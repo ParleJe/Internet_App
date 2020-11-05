@@ -6,7 +6,7 @@ body {
 
 .container{
     width: 100vw;
-    height: 80vh;
+    height: 85vh;
     border-radius: 50px 50px 0px 0px;
     background-color: #ffffff;
     position: fixed;
@@ -25,6 +25,7 @@ body {
     align-items: center;
 
 }
+
 .login-container{
     width: 50%;
     display: flex;
@@ -33,7 +34,8 @@ body {
     align-items: center;
 
 }
-form{
+
+form.login{
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -46,6 +48,7 @@ form{
     border-radius: 50px;
     box-shadow: 5px 12px 6px #DDA0DD33;
 }
+
 input {
     background: transparent;
     border-radius: 2em;
@@ -55,32 +58,39 @@ input {
     margin: 1em;
     width: 80%;
 }
+
 input:hover {
     border-bottom: 1px solid #C968C9;
     background: #dda0dd20;
 }
+
 .login-button{
     border: 0;
     background: #FDFDFD;
     color: #dda0dd;
     cursor: pointer;
+    margin: 10px;
 }
+
 i {
     font-size: 2em;
 }
+
 .login-button:hover {
     color: #C968C9;
 }
+
 .logo-container{
     width: 50%;
     text-align: center;
 }
+
 img{
     width: 50%;
     height: 50%;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
     .middle-line {
         background: none;
         flex-direction: column;
@@ -108,10 +118,12 @@ img{
         height: 20%;
     }
 
-    .i{
+    i{
         font-size: 2em;
     }
+
     img {
-        width: 10em;
+        width: 80%;
+        height: 100%;
     }
 }
