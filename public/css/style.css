@@ -5,7 +5,10 @@
 body {
     background-color: #EDEDED;
     margin: 0;
-    
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
 }
 
 .container{
@@ -58,7 +61,7 @@ input {
     border-radius: 2em;
     border: none;
     
-    padding: 1em;
+    padding: 1vh;
     margin: 1em;
     width: 80%;
 }
@@ -103,6 +106,7 @@ input:hover {
 
 i {
     font-size: 2em;
+    width: 2em;
     padding-right: 10px;
     padding-left: 10px;
 }
@@ -149,16 +153,19 @@ img.login-logo{
 /*________________________________________*/
 nav {
     width: 12vw;
-    height: 74vh;
+    height: 93vh;
     background: #FFFFFF;
     border-radius: 2vh;
-    margin-left: 2vw;
+    margin: 2vw;
+    margin-right: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 .base-container {
-    width: 100vw;
+    margin: 0;
+    overflow: hidden;
+    width: 88vw;
     height: 100vh;
     background: transparent;
     display: flex;
@@ -166,7 +173,12 @@ nav {
     align-items: center;
 }
 
-.nav-visibility-button >img {
+.featured >img {
+    justify-self: center;
+    margin-left: 2vh;
+    width: 6vh;
+    height: 6vh;
+
     display: none;
 }
 /*.content-container {
@@ -243,17 +255,25 @@ li {
 
 .content-container {
     width: 100%;
-    height: 100%;
-    background: coral;
+    height: 93%;
+    padding: 2vw;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .featured {
+    border-radius: 2vh;
     width: 100%;
-    height: 13%;
-    background: cyan;
+    height: 8%;
+    background: #FFFFFF;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
+
+
 
 
 
@@ -287,6 +307,7 @@ li {
 
     i{
         font-size: 2em;
+        width: 2em;
     }
 
     img {
@@ -297,28 +318,8 @@ li {
 
     /*_____________________________________*/
 
-    .nav-visibility-button > img {
-        position: absolute;
-        top: 1vh;
-        left: 1vh;
-        width: 6vh;
-        height: 6vh;
+    .featured > img { 
         display: unset;
-        justify-self: center;
-    }
-
-    .nav-visibility-button:hover + #navigation-bar {
-        left: 0;
-    }
-
-    #slide {
-        transition: 1s;
-        left: 0;
-    }
-
-    #slide-out {
-        transition:1s;
-        left: -60vw;
     }
     
     #navigation-bar {
