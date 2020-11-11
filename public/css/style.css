@@ -308,25 +308,27 @@ li {
     }
 
     .nav-visibility-button:hover + #navigation-bar {
+        left: 0;
+    }
+
+    #slide {
         transition: 1s;
         left: 0;
     }
 
-    .slide {
-        transition: 1s;
-        left: 0;
+    #slide-out {
+        transition:1s;
+        left: -60vw;
     }
     
     #navigation-bar {
         width: 50vw;
         height: fit-content;
         position: absolute;
-        left: -40vw;
+        left: -60vw;
         transition: 1s;
         align-items: left;
-        /*height: 15vh;
-        flex-direction: row;
-        margin-top: 1vh;*/
+        --status: hidden;
     }
 
     .nav-logo-container {
@@ -346,8 +348,7 @@ li {
         padding: 1vmin;
         margin: 1em;
     }
-    .base-container {
-    }
+    
 /*
     ul{
         padding-left: 4vw;
