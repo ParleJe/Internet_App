@@ -20,24 +20,61 @@
 .trip {
     min-width: 200px;
     min-height: 150px;
-    height: 15vw;
+    height: fit-content;
     padding: 2vh;
     border-radius: 2vh;
-
     background: white;
     display: flex;
     flex-direction: column;
-
 }
+
+.trip>h2 {
+    font-size: 2em;
+    margin-left: 15px;
+}
+
+.trip>div {
+    display: flex;
+    margin: 15px;
+}
+
+.trip>div>i {
+    font-size: 2.5em;
+    margin-right: 1.5em;
+}
+
 .trip:hover {
     min-height: 250px;
     height: 20vw;
 }
-.trip > img {
-    width: 80%;
-    height: 15vh;
+
+.trip:hover>p {
+    display: unset;
+}
+
+.trip>img {
+    width: 90%;
+    height: 10vmax;
     align-self: center;
 }
-.trip > p {
+
+.trip>p {
+    margin: 15px;
     white-space: pre-wrap;
+    height: 20%;
+    font-size: 1.5em;
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .trip {
+        font-size: 2vmin;
+    }
+    .trip>div>i {
+        font-size: 1.5em;
+        margin-right: 1.5em;
+    }
+    .trip>img {
+        height: 15vmax;
+    }
 }
