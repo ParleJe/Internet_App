@@ -1,0 +1,43 @@
+:root {
+    --min-card-width: 250px;
+    --spacing: 24px;
+}
+
+.content {
+    width: 80%;
+    height: 88%;
+    border-radius: 2vh;
+    background: transparent;
+    margin-top: 2vw;
+    display: grid;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+    padding: 2em;
+    overflow: auto;
+}
+
+.trip {
+    min-width: 200px;
+    min-height: 150px;
+    height: 15vw;
+    padding: 2vh;
+    border-radius: 2vh;
+
+    background: white;
+    display: flex;
+    flex-direction: column;
+
+}
+.trip:hover {
+    min-height: 250px;
+    height: 20vw;
+}
+.trip > img {
+    width: 80%;
+    height: 15vh;
+    align-self: center;
+}
+.trip > p {
+    white-space: pre-wrap;
+}

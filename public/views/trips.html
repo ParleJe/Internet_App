@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/trips.css">
+    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
+    <script src="../scripts/script.js"></script>
+    <title>Your Trips</title>
+</head>
+
+<body>
+
+    <nav id="navigation-bar">
+
+        <div class="nav-logo-container">
+            <img class="nav-logo" src="../misc/logo.svg" />
+        </div>
+
+        <ol>
+
+            <li>
+                <button class="nav-button">
+                    <i class="fas fa-spinner"></i>
+                    <div class="nav-text">Your Trips</div>
+                </button>
+            </li>
+            <li>
+                <button class="nav-button">
+                    <i class="far fa-calendar-alt"></i>
+                    <div class="nav-text">Calendar</div>
+                </button>
+            </li>
+            <li>
+                <button class="nav-button">
+                    <i class="fas fa-user-friends"></i>
+                    <div class="nav-text">Friends</div>
+                </button>
+            </li>
+            <li>
+                <button class="nav-button">
+                    <i class="fas fa-cog"></i>
+                    <div class="nav-text">Settings</div>
+                </button>
+            </li>
+            <li>
+                <button class="nav-button">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="nav-text">Search</div>
+                </button>
+            </li>
+
+
+            <li class="button-container">
+                <div class="new-button">
+                    Get to the Boat
+                    <img class="nav-add" src="../misc/drakkar.svg">
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+    <div class="content-container">
+        <div class="featured">
+            <img src="../misc/logo.svg" onclick="showMenu()" />
+            <input name="search" type="text" placeholder="Search">
+        </div>
+        <div class="content">
+
+            <div class="trip" id="trip-1">
+                <h2> Title </h2>
+                <img src="../misc/placeholder.jpg" />
+                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            </div>
+
+            <div class="trip" id="trip-1">
+                <h2> Title </h2>
+                <img src="../misc/placeholder.jpg" />
+                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            </div>
+
+            <div class="trip" id="trip-1">
+                <h2> Title </h2>
+                <img src="../misc/placeholder.jpg" />
+                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            </div>
+
+            <div class="trip" id="trip-1">
+                <h2> Title </h2>
+                <img src="../misc/placeholder.jpg" />
+                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            </div>
+
+        </div>
+    </div>
+</body>
