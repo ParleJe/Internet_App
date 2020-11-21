@@ -1,3 +1,7 @@
+:root {
+    --radius: 2em;
+}
+
 * {
     font-size: calc(0.3vmax + 0.6vmin);
 }
@@ -9,6 +13,7 @@ body {
     width: 100vw;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 .container {
@@ -160,9 +165,8 @@ nav {
     width: 20%;
     height: 93vh;
     background: #FFFFFF;
-    border-radius: 2vh;
-    margin: 2vw;
-    margin-right: 0;
+    border-radius: var(--radius);
+    margin: 2vw 2vw 2vw 2vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -179,11 +183,12 @@ nav {
     align-items: center;
 }
 
-.featured>img {
-    justify-self: center;
-    margin-left: 2vh;
-    width: 6vh;
-    height: 6vh;
+#toggle-button {
+    position: absolute;
+    top: 50vh;
+    left: 1vmax;
+    width: 10vmax;
+    height: 10vmax;
     display: none;
 }
 
@@ -191,10 +196,11 @@ nav {
     align-self: center;
     text-align: center;
     margin-top: 1.5vh;
+    margin-bottom: 3vh;
 }
 
 .nav-logo-container>img {
-    width: 8vh;
+    width: 60%;
 }
 
 .new-button>img {
@@ -205,20 +211,18 @@ nav {
 ol {
     list-style-type: none;
     padding: 0;
-    margin: 0;
-    margin-top: 2em;
+    margin: 2em 0 0;
     height: 100%
 }
 
 li {
     height: 10%;
-    /*padding-bottom: 1vw;
-    padding-top: 1vh;*/
 }
 
 li:last-child {
     height: 30%;
-    border: 1px solid black;
+    border-radius: var(--radius);
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
 }
 
 .nav-button {
@@ -251,9 +255,8 @@ li:last-child {
 .new-button {
     position: relative;
     bottom: 1vh;
-    margin: 1vmin;
     width: unset;
-    border-radius: 2vmin;
+    border-radius: var(--radius);
     background: #6BA2EB;
     padding: 0.5vmin;
     font-size: calc(0.5vmax + 1vmin);
@@ -273,16 +276,6 @@ li:last-child {
     align-items: center;
 }
 
-.featured {
-    border-radius: 2vh;
-    width: 100%;
-    height: 8%;
-    background: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 @media (max-width: 800px) {
     .middle-line {
         background: none;
@@ -298,8 +291,8 @@ li:last-child {
         width: 80%;
     }
     input {
-        margin-top: 0em;
-        margin-bottom: 0em;
+        margin-top: 0;
+        margin-bottom: 0;
     }
     .logo-container {
         width: 100%;
@@ -314,10 +307,51 @@ li:last-child {
         height: 100%;
     }
     /*_____________________________________*/
-    .featured>img {
-        display: unset;
+    body {
+        flex-direction: column;
     }
-    #navigation-bar {
+    .content-container {
+        width: 100%;
+        margin-left: 2vw;
+    }
+    #toggle-button {
+        display: none;
+    }
+    nav {
+        width: 90%;
+        height: 20%;
+        margin: 2vw 2vw 0 2vw;
+    }
+    .nav-text {
+        display: none;
+    }
+    li {
+        width: 20%;
+        float: left;
+        height: unset;
+    }
+    .nav-button>i {
+        font-size: 4em;
+    }
+    li:first-child {
+        display: none;
+    }
+    ol {
+        height: unset;
+        width: 100%;
+        margin: 0;
+    }
+    .nav-logo-container>img {
+        margin: 0.5em;
+        width: 20%;
+    }
+    .nav-logo-container {
+        align-self: unset;
+        text-align: unset;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    /*#navigation-bar {
         width: 50vw;
         height: fit-content;
         position: absolute;
@@ -340,7 +374,16 @@ li:last-child {
         padding: 1vmin;
         margin: 1em;
     }
-    /*
+    ol {
+        height: fit-content;
+    }
+    li {
+        height: 10vh;
+    }
+    li:last-child {
+        display: none;
+    }
+    
     ul{
         padding-left: 4vw;
         padding-right: 4vw;
