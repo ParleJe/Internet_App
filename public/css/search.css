@@ -26,7 +26,7 @@
 }
 
 .top-bar>button:hover {
-    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
 }
 
 .content {
@@ -75,6 +75,7 @@
 }
 
 h2 {
+    font-weight: 400;
     padding-left: 1em;
     font-size: 2em;
 }

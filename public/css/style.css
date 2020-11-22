@@ -4,6 +4,8 @@
 
 * {
     font-size: calc(0.3vmax + 0.6vmin);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 300;
 }
 
 body {
@@ -19,7 +21,7 @@ body {
 .container {
     width: 100vw;
     height: 85vh;
-    border-radius: 50px 50px 0px 0px;
+    border-radius: var(--radius) var(--radius) 0 0;
     background-color: #ffffff;
     position: fixed;
     bottom: 0;
@@ -54,13 +56,13 @@ form.login {
     padding-right: 5vw;
     padding-left: 5vw;
     background: #FDFDFD;
-    border-radius: 50px;
+    border-radius: var(--radius);
     box-shadow: 5px 12px 6px #DDA0DD33;
 }
 
 input {
     background: transparent;
-    border-radius: 2em;
+    border-radius: var(--radius);
     border: none;
     padding: 1vh;
     margin: 1em;
@@ -100,7 +102,7 @@ input:hover {
     animation-play-state: paused;
 }
 
-.login-button>i {
+.login-button > i {
     font-size: 2em;
     width: 2em;
 }
@@ -162,6 +164,7 @@ img.login-logo {
 /*________________________________________*/
 
 nav {
+    font-weight: 500;
     width: 20%;
     height: 93vh;
     background: #FFFFFF;
@@ -199,11 +202,11 @@ nav {
     margin-bottom: 3vh;
 }
 
-.nav-logo-container>img {
+.nav-logo-container > img {
     width: 60%;
 }
 
-.new-button>img {
+.new-button > img {
     padding-left: 5px;
     width: calc(3vmax + 1vmin);
 }
@@ -222,7 +225,7 @@ li {
 li:last-child {
     height: 30%;
     border-radius: var(--radius);
-    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
 }
 
 .nav-button {
@@ -237,11 +240,11 @@ li:last-child {
     height: 8vh;
 }
 
-.nav-button>i {
+.nav-button > i {
     font-size: 2em;
 }
 
-.nav-button>div {
+.nav-button > div {
     font-size: 1.2em;
     width: 80%;
     text-align: right;
@@ -249,14 +252,14 @@ li:last-child {
 
 .nav-button:hover {
     cursor: pointer;
-    color: #282E3F;
+    color: #282e3f;
 }
 
 .new-button {
     position: relative;
     bottom: 1vh;
     width: unset;
-    border-radius: 1em;
+    border-radius: calc(var(--radius)/2);
     background: #6BA2EB;
     padding: 0.5vmin;
     font-size: calc(0.5vmax + 1vmin);
@@ -267,7 +270,7 @@ li:last-child {
 }
 
 .new-button:hover {
-    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
 }
 
 .content-container {
@@ -285,130 +288,92 @@ li:last-child {
         background: none;
         flex-direction: column;
     }
+
     * {
         font-size: 3vmin;
     }
+
     .login-container {
         width: 100%;
     }
+
     form {
         width: 80%;
     }
+
     input {
         margin-top: 0;
         margin-bottom: 0;
     }
+
     .logo-container {
         width: 100%;
         height: 20%;
     }
-    .login-button>i {
+
+    .login-button > i {
         font-size: 2em;
         width: 2em;
     }
+
     img {
         width: 80%;
         height: 100%;
     }
+
     /*_____________________________________*/
     body {
         flex-direction: column;
     }
+
     .content-container {
         width: 100%;
         margin-left: 2vw;
     }
+
     #toggle-button {
         display: none;
     }
+
     nav {
         width: 90%;
         height: 20%;
         margin: 2vw 2vw 0 2vw;
     }
+
     .nav-text {
         display: none;
     }
+
     li {
         width: 20%;
         float: left;
         height: unset;
     }
-    .nav-button>i {
+
+    .nav-button > i {
         font-size: 4em;
     }
+
     li:first-child {
         display: none;
     }
+
     ol {
         height: unset;
         width: 100%;
         margin: 0;
     }
-    .nav-logo-container>img {
+
+    .nav-logo-container > img {
         margin: 0.5em;
         width: 20%;
     }
+
     .nav-logo-container {
         align-self: unset;
         text-align: unset;
         margin-top: 0;
         margin-bottom: 0;
     }
-    /*#navigation-bar {
-        width: 50vw;
-        height: fit-content;
-        position: absolute;
-        left: -60vw;
-        transition: 1s;
-        align-items: center;
-        --status: hidden;
-    }
-    .nav-logo-container {
-        display: none;
-    }
-    .nav-button {
-        font-size: calc(2vmax + 1vmin);
-    }
-    .nav-text {
-        font-size: inherit;
-    }
-    .new-button {
-        font-size: calc(2vmax + 1vmin);
-        padding: 1vmin;
-        margin: 1em;
-    }
-    ol {
-        height: fit-content;
-    }
-    li {
-        height: 10vh;
-    }
-    li:last-child {
-        display: none;
-    }
-    
-    ul{
-        padding-left: 4vw;
-        padding-right: 4vw;
-    }
-    
-
-    .nav-text {
-        display: none;
-    }
-
-    
-
-    .button-container {
-        
-    }
-    .new-button {
-        position: unset;
-        bottom: unset;
-    }
-    .button-container {
-        width: max-content;
-        height: max-content;
-    }*/
 }
