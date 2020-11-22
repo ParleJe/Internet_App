@@ -17,10 +17,16 @@
 }
 
 .top-bar>button {
-    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
+    margin: 0;
+    font-size: 1.2em;
+    background: #6BA2EB;
     border: 0;
     width: 20%;
     border-radius: 0 2em 2em 0;
+}
+
+.top-bar>button:hover {
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
 }
 
 .content {
@@ -53,7 +59,7 @@
     -webkit-filter: blur(3px);
     object-fit: cover;
     width: 100%;
-    height: 40vh;
+    height: 20vh;
 }
 
 .search>div {
@@ -64,7 +70,7 @@
     border-radius: 2em;
     justify-self: flex-end;
     margin-top: 10vh;
-    width: 100%;
+    width: 90%;
     text-align: left;
 }
 

@@ -256,7 +256,7 @@ li:last-child {
     position: relative;
     bottom: 1vh;
     width: unset;
-    border-radius: var(--radius);
+    border-radius: 1em;
     background: #6BA2EB;
     padding: 0.5vmin;
     font-size: calc(0.5vmax + 1vmin);
@@ -264,6 +264,10 @@ li:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.new-button:hover {
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
 }
 
 .content-container {
