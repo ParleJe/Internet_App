@@ -14,10 +14,10 @@
                 <img src="public/resources/logo.svg" class="login-logo" alt="logo of the project">
             </div>
             <div class="login-container">
-                <form class="login">
-                    <input name="email" type="text" placeholder="email@email.com">
+                <form class="login" action="login" method="post" >
+                    <input name="email" type="email" placeholder="email@email.com">
                     <input name="password" type="password" placeholder="password">
-                    <button class="login-button">
+                    <button class="login-button" type="submit">
                         <i class="fas fa-spinner"></i>
                     </button>
                 </form>

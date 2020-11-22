@@ -11,4 +11,8 @@
         public function search() {
             $this->render('search');
         }
+
+        public function registration() {
+            $this->render('registration');
+        }
     }
