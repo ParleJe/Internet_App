@@ -337,7 +337,7 @@ li:last-child {
 
     nav {
         width: 90%;
-        height: 20%;
+        height: 25%;
         margin: 2vw 2vw 0 2vw;
     }
 
@@ -358,6 +358,8 @@ li:last-child {
     li:first-child {
         display: none;
     }
+
+
 
     ol {
         height: unset;
