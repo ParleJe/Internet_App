@@ -1,0 +1,147 @@
+:root {
+    --radius: 2em;
+}
+
+.top-bar {
+    border-radius: var(--radius);
+    width: 50%;
+    padding: 0;
+    background: #FFFFFF;
+    display: flex;
+}
+
+.top-bar>input {
+    border-radius: var(--radius) 0 0 var(--radius);
+    margin: 0;
+    width: 80%;
+}
+
+.top-bar>button {
+    margin: 0;
+    font-size: 1.2em;
+    background: #6BA2EB;
+    border: 0;
+    width: 20%;
+    border-radius: 0 2em 2em 0;
+}
+
+.top-bar>button:hover {
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0% 0% no-repeat padding-box;
+}
+
+.content {
+    width: 100%;
+    height: 88%;
+    background: transparent;
+    margin-top: 2vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 1em;
+    justify-items: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.search {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search>img {
+    border-radius: var(--radius);
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    object-fit: cover;
+    width: 100%;
+    height: 20vh;
+}
+
+.search>div {
+    visibility: hidden;
+    background: white;
+    padding-top: 2em;
+    padding-left: 1em;
+    border-radius: 2em;
+    justify-self: flex-end;
+    margin-top: 10vh;
+    width: 90%;
+    text-align: left;
+}
+
+h2 {
+    padding-left: 1em;
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.2em;
+    padding-bottom: 1em;
+}
+
+#search-2 {
+    grid-column: 2 / span 2;
+}
+
+#search-2>img {
+    filter: none;
+}
+
+#search-2>img {
+    height: 40vh;
+}
+
+#search-2>div {
+    visibility: visible;
+}
+
+@media (max-width: 801px) {
+    .top-bar {
+        width: 80%;
+    }
+    .content {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+    }
+    .search {
+        margin: 1em;
+        height: 30%;
+        width: 100%;
+        justify-content: unset;
+    }
+    .search>img {
+        height: 20vh;
+        width: 80%;
+    }
+    #search-2>img {
+        height: 20vh;
+    }
+    .search>div {
+        border-radius: 1.2em;
+        visibility: visible;
+        background: white;
+        width: 60%;
+        justify-self: unset;
+        margin-top: 0;
+        position: relative;
+        bottom: 10vh;
+        padding-top: 0.2em;
+    }
+    h2 {
+        padding-left: 1em;
+        font-size: 3vmin;
+        margin-bottom: 0.2em;
+    }
+    p {
+        margin-top: 0;
+        font-size: 2vmin;
+        padding-bottom: 1em;
+    }
+}
