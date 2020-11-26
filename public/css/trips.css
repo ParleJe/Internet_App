@@ -1,92 +1,124 @@
-:root {
-    --radius: 2em;
+
+.top-bar {
+    border-radius: var(--radius);
+    width: 100%;
+    height: 12%;
+
+    padding: 0.5em 1em;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
+
+.top-bar>div {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 1em;
+}
+.top-bar>div>h2 {
+    font-size: 3em;
+    margin-block-start: 0.1em;
+    margin-block-end: 0.5em;
+}
+
+.top-bar>div>.trip-icons{
+    justify-content: flex-end;
+}
+
+.top-bar>div>a {
+    justify-self: flex-end;
+    width: fit-content;
+    padding: 0.2em 0.8em;
+    border-radius: calc(var(--radius)/4);
+    background: plum;
+    color: #C968C9;
+}
+
 
 .content {
     width: 80%;
+    height: 84%;
+
+
     border-radius: 2vh;
     background: transparent;
-    margin-top: 2vw;
-    display: grid;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
     padding: 2em;
     overflow: auto;
 }
-
-.top-bar {
-    border-radius: 2vh;
-    width: 100%;
-    height: 8%;
-    background: #FFFFFF;
+.flow {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    height: 100%;
 }
-
 .trip {
-    min-width: 200px;
-    min-height: 150px;
+    margin-bottom: 2em;
     height: fit-content;
-    padding: 2vh;
-    border-radius: var(--radius);
+    padding: 1vh;
+    border-radius: calc(2*var(--radius));
     background: white;
     display: flex;
     flex-direction: column;
 }
 
-.trip>h2 {
+.trip>h4 {
+    font-size: 1.2em;
+}
+
+.trip>h4, .trip>h3 {
+    margin: 0.2em 0.2em 0.2em 1em;
+}
+
+h2, .trip>h3 {
     font-size: 2em;
-    margin-left: 15px;
 }
 
-.trip>div {
+.trip-icons {
     display: flex;
-    margin: 15px;
+    margin: 1em 1em 1em 2em;
 }
 
-.trip>div>i {
-    font-size: 2.5em;
+.trip-icons>i {
+    font-size: 1.5em;
     margin-right: 1.5em;
 }
 
-.trip:hover {
-    min-height: 250px;
-    height: 20vw;
-}
 
-.trip:hover>p {
+
+.trip:hover>img {
     display: unset;
 }
 
 .trip>img {
+    display: none;
     object-fit: cover;
-    width: 90%;
-    height: 12vmax;
+    width: 70%;
+    height: 6.5vmax;
     align-self: center;
 }
 
-.trip>p {
-    margin: 15px;
-    white-space: pre-wrap;
-    height: 20%;
-    font-size: 1.5em;
-    display: none;
-}
 
 @media (max-width: 800px) {
     .trip {
         font-size: 2vmin;
+        min-width: 70vw;
     }
     .trip>div>i {
         font-size: 1.5em;
         margin-right: 1.5em;
     }
     .trip>img {
-        height: 15vmax;
+        display: none;
+        height: 16.2vmax;
     }
     .top-bar {
         display: none;
+    }
+    h2 {
+        font-size: 1em;
     }
 }
