@@ -4,6 +4,7 @@
 
 * {
     font-size: calc(0.3vmax + 0.6vmin);
+
 }
 
 body {
@@ -194,6 +195,7 @@ nav {
     text-align: center;
     margin-top: 1.5vh;
     margin-bottom: 3vh;
+    height: 15%;
 }
 
 .nav-logo-container>img {
@@ -208,22 +210,26 @@ nav {
 ol {
     list-style-type: none;
     padding: 0;
-    margin: 0 2em;
-    height: 100%
+    margin: 0;
+    height: 85%;
+    align-self: center;
 }
 
-
+li:first-child, li:last-child {
+    justify-self: center;
+}
 
 li:last-child {
-    height: 35%;
+    height: 30%;
     margin-bottom: 1em;
     border-radius: var(--radius);
     background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
 }
 
 .nav-button {
-    width: 100%;
+    width: 90%;
     font-size: calc(0.3vmax + 1vmin);
+    padding: 0.2em 0.8em;
     color: #282E3F90;
     display: flex;
     align-items: center;
@@ -249,9 +255,6 @@ li:last-child {
 }
 
 .new-button {
-    position: relative;
-    bottom: 1vh;
-    width: unset;
     border-radius: calc(var(--radius)/2);
     background: #6BA2EB;
     padding: 0.5vmin;
@@ -274,6 +277,10 @@ li:last-child {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+a {
+    text-decoration: none;
 }
 
 @media (max-width: 801px) {
@@ -313,12 +320,12 @@ li:last-child {
         flex-direction: column;
     }
     .content-container {
-        width: 100%;
+        width: 80%;
         margin-left: 2vw;
     }
     nav {
         width: 90%;
-        height: 25%;
+        height: 20%;
         margin: 2vw 2vw 0 2vw;
     }
     .nav-button>pre {
@@ -332,22 +339,26 @@ li:last-child {
     .nav-button>i {
         font-size: 4em;
     }
-    li:first-child {
+    li:first-child, li:last-child {
         display: none;
     }
+
     ol {
-        height: unset;
+        height: 50%;
         width: 100%;
         margin: 0;
     }
+
     .nav-logo-container>img {
         margin: 0.5em;
         width: 20%;
     }
+
     .nav-logo-container {
         align-self: unset;
         text-align: unset;
         margin-top: 0;
         margin-bottom: 0;
+        height: 50%;
     }
 }

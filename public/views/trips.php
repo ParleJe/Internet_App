@@ -24,35 +24,35 @@
             </li>
 
             <li>
-                <button class="nav-button">
+                <a class="nav-button" href="trips">
                     <i class="fas fa-spinner"></i>
                     <pre>Your Trips</pre>
-                </button>
+                </a>
             </li>
             <li>
-                <button class="nav-button">
+                <a class="nav-button" href="Calendar">
                     <i class="far fa-calendar-alt"></i>
                     <pre>Calendar</pre>
-                </button>
+                </a>
             </li>
             <li>
-                <button class="nav-button">
+                <a class="nav-button" href="friends">
                     <i class="fas fa-user-friends"></i>
                     <pre>Friends</pre>
-                </button>
+                </a>
             </li>
             <li>
-                <button class="nav-button">
+                <a class="nav-button" href="settings">
                     <i class="fas fa-cog"></i>
                     <pre>Settings</pre>
-                </button>
+                </a>
             </li>
 
             <li>
-                    <button class="nav-button" href="http://localhost:8080/search">
+                    <a class="nav-button" href="search">
                         <i class="fas fa-map-marker-alt"></i>
                         <pre>Search</pre>
-                    </button>
+                    </a>
             </li>
             <li>
                 <div></div>
@@ -61,40 +61,84 @@
     </nav>
 
     <div class="content-container">
-        <div class="top-bar">
-            <label>
-                <input name="search" type="text" placeholder="Search">
-            </label>
-        </div>
-        <div class="content">
-
-            <div class="trip" id="trip-1">
-                <h2> Title </h2>
-                <img src="public/resources/placeholder.jpg" alt="trip" />
-                <div>
-                    <i class="fas fa-paperclip"></i>
+        <section class="top-bar">
+            <div>
+            <h2>City of The Forgotten Kings</h2>
+                <a>
+                    invite people
+                </a>
+            </div>
+            <div>
+                <pre></pre>
+                <div class="trip-icons"><!--Icons-->
                     <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div>
+        </section>
+        <section class="content"> <!-- grid layout 3 columns-->
+
+            <div class="flow"> <!--First column etc.-->
+                <h2>TITLE OF TRIPS #1</h2>
+                <div class="trip" id="trip-1">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                </div>
+
+                <div class="trip" id="trip-2">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
                 </div>
             </div>
 
-            <div class="trip" id="trip-2">
-                <h2> Title </h2>
-                <img src="public/resources/placeholder.jpg" alt="trip" />
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            <div class="flow">
+                <h2>TITLE OF TRIPS #2</h2>
+                <div class="trip" id="trip-3">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                </div>
+
+                <div class="trip" id="trip-4">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                </div>
+
+                <div class="trip" id="trip-5">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="trip" id="trip-3">
-                <h2> Title </h2>
-                <img src="public/resources/placeholder.jpg" alt="trip" />
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            <div class="flow">
+                <!--TODO empty columns-->
             </div>
 
-            <div class="trip" id="trip-4">
-                <h2> Title </h2>
-                <img src="public/resources/placeholder.jpg" alt="trip" />
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-
-        </div>
+        </section>
     </div>
 </body>

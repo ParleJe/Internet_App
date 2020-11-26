@@ -1,9 +1,4 @@
-:root {
-    --radius: 2em;
-}
-* {
-    font-family: "Roboto Mono", monospace;
-}
+
 .top-bar {
     border-radius: var(--radius);
     width: 50%;
@@ -94,6 +89,7 @@ p {
         width: 90%;
         grid-template-columns: 1fr;
         grid-gap: 0;
+        grid-auto-flow: row;
         overflow: auto;
     }
     .search {
