@@ -1,9 +1,9 @@
 :root {
-    --radius: 2em;
+    --radius: 4em;
 }
 
 * {
-    font-size: calc(0.3vmax + 0.6vmin);
+    font-size:0.5vmax;
 
 }
 
@@ -169,7 +169,7 @@ img.login-logo {
 /*________________________________________*/
 
 nav {
-    width: 20%;
+    width: 18%;
     height: 93vh;
     background: #FFFFFF;
     border-radius: var(--radius);
@@ -195,7 +195,7 @@ nav {
     text-align: center;
     margin-top: 1.5vh;
     margin-bottom: 3vh;
-    height: 15%;
+    height: 12%;
 }
 
 .nav-logo-container>img {
@@ -227,8 +227,8 @@ li:last-child {
 }
 
 .nav-button {
+    font-size: 1.5em;
     width: 90%;
-    font-size: calc(0.3vmax + 1vmin);
     padding: 0.2em 0.8em;
     color: #282E3F90;
     display: flex;
@@ -255,10 +255,10 @@ li:last-child {
 }
 
 .new-button {
+    font-size: 2em;
     border-radius: calc(var(--radius)/2);
     background: #6BA2EB;
     padding: 0.5vmin;
-    font-size: calc(0.5vmax + 1vmin);
     align-self: center;
     display: flex;
     align-items: center;
@@ -289,7 +289,7 @@ a {
         flex-direction: column;
     }
     * {
-        font-size: 3vmin;
+        font-size: 1em;
     }
     .login-container {
         width: 100%;
@@ -320,10 +320,12 @@ a {
         flex-direction: column;
     }
     .content-container {
-        width: 80%;
-        margin-left: 2vw;
+        width: 90%;
+        justify-self: center;
     }
     nav {
+        font-size: 0.6em;
+        border-radius: calc(var(--radius)/2);
         width: 90%;
         height: 20%;
         margin: 2vw 2vw 0 2vw;
@@ -335,9 +337,6 @@ a {
         width: 20%;
         float: left;
         height: unset;
-    }
-    .nav-button>i {
-        font-size: 4em;
     }
     li:first-child, li:last-child {
         display: none;
