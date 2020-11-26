@@ -16,6 +16,12 @@ body {
     overflow: hidden;
 }
 
+.message {
+    border-radius: var(--radius);
+    background: transparent;
+    padding: 1em 4em;
+}
+
 .container {
     width: 100vw;
     height: 85vh;
@@ -183,15 +189,6 @@ nav {
     align-items: center;
 }
 
-#toggle-button {
-    position: absolute;
-    top: 50vh;
-    left: 1vmax;
-    width: 10vmax;
-    height: 10vmax;
-    display: none;
-}
-
 .nav-logo-container {
     align-self: center;
     text-align: center;
@@ -211,16 +208,15 @@ nav {
 ol {
     list-style-type: none;
     padding: 0;
-    margin: 2em 0 0;
+    margin: 0 2em;
     height: 100%
 }
 
-li {
-    height: 10%;
-}
+
 
 li:last-child {
-    height: 30%;
+    height: 35%;
+    margin-bottom: 1em;
     border-radius: var(--radius);
     background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
 }
@@ -241,7 +237,7 @@ li:last-child {
     font-size: 2em;
 }
 
-.nav-button>div {
+.nav-button>pre {
     font-size: 1.2em;
     width: 80%;
     text-align: right;
@@ -280,7 +276,7 @@ li:last-child {
     align-items: center;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 801px) {
     .middle-line {
         background: none;
         flex-direction: column;
@@ -320,15 +316,12 @@ li:last-child {
         width: 100%;
         margin-left: 2vw;
     }
-    #toggle-button {
-        display: none;
-    }
     nav {
         width: 90%;
         height: 25%;
         margin: 2vw 2vw 0 2vw;
     }
-    .nav-text {
+    .nav-button>pre {
         display: none;
     }
     li {

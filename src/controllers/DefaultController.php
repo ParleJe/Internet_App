@@ -15,4 +15,8 @@
         public function registration() {
             $this->render('registration');
         }
+
+        public function trips() {
+            $this->render('trips');
+        }
     }

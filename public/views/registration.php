@@ -2,7 +2,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <title>LOGIN PAGE</title>
+    <title>CREATE YOUR ACCOUNT</title>
 </head>
 
 <body>

@@ -22,7 +22,7 @@ function showMenu() {
         style = window.getComputedStyle(element),
         left = style.getPropertyValue('left');
         
-    if(left == "0px") {
+    if(left === "0px") {
         element.style.left = new String(vw(-70)+'px');
     }else {
         element.style.left = vw(0);

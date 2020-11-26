@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/trips.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/trips.css">
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <script src="../scripts/script.js"></script>
+    <!--<script src="../scripts/script.js"></script>-->
     <title>Your Trips</title>
 </head>
 
 <body>
-    <img id="toggle-button" src="public/resources/logo.svg" onclick="showMenu()" alt="Logo of the project" />
     <nav id="navigation-bar">
 
         <div class="nav-logo-container">
@@ -27,32 +26,33 @@
             <li>
                 <button class="nav-button">
                     <i class="fas fa-spinner"></i>
-                    <div class="nav-text">Your Trips</div>
+                    <pre>Your Trips</pre>
                 </button>
             </li>
             <li>
                 <button class="nav-button">
                     <i class="far fa-calendar-alt"></i>
-                    <div class="nav-text">Calendar</div>
+                    <pre>Calendar</pre>
                 </button>
             </li>
             <li>
                 <button class="nav-button">
                     <i class="fas fa-user-friends"></i>
-                    <div class="nav-text">Friends</div>
+                    <pre>Friends</pre>
                 </button>
             </li>
             <li>
                 <button class="nav-button">
                     <i class="fas fa-cog"></i>
-                    <div class="nav-text">Settings</div>
+                    <pre>Settings</pre>
                 </button>
             </li>
+
             <li>
-                <button class="nav-button">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="nav-text">Search</div>
-                </button>
+                    <button class="nav-button" href="http://localhost:8080/search">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <pre>Search</pre>
+                    </button>
             </li>
             <li>
                 <div></div>
@@ -71,7 +71,6 @@
             <div class="trip" id="trip-1">
                 <h2> Title </h2>
                 <img src="public/resources/placeholder.jpg" alt="trip" />
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
                 <div>
                     <i class="fas fa-paperclip"></i>
                     <i class="fas fa-comment-alt"></i>

@@ -3,13 +3,15 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/search.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <script src="../scripts/script.js"></script>
     <title>Search</title>
 </head>
 
 <body>
-    <img id="toggle-button" src="public/resources/logo.svg" onclick="showMenu()" alt="Logo of the project" />
     <nav id="navigation-bar">
 
         <div class="nav-logo-container">
@@ -91,6 +93,29 @@
                 </div>
             </div>
 
+            <div class="search" id="search-3">
+                <img src="public/resources/placeholder.jpg" alt="trip" />
+                <div>
+                    <h2>LOREM IPSUM</h2>
+                    <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+                </div>
+            </div>
+
+            <div class="search" id="search-3">
+                <img src="public/resources/placeholder.jpg" alt="trip" />
+                <div>
+                    <h2>LOREM IPSUM</h2>
+                    <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+                </div>
+            </div>
+
+            <div class="search" id="search-3">
+                <img src="public/resources/placeholder.jpg" alt="trip" />
+                <div>
+                    <h2>LOREM IPSUM</h2>
+                    <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+                </div>
+            </div>
 
         </div>
     </div>

@@ -14,9 +14,21 @@
                 <img src="public/resources/logo.svg" class="login-logo" alt="logo of the project">
             </div>
             <div class="login-container">
+
                 <form class="login" action="login" method="post" >
                     <input name="email" type="email" placeholder="email@email.com">
                     <input name="password" type="password" placeholder="password">
+                    <div class="message">
+                    <?php
+                    if(isset($messages))
+                    {
+                        foreach ($messages as $message)
+                        {
+                            echo $message;
+                        }
+                    }
+                    ?>
+                    </div>
                     <button class="login-button" type="submit">
                         <i class="fas fa-spinner"></i>
                     </button>
