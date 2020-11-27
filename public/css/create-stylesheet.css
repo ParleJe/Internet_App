@@ -1,0 +1,63 @@
+.content {
+    padding: 5em;
+    background: #FFFFFF;
+    margin: auto;
+    border-radius: var(--radius);
+    display: flex;
+
+
+}
+
+.content>div {
+    margin: auto;
+
+}
+
+form {
+    margin: 1em;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    border-radius: 0;
+    width: 50%;
+    border-bottom: 1px solid #C968C9;
+}
+
+textarea {
+    font-weight: 300;
+    font-size: 1.5em;
+    background: transparent;
+    border-radius: calc(var(--radius)/4);
+    border: 1px solid #e5b2e5;
+    padding: 1vh;
+    margin: 1em;
+    width: 80%;
+
+    resize: vertical;
+}
+
+img {
+    margin: auto;
+}
+
+button {
+    align-self: flex-end;
+    font-size: 2em;
+    width: fit-content;
+    background: #6BA2EB;
+    border: 0;
+    font-weight: 500;
+    border-radius: 10em;
+}
+
+#add-poi {
+    margin: 0;
+}
+#submit {
+    font-size: 1.6em;
+    align-self: center;
+    padding: 0.2em 1em;
+}

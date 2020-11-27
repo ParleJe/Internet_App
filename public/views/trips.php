@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="../css/trips-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="public/css/trips-stylesheet.css">
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <!--<script src="../scripts/script.js"></script>-->
     <title>Your Trips</title>
 </head>
 
 <body>
+
+<?PHP
+
+?>
+
     <nav id="navigation-bar">
 
         <div class="nav-logo-container">
