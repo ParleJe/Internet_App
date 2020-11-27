@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
-    <link rel="stylesheet" type="text/css" href="public/css/trips.css">
+    <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="../css/trips-stylesheet.css">
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <!--<script src="../scripts/script.js"></script>-->
     <title>Your Trips</title>
@@ -17,10 +17,10 @@
 
         <ol>
             <li class="button-container">
-                <div class="new-button">
+                <a class="new-button" href="create">
                     Get to the Boat
                     <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-                </div>
+                </a>
             </li>
 
             <li>
@@ -69,7 +69,8 @@
                 </a>
             </div>
             <div>
-                <pre></pre>
+                <pre>Date</pre>
+                <pre>XX.XX.XXXX</pre>
                 <div class="trip-icons"><!--Icons-->
                     <i class="fas fa-comment-alt"></i>
                     <i class="fas fa-ellipsis-v"></i>
@@ -137,6 +138,16 @@
 
             <div class="flow">
                 <!--TODO empty columns-->
+                <h2>TITLE OF TRIPS #3</h2>
+                <div class="trip" id="trip-6">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                </div>
             </div>
 
         </section>

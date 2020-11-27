@@ -14,8 +14,10 @@
 }
 
 .top-bar>button {
+    font-weight: 700;
+    color: #282e3f;
     margin: 0;
-    font-size: 1.2em;
+    font-size: 1.5em;
     background: #6BA2EB;
     border: 0;
     width: 20%;

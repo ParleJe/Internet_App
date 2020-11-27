@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+
 :root {
     --radius: 4em;
 }
 
 * {
-    font-size:0.5vmax;
-
+    font-size: 8px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
 }
 
 body {
@@ -66,6 +69,8 @@ form.login {
 }
 
 input {
+    font-weight: 300;
+    font-size: 1.5em;
     background: transparent;
     border-radius: var(--radius);
     border: none;
@@ -101,10 +106,10 @@ input:hover {
     animation-duration: 2000ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    -webkit-animation-play-state: paused;
-    -moz-animation-play-state: paused;
-    -ms-animation-play-state: paused;
-    animation-play-state: paused;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -ms-animation-play-state: running;
+    animation-play-state: running;
 }
 
 .login-button>i {
@@ -114,10 +119,7 @@ input:hover {
 
 .login-button:hover {
     color: #C968C9;
-    -webkit-animation-play-state: running;
-    -moz-animation-play-state: running;
-    -ms-animation-play-state: running;
-    animation-play-state: running;
+
 }
 
 .logo-container {
@@ -245,6 +247,7 @@ li:last-child {
 
 .nav-button>pre {
     font-size: 1.2em;
+    font-weight: 500;
     width: 80%;
     text-align: right;
 }
@@ -256,6 +259,8 @@ li:last-child {
 
 .new-button {
     font-size: 2em;
+    font-weight: 600;
+    color: #282e3f;
     border-radius: calc(var(--radius)/2);
     background: #6BA2EB;
     padding: 0.5vmin;

@@ -15,32 +15,50 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    padding-inline-start: 1em;
+    padding-inline-start: 2em;
+    padding-inline-end: 2em;
 }
 .top-bar>div>h2 {
-    font-size: 3em;
+    font-weight: 600;
+    font-size: 4em;
     margin-block-start: 0.1em;
-    margin-block-end: 0.5em;
+    margin-block-end: 0.2em;
 }
+
 
 .top-bar>div>.trip-icons{
     justify-content: flex-end;
+    margin-inline-end: 0;
+    color: dimgray;
+}
+.top-bar>div>.trip-icons>i:last-child{
+    margin-right: 0;
+}
+
+.top-bar>div>pre {
+    align-self: flex-end;
+    margin: 0;
+    width:fit-content;
+
+    font-size: 2em;
+    font-weight: 800;
+    color: dimgray;
 }
 
 .top-bar>div>a {
-    justify-self: flex-end;
+    font-size: 1.5em;
+    font-weight: 500;
     width: fit-content;
-    padding: 0.2em 0.8em;
+    padding: 0.5em 1.5em;
     border-radius: calc(var(--radius)/4);
-    background: plum;
-    color: #C968C9;
+    background: #e5b2e5;
+    color: #961c9690;
 }
 
 
 .content {
     width: 80%;
     height: 84%;
-
 
     border-radius: 2vh;
     background: transparent;
@@ -59,34 +77,38 @@
     margin-bottom: 2em;
     height: fit-content;
     padding: 1vh;
-    border-radius: calc(2*var(--radius));
+    border-radius: calc(var(--radius));
     background: white;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    justify-self: center;
 }
 
 .trip>h4 {
+    font-weight: 600;
     font-size: 1.2em;
 }
 
 .trip>h4, .trip>h3 {
+    font-weight: 500;
     margin: 0.2em 0.2em 0.2em 1em;
 }
 
 h2, .trip>h3 {
+    font-weight: 600;
     font-size: 2em;
 }
 
 .trip-icons {
     display: flex;
-    margin: 1em 1em 1em 2em;
+    margin: 1em 1em 0 2em;
 }
 
 .trip-icons>i {
-    font-size: 1.5em;
+    font-size: 2em;
     margin-right: 1.5em;
 }
-
 
 
 .trip:hover>img {
@@ -97,15 +119,19 @@ h2, .trip>h3 {
     display: none;
     object-fit: cover;
     width: 70%;
-    height: 6.5vmax;
+    height: 7.5vmax;
     align-self: center;
 }
 
 
 @media (max-width: 800px) {
+    .content {
+        grid-gap: 1em;
+    }
+
     .trip {
         font-size: 2vmin;
-        min-width: 70vw;
+        min-width: 60vw;
     }
     .trip>div>i {
         font-size: 1.5em;

@@ -19,4 +19,8 @@
         public function trips() {
             $this->render('trips');
         }
+
+        public function create() {
+            $this->render('create');
+        }
     }
