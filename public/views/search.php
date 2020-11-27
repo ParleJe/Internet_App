@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
-    <link rel="stylesheet" type="text/css" href="public/css/search.css">
+    <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="../css/search-stylesheet.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -20,10 +20,10 @@
 
     <ol>
         <li class="button-container">
-            <div class="new-button">
+            <a class="new-button">
                 Get to the Boat
                 <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-            </div>
+            </a>
         </li>
 
         <li>
@@ -120,4 +120,4 @@
 
     </div>
 </div>
-</body>ś
+</body>

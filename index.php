@@ -7,8 +7,8 @@ $path = parse_url($path, PHP_URL_PATH);
 
 Routing::get('', 'DefaultController' );
 Routing::get('search', 'DefaultController' );
-Routing::get('registration', 'DefaultController');
 Routing::get('trips', 'DefaultController');
+Routing::get('create', 'DefaultController');
 
 Routing::post('login', 'LoginController' );
 Routing::post('register', 'LoginController');
