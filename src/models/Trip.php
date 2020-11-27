@@ -4,13 +4,14 @@
 class Trip
 {
     private $name;
+    private $localization;
     private $description;
     private $image;
     private $steps;
 
     //TODO WHOLE CLASS
 
-    public function __construct(string $name, string $description,  $image,array $steps)
+    public function __construct(string $name, string $description,  $image = null, array $steps = [])
     {
         $this->name = $name;
         $this->description = $description;

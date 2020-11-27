@@ -17,10 +17,10 @@
 
     <ol>
         <li class="button-container">
-            <div class="new-button">
+            <a class="new-button" href="create">
                 Get to the Boat
                 <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-            </div>
+            </a>
         </li>
 
         <li>
@@ -64,20 +64,33 @@
     <div class="top-bar"></div>
 
     <div class="content">
-        <form>
-            <input placeholder="Trip name"> <!--Name-->
-            <input placeholder="Where?"> <!--Localisation-->
-            <textarea rows="6" cols="30" >What is about?</textarea> <!--Description-->
+        <form action="create" method="post">
+            <h2>My New Trip</h2>
+            <input name="name" placeholder="Trip name"> <!--Name-->
+            <input name="where" placeholder="Where?"> <!--Localisation-->
+            <textarea name="desc" rows="6" cols="30" placeholder="What is about?"></textarea> <!--Description-->
             <input> <!--Photo-->
             <div>
             <input> <!--Point Of Interest-->
                 <button id="add-poi">+</button> <!--Submit only Point Of Interest-->
             </div>
-            <button id="submit">Submit</button> <!--Submit All Form-->
+            <button id="submit" type="submit">Submit</button> <!--Submit All Form-->
         </form>
         <div>
             <img src="public/resources/placeholder.jpg">
+            <div class="message">
+                <?PHP
+                if(isset($messages))
+                {
+                    foreach ($messages as $message)
+                    {
+                        echo $message;
+                    }
+                }
+                ?>
+            </div>
         </div>
     </div>
+
 </div>
 </body>

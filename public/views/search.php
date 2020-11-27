@@ -22,7 +22,7 @@
 
     <ol>
         <li class="button-container">
-            <a class="new-button">
+            <a class="new-button" href="create">
                 Get to the Boat
                 <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
             </a>

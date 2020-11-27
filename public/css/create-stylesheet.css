@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+
 .content {
-    padding: 5em;
+    padding: 2em 5em;
     background: #FFFFFF;
     margin: auto;
     border-radius: var(--radius);
@@ -9,7 +11,10 @@
 }
 
 .content>div {
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
 
 }
 
@@ -20,10 +25,21 @@ form {
     flex-direction: column;
 }
 
+h2 {
+    font-family: 'Nothing You Could Do', cursive;
+    font-size: 4em;
+    margin-block-start: 0.2em ;
+    margin-block-end: 0.5em;
+}
+
 input {
     border-radius: 0;
-    width: 50%;
+    width: 80%;
     border-bottom: 1px solid #C968C9;
+}
+
+form>div>input {
+    width: 70%;
 }
 
 textarea {
@@ -41,6 +57,15 @@ textarea {
 
 img {
     margin: auto;
+}
+.message {
+    padding: 0;
+    height: 2em;
+    font-size: 2em;
+    text-align: center;
+    margin: 1em;
+    width: 100%;
+
 }
 
 button {
