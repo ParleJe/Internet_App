@@ -288,7 +288,7 @@ a {
     text-decoration: none;
 }
 
-@media (max-width: 801px) {
+@media (max-width: 801px) or (orientation:portrait) {
     .middle-line {
         background: none;
         flex-direction: column;

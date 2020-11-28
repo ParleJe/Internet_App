@@ -83,7 +83,7 @@ p {
 }
 
 
-@media (max-width: 801px) {
+@media (max-width: 801px) or (orientation:portrait) {
     .top-bar {
         width: 80%;
     }

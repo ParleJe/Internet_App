@@ -1,10 +1,10 @@
 
 function vh(v) {
-    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     return (v * h) / 100;
   }
 function vw(v) {
-    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     return (v * w) / 100;
   }
 function vmin(v) {
@@ -21,9 +21,7 @@ function showMap() {
         bottom = style.getPropertyValue('bottom');
 
     bottom = bottom.substring(0, bottom.length -2) //remove "px"
-    alert(bottom.split(".")[0]) //remove fractional part
-    alert(vh(20).toString().split(".")[0])
-    if(bottom.split(".")[0] === vh(20).toString().split(".")[0]) {
+    if(bottom.split(".")[0] === vh(20).toString().split(".")[0]) { //remove fractional parts
         element.style.bottom = String(vh(-100)+'px')
     }else {
         element.style.bottom = String(vh(20)+'px')
