@@ -15,26 +15,10 @@ class TripController extends AppController
                 $_FILES['photo']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name']
             );
-
             return $this->render('create');
         }
 
-
-
-
-
-       /*
-        $name = $_POST['name'];
-        $where = $_POST['where'];
-        $desc = $_POST['desc'];
-        if(empty($name)) {
-            return $this->render('create', ['messages'=>['Name is missing!']]);
-        } elseif (empty($where)) {
-            return $this->render('create', ['messages'=>['Destination is missing!']]);
-        } elseif (empty($desc)) {
-            return $this->render('create', ['messages'=>['Description is missing!']]);
-        }*/
-
+        $this->messages[] = $this->getPOI();
         return $this->render('create', ['messages' => $this->messages]);
     }
 
@@ -53,5 +37,21 @@ class TripController extends AppController
         return true;
     }
 
+    private function getPOI(): array {
+
+        if(!isset($_COOKIE['POI'])){
+            return []; //empty array
+        }
+        $cookie = $_COOKIE['POI'];
+
+        $places = explode(',', $cookie); // [POINT (XX.XXX XX.XXXX)] [POINT (XX.XXX XX.XXXX)] [POINT (XX.XXX XX.XXXX]
+        $iter = 0;
+        foreach ($places as $place){
+            $places[$iter] = substr($place,7, -1 );
+            $iter++;
+        }
+
+        return $places;
+    }
 
 }

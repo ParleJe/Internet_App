@@ -4,7 +4,6 @@ require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 class LoginController extends AppController
 {
-    private static $mailRegex = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+";
     private static $passwordRegex = '/"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/'; //password no space
     private static $salt = "RainbowHair";
 
@@ -38,9 +37,11 @@ class LoginController extends AppController
         header("Location: {$url}/search");*/
     }
 
-    public function register()
+    public function registration()
     {
-
+        if(!$this->isPost()){
+            return $this->render('registration');
+        }
 
         $mail = $_POST["email"];
         $login = $_POST["login"];

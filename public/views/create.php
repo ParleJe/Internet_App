@@ -103,10 +103,11 @@
             </div>
         </div>
         <section id="map-container">
-            <i class="fas fa-times" onclick="showMap()"></i>
+            <i class="fas fa-times" onclick="closeMapAndExport()"></i>
             <div id="map"></div>
         </section>
     </div>
+
 
     <script type="module" src="public/scripts/hereAPI/map.js"></script>
 </body>

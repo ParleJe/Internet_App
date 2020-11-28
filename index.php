@@ -11,5 +11,5 @@ Routing::get('trips', 'DefaultController');
 
 Routing::post('create', 'TripController');
 Routing::post('login', 'LoginController' );
-Routing::post('register', 'LoginController');
+Routing::post('registration', 'LoginController');
 Routing::run($path);

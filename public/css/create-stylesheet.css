@@ -15,12 +15,13 @@
 }
 
 #map-container {
-    width: 60vw;
-    height: 60vh;
+    width: 100vw;
+    height: 100vh;
     transition: 1s;
     background: white;
     position: absolute;
-    bottom:-60vh;
+    bottom:-200vh;
+    left: 0;
 }
 
 #map {
@@ -31,8 +32,8 @@
 #map-container>i {
     font-size: 2em;
     position: absolute;
-    top: 1em;
-    left: 1em;
+    top: 12px;
+    left: 12px;
     z-index: 10;
     cursor: pointer;
 }
@@ -121,7 +122,7 @@ img {
     width: 60%;
 }
 
-@media (max-width: 801px) or (orientation:portrait) {
+@media screen and (max-width:801px), screen and (max-device-width:801px) {
     .content>div {
         display: none;
     }
@@ -157,7 +158,11 @@ img {
         width: fit-content;
     }
     #map-container {
-        width: 90vw;
+        width: 100vw;
+        height: 100vw;
         border-radius: calc(var(--radius)/2);
+    }
+    #map-container>i {
+        font-size: 6em;
     }
 }
