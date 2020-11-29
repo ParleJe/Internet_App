@@ -73,7 +73,7 @@
         </ol>
     </nav>
 
-    <div class="content-container">
+    <section class="content-container">
 
         <div class="content">
             <form action="create" method="POST" enctype="multipart/form-data">
@@ -102,11 +102,16 @@
                 </div>
             </div>
         </div>
-        <section id="map-container">
-            <i class="fas fa-times" onclick="closeMapAndExport()"></i>
+
+        <div id="map-container">
+            <i class="fas fa-times" onclick="showMap()"></i>
+                    <div class="inner-city-field-container">
+                        <div contenteditable="true" class="city-field"></div>
+                        <div class="city-field-suggestion"></div>
+                    </div>
             <div id="map"></div>
-        </section>
-    </div>
+        </div>
+    </section>
 
 
     <script type="module" src="public/scripts/hereAPI/map.js"></script>

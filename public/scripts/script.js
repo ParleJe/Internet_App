@@ -17,21 +17,12 @@ function showMap() {
         display = style.getPropertyValue('display')
 
     bottom = bottom.substring(0, bottom.length -2) //remove "px"
-    if(bottom.split(".")[0] === vh(0).toString().split(".")[0]) { //remove fractional parts
+    if(bottom >= 0) { //remove fractional parts
         element.style.bottom = String(vh(-200)+'px')
     }else {
-        element.style.bottom = 0
+        element.style.bottom = '0'
     }
 
-}
-
-function closeMapAndExport() {
-    const cookieValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('POI'))
-        .split('=')[1];
-    showMap()
-    alert(cookieValue)
 }
 
 function expandTrip(elementID) {

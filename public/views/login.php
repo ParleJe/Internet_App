@@ -18,6 +18,7 @@
                 <form class="login" action="login" method="post" >
                     <input name="email" type="email" placeholder="email@email.com">
                     <input name="password" type="password" placeholder="password">
+                    <p> don't have an account? Click <a href="registration">HERE</a></p>
                     <div class="message">
                     <?php
                     if(isset($messages))

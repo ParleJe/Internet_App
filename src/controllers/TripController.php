@@ -1,7 +1,5 @@
 <?php /** @noinspection ALL */
 
-    /*spl_autoload_register('AutoLoader::classLoader');
-    spl_autoload_register('AutoLoader::modelLoader()');*/
 class TripController extends AppController
 {
     const MAX_FILE_SIZE = 1024*1024;
@@ -11,7 +9,8 @@ class TripController extends AppController
 
     public function create()
     {
-        if($this->isPost() && is_uploaded_file($_FILES['photo']['tmp_name']) && $this->validate($_FILES['photo'])){
+        //TODO check localization, POI, title, desription
+        if($this->isPost() && is_uploaded_file($_FILES['photo']['tmp_name']) && $this->validate($_FILES['photo'])){ // check photo
             move_uploaded_file(
                 $_FILES['photo']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name']

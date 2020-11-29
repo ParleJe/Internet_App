@@ -1,6 +1,4 @@
 <?php
-spl_autoload_register('AutoLoader::controllerLoader');
-spl_autoload_register('AutoLoader::modelLoader');
 
 class AutoLoader
 {
@@ -19,5 +17,9 @@ class AutoLoader
         if( is_readable($directory)){
             require $directory;
         }
+    }
+
+    public static function defaultLoader ($classname) {
+        $directory = __DIR__.$classname.self::$extension;
     }
 }

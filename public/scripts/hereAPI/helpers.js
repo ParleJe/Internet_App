@@ -1,3 +1,6 @@
+import {geocoder} from "./map";
+import {hereCredentials} from "./config";
+
 const $ = q => document.querySelector(q);
 const $$ = qq => document.querySelectorAll(qq);
 
@@ -19,4 +22,22 @@ function addMarker(geolocal, markerArray, locationArray, map) {
 
 }
 
-export { $, $$, removeMarker, addMarker }
+const requestGeocode = locationid => {
+    return new Promise((resolve, reject) => {
+        geocoder.geocode(
+            { locationid },
+            res => {
+                const coordinates = res.Response.View[0].Result[0].Location.DisplayPosition;
+                resolve(coordinates);
+            },
+            err => reject(err)
+        )
+    })
+}
+
+const autocompleteGeocodeUrl = (query) =>
+    `https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?apiKey=${hereCredentials.apikey}
+    &resultType=areas
+    &query=${query}`
+
+export { $, $$, removeMarker, addMarker, requestGeocode, autocompleteGeocodeUrl }

@@ -11,7 +11,7 @@ class Trip
 
     //TODO WHOLE CLASS
 
-    public function __construct(string $name, string $description,  $image = null, array $steps = [])
+    public function __construct(string $name,string $localization, string $description,  $image = null, array $steps = [])
     {
         $this->name = $name;
         $this->description = $description;
