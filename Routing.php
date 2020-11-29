@@ -1,9 +1,12 @@
 <?php
 
 
-    require_once 'src/controllers/DefaultController.php';
+   /* require_once 'src/controllers/DefaultController.php';
     require_once 'src/controllers/LoginController.php';
-    require_once 'src/controllers/TripController.php';
+    require_once 'src/controllers/TripController.php';*/
+    require 'AutoLoader.php';
+    spl_autoload_register('AutoLoader::controllerLoader');
+    spl_autoload_register('AutoLoader::modelLoader');
 
     class Routing {
         public static $routes;

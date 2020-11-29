@@ -1,6 +1,7 @@
 <?php /** @noinspection ALL */
 
-
+    /*spl_autoload_register('AutoLoader::classLoader');
+    spl_autoload_register('AutoLoader::modelLoader()');*/
 class TripController extends AppController
 {
     const MAX_FILE_SIZE = 1024*1024;
@@ -17,8 +18,9 @@ class TripController extends AppController
             );
             return $this->render('create');
         }
+        $places = $this->getPOI();
+       
 
-        $this->messages[] = $this->getPOI();
         return $this->render('create', ['messages' => $this->messages]);
     }
 
@@ -40,16 +42,20 @@ class TripController extends AppController
     private function getPOI(): array {
 
         if(!isset($_COOKIE['POI'])){
-            return []; //empty array
+            return ['POIs not set']; //empty array
         }
         $cookie = $_COOKIE['POI'];
 
         $places = explode(',', $cookie); // [POINT (XX.XXX XX.XXXX)] [POINT (XX.XXX XX.XXXX)] [POINT (XX.XXX XX.XXXX]
-        $iter = 0;
-        foreach ($places as $place){
-            $places[$iter] = substr($place,7, -1 );
-            $iter++;
+
+        foreach ($places as $i => $place){
+            $places[$i] = substr($place,7, -1 );
         }
+
+        unset($_COOKIE['POI']);
+        setcookie('POI', null, -1, '/');
+
+
 
         return $places;
     }

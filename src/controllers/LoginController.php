@@ -1,7 +1,8 @@
 <?php
 
-require_once 'AppController.php';
-require_once __DIR__.'/../models/User.php';
+   /* spl_autoload_register('AutoLoader::classLoader');
+    spl_autoload_register('AutoLoader::modelLoader()');*/
+
 class LoginController extends AppController
 {
     private static $passwordRegex = '/"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/'; //password no space
