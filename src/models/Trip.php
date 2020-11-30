@@ -6,18 +6,19 @@ class Trip
     private $name;
     private $localization;
     private $description;
-    private $image;
     private $steps;
 
     //TODO WHOLE CLASS
 
-    public function __construct(string $name,string $localization, string $description,  $image = null, array $steps = [])
+    public function __construct(string $name,string $localization, string $description, array $steps = [])
     {
         $this->name = $name;
+        $this->localization = $localization;
         $this->description = $description;
-        $this->image = $image;
         $this->steps = $steps;
     }
+
+
 
     /**
      * @return string
@@ -49,22 +50,6 @@ class Trip
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param mixed $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
     }
 
     /**

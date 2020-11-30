@@ -9,15 +9,24 @@ class TripController extends AppController
 
     public function create()
     {
-        //TODO check localization, POI, title, desription
         if($this->isPost() && is_uploaded_file($_FILES['photo']['tmp_name']) && $this->validate($_FILES['photo'])){ // check photo
             move_uploaded_file(
                 $_FILES['photo']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name']
             );
-            return $this->render('create');
+            //get title TODO check with DB if such title didnt exist yet
+            $title = $_POST['name'];
+            //get localization
+            $localizaaton = $_POST['where'];
+            //get POIs
+            $steps = $this->getPOI();
+            //get description
+            $desc = $_POST['desc'];
+            //create object TODO pass it to DB
+            $trip = new Trip($title, $localizaaton, $desc, $steps);
+
+            return $this->render('trips');
         }
-        $places = $this->getPOI();
        
 
         return $this->render('create', ['messages' => $this->messages]);
