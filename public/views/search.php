@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="../css/search-stylesheet.css">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="public/css/search-stylesheet.css">
 
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <title>Search</title>
 </head>
 
 <body>
+
+<?PHP
+
+?>
+
 <nav id="navigation-bar">
 
     <div class="nav-logo-container">
@@ -20,7 +22,7 @@
 
     <ol>
         <li class="button-container">
-            <a class="new-button">
+            <a class="new-button" href="create">
                 Get to the Boat
                 <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
             </a>

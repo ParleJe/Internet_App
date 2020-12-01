@@ -5,7 +5,7 @@
 }
 
 * {
-    font-size: 8px;
+    font-size: 0.8vmin;
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
 }
@@ -288,7 +288,7 @@ a {
     text-decoration: none;
 }
 
-@media (max-width: 801px) {
+@media screen and (max-width:801px), screen and (max-device-width:801px) {
     .middle-line {
         background: none;
         flex-direction: column;
@@ -343,8 +343,15 @@ a {
         float: left;
         height: unset;
     }
-    li:first-child, li:last-child {
+    li:last-child {
         display: none;
+    }
+
+    .new-button {
+        font-size: 1em;
+        position: absolute;
+        right: 6vw;
+        top: 3.5vh;
     }
 
     ol {

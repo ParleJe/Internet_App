@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <title>LOGIN PAGE</title>
 </head>
@@ -18,6 +18,7 @@
                 <form class="login" action="login" method="post" >
                     <input name="email" type="email" placeholder="email@email.com">
                     <input name="password" type="password" placeholder="password">
+                    <p> don't have an account? Click <a href="registration">HERE</a></p>
                     <div class="message">
                     <?php
                     if(isset($messages))

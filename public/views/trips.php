@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="../css/trips-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="public/css/trips-stylesheet.css">
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <!--<script src="../scripts/script.js"></script>-->
+    <script src="public/scripts/script.js"></script>
     <title>Your Trips</title>
 </head>
 
 <body>
+
+<?PHP
+
+?>
+
     <nav id="navigation-bar">
 
         <div class="nav-logo-container">
@@ -81,20 +86,20 @@
 
             <div class="flow"> <!--First column etc.-->
                 <h2>TITLE OF TRIPS #1</h2>
-                <div class="trip" id="trip-1">
+                <div class="trip" id="trip-1" onclick="expandTrip(this.id)">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-1-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
                     </div>
                 </div>
 
-                <div class="trip" id="trip-2">
+                <div class="trip" id="trip-2" onclick="expandTrip(this.id)">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-2-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
@@ -104,30 +109,30 @@
 
             <div class="flow">
                 <h2>TITLE OF TRIPS #2</h2>
-                <div class="trip" id="trip-3">
+                <div class="trip" id="trip-3" onclick="expandTrip(this.id)">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
                     </div>
                 </div>
 
-                <div class="trip" id="trip-4">
+                <div class="trip" id="trip-4" onclick="expandTrip(this.id)">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-4-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
                     </div>
                 </div>
 
-                <div class="trip" id="trip-5">
+                <div class="trip" id="trip-5" onclick="expandTrip(this.id)">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-5-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
@@ -139,10 +144,10 @@
             <div class="flow">
                 <!--TODO empty columns-->
                 <h2>TITLE OF TRIPS #3</h2>
-                <div class="trip" id="trip-6">
+                <div class="trip" id="trip-6" onclick="expandTrip(this.id)">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-6-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
