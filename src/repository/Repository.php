@@ -8,7 +8,7 @@ class Repository
     //TODO singleton
     public function __construct()
     {
-        $this->database = new Database();
+        $this->database = DbConnection::getInstance();
     }
 
 
