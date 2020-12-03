@@ -3,6 +3,8 @@
 require 'AutoLoader.php';
 spl_autoload_register('AutoLoader::controllerLoader');
 spl_autoload_register('AutoLoader::modelLoader');
+spl_autoload_register("AutoLoader::defaultLoader");
+spl_autoload_register("AutoLoader::repositoryLoader");
 
     class Routing {
         public static $routes;

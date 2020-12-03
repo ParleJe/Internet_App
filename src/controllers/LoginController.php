@@ -11,7 +11,7 @@ class LoginController extends AppController
     public function login()
     {
         $user = new User("a@a", hash("sha512", self::$salt."passwd"), 'Jon');
-
+        $userRepositiory = new UserRepository();
 
         if(!$this->isPost())
         {
@@ -20,17 +20,17 @@ class LoginController extends AppController
 
         $mail = $_POST["email"];
         $passwd = $_POST["password"];
-
-        if($user->getEmail() !== $mail)
-        {
-            return $this->render('login', ['messages' => ['User with this email not exist!']]);
+        try{
+            $user = $userRepositiory->getUser($mail);
+        }catch (Exception $e){
+            return $this->render('login', ['messages' => [$e->getMessage()]]);
         }
 
-        if(preg_match(self::$passwordRegex, $passwd) or
+        /*if(preg_match(self::$passwordRegex, $passwd) or
             $user->getPassword() !== hash("sha512", self::$salt.$passwd))
         {
             return $this->render('login', ['messages' => ['Wrong password!']]);
-        }
+        }*/
 
         return $this->render('trips');
 

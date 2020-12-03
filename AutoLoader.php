@@ -19,6 +19,13 @@ class AutoLoader
         }
     }
 
+    public static function repositoryLoader ($classname) {
+        $directory = self::$top_dir.'repository/'.$classname.self::$extension;
+        if( is_readable($directory)){
+            require $directory;
+        }
+    }
+
     public static function defaultLoader ($classname) {
         $directory = __DIR__.$classname.self::$extension;
     }
