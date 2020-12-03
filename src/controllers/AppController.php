@@ -13,11 +13,6 @@
             return $this->request === 'POST';
         }
 
-        protected function isGet(): bool
-        {
-            return $this->request === 'GET';
-        }
-
         protected function render(string $template = null, array $vars=[]) {
             $output = 'Error 69';
             $templatePath = 'public/views/'.$template.'.php';
