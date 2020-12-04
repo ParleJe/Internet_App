@@ -3,7 +3,7 @@
 
 class Repository
 {
-    protected  $database;
+    protected DatabaseConnection $database;
 
 
     public function __construct()

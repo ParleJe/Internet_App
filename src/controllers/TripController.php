@@ -8,21 +8,32 @@ class TripController extends AppController
 
     public function create()
     {
+        $tripRepo = new TripRepository();
+
         if( $this->isPost() && is_uploaded_file( $_FILES['photo']['tmp_name'] ) && $this->validate( $_FILES['photo'] ) ){ // check photo
-            move_uploaded_file(
+            /*move_uploaded_file(
                 $_FILES['photo']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name']
-            );
+            );*/
+            //TODO check if it's working
+            $photo = file_get_contents( $_FILES['photo']['tmp_name'] );
+            $photo = urlencode( $photo ); //photo to bytea
+
             //get title TODO check with DB if such title didnt exist yet
             $title = $_POST['name'];
             //get localization
-            $localizaaton = $_POST['where'];
+            $localization = $_POST['where'];
             //get POIs
-            $steps = $this->getPOI();
+            $steps = $this->parsePOI();
+            $steps = $this->getPOIAsJSON( $steps );
             //get description
             $desc = $_POST['desc'];
             //create object TODO pass it to DB
-            $trip = new Trip($title, $localizaaton, $desc, $steps);
+            $trip = new Trip( $title, $localization, $desc, $steps, $photo );
+
+            if( ! $tripRepo->setTrip( $trip ) ) {
+                return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
+            }
 
             return $this->render('trips');
         }
@@ -45,7 +56,7 @@ class TripController extends AppController
         return true;
     }
 
-    private function getPOI(): array {
+    private function parsePOI(): array {
 
         if(!isset($_COOKIE['POI'])){
             return ['POIs not set']; //empty array
@@ -62,6 +73,21 @@ class TripController extends AppController
         setcookie( 'POI', null, -1, '/' );
 
         return $places;
+    }
+
+
+    private function getPOIAsJSON(array $POI, array $name = null, array $description = null) {
+        $JSONArray = [];
+
+        foreach ( $POI as $iterator => $place ) {
+            $JSONArray["POI ".($iterator+1)] = [
+                "location" => $POI[$iterator],
+                "name" => $name[$iterator],
+                "description" => $description[$iterator]
+            ];
+        }
+        return json_encode($JSONArray);
+
     }
 
 }
