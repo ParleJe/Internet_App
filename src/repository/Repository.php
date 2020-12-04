@@ -5,10 +5,10 @@ class Repository
 {
     protected  $database;
 
-    //TODO singleton
+
     public function __construct()
     {
-        $this->database = DbConnection::getInstance();
+        $this->database = new DatabaseConnection();
     }
 
 

@@ -1,7 +1,5 @@
 <?php
 
-    /*spl_autoload_register('AutoLoader::classLoader');
-    spl_autoload_register('AutoLoader::modelLoader()');*/
 
     class DefaultController extends AppController {
 
