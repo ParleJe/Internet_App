@@ -19,16 +19,19 @@ class TripController extends AppController
             $photo = file_get_contents( $_FILES['photo']['tmp_name'] );
             $photo = urlencode( $photo ); //photo to bytea
 
-            //get title TODO check with DB if such title didnt exist yet
+
             $title = $_POST['name'];
-            //get localization
+            if( $tripRepo->getTripByName( $title ) != null ) {
+                return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
+            }
+            //get destination
             $localization = $_POST['where'];
             //get POIs
             $steps = $this->parsePOI();
             $steps = $this->getPOIAsJSON( $steps );
             //get description
             $desc = $_POST['desc'];
-            //create object TODO pass it to DB
+
             $trip = new Trip( $title, $localization, $desc, $steps, $photo );
 
             if( ! $tripRepo->setTrip( $trip ) ) {

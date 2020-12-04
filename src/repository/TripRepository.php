@@ -21,7 +21,7 @@ class TripRepository extends Repository {
             $trip['destination'],
             $trip['description'],
             $trip['pointsOfInterest'],
-            $trip['photo']
+             ' '
         );
     }
 
