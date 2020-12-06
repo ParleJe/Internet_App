@@ -24,4 +24,8 @@
         public function create() {
             $this->render('create');
         }
+
+        public function friends() {
+            $this->render('friends');
+        }
     }
