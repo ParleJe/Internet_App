@@ -4,7 +4,7 @@ class TripRepository extends Repository {
 
     public function getTripByName(string $name): ?Trip {
         $statement = $this->database->getInstance()->prepare('
-            SELECT * FROM trip where trip_name = :Name;
+            SELECT 1 FROM trip where trip_name = :Name;
             ');
 
         try {
@@ -12,17 +12,19 @@ class TripRepository extends Repository {
                 ':Name' => $name,
             ] );
         } catch (Exception $e){
-            return null;
+            die($e->getMessage());
         }
         $trip = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return new Trip(
-            $trip['trip_name'],
-            $trip['destination'],
-            $trip['description'],
-            $trip['pointsOfInterest'],
-             ' '
-        );
+        if($trip['trip_name'] != null) {
+            return new Trip(
+                $trip['trip_name'],
+                $trip['destination'],
+                $trip['description'],
+                $trip['pointsOfInterest'],
+                ' '
+            );
+        }
+        return null;
     }
 
     public function getTripByUser( string $user ): ?array {
