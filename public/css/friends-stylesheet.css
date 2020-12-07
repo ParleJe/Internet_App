@@ -71,7 +71,10 @@
     border-radius: var(--radius);
 }
 
-.profile>h2 {
+.profile>div {
+    text-align: center;
+}
+.profile>div>h2 {
     font-size: 2.5em;
     text-underline: auto;
     border-bottom: 1px solid black;
@@ -80,7 +83,62 @@
     margin-block-end: 0.5em;
 }
 
-.profile>h3 {
+.profile>div>h3 {
     color: #282e3f90;
     margin-top: 0.2em;
+}
+
+@media screen and (max-width:801px), screen and (max-device-width:801px) {
+
+    .top-bar {
+        width: 95%;
+    }
+    .top-bar>input {
+        font-size: 1em;
+        width: 70%;
+    }
+
+    .top-bar>button {
+        font-size: 1em;
+        width: 30%;
+    }
+
+    .content {
+        width: 90%;
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+        grid-auto-flow: row;
+        overflow: auto;
+    }
+
+
+    .profile {
+        width: 100%;
+        height: fit-content;
+        margin: 1em 0;
+        flex-direction: row;
+
+        border-radius: calc(var(--radius)/2);
+
+    }
+    .profile>img {
+        object-fit: cover;
+        width: 30%;
+        border-radius: calc(var(--radius)/2);
+    }
+
+    .profile>div {
+        margin: 0 2em;
+        text-align: center;
+        width: 60%;
+    }
+    .profile>div>h2 {
+        font-size: 1em;
+        border-bottom: unset;
+    }
+
+    .profile>div>h3 {
+        margin-top: 0.8em;
+    }
+
 }

@@ -68,15 +68,16 @@
     <div class="content">
 
         <div class="profile">
+            <div>
+                <img src="public/resources/placeholder.jpg">
+                <!--icon for add to friends or delete account-->
+                <h2>NAME SURNAME</h2>
+                <h3>LOGIN</h3>
+            </div>
 
-            <img src="public/resources/placeholder.jpg">
-            <!--icon for add to friends or delete account-->
 
 
-
-            <h2>NAME SURNAME</h2>
-            <h3>LOGIN</h3>
-            <div class="trips-created">
+            <section class="trips-created">
                 <!--here all created trips by user-->
                 <div class="trip" id="trip-1">
                     <!--photo of the trip as background-->
@@ -92,7 +93,22 @@
                     <!--photo of the trip as background-->
                     <h2>NAME</h2>
                 </div>
-            </div>
+
+                <div class="trip" id="trip-4">
+                    <!--photo of the trip as background-->
+                    <h2>NAME</h2>
+                </div>
+
+                <div class="trip" id="trip-5">
+                    <!--photo of the trip as background-->
+                    <h2>NAME</h2>
+                </div>
+
+                <div class="trip" id="trip-6">
+                    <!--photo of the trip as background-->
+                    <h2>NAME</h2>
+                </div>
+            </section>
 
         </div>
 

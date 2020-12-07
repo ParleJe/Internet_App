@@ -73,56 +73,70 @@
         <div class="cell">
             <div class="profile" id="profile-1">
                 <img src="public/resources/placeholder.jpg">
-                <h2>Name Surname</h2>
-                <h3>Something Else</h3>
+                <div>
+                    <h2>Name Surname</h2>
+                    <h3>Something Else</h3>
+                </div>
             </div>
         </div>
 
         <div class="cell">
             <div class="profile" id="profile-1">
                 <img src="public/resources/placeholder.jpg">
-                <h2>Name Surname</h2>
-                <h3>Something Else</h3>
+                <div>
+                    <h2>Name Surname</h2>
+                    <h3>Something Else</h3>
+                </div>
             </div>
         </div>
 
         <div class="cell">
             <div class="profile" id="profile-2">
                 <img src="public/resources/placeholder.jpg">
-                <h2>Name Surname</h2>
-                <h3>Something Else</h3>
+                <div>
+                    <h2>Name Surname</h2>
+                    <h3>Something Else</h3>
+                </div>
             </div>
         </div>
 
         <div class="cell">
             <div class="profile" id="profile-3">
                 <img src="public/resources/placeholder.jpg">
-                <h2>Name Surname</h2>
-                <h3>Something Else</h3>
+                <div>
+                    <h2>Name Surname</h2>
+                    <h3>Something Else</h3>
+                </div>
             </div>
         </div>
 
         <div class="cell">
             <div class="profile" id="profile-4">
                 <img src="public/resources/placeholder.jpg">
-                <h2>Name Surname</h2>
-                <h3>Something Else</h3>
+                <div>
+                    <h2>Name Surname</h2>
+                    <h3>Something Else</h3>
+                </div>
             </div>
         </div>
 
         <div class="cell">
             <div class="profile" id="profile-5">
                 <img src="public/resources/placeholder.jpg">
-                <h2>Name Surname</h2>
-                <h3>Something Else</h3>
+                <div>
+                    <h2>Name Surname</h2>
+                    <h3>Something Else</h3>
+                </div>
             </div>
         </div>
 
         <div class="cell">
             <div class="profile" id="profile-6">
                 <img src="public/resources/placeholder.jpg">
-                <h2>Name Surname</h2>
-                <h3>Something Else</h3>
+                <div>
+                    <h2>Name Surname</h2>
+                    <h3>Something Else</h3>
+                </div>
             </div>
         </div>
 
