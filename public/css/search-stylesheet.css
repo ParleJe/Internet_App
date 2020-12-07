@@ -87,6 +87,13 @@ p {
     .top-bar {
         width: 80%;
     }
+    .top-bar>input {
+        font-size: 0.4em;
+    }
+
+    .top-bar>button {
+        font-size: 0.4em;
+    }
     .content {
         width: 90%;
         grid-template-columns: 1fr;

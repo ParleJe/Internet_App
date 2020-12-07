@@ -325,6 +325,7 @@ a {
         flex-direction: column;
     }
     .content-container {
+        height: 80%;
         width: 90%;
         justify-self: center;
     }

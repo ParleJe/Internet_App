@@ -70,7 +70,6 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
     padding: 2em;
-    overflow: auto;
 }
 .flow {
     display: flex;
