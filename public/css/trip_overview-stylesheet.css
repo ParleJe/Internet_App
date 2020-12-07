@@ -1,0 +1,146 @@
+.content-container {
+}
+.content {
+    width: 90%;
+    height: 85%;
+    margin: 0;
+    background: white;
+
+    border-radius: var(--radius);
+
+    position: relative;
+}
+
+.photo-background {
+    margin: 0;
+    padding: 5em 6em;
+    height:60%;
+    background-image: url(../resources/trip-placeholder.jpg);
+    background-size: 100% 200%;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+
+    box-shadow: 0 6px 6px #00000050;
+}
+
+.photo-background>i {
+    font-size: 8em;
+    color: white;
+    height: fit-content;
+}
+
+.photo-background>div {
+    border-radius: var(--radius);
+    background: white;
+    width: fit-content;
+    height: fit-content;
+
+}
+
+.photo-background>div>h1 {
+    margin: 0;
+    padding: 1em 2em;
+    font-size: 2.5em;
+}
+
+.trip {
+    position: absolute;
+    left: 5em;
+    bottom: -10em;
+
+    height: 70%;
+    width: 93%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.desc {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.POI-list {
+    z-index: 3;
+    width: 35%;
+    height: 60vh;
+    background: white;
+
+    box-shadow: 6px 4px 6px #00000050;
+
+    border-radius: var(--radius);
+}
+
+.description {
+    z-index: 1;
+    width: 40%;
+    height: 70%;
+    background: white;
+
+    box-shadow: 6px 4px 6px #00000050;
+
+    border-radius: 0 var(--radius) var(--radius) 0;
+
+    padding: 2em;
+}
+
+.description>p {
+    font-size: 2em;
+}
+
+.description>h1 {
+    font-size: 2.7em;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.trip>div:last-child {
+    width: 20%;
+    height: 60%;
+    background: white;
+    border-radius: var(--radius);
+
+    box-shadow: 0 4px 6px #00000050;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.trip>div:last-child>h1 {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.grid-friends {
+    width: 100%;
+    height: 70%;
+    margin-bottom: 1em;
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(3,1fr);
+    grid-gap: 0;
+}
+
+.grid-friends>div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+}
+.grid-friends>div>img {
+    width: 75%;
+    height: 80%;
+    border-radius: var(--radius);
+}
+
+.trip>div:last-child>i {
+    font-size: 3em;
+    text-align: center;
+}
