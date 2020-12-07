@@ -1,0 +1,5 @@
+.gitattributes
+.DS_Store
+/public/scripts/hereAPI/config.js
+/public/uploads
+config.php
