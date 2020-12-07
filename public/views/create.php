@@ -16,6 +16,7 @@
     <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
 
+
     <!--icons-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
 
@@ -112,7 +113,5 @@
             <div id="map"></div>
         </div>
     </section>
-
-
     <script type="module" src="public/scripts/hereAPI/map.js"></script>
 </body>

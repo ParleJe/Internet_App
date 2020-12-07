@@ -28,4 +28,8 @@
         public function friends() {
             $this->render('friends');
         }
+
+        public function settings() {
+            $this->render('profile');
+        }
     }
