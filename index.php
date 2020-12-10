@@ -11,6 +11,7 @@ Routing::get( 'search', 'DefaultController' );
 Routing::get( 'trips', 'DefaultController' );
 Routing::get( 'friends', 'DefaultController' );
 Routing::get( 'settings', 'DefaultController' );
+Routing::get( 'trip_overview', 'DefaultController' );
 
 Routing::post( 'create', 'TripController' );
 Routing::post( 'login', 'LoginController' );

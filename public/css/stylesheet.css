@@ -222,7 +222,7 @@ li:first-child, li:last-child {
     justify-self: center;
 }
 
-li:last-child {
+nav>ol>li:last-child {
     height: 30%;
     margin-bottom: 1em;
     border-radius: var(--radius);

@@ -30,4 +30,8 @@
         public function settings() {
             $this->render('profile');
         }
+
+        public function trip_overview() {
+            $this->render('trip_overview');
+        }
     }
