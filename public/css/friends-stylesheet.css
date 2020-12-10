@@ -1,0 +1,144 @@
+.top-bar {
+    border-radius: var(--radius);
+    width: 50%;
+    padding: 0;
+    background: #FFFFFF;
+    display: flex;
+}
+
+.top-bar>input {
+    border-radius: var(--radius) 0 0 var(--radius);
+    margin: 0;
+    width: 80%;
+}
+
+.top-bar>input:hover {
+    background: linear-gradient(90deg, rgba(107,162,235,0.3) 10%, rgba(255,255,255,1) 100%);
+}
+
+.top-bar>button {
+    font-weight: 700;
+    color: #282e3f;
+    margin: 0.4em;
+    font-size: 1.5em;
+    background: #6BA2EB;
+    border: 0;
+    width: 20%;
+    border-radius: var(--radius);
+}
+
+.top-bar>button:hover {
+    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
+}
+
+.content {
+    width: 90%;
+    height: 88%;
+    margin-top: 2em;
+    background: transparent;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+    justify-items: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.profile {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1em;
+    margin: 2em 3em;
+    width: 60%;
+
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.profile>img {
+    object-fit: cover;
+    width: 100%;
+    border-radius: var(--radius);
+}
+
+.profile>div {
+    text-align: center;
+}
+.profile>div>h2 {
+    font-size: 2.5em;
+    text-underline: auto;
+    border-bottom: 1px solid black;
+
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
+.profile>div>h3 {
+    color: #282e3f90;
+    margin-top: 0.2em;
+}
+
+@media screen and (max-width:801px), screen and (max-device-width:801px) {
+
+    .top-bar {
+        width: 95%;
+    }
+    .top-bar>input {
+        font-size: 1em;
+        width: 70%;
+    }
+
+    .top-bar>button {
+        font-size: 1em;
+        width: 30%;
+    }
+
+    .content {
+        width: 90%;
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+        grid-auto-flow: row;
+        overflow: auto;
+    }
+
+
+    .profile {
+        width: 100%;
+        height: fit-content;
+        margin: 1em 0;
+        flex-direction: row;
+
+        border-radius: calc(var(--radius)/2);
+
+    }
+    .profile>img {
+        object-fit: cover;
+        width: 30%;
+        border-radius: calc(var(--radius)/2);
+    }
+
+    .profile>div {
+        margin: 0 2em;
+        text-align: center;
+        width: 60%;
+    }
+    .profile>div>h2 {
+        font-size: 1em;
+        border-bottom: unset;
+    }
+
+    .profile>div>h3 {
+        margin-top: 0.8em;
+    }
+
+}

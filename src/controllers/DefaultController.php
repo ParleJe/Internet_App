@@ -1,6 +1,5 @@
 <?php
 
-    require 'AppController.php';
 
     class DefaultController extends AppController {
 
@@ -22,5 +21,17 @@
 
         public function create() {
             $this->render('create');
+        }
+
+        public function friends() {
+            $this->render('friends');
+        }
+
+        public function settings() {
+            $this->render('profile');
+        }
+
+        public function trip_overview() {
+            $this->render('trip_overview');
         }
     }
