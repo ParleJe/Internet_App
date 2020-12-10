@@ -172,6 +172,7 @@ img.login-logo {
 
 nav {
     width: 18%;
+    min-width: 200px;
     height: 93vh;
     background: #FFFFFF;
     border-radius: var(--radius);
@@ -334,6 +335,7 @@ a {
         border-radius: calc(var(--radius)/2);
         width: 90%;
         height: 20%;
+        min-width: unset;
         margin: 2vw 2vw 0 2vw;
     }
     .nav-button>pre {

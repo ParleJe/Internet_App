@@ -1,5 +1,5 @@
-import {geocoder} from "./map";
-import {hereCredentials} from "./config";
+import {geocoder} from "./map.js";
+import {hereCredentials} from "./config.js";
 
 const $ = q => document.querySelector(q);
 const $$ = qq => document.querySelectorAll(qq);

@@ -1,28 +1,24 @@
 <?php
 
-require 'AutoLoader.php';
-spl_autoload_register('AutoLoader::controllerLoader');
-spl_autoload_register('AutoLoader::modelLoader');
-
     class Routing {
         public static $routes;
 
-        public static function get($url, $controller) {
+        public static function get( $url, $controller ) {
             self::$routes[$url] = $controller;
         }
 
-        public static function post($url, $controller) {
+        public static function post( $url, $controller ) {
             self::$routes[$url] = $controller;
         }
 
-        public static function run($url) {
+        public static function run( $url ) {
             $action = explode("/", $url)[0];
 
-            if(!array_key_exists($action, self::$routes)) {
+            if ( ! array_key_exists( $action, self::$routes ) ) {
                 die("Wrong URL!!!");
             }
 
-            $controller = self::$routes[$action];
+            $controller = self::$routes[ $action ];
             $controllerInstance = new $controller;
             $action = $action ?: 'index';
 

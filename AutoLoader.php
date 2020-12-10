@@ -1,5 +1,4 @@
 <?php
-
 class AutoLoader
 {
     protected static $extension = '.php';
@@ -19,7 +18,25 @@ class AutoLoader
         }
     }
 
+    public static function repositoryLoader ($classname) {
+        $directory = self::$top_dir.'repository/'.$classname.self::$extension;
+        if( is_readable($directory)){
+            require $directory;
+        }
+    }
+
     public static function defaultLoader ($classname) {
-        $directory = __DIR__.$classname.self::$extension;
+        $directory = __DIR__.'/'.$classname.self::$extension;
+        if( is_readable($directory)){
+            require $directory;
+        }
+    }
+    public static function register() {
+        spl_autoload_register('AutoLoader::controllerLoader');
+        spl_autoload_register('AutoLoader::modelLoader');
+        spl_autoload_register('AutoLoader::defaultLoader');
+        spl_autoload_register('AutoLoader::repositoryLoader');
     }
 }
+
+

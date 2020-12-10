@@ -143,9 +143,6 @@ img {
 
 .city-field-suggestion {
     color: lightgrey;
-    background: white;
-
-
 }
 .city-field, .city-field-suggestion {
     width: 100%;
@@ -198,5 +195,28 @@ img {
     }
     #map-container>i {
         font-size: 6em;
+    }
+
+    .inner-city-field-container {
+        top: 4em;
+        left: 30vw;
+        width: 40vw;
+        z-index: 10;
+    }
+
+    .city-field {
+        cursor: pointer;
+        border-bottom: 2px solid black;
+        transition: .3s all ease-in-out;
+
+        z-index: 10;
+    }
+    .city-field, .city-field-suggestion {
+        width: 100%;
+        font-weight: 600;
+        font-size: 2em;
+        position: absolute;
+        top: 0.2em;
+        left: 1em;
     }
 }

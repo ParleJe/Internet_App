@@ -1,63 +1,60 @@
 <?php
 
-   /* spl_autoload_register('AutoLoader::classLoader');
-    spl_autoload_register('AutoLoader::modelLoader()');*/
 
-class LoginController extends AppController
-{
-    private static $passwordRegex = '/"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/'; //password no space
-    private static $salt = "RainbowHair";
+class LoginController extends AppController {
+    private $passwordRegex = '/"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/'; //password no space
+    private $options = [
+        'cost' => 12,
+    ];
 
-    public function login()
-    {
-        $user = new User("a@a", hash("sha512", self::$salt."passwd"), 'Jon');
-
-
-        if(!$this->isPost())
-        {
+    public function login() {
+        if(!$this->isPost()) {
             return $this->render('login');
         }
 
         $mail = $_POST["email"];
         $passwd = $_POST["password"];
 
-        if($user->getEmail() !== $mail)
-        {
-            return $this->render('login', ['messages' => ['User with this email not exist!']]);
+        $userDB = new UserRepository();
+        try{
+            $user = $userDB->getUser($mail);
+        } catch (Exception $e) {
+            return $this->render('login', ['messages' => [$e->getMessage()]]);
         }
 
-        if(preg_match(self::$passwordRegex, $passwd) or
-            $user->getPassword() !== hash("sha512", self::$salt.$passwd))
+        if( ! password_verify( $passwd, $user->getPassword() ) )
         {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
         return $this->render('trips');
-
-        /*$url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/search");*/
     }
 
-    public function registration()
-    {
-        if(!$this->isPost()){
+    public function registration() {
+        if(!$this->isPost()) {
             return $this->render('registration');
+        }
+        if($_POST["password"] != $_POST["reentered-password"]) {
+            return $this->render("registration", ['messages' => ["Passwords did not match"]]);
         }
 
         $mail = $_POST["email"];
         $login = $_POST["login"];
-        $passwd = $_POST["password"];
+        $passwd = password_hash( $_POST["password"], PASSWORD_ARGON2ID, $this->options );
+        $newUser = new User( $mail, $passwd, $login, null, null );
 
-        if($passwd != $_POST["reentered-password"])
-        {
-            return $this->render("registation", ['messages' => ["Passwords did not match"]]);
+        $userDB = new UserRepository();
+        if( ! $userDB->setUser( $newUser ) ) {
+            return $this->render("registration", ['messages' => ["Sorry, we have problem with connection"]]);
         }
 
-        $newUser = new User($mail, $passwd, $login);
-
-        //TODO: Save $newUser in DB
-
-        return $this->render('login'); // bck to login page
-
+        return $this->render('login'); // You made it! Back to login page
     }
+
+    private function generateRandomString( $length = 10 ) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            ceil($length/strlen($x)) )),
+            1,$length);
+    }
+
 }

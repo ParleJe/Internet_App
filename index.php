@@ -1,6 +1,7 @@
 <?php
 
-require 'Routing.php';
+require_once 'AutoLoader.php';
+AutoLoader::register();
 
 $path = trim( $_SERVER['REQUEST_URI'], '/' );
 $path = parse_url( $path, PHP_URL_PATH );
@@ -14,4 +15,4 @@ Routing::get( 'settings', 'DefaultController' );
 Routing::post( 'create', 'TripController' );
 Routing::post( 'login', 'LoginController' );
 Routing::post( 'registration', 'LoginController' );
-Routing::run($path);
+Routing::run( $path );

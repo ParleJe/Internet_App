@@ -79,11 +79,11 @@
         <div class="content">
             <form action="create" method="POST" enctype="multipart/form-data">
                 <h2>My New Trip</h2>
-                <input name="name" placeholder="Trip name"> <!--Name-->
-                <input name="where" placeholder="Where?"> <!--Localisation-->
+                <input name="name" placeholder="Trip name" required="required"> <!--Name-->
+                <input name="where" placeholder="Where?" required="required"> <!--Localisation-->
                 <textarea name="desc" rows="6" cols="30" placeholder="What is about?"></textarea> <!--Description-->
                 <div>
-                    <input class="button" id="file-form" name="photo" type="file" value="Photo"> <!--Photo-->
+                    <input class="button" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
                     <input class="button" name="POI" type="button" value="Add POI" onclick="showMap()"> <!--Point Of Interest-->
                 </div>
                 <button class="button" id="submit" type="submit">Submit</button> <!--Submit All Form-->
