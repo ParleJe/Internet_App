@@ -14,7 +14,7 @@ function removeMarker(marker, markerArray, locationArray, map) {
 
 function addMarker(geolocal, markerArray, locationArray, map) {
     let newMarker =  new H.map.Marker(geolocal,{volatility: true})
-
+    var value = prompt('Name?');
     markerArray.push(newMarker)
     locationArray.push(geolocal)
     map.addObject(newMarker)
