@@ -29,7 +29,6 @@ class UserRepository extends Repository
                 $user->getNickname()
             ])) {
                 $connection->rollBack();
-                die(1);
                 return false;
             }
 
@@ -45,7 +44,6 @@ class UserRepository extends Repository
                 $connection->lastInsertId()
             ])) {
                 $connection->rollBack();
-                die(2);
                 return false;
             }
 

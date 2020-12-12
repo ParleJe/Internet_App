@@ -1,3 +1,7 @@
+<?PHP
+    include('src/SessionHandling.php');
+?>
+
 <!DOCTYPE html>
 
 <head>
@@ -10,9 +14,7 @@
 
 <body>
 
-<?PHP
 
-?>
 
     <nav id="navigation-bar">
 

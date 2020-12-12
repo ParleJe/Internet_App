@@ -10,11 +10,10 @@ class Trip
     private $points_of_interest;
     private $photo_directory;
     private $mortal_id;
-    //TODO WHOLE CLASS
-
+    private $color;
 
     public static function initWithVariables(?int $trip_id, string $trip_name, string $destination, string $description,
-                                             string $points_of_interest, string $photo_directory, int $mortal_id): Trip{
+                                             string $points_of_interest, string $photo_directory,string $color, int $mortal_id): Trip{
         $newTrip = new Trip();
 
         $newTrip->trip_id = $trip_id;
@@ -23,6 +22,7 @@ class Trip
         $newTrip->description = $description;
         $newTrip->points_of_interest = $points_of_interest;
         $newTrip->photo_directory = $photo_directory;
+        $newTrip->color = $color;
         $newTrip->mortal_id = $mortal_id;
 
         return $newTrip;
@@ -151,6 +151,24 @@ class Trip
     public function setMortalId($mortal_id)
     {
         $this->mortal_id = $mortal_id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param mixed $color
+     * @return Trip
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
         return $this;
     }
 

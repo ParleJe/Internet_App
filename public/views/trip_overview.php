@@ -1,3 +1,6 @@
+<?PHP
+include('src/SessionHandling.php');
+?>
 <!DOCTYPE html>
 
 <head>
@@ -9,10 +12,6 @@
 </head>
 
 <body>
-
-<?PHP
-
-?>
 
 <nav id="navigation-bar">
 

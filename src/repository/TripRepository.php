@@ -28,8 +28,8 @@ class TripRepository extends Repository {
         $connection = $this->database->getInstance();
 
         $statement = $connection->prepare('
-        INSERT INTO trip (trip_name, destination, description, points_of_interest, photo_directory, mortal_id) 
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO trip (trip_name, destination, description, points_of_interest, photo_directory, color, mortal_id) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
 
          return $statement->execute([
@@ -38,6 +38,7 @@ class TripRepository extends Repository {
             $trip->getDescription(),
             $trip->getPointsOfInterest(),
             $trip->getPhotoDirectory(),
+            $trip->getColor(),
             $trip->getMortalId()
         ]);
     }

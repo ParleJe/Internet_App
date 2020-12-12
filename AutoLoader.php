@@ -1,4 +1,6 @@
 <?php
+
+//TODO optimize this class
 class AutoLoader
 {
     protected static $extension = '.php';

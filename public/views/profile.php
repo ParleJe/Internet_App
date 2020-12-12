@@ -1,3 +1,6 @@
+<?PHP
+include('src/SessionHandling.php');
+?>
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/profile-stylesheet.css">

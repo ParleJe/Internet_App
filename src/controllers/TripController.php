@@ -21,22 +21,26 @@ class TripController extends AppController
                 $photoDIR
             );
 
-            $title = $_POST['name'];
+            $title = $_POST['trip_name'];
             if( $tripRepo->getTripByName( $title ) != null ) {
                 return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
             }
 
             //get destination
-            $localization = $_POST['where'];
+            $destination = $_POST['destination'];
 
             //get POIs
-            $steps = $this->parsePOI();
-            $steps = $this->getPOIAsJSON( $steps );
+            $points_of_interest = $this->parsePOI();
+            $points_of_interest = $this->getPOIAsJSON( $points_of_interest );
 
             //get description
-            $desc = $_POST['desc'];
+            $description = $_POST['description'];
 
-            $trip = Trip::initWithVariables( null, $title, $localization, $desc, $steps, $photoDIR, $userID );
+            //get color
+            $color = $_POST['color'];
+
+            $trip = Trip::initWithVariables( null, $title, $destination, $description,
+                $points_of_interest, $photoDIR, $color, $userID );
 
             if( ! $tripRepo->setTrip( $trip ) ) {
                 return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
