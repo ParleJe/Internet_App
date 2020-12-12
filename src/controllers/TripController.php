@@ -5,34 +5,38 @@ class TripController extends AppController
     const SUPPORTED_EXTENSIONS = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
     private $messages;
-
+        //TODO check if user_ID is valid
     public function create()
     {
+        if ( session_status() !== PHP_SESSION_ACTIVE ) {
+            session_start();
+        }
+
         $tripRepo = new TripRepository();
-
+        $userID = $_SESSION['user_id'];
         if( $this->isPost() && is_uploaded_file( $_FILES['photo']['tmp_name'] ) && $this->validate( $_FILES['photo'] ) ){ // check photo
-            /*move_uploaded_file(
+            $photoDIR = dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name'];
+            move_uploaded_file(
                 $_FILES['photo']['tmp_name'],
-                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name']
-            );*/
-            //TODO check if it's working
-            $photo = file_get_contents( $_FILES['photo']['tmp_name'] );
-            $photo = urlencode( $photo ); //photo to bytea
-
+                $photoDIR
+            );
 
             $title = $_POST['name'];
             if( $tripRepo->getTripByName( $title ) != null ) {
                 return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
             }
+
             //get destination
             $localization = $_POST['where'];
+
             //get POIs
             $steps = $this->parsePOI();
             $steps = $this->getPOIAsJSON( $steps );
+
             //get description
             $desc = $_POST['desc'];
 
-            $trip = new Trip( $title, $localization, $desc, $steps, $photo );
+            $trip = Trip::initWithVariables( null, $title, $localization, $desc, $steps, $photoDIR, $userID );
 
             if( ! $tripRepo->setTrip( $trip ) ) {
                 return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);

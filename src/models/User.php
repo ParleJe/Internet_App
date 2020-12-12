@@ -3,110 +3,148 @@
 
 class User
 {
-    private $email;
+    const ADMIN = 1;
+    const USER = 2;
+
+    //keep order as in the database
+    private $mortal_id;
+    private $mail;
     private $password;
-    private $login;
+    private $role_name;
     private $name;
     private $surname;
+    private $nickname;
 
-
-
-    //Getters and Setters:
-
-    /**
-     * User constructor.
-     * @param $email
-     * @param $password
-     * @param $login
-     * @param $name
-     * @param $surname
-     */
-    public function __construct($email, $password, $login, $name, $surname)
+       /* /**
+         * User constructor.
+         * @param $mortal_id
+         * @param $mail
+         * @param $password
+         * @param $role_name
+         * @param $name
+         * @param $surname
+         * @param $nickname
+         */
+    /*public function __construct($mortal_id, $mail, $password, $role_name, $name, $surname, $nickname)
     {
-        $this->email = $email;
+        $this->mortal_id = $mortal_id;
+        $this->mail = $mail;
         $this->password = $password;
-        $this->login = $login;
+        $this->role_name = $role_name;
         $this->name = $name;
         $this->surname = $surname;
+        $this->nickname = $nickname;
+    }*/
+
+
+    public static function initiateUserWithValues ($mortal_id, $mail, $password, $role_name, $name, $surname, $nickname): User {
+        $user = new User();
+
+        $user->mortal_id = $mortal_id;
+        $user->mail = $mail;
+        $user->password = $password;
+        $user->role_name = $role_name;
+        $user->name = $name;
+        $user->surname = $surname;
+        $user->nickname = $nickname;
+        
+        return $user;
+
+    }
+    public function getVariablesToArray(): array {
+        $array = [];
+        foreach($this as $value) {
+            $array[] = $value;
+        }
+        return $array;
     }
 
-    public function getEmail(): string
+
+
+
+
+    public function getMortalId() : int{
+        return $this->mortal_id;
+    }
+
+
+    public function setMortalId($mortal_id): void
     {
-        return $this->email;
+        $this->mortal_id = $mortal_id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSalt()
+
+    public function getMail()
     {
-        return $this->salt;
+        return $this->mail;
     }
 
-    /**
-     * @param mixed $salt
-     */
-    public function setSalt($salt): void
+
+    public function setMail($mail): void
     {
-        $this->salt = $salt;
+        $this->mail = $mail;
     }
 
-    /**
-     * @return mixed
-     */
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+
+    public function getRoleName()
+    {
+        return $this->role_name;
+    }
+
+
+    public function setRoleName($role_name): void
+    {
+        $this->role_name = $role_name;
+    }
+
+
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
+
     public function setName($name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getSurname()
     {
         return $this->surname;
     }
 
-    /**
-     * @param mixed $surname
-     */
+
     public function setSurname($surname): void
     {
         $this->surname = $surname;
     }
 
-    public function setEmail(string $email)
+
+    public function getNickname()
     {
-        $this->email = $email;
+        return $this->nickname;
     }
 
-    public function getPassword(): string
+
+    public function setNickname($nickname): void
     {
-        return $this->password;
+        $this->nickname = $nickname;
     }
 
-    public function setPassword(string $password)
-    {
-        $this->password = $password;
-    }
-
-    public function getLogin(): string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login)
-    {
-        $this->login = $login;
-    }
 
 
 

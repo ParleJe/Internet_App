@@ -4,48 +4,56 @@
 class UserRepository extends Repository
 {
 
-    public function getUser(string $mail): ?User {
+    public function getUser(string $mail): array
+    {
         $statement = $this->database->getInstance()->prepare('
-           SELECT * FROM "user" WHERE mail = :mail;
+           SELECT * FROM user_full_detail WHERE mail = ?;
         ');
-        $statement->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $statement->execute();
+        $statement->execute( [$mail] );
 
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_CLASS, "User"); // always one
 
-        if($user == false){
-            throw new Exception('user not found');
-        }
-
-        return new User(
-            $user['mail'],
-            $user['password'],
-            $user['login'],
-            $user['user_name'],
-            $user['surname']
-        );
     }
 
-    public function setUser(User $user): bool{
-        $statement = $this->database->getInstance()->prepare('
-        INSERT INTO "user" (mail, password, user_name, surname, login)
-        VALUES (:mail,:password, :user_name, :surname, :login);
-        ');
+    public function setUserByTransaction( User $user ): bool
+    {
+        $connection = $this->database->getInstance();
+        if ($connection->beginTransaction()) {
+            $statement = $connection->prepare('
+           INSERT INTO mortal_details (name, surname, nickname ) 
+           VALUES (?, ?, ?);
+           ');
+            if ( ! $statement->execute([
+                $user->getName(),
+                $user->getSurname(),
+                $user->getNickname()
+            ])) {
+                $connection->rollBack();
+                die(1);
+                return false;
+            }
 
-        try {
-            $statement->execute(array(
-                ':mail'=>$user->getEmail(),
-                'password'=>$user->getPassword(),
-                ':user_name' => $user->getName(),
-                ':surname' => $user->getSurname(),
-                ':login' => $user->getLogin(),
-            ));
-        } catch (Exception $e){
-            return false;
+            $statement = $connection->prepare('
+           INSERT INTO mortal (mail, password, role_id, mortal_details_id)
+           VALUES (?, ?, ?, ?);
+           ');
+
+            if ( ! $statement->execute([
+                $user->getMail(),
+                $user->getPassword(),
+                $user->getRoleName(),
+                $connection->lastInsertId()
+            ])) {
+                $connection->rollBack();
+                die(2);
+                return false;
+            }
+
+            $connection->commit();
+            return true;
         }
-        return true;
-}
-
+        return false;
+    }
 
 
 }

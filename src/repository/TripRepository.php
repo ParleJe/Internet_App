@@ -14,42 +14,31 @@ class TripRepository extends Repository {
         } catch (Exception $e){
             die($e->getMessage());
         }
-        $trip = $statement->fetch(PDO::FETCH_ASSOC);
-        if($trip['trip_name'] != null) {
-            return new Trip(
-                $trip['trip_name'],
-                $trip['destination'],
-                $trip['description'],
-                $trip['pointsOfInterest'],
-                ' '
-            );
-        }
-        return null;
+        $trip = $statement->fetchObject('Trip');
+        $trip = $trip?: null;
+
+        return $trip;
     }
 
     public function getTripByUser( string $user ): ?array {
         return null;
     }
 
-    public function setTrip( Trip $trip ): bool {
+    public function setTrip( Trip $trip): bool{
+        $connection = $this->database->getInstance();
 
-        $statement = $this->database->getInstance()->prepare('
-        INSERT INTO "trip" (trip_name, destination, description, "pointsOfInterest", photo)
-        VALUES (:trip_name,:destination, :description, :pointsOfInterest, :photo);
+        $statement = $connection->prepare('
+        INSERT INTO trip (trip_name, destination, description, points_of_interest, photo_directory, mortal_id) 
+        VALUES (?, ?, ?, ?, ?, ?)
         ');
 
-        try {
-            $statement->execute( [
-                ':trip_name' => $trip->getName(),
-                ':destination' => $trip->getLocalization(),
-                ':description' => $trip->getDescription(),
-                ':pointsOfInterest' => $trip->getSteps(),
-                ':photo' => $trip->getPhoto(),
-            ]);
-        } catch (Exception $e){
-            return false;
-        }
-        return true;
-
+         return $statement->execute([
+            $trip->getTripName(),
+            $trip->getDestination(),
+            $trip->getDescription(),
+            $trip->getPointsOfInterest(),
+            $trip->getPhotoDirectory(),
+            $trip->getMortalId()
+        ]);
     }
 }

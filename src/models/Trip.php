@@ -3,74 +3,159 @@
 
 class Trip
 {
-    private $name;
-    private $localization;
+    private $trip_id;
+    private $trip_name;
+    private $destination;
     private $description;
-    private $steps;
-    private $photo;
+    private $points_of_interest;
+    private $photo_directory;
+    private $mortal_id;
     //TODO WHOLE CLASS
 
-    public function __construct( string $name,string $localization, string $description, string $steps, string $photo )
-    {
-        $this->name = $name;
-        $this->localization = $localization;
-        $this->description = $description;
-        $this->steps = $steps;
-        $this->photo = $photo;
+
+    public static function initWithVariables(?int $trip_id, string $trip_name, string $destination, string $description,
+                                             string $points_of_interest, string $photo_directory, int $mortal_id): Trip{
+        $newTrip = new Trip();
+
+        $newTrip->trip_id = $trip_id;
+        $newTrip->trip_name = $trip_name;
+        $newTrip->destination = $destination;
+        $newTrip->description = $description;
+        $newTrip->points_of_interest = $points_of_interest;
+        $newTrip->photo_directory = $photo_directory;
+        $newTrip->mortal_id = $mortal_id;
+
+        return $newTrip;
     }
 
-    public function getName(): string
+    /**
+     * @return mixed
+     */
+    public function getTripId()
     {
-        return $this->name;
+        return $this->trip_id;
     }
 
-    public function setName($name)
+    /**
+     * @param mixed $trip_id
+     * @return Trip
+     */
+    public function setTripId($trip_id)
     {
-        $this->name = $name;
+        $this->trip_id = $trip_id;
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTripName()
+    {
+        return $this->trip_name;
+    }
+
+    /**
+     * @param mixed $trip_name
+     * @return Trip
+     */
+    public function setTripName($trip_name)
+    {
+        $this->trip_name = $trip_name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
+     * @param mixed $destination
+     * @return Trip
+     */
+    public function setDestination($destination)
+    {
+        $this->destination = $destination;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getDescription()
     {
         return $this->description;
     }
 
+    /**
+     * @param mixed $description
+     * @return Trip
+     */
     public function setDescription($description)
     {
         $this->description = $description;
+        return $this;
     }
 
-
-    public function getSteps()
+    /**
+     * @return mixed
+     */
+    public function getPointsOfInterest()
     {
-        return $this->steps;
+        return $this->points_of_interest;
     }
 
-    public function setSteps($steps)
+    /**
+     * @param mixed $points_of_interest
+     * @return Trip
+     */
+    public function setPointsOfInterest($points_of_interest)
     {
-        $this->steps = $steps;
+        $this->points_of_interest = $points_of_interest;
+        return $this;
     }
 
-    public function getLocalization(): string
+    /**
+     * @return mixed
+     */
+    public function getPhotoDirectory()
     {
-        return $this->localization;
+        return $this->photo_directory;
     }
 
-
-    public function setLocalization(string $localization): void
+    /**
+     * @param mixed $photo_directory
+     * @return Trip
+     */
+    public function setPhotoDirectory($photo_directory)
     {
-        $this->localization = $localization;
+        $this->photo_directory = $photo_directory;
+        return $this;
     }
 
-
-    public function getPhoto(): string
+    /**
+     * @return mixed
+     */
+    public function getMortalId()
     {
-        return $this->photo;
+        return $this->mortal_id;
     }
 
-    public function setPhoto(string $photo): void
+    /**
+     * @param mixed $mortal_id
+     * @return Trip
+     */
+    public function setMortalId($mortal_id)
     {
-        $this->photo = $photo;
+        $this->mortal_id = $mortal_id;
+        return $this;
     }
+
+
+
 
 
 
