@@ -24,4 +24,12 @@
             }
             print $output;
         }
+
+        protected function getCurrentLoggedID(): ?int {
+            session_start();
+            if( isset( $_SESSION['user_id'] ) ) {
+                return $_SESSION['user_id'];
+            }
+            return null;
+        }
     }

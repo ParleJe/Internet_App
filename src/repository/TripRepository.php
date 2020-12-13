@@ -20,10 +20,6 @@ class TripRepository extends Repository {
         return $trip;
     }
 
-    public function getTripByUser( string $user ): ?array {
-        return null;
-    }
-
     public function setTrip( Trip $trip): bool{
         $connection = $this->database->getInstance();
 

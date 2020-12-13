@@ -7,13 +7,13 @@ class User
     const USER = 2;
 
     //keep order as in the database
-    private $mortal_id;
-    private $mail;
-    private $password;
-    private $role_name;
-    private $name;
-    private $surname;
-    private $nickname;
+    public $mortal_id;
+    public $mail;
+    public $password;
+    public $role_id;
+    public $name;
+    public $surname;
+    public $nickname;
 
        /* /**
          * User constructor.
@@ -37,13 +37,13 @@ class User
     }*/
 
 
-    public static function initiateUserWithValues ($mortal_id, $mail, $password, $role_name, $name, $surname, $nickname): User {
+    public static function initiateUserWithValues ($mortal_id, $mail, $password, $role_id, $name, $surname, $nickname): User {
         $user = new User();
 
         $user->mortal_id = $mortal_id;
         $user->mail = $mail;
         $user->password = $password;
-        $user->role_name = $role_name;
+        $user->role_id = $role_id;
         $user->name = $name;
         $user->surname = $surname;
         $user->nickname = $nickname;
@@ -100,7 +100,7 @@ class User
 
     public function getRoleName()
     {
-        return $this->role_name;
+        return $this->role_id;
     }
 
 
@@ -144,7 +144,6 @@ class User
     {
         $this->nickname = $nickname;
     }
-
 
 
 

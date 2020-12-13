@@ -75,7 +75,7 @@ include('src/SessionHandling.php');
     <div class="content">
         <div class="cell">
             <div class="profile" id="profile-1">
-                <img src="public/resources/placeholder.jpg">
+                <img src="public/resources/placeholder.jpg" alt="trip photo">
                 <div>
                     <h2>Name Surname</h2>
                     <h3>Something Else</h3>
@@ -85,7 +85,7 @@ include('src/SessionHandling.php');
 
         <div class="cell">
             <div class="profile" id="profile-1">
-                <img src="public/resources/placeholder.jpg">
+                <img src="public/resources/placeholder.jpg" alt="trip photo">
                 <div>
                     <h2>Name Surname</h2>
                     <h3>Something Else</h3>
@@ -95,7 +95,7 @@ include('src/SessionHandling.php');
 
         <div class="cell">
             <div class="profile" id="profile-2">
-                <img src="public/resources/placeholder.jpg">
+                <img src="public/resources/placeholder.jpg" alt="trip photo">
                 <div>
                     <h2>Name Surname</h2>
                     <h3>Something Else</h3>
@@ -105,7 +105,7 @@ include('src/SessionHandling.php');
 
         <div class="cell">
             <div class="profile" id="profile-3">
-                <img src="public/resources/placeholder.jpg">
+                <img src="public/resources/placeholder.jpg" alt="trip photo">
                 <div>
                     <h2>Name Surname</h2>
                     <h3>Something Else</h3>
@@ -113,36 +113,30 @@ include('src/SessionHandling.php');
             </div>
         </div>
 
-        <div class="cell">
-            <div class="profile" id="profile-4">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
 
-        <div class="cell">
-            <div class="profile" id="profile-5">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
 
-        <div class="cell">
-            <div class="profile" id="profile-6">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
+        <?php
+        if( isset($friends) ) {
+            foreach ($friends as $friend) {
+                $id = $friend->getMortalId();
+                $name = $friend->getName();
+                $surname = $friend->getSurName();
+                $nickname = $friend->getNickname();
+                echo <<<EOL
+<div class="cell">
+<div class="profile" id="$id">
+<img src="public/resources/placeholder.jpg" alt="trip photo">
+<div>
+<h2>$name $surname</h2>
+<h3>$nickname</h3>
+</div>
+</div>
+</div>
+EOL;
 
+            }
+        }
+        ?>
 
 
     </div>

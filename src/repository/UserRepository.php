@@ -40,7 +40,7 @@ class UserRepository extends Repository
             if ( ! $statement->execute([
                 $user->getMail(),
                 $user->getPassword(),
-                $user->getRoleName(),
+                $user->getRoleName(), //TODO change this name
                 $connection->lastInsertId()
             ])) {
                 $connection->rollBack();
@@ -51,6 +51,20 @@ class UserRepository extends Repository
             return true;
         }
         return false;
+    }
+
+    public function getFriendsOfUser( int $user ): array {
+        $connection = $this->database->getInstance();
+
+        $statement = $connection->prepare('
+        SELECT * FROM friends WHERE user_id = ?;
+        ');
+
+        $statement->execute([
+            $user
+        ]);
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, "User");
     }
 
 

@@ -3,8 +3,8 @@
 //TODO optimize this class
 class AutoLoader
 {
-    protected static $extension = '.php';
-    protected static $top_dir = __DIR__.'/src/';
+    protected static string $extension = '.php';
+    protected static string $top_dir = __DIR__.'/src/';
 
     public static function controllerLoader ($classname) {
         $directory = self::$top_dir.'controllers/'.$classname.self::$extension;

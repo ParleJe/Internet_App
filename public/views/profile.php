@@ -72,7 +72,7 @@ include('src/SessionHandling.php');
 
         <div class="profile">
             <div>
-                <img src="public/resources/placeholder.jpg">
+                <img src="public/resources/placeholder.jpg"  alt="profile photo">
                 <!--icon for add to friends or delete account-->
                 <h2>NAME SURNAME</h2>
                 <h3>LOGIN</h3>

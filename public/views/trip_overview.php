@@ -90,22 +90,22 @@ include('src/SessionHandling.php');
                 <h1>participants</h1>
                 <div class="grid-friends">
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
 
                 </div>

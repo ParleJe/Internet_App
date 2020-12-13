@@ -24,7 +24,9 @@
         }
 
         public function friends() {
-            $this->render('friends');
+            $repository = new UserRepository();
+            $friends = $repository->getFriendsOfUser($this->getCurrentLoggedID());
+            $this->render('friends', ['friends'=> $friends]);
         }
 
         public function settings() {
