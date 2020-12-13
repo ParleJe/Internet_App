@@ -16,7 +16,9 @@
         }
 
         public function trips() {
-            $this->render('trips');
+            $repository = new TripRepository();
+            $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
+            $this->render('trips', ['trips'=> $trips]);
         }
 
         public function create() {
@@ -24,7 +26,9 @@
         }
 
         public function friends() {
-            $this->render('friends');
+            $repository = new UserRepository();
+            $friends = $repository->getFriendsOfUser($this->getCurrentLoggedID());
+            $this->render('friends', ['friends'=> $friends]);
         }
 
         public function settings() {

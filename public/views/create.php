@@ -1,3 +1,6 @@
+<?PHP
+include('src/SessionHandling.php');
+?>
 <!DOCTYPE html>
 
 <head>
@@ -79,29 +82,17 @@
         <div class="content">
             <form action="create" method="POST" enctype="multipart/form-data">
                 <h2>My New Trip</h2>
-                <input name="name" placeholder="Trip name" required="required"> <!--Name-->
-                <input name="where" placeholder="Where?" required="required"> <!--Localisation-->
-                <textarea name="desc" rows="6" cols="30" placeholder="What is about?"></textarea> <!--Description-->
+                <input name="trip_name" placeholder="Trip name" required="required"> <!--Title-->
+                <input name="destination" placeholder="Where?" required="required"> <!--Destination-->
+                <textarea name="description" rows="6" cols="30" placeholder="What is about?"></textarea> <!--Description-->
                 <div>
+                    <input type="color" name="color" style="width: 10%;" value="#e66465">
                     <input class="button" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
-                    <input class="button" name="POI" type="button" value="Add POI" onclick="showMap()"> <!--Point Of Interest-->
+                    <input class="button" name="points_of_interest" type="button" value="Add POI" onclick="showMap()"> <!--Point Of Interest-->
                 </div>
                 <button class="button" id="submit" type="submit">Submit</button> <!--Submit All Form-->
             </form>
-            <div>
-                <img src="public/resources/placeholder.jpg">
-                <div class="message">
-                    <?PHP
-                    if(isset($messages))
-                    {
-                        foreach ($messages as $message)
-                        {
-                            echo $message;
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
+
         </div>
 
         <div id="map-container">

@@ -8,37 +8,45 @@ class TripController extends AppController
 
     public function create()
     {
+        if ( session_status() !== PHP_SESSION_ACTIVE ) {
+            session_start();
+        }
+
         $tripRepo = new TripRepository();
-
+        $userID = $_SESSION['user_id'];
         if( $this->isPost() && is_uploaded_file( $_FILES['photo']['tmp_name'] ) && $this->validate( $_FILES['photo'] ) ){ // check photo
-            /*move_uploaded_file(
+            $photoDIR = dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name'];
+            move_uploaded_file(
                 $_FILES['photo']['tmp_name'],
-                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name']
-            );*/
-            //TODO check if it's working
-            $photo = file_get_contents( $_FILES['photo']['tmp_name'] );
-            $photo = urlencode( $photo ); //photo to bytea
+                $photoDIR
+            );
 
-
-            $title = $_POST['name'];
-            if( $tripRepo->getTripByName( $title ) != null ) {
+            $title = $_POST['trip_name'];
+            if( $tripRepo->getTripsByName( $title ) != null ) {
                 return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
             }
-            //get destination
-            $localization = $_POST['where'];
-            //get POIs
-            $steps = $this->parsePOI();
-            $steps = $this->getPOIAsJSON( $steps );
-            //get description
-            $desc = $_POST['desc'];
 
-            $trip = new Trip( $title, $localization, $desc, $steps, $photo );
+            //get destination
+            $destination = $_POST['destination'];
+
+            //get POIs
+            $points_of_interest = $this->parsePOI();
+            $points_of_interest = $this->getPOIAsJSON( $points_of_interest );
+
+            //get description
+            $description = $_POST['description'];
+
+            //get color
+            $color = $_POST['color'];
+
+            $trip = Trip::initWithVariables( null, $title, $destination, $description,
+                $points_of_interest, $photoDIR, $color, $userID );
 
             if( ! $tripRepo->setTrip( $trip ) ) {
                 return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
             }
 
-            return $this->render('trips');
+            return Routing::run('trips');
         }
        
 
@@ -77,6 +85,7 @@ class TripController extends AppController
 
         return $places;
     }
+
 
 
     private function getPOIAsJSON(array $POI, array $name = null, array $description = null) {

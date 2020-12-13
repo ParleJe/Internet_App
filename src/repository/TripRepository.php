@@ -2,54 +2,49 @@
 
 class TripRepository extends Repository {
 
-    public function getTripByName(string $name): ?Trip {
+    public function getTripsByName(string $name): ?Trip {
         $statement = $this->database->getInstance()->prepare('
-            SELECT 1 FROM trip where trip_name = :Name;
+            SELECT 1 FROM trip where trip_name = ?;
             ');
 
-        try {
-            $statement->execute( [
-                ':Name' => $name,
-            ] );
-        } catch (Exception $e){
-            die($e->getMessage());
-        }
-        $trip = $statement->fetch(PDO::FETCH_ASSOC);
-        if($trip['trip_name'] != null) {
-            return new Trip(
-                $trip['trip_name'],
-                $trip['destination'],
-                $trip['description'],
-                $trip['pointsOfInterest'],
-                ' '
-            );
-        }
-        return null;
+
+        $statement->execute( [ $name ] );
+
+        $trip = $statement->fetchObject('Trip');
+        $trip = $trip?: null;
+
+        return $trip;
     }
 
-    public function getTripByUser( string $user ): ?array {
-        return null;
-    }
+    public function setTrip( Trip $trip): bool{
+        $connection = $this->database->getInstance();
 
-    public function setTrip( Trip $trip ): bool {
-
-        $statement = $this->database->getInstance()->prepare('
-        INSERT INTO "trip" (trip_name, destination, description, "pointsOfInterest", photo)
-        VALUES (:trip_name,:destination, :description, :pointsOfInterest, :photo);
+        $statement = $connection->prepare('
+        INSERT INTO trip (trip_name, destination, description, points_of_interest, photo_directory, color, mortal_id) 
+        VALUES           (?, ?, ?, ?, ?, ?, ?);
         ');
 
-        try {
-            $statement->execute( [
-                ':trip_name' => $trip->getName(),
-                ':destination' => $trip->getLocalization(),
-                ':description' => $trip->getDescription(),
-                ':pointsOfInterest' => $trip->getSteps(),
-                ':photo' => $trip->getPhoto(),
-            ]);
-        } catch (Exception $e){
-            return false;
-        }
-        return true;
+         return $statement->execute( [
+            $trip->getTripName(),
+            $trip->getDestination(),
+            $trip->getDescription(),
+            $trip->getPointsOfInterest(),
+            $trip->getPhotoDirectory(),
+            $trip->getColor(),
+            $trip->getMortalId()
+        ] );
+    }
+
+    public function getTripsByUserId(int $id): array {
+        $connection = $this->database->getInstance();
+
+        $statement = $connection->prepare( '
+        SELECT * FROM trip WHERE mortal_id = ?;
+        ');
+
+        $statement->execute( [ $id ] );
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Trip');
 
     }
 }
