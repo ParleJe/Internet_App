@@ -5,7 +5,7 @@ class TripController extends AppController
     const SUPPORTED_EXTENSIONS = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
     private $messages;
-        //TODO check if user_ID is valid
+
     public function create()
     {
         if ( session_status() !== PHP_SESSION_ACTIVE ) {
@@ -22,7 +22,7 @@ class TripController extends AppController
             );
 
             $title = $_POST['trip_name'];
-            if( $tripRepo->getTripByName( $title ) != null ) {
+            if( $tripRepo->getTripsByName( $title ) != null ) {
                 return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
             }
 
@@ -46,7 +46,7 @@ class TripController extends AppController
                 return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
             }
 
-            return $this->render('trips');
+            return Routing::run('trips');
         }
        
 
@@ -85,6 +85,7 @@ class TripController extends AppController
 
         return $places;
     }
+
 
 
     private function getPOIAsJSON(array $POI, array $name = null, array $description = null) {

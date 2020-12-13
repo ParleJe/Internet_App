@@ -88,25 +88,30 @@
 
             <div class="flow"> <!--First column etc.-->
                 <h2>TITLE OF TRIPS #1</h2>
-                <div class="trip" id="trip-1" onclick="expandTrip(this.id)">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-1-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                </div>
+                <?PHP
+                if( isset($trips) ) {
+                    foreach($trips as $trip) {
+                        $id = $trip->getTripId();
+                        $title = $trip->getTripName();
+                        $destination = $trip->getDestination();
+                        $color = $trip->getColor();
+                        $photoDir = $trip->getPhotoDirectory();
+                        //...
+                        echo <<<EOL
+                        <div class="trip" id="$id" onclick="expandTrip(this.id)">
+                            <h4 style="color: $color;">$destination</h4>
+                            <h3>$title</h3>
+                            <img src="$photoDir" id="$id-img" alt="trip" />
+                            <div class="trip-icons">
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-comment-alt"></i>
+                            </div>
+                        </div>
+EOL;
+                    }
+                }
+                ?>
 
-                <div class="trip" id="trip-2" onclick="expandTrip(this.id)">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-2-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                </div>
             </div>
 
             <div class="flow">

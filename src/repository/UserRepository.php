@@ -21,7 +21,7 @@ class UserRepository extends Repository
         if ($connection->beginTransaction()) {
             $statement = $connection->prepare('
            INSERT INTO mortal_details (name, surname, nickname ) 
-           VALUES (?, ?, ?);
+           VALUES                     (?, ?, ?);
            ');
             if ( ! $statement->execute([
                 $user->getName(),
@@ -34,7 +34,7 @@ class UserRepository extends Repository
 
             $statement = $connection->prepare('
            INSERT INTO mortal (mail, password, role_id, mortal_details_id)
-           VALUES (?, ?, ?, ?);
+           VALUES             (?, ?, ?, ?);
            ');
 
             if ( ! $statement->execute([
@@ -60,9 +60,7 @@ class UserRepository extends Repository
         SELECT * FROM friends WHERE user_id = ?;
         ');
 
-        $statement->execute([
-            $user
-        ]);
+        $statement->execute( [ $user ] );
 
         return $statement->fetchAll(PDO::FETCH_CLASS, "User");
     }

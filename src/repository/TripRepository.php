@@ -2,18 +2,14 @@
 
 class TripRepository extends Repository {
 
-    public function getTripByName(string $name): ?Trip {
+    public function getTripsByName(string $name): ?Trip {
         $statement = $this->database->getInstance()->prepare('
-            SELECT 1 FROM trip where trip_name = :Name;
+            SELECT 1 FROM trip where trip_name = ?;
             ');
 
-        try {
-            $statement->execute( [
-                ':Name' => $name,
-            ] );
-        } catch (Exception $e){
-            die($e->getMessage());
-        }
+
+        $statement->execute( [ $name ] );
+
         $trip = $statement->fetchObject('Trip');
         $trip = $trip?: null;
 
@@ -25,10 +21,10 @@ class TripRepository extends Repository {
 
         $statement = $connection->prepare('
         INSERT INTO trip (trip_name, destination, description, points_of_interest, photo_directory, color, mortal_id) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES           (?, ?, ?, ?, ?, ?, ?);
         ');
 
-         return $statement->execute([
+         return $statement->execute( [
             $trip->getTripName(),
             $trip->getDestination(),
             $trip->getDescription(),
@@ -36,6 +32,19 @@ class TripRepository extends Repository {
             $trip->getPhotoDirectory(),
             $trip->getColor(),
             $trip->getMortalId()
-        ]);
+        ] );
+    }
+
+    public function getTripsByUserId(int $id): array {
+        $connection = $this->database->getInstance();
+
+        $statement = $connection->prepare( '
+        SELECT * FROM trip WHERE mortal_id = ?;
+        ');
+
+        $statement->execute( [ $id ] );
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Trip');
+
     }
 }

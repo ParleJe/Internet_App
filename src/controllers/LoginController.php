@@ -29,7 +29,7 @@ class LoginController extends AppController {
         if(session_start()) {
             $_SESSION['user_id'] = $user->getMortalId();
             $_SESSION['isLoggedIn'] = true;
-            return $this->render('trips');
+            return Routing::run('trips/');
         }
         return $this->render('login', ['messages' => ['Something went wrong']]);
     }

@@ -16,7 +16,9 @@
         }
 
         public function trips() {
-            $this->render('trips');
+            $repository = new TripRepository();
+            $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
+            $this->render('trips', ['trips'=> $trips]);
         }
 
         public function create() {
