@@ -1,4 +1,4 @@
-
+/*TODO EXTRACT ALL HARDCODED VALUES INTO VARS(COLORS, RADIUSES ETC.)*/
 .top-bar {
     border-radius: var(--radius);
     width: 100%;
@@ -62,19 +62,31 @@
 
 .content {
     width: 80%;
-    height: 84%;
+    height: 85%;
 
     border-radius: 2vh;
     background: transparent;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
-    padding: 2em;
+    padding: 2em 2em 0 2em;
+
+
+
+
 }
 .flow {
     display: flex;
     flex-direction: column;
     height: 100%;
+
+    overflow: auto;
+}
+
+.trip-container{
+    height: 100%;
+    border-radius: var(--radius);
+    overflow: auto;
 }
 .trip {
     margin-bottom: 2em;
@@ -121,11 +133,23 @@ h2, .trip>h3 {
     align-self: center;
 }
 
+.trip>i {
+    font-size: 2em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.rotate {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
 
 @media screen and (max-width:801px), screen and (max-device-width:801px) {
     .content {
         grid-gap: 1em;
         width: 100%;
+
+        overflow: auto;
     }
 
     .trip {
@@ -146,4 +170,15 @@ h2, .trip>h3 {
     h2 {
         font-size: 1em;
     }
+
+    .flow {
+        overflow: unset;
+    }
+
+    .trip-container{
+        height: unset;
+        overflow: unset;
+    }
 }
+
+/*TODO fix height of flow div in order to correspond with navigation height*/

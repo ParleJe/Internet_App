@@ -36,5 +36,6 @@ map.addEventListener('longpress', evt => {
 }, false);
 
 new Search('Berlin, DEU');
+$('#map-container').css('display', 'none')
 
 export { router, geocoder, map }

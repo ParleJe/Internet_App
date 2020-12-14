@@ -63,6 +63,14 @@
     justify-items: center;
     align-items: center;
 
+    transition: 0.1s;
+
+}
+
+.hover {
+/*background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 80%, #6BA2EB 300%) 0 0 no-repeat padding-box;*/
+    box-shadow: 0 6px 8px #00000040;
+    transition: 0.1s;
 }
 
 .profile>img {
