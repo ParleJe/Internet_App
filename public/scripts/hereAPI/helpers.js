@@ -4,21 +4,34 @@ import {hereCredentials} from "./config.js";
 const $ = q => document.querySelector(q);
 const $$ = qq => document.querySelectorAll(qq);
 
-function removeMarker(marker, markerArray, locationArray, map) {
+let markerArray = [],
+locationArray = [],
+descriptionArray = [],
+nameArray = []
+
+function removeMarker(marker, map) {
     const index = markerArray.indexOf(marker);
     markerArray.splice(index, 1)
     locationArray.splice(index, 1)
+    nameArray.splice(index, 1)
+    descriptionArray.splice(index, 1)
     map.removeObject(marker)
     document.cookie = String("POI="+locationArray)
 }
 
-function addMarker(geolocal, markerArray, locationArray, map) {
-    let newMarker =  new H.map.Marker(geolocal,{volatility: true})
-    var value = prompt('Name?');
+function addMarker(geolocal,  map) {
+    let newMarker =  new H.map.Marker(geolocal,{volatility: true}),
+        name = prompt('Name?'),
+        description = prompt('Describe what it is')
+
     markerArray.push(newMarker)
     locationArray.push(geolocal)
+    descriptionArray.push(description)
+    nameArray.push(name)
     map.addObject(newMarker)
-    document.cookie = String("POI="+locationArray)
+    document.cookie = String("POIs="+locationArray)
+    document.cookie = String('name='+nameArray)
+    document.cookie = String('desc='+descriptionArray)
 
 }
 

@@ -40,7 +40,7 @@ class TripController extends AppController
             $color = $_POST['color'];
 
             $trip = Trip::initWithVariables( null, $title, $destination, $description,
-                $points_of_interest, $photoDIR, $color, $userID );
+                $points_of_interest, self::UPLOAD_DIRECTORY.$_FILES['photo']['name'], $color, $userID );
 
             if( ! $tripRepo->setTrip( $trip ) ) {
                 return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
@@ -69,16 +69,21 @@ class TripController extends AppController
 
     private function parsePOI(): array {
 
-        if(!isset($_COOKIE['POI'])){
+        if(!isset($_COOKIE['POIs'])){
             return ['POIs not set']; //empty array
         }
-        $cookie = $_COOKIE['POI'];
-
+        $cookie = $_COOKIE['POIs'];
         $places = explode(',', $cookie ); // [POINT (XX.XXX XX.XXXX)] [POINT (XX.XXX XX.XXXX)] [POINT (XX.XXX XX.XXXX]
-
         foreach ( $places as $i => $place ){
             $places[$i] = substr( $place, 7, -1 );
         }
+
+
+
+
+        $cookie = $_COOKIE['desc'];
+        $descriptions = explode(',', $cookie ); // [STRING] [STRING] [STRING]
+
 
         unset( $_COOKIE['POI'] );
         setcookie( 'POI', null, -1, '/' );
@@ -86,15 +91,20 @@ class TripController extends AppController
         return $places;
     }
 
+    private function getPOIAsJSON() {
+        $POI = $this->parsePOI();
 
+        $cookie = $_COOKIE['name'];
+        $name = explode(',', $cookie ); // [STRING] [STRING] [STRING]
 
-    private function getPOIAsJSON(array $POI, array $name = null, array $description = null) {
+        $cookie = $_COOKIE['desc'];
+        $description = explode(',', $cookie ); // [STRING] [STRING] [STRING]
         $JSONArray = [];
 
         foreach ( $POI as $iterator => $place ) {
-            $JSONArray["POI ".($iterator+1)] = [
+            //TODO check if name[iterator] != null
+            $JSONArray[$name[$iterator]] = [
                 "location" => $POI[$iterator],
-                "name" => $name[$iterator],
                 "description" => $description[$iterator]
             ];
         }

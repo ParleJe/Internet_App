@@ -22,16 +22,13 @@ const geocoder = platform.getGeocodingService();
 
 window.addEventListener('resize', () => map.getViewPort().resize());
 
-export var markerArray = []
-export var locationArray = []
-
 
 map.addEventListener('longpress', evt => {
     const pointer = evt.currentPointer;
     if((evt.target instanceof H.map.Marker)){
-        removeMarker(evt.target, markerArray, locationArray, map)
+        removeMarker(evt.target, map)
     } else {
-        addMarker(map.screenToGeo(pointer.viewportX, pointer.viewportY), markerArray, locationArray, map)
+        addMarker(map.screenToGeo(pointer.viewportX, pointer.viewportY), map)
     }
 }, false);
 

@@ -11,8 +11,6 @@ class LoginController extends AppController {
             return $this->render('login');
         }
 
-
-
         $mail = $_POST["email"];
         $passwd = $_POST["password"];
 
@@ -21,16 +19,22 @@ class LoginController extends AppController {
         $user = $userDB->getUser($mail);
         $user = $user[0];
 
+        if ( is_null( $user ) ) {
+            return $this->render('login', ['messages' => ['Wrong mail!']]);
+        }
+
 
         if( ! password_verify( $passwd, $user->getPassword() ) )
         {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
+
         if(session_start()) {
             $_SESSION['user_id'] = $user->getMortalId();
             $_SESSION['isLoggedIn'] = true;
             return Routing::run('trips/');
         }
+
         return $this->render('login', ['messages' => ['Something went wrong']]);
     }
 

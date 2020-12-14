@@ -77,8 +77,47 @@ include('src/SessionHandling.php');
                 <div class="POI-list">
                     <ol>
                         <li>
-
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
                         </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <p>Bla Bla Bla</p>
+                        </li>
+
+
                     </ol>
                 </div>
                 <div class="description">
