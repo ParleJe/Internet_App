@@ -62,7 +62,7 @@ include('src/SessionHandling.php');
 </nav>
 
 <section class="content-container">
-    <div class="top-bar">
+    <div class="top-bar"><!--TODO WAIT FOR AJAXJS-->
         <input name="search" type="text" placeholder="Search">
         <button>Search</button>
     </div>
@@ -94,4 +94,8 @@ EOL;
         ?>
     </div>
 </section>
+
+<script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+<script src="public/scripts/script.js"></script>
+
 </body>

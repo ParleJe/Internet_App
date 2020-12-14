@@ -106,7 +106,7 @@
                                 <i class="fas fa-paperclip"></i>
                                 <i class="fas fa-comment-alt"></i>
                             </div>
-                            <i class="fas fa-sort-down"></i>
+                            <i class="fas fa-sort-down" style="color: $color"></i>
                         </div>
 EOL;
                     }
@@ -119,75 +119,15 @@ EOL;
             <div class="flow">
                 <h2>TITLE OF TRIPS #2</h2>
                 <div class="trip-container">
-                <div class="trip" id="trip-3">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                    <i class="fas fa-sort-down" ></i>
-                </div>
 
-                <div class="trip" id="trip-3">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                    <i class="fas fa-sort-down" ></i>
-                </div>
-
-                <div class="trip" id="trip-3">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                    <i class="fas fa-sort-down" ></i>
-                </div>
-
-                <div class="trip" id="trip-3">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                    <i class="fas fa-sort-down" ></i>
-                </div>
-
-                <div class="trip" id="trip-3">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                    <i class="fas fa-sort-down" ></i>
-                </div>
                 </div>
             </div>
 
             <div class="flow">
                 <!--TODO empty columns-->
                 <h2>TITLE OF TRIPS #3</h2>
-                <div class="trip" id="trip-6">
-                    <h4>location - location</h4>
-                    <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-6-img" alt="trip" />
-                    <div class="trip-icons">
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                    <i class="fas fa-sort-down"></i>
+                <div class="trip-container">
+
                 </div>
             </div>
 

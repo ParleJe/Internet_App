@@ -269,10 +269,13 @@ nav>ol>li:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
+
+
 }
 
 .new-button:hover {
     background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
+    transition: 2s;
 }
 
 .content-container {

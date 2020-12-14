@@ -1,4 +1,4 @@
-
+/*TODO EXTRACT ALL HARDCODED VALUES INTO VARS(COLORS, RADIUSES ETC.)*/
 .top-bar {
     border-radius: var(--radius);
     width: 100%;
@@ -62,14 +62,14 @@
 
 .content {
     width: 80%;
-    height: 84%;
+    height: 85%;
 
     border-radius: 2vh;
     background: transparent;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
-    padding: 2em;
+    padding: 2em 2em 0 2em;
 
 
 
@@ -85,7 +85,7 @@
 
 .trip-container{
     height: 100%;
-
+    border-radius: var(--radius);
     overflow: auto;
 }
 .trip {
