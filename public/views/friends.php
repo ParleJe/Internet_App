@@ -1,21 +1,19 @@
+<?PHP
+include('src/SessionHandling.php');
+?>
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/friends-stylesheet.css">
 
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <title>Create</title>
+    <title>Friends</title>
 </head>
 
 <body>
-
-<?PHP
-
-?>
-
 <nav id="navigation-bar">
 
     <div class="nav-logo-container">
-        <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
+        <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project"/>
     </div>
 
     <ol>
@@ -70,78 +68,30 @@
     </div>
 
     <div class="content">
-        <div class="cell">
-            <div class="profile" id="profile-1">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
+
+        <?php
+        if (isset($friends)) {
+            foreach ($friends as $friend) {
+                $id = $friend->getMortalId();
+                $name = $friend->getName();
+                $surname = $friend->getSurName();
+                $nickname = $friend->getNickname();
+                echo <<<EOL
+                <div class="cell">
+                    <div class="profile" id="$id">
+                        <img src="public/resources/placeholder.jpg" alt="profile photo">
+                        <div>
+                            <h2>$name $surname</h2>
+                            <h3>$nickname</h3>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+EOL;
 
-        <div class="cell">
-            <div class="profile" id="profile-1">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
+            }
+        }
 
-        <div class="cell">
-            <div class="profile" id="profile-2">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="cell">
-            <div class="profile" id="profile-3">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="cell">
-            <div class="profile" id="profile-4">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="cell">
-            <div class="profile" id="profile-5">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="cell">
-            <div class="profile" id="profile-6">
-                <img src="public/resources/placeholder.jpg">
-                <div>
-                    <h2>Name Surname</h2>
-                    <h3>Something Else</h3>
-                </div>
-            </div>
-        </div>
-
-
-
+        ?>
     </div>
 </section>
 </body>

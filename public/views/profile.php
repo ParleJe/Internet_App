@@ -1,3 +1,6 @@
+<?PHP
+include('src/SessionHandling.php');
+?>
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/profile-stylesheet.css">
@@ -69,7 +72,7 @@
 
         <div class="profile">
             <div>
-                <img src="public/resources/placeholder.jpg">
+                <img src="public/resources/placeholder.jpg"  alt="profile photo">
                 <!--icon for add to friends or delete account-->
                 <h2>NAME SURNAME</h2>
                 <h3>LOGIN</h3>
