@@ -1,3 +1,4 @@
+
 //nav
 $('.new-button').on('mouseover', function() {
 
@@ -15,3 +16,4 @@ $('#map-container>i, #POI').on( 'click', function() {
 $('.profile').on('mouseover mouseout', function() {
     $(this).toggleClass('hover')
 })
+
