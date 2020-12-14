@@ -11,7 +11,7 @@ include('src/SessionHandling.php');
     <link rel="stylesheet" type="text/css" href="public/css/create-stylesheet.css">
 
     <!--transision script-->
-    <script src="public/scripts/script.js"></script>
+
 
     <!-- HERE API -->
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
@@ -88,7 +88,7 @@ include('src/SessionHandling.php');
                 <div>
                     <input type="color" name="color" style="width: 10%;" value="#e66465">
                     <input class="button" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
-                    <input class="button" name="points_of_interest" type="button" value="Add POI" onclick="showMap()"> <!--Point Of Interest-->
+                    <input class="button" id="POI" name="points_of_interest" type="button" value="Add POI"> <!--Point Of Interest-->
                 </div>
                 <button class="button" id="submit" type="submit">Submit</button> <!--Submit All Form-->
             </form>
@@ -96,7 +96,7 @@ include('src/SessionHandling.php');
         </div>
 
         <div id="map-container">
-            <i class="fas fa-times" onclick="showMap()"></i>
+            <i class="fas fa-times""></i>
                     <div class="inner-city-field-container">
                         <div contenteditable="true" class="city-field"></div>
                         <div class="city-field-suggestion"></div>
@@ -104,5 +104,8 @@ include('src/SessionHandling.php');
             <div id="map"></div>
         </div>
     </section>
+
+    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <script src="public/scripts/script.js"></script>
     <script type="module" src="public/scripts/hereAPI/map.js"></script>
 </body>

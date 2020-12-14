@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/trips-stylesheet.css">
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <script src="public/scripts/script.js"></script>
     <title>Your Trips</title>
 </head>
 
@@ -88,6 +87,7 @@
 
             <div class="flow"> <!--First column etc.-->
                 <h2>TITLE OF TRIPS #1</h2>
+                <div class="trip-container">
                 <?PHP
                 if( isset($trips) ) {
                     foreach($trips as $trip) {
@@ -98,7 +98,7 @@
                         $photoDir = $trip->getPhotoDirectory();
                         //...
                         echo <<<EOL
-                        <div class="trip" id="$id" onclick="expandTrip(this.id)">
+                        <div class="trip" id="$id">
                             <h4 style="color: $color;">$destination</h4>
                             <h3>$title</h3>
                             <img src="$photoDir" id="$id-img" alt="trip" />
@@ -106,17 +106,20 @@
                                 <i class="fas fa-paperclip"></i>
                                 <i class="fas fa-comment-alt"></i>
                             </div>
+                            <i class="fas fa-sort-down"></i>
                         </div>
 EOL;
                     }
                 }
-                ?>
 
+                ?>
+                </div>
             </div>
 
             <div class="flow">
                 <h2>TITLE OF TRIPS #2</h2>
-                <div class="trip" id="trip-3" onclick="expandTrip(this.id)">
+                <div class="trip-container">
+                <div class="trip" id="trip-3">
                     <h4>location - location</h4>
                     <h3>Title</h3>
                     <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
@@ -124,34 +127,59 @@ EOL;
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
                     </div>
+                    <i class="fas fa-sort-down" ></i>
                 </div>
 
-                <div class="trip" id="trip-4" onclick="expandTrip(this.id)">
+                <div class="trip" id="trip-3">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-4-img" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
                     </div>
+                    <i class="fas fa-sort-down" ></i>
                 </div>
 
-                <div class="trip" id="trip-5" onclick="expandTrip(this.id)">
+                <div class="trip" id="trip-3">
                     <h4>location - location</h4>
                     <h3>Title</h3>
-                    <img src="public/resources/placeholder.jpg" id="trip-5-img" alt="trip" />
+                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
                     <div class="trip-icons">
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
                     </div>
+                    <i class="fas fa-sort-down" ></i>
                 </div>
 
+                <div class="trip" id="trip-3">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <i class="fas fa-sort-down" ></i>
+                </div>
+
+                <div class="trip" id="trip-3">
+                    <h4>location - location</h4>
+                    <h3>Title</h3>
+                    <img src="public/resources/placeholder.jpg" id="trip-3-img" alt="trip" />
+                    <div class="trip-icons">
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <i class="fas fa-sort-down" ></i>
+                </div>
+                </div>
             </div>
 
             <div class="flow">
                 <!--TODO empty columns-->
                 <h2>TITLE OF TRIPS #3</h2>
-                <div class="trip" id="trip-6" onclick="expandTrip(this.id)">
+                <div class="trip" id="trip-6">
                     <h4>location - location</h4>
                     <h3>Title</h3>
                     <img src="public/resources/placeholder.jpg" id="trip-6-img" alt="trip" />
@@ -159,9 +187,13 @@ EOL;
                         <i class="fas fa-paperclip"></i>
                         <i class="fas fa-comment-alt"></i>
                     </div>
+                    <i class="fas fa-sort-down"></i>
                 </div>
             </div>
 
         </section>
     </div>
+
+    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <script src="public/scripts/script.js"></script>
 </body>
