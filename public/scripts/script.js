@@ -17,10 +17,13 @@ function showMap() {
         display = style.getPropertyValue('display')
 
     bottom = bottom.substring(0, bottom.length -2) //remove "px"
-    if(bottom >= 0) { //remove fractional parts
+    if(bottom >= 0) {
         element.style.bottom = String(vh(-200)+'px')
     }else {
         element.style.bottom = '0'
+        setTimeout(function (){
+            alert("Longpress to add or delete mark")
+        }, 1500)
     }
 
 }
