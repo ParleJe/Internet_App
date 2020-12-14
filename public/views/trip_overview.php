@@ -1,3 +1,6 @@
+<?PHP
+include('src/SessionHandling.php');
+?>
 <!DOCTYPE html>
 
 <head>
@@ -9,10 +12,6 @@
 </head>
 
 <body>
-
-<?PHP
-
-?>
 
 <nav id="navigation-bar">
 
@@ -91,22 +90,22 @@
                 <h1>participants</h1>
                 <div class="grid-friends">
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
                     <div>
-                        <img src="public/resources/placeholder.jpg">
+                        <img src="public/resources/placeholder.jpg" alt="friend photo">
                     </div>
 
                 </div>
