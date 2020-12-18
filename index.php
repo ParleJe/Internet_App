@@ -18,4 +18,5 @@ Routing::post( 'login', 'LoginController' );
 Routing::post( 'registration', 'LoginController' );
 
 Routing::ajax('ajaxTripDescription', 'TripController');
+Routing::ajax('ajaxGetTrips', 'TripController');
 Routing::run( $path );

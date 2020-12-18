@@ -7,6 +7,8 @@ include('src/SessionHandling.php');
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/search-stylesheet.css">
 
+    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <script src="public/scripts/searchAJAX.js" DEFER></script>
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <title>Search</title>
 </head>
@@ -70,8 +72,8 @@ include('src/SessionHandling.php');
 
 <div class="content-container">
     <div class="top-bar">
-        <input name="search" type="text" placeholder="Search">
-        <button>Search</button>
+        <input id="search-input" name="search" type="text" placeholder="Search">
+        <button class="search-btn">Search</button>
     </div>
     <div class="content">
 

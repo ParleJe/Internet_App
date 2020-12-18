@@ -9,17 +9,13 @@ $('li').on( 'click', function() {
     updateDescription($(this).attr('id'));
 })
 
-/*$(".back-button").on( 'click', function () {
-    alert("alert");
-    widnow.history.go(-1);
-})*/
-
 function getTripID() {
     let url = document.URL;
     return url.split("&").pop().split("=").pop();
 }
 
 function getDetails() {
+    //TODO GET URL DYNAMICALLY
     let apiUrl = "http://localhost:8080";
     let tripId = getTripID();
     $.ajax({

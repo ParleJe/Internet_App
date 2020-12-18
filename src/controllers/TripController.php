@@ -23,7 +23,7 @@ class TripController extends AppController
             );
 
             $title = $_POST['trip_name'];
-            if( $tripRepo->getTripsByName( $title ) != null ) {
+            if( $tripRepo->getTripByName( $title ) != null ) {
                 return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
             }
 
@@ -53,7 +53,6 @@ class TripController extends AppController
 
         return $this->render('create', ['messages' => $this->messages]);
     }
-
     public function view() {
         $tripId = $_GET["tripId"];
         $repo = new TripRepository();
@@ -63,7 +62,6 @@ class TripController extends AppController
         }
         return $this->render('trip_overview', ['trip' => $trip]);
     }
-
     public function ajaxTripDescription() {
 
         $tripID = $_GET["tripID"];
@@ -74,6 +72,17 @@ class TripController extends AppController
         http_response_code(200);
         echo $trip->getPointsOfInterest();
 
+    }
+    public function ajaxGetTrips() {
+        $string = $_GET['search'];
+        $repo = new TripRepository();
+        $trips = $repo->getTripByName($string);
+        $json = null;
+        foreach ($trips as $trip){
+            $json[] = json_encode($trip);
+        }
+
+        echo json_encode($trips);
     }
     private function validate( array $file ): bool {
         if( $file['size'] > self::MAX_FILE_SIZE ) {

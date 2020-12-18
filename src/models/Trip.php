@@ -1,17 +1,18 @@
 <?php
 
 
-class Trip
+class Trip //implements JsonSerializable
 {
-    private $trip_id;
-    private $trip_name;
-    private $destination;
-    private $description;
-    private $points_of_interest;
-    private $photo_directory;
-    private $mortal_id;
-    private $color;
+    public $trip_id;
+    public $trip_name;
+    public $destination;
+    public $description;
+    public $points_of_interest;
+    public $photo_directory;
+    public $mortal_id;
+    public $color;
 
+    //TODO change to array with data
     public static function initWithVariables(?int $trip_id, string $trip_name, string $destination, string $description,
                                              string $points_of_interest, string $photo_directory,string $color, int $mortal_id): Trip{
         $newTrip = new Trip();
@@ -28,6 +29,10 @@ class Trip
         return $newTrip;
     }
 
+
+    public function asJson() {
+
+    }
     /**
      * @return mixed
      */
@@ -173,9 +178,17 @@ class Trip
     }
 
 
-
-
-
-
-
+ /*   public function jsonSerialize()
+    {
+        return [
+            'trip_id' => $this->getTripId(),
+            'trip_name' => $this->getTripName(),
+            'destination' => $this->getDestination(),
+            'description' => $this->getDescription(),
+            'points_of_interest' => $this->getPointsOfInterest(),
+            'photo_directory' => $this->getPhotoDirectory(),
+            'mortal_id' => $this->getMortalId(),
+            'color' => $this->getColor(),
+        ];
+    }*/
 }

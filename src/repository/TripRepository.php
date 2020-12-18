@@ -2,19 +2,16 @@
 
 class TripRepository extends Repository {
 
-    public function getTripsByName(string $name): ?Trip {
+    public function getTripByName(string $name): array {
         $statement = $this->database->getInstance()->prepare('
-            SELECT * FROM trip where trip_name = ?;
+            SELECT * FROM trip where trip_name LIKE ?;
             ');
+        $statement->execute( [ '%'.$name.'%' ] );
 
-
-        $statement->execute( [ $name ] );
-
-        $trip = $statement->fetchObject('Trip');
-        $trip = $trip?: null;
-
-        return $trip;
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Trip');
     }
+
+
 
     public function getTripById(int $id): ?Trip {
         $statement = $this->database->getInstance()->prepare('

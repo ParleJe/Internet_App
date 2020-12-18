@@ -1,5 +1,8 @@
 <?PHP
     include('src/SessionHandling.php');
+    if( ! isset($trips) ){
+        die("problem!");
+    }
 ?>
 
 <!DOCTYPE html>
