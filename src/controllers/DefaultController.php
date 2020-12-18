@@ -16,6 +16,7 @@
         }
 
         public function trips() {
+            include('src/SessionHandling.php');
             $repository = new TripRepository();
             $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
             $this->render('trips', ['trips'=> $trips]);
@@ -26,6 +27,7 @@
         }
 
         public function friends() {
+            include('src/SessionHandling.php');
             $repository = new UserRepository();
             $friends = $repository->getFriendsOfUser($this->getCurrentLoggedID());
             $this->render('friends', ['friends'=> $friends]);

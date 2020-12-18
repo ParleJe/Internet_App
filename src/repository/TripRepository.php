@@ -4,11 +4,25 @@ class TripRepository extends Repository {
 
     public function getTripsByName(string $name): ?Trip {
         $statement = $this->database->getInstance()->prepare('
-            SELECT 1 FROM trip where trip_name = ?;
+            SELECT * FROM trip where trip_name = ?;
             ');
 
 
         $statement->execute( [ $name ] );
+
+        $trip = $statement->fetchObject('Trip');
+        $trip = $trip?: null;
+
+        return $trip;
+    }
+
+    public function getTripById(int $id): ?Trip {
+        $statement = $this->database->getInstance()->prepare('
+            SELECT * FROM trip where trip_id = ?;
+            ');
+
+
+        $statement->execute( [ $id ] );
 
         $trip = $statement->fetchObject('Trip');
         $trip = $trip?: null;

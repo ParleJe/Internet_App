@@ -10,23 +10,22 @@ include('src/SessionHandling.php');
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/create-stylesheet.css">
 
-    <!--transision script-->
-
-
     <!-- HERE API -->
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-
-
+    <!--Scripts-->
+    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <script src="public/scripts/script.js" DEFER></script>
+    <script type="module" src="public/scripts/hereAPI/map.js" DEFER></script>
     <!--icons-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-    <nav id="navigation-bar">
+<nav id="navigation-bar">
 
         <div class="nav-logo-container">
             <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
@@ -77,7 +76,7 @@ include('src/SessionHandling.php');
         </ol>
     </nav>
 
-    <section class="content-container">
+<section class="content-container">
 
         <div class="content">
             <form action="create" method="POST" enctype="multipart/form-data">
@@ -97,7 +96,7 @@ include('src/SessionHandling.php');
 
         <div id="map-container">
             <i class="fas fa-times""></i>
-                    <div class="inner-city-field-container">
+            <div class="inner-city-field-container">
                         <div contenteditable="true" class="city-field"></div>
                         <div class="city-field-suggestion"></div>
                     </div>
@@ -105,7 +104,4 @@ include('src/SessionHandling.php');
         </div>
     </section>
 
-    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
-    <script src="public/scripts/script.js"></script>
-    <script type="module" src="public/scripts/hereAPI/map.js"></script>
 </body>

@@ -1,4 +1,5 @@
-<?php /** @noinspection ALL */
+<?php
+
 class TripController extends AppController
 {
     const MAX_FILE_SIZE = 1024*1024;
@@ -53,6 +54,27 @@ class TripController extends AppController
         return $this->render('create', ['messages' => $this->messages]);
     }
 
+    public function view() {
+        $tripId = $_GET["tripId"];
+        $repo = new TripRepository();
+        $trip = $repo->getTripById($tripId);
+        if( is_null($trip) ) {
+            return Routing::run('trips');
+        }
+        return $this->render('trip_overview', ['trip' => $trip]);
+    }
+
+    public function ajaxTripDescription() {
+
+        $tripID = $_GET["tripID"];
+        $repo = new TripRepository();
+        $trip = $repo->getTripById($tripID);
+
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo $trip->getPointsOfInterest();
+
+    }
     private function validate( array $file ): bool {
         if( $file['size'] > self::MAX_FILE_SIZE ) {
             $this->messages[] = 'File is too large';
@@ -66,7 +88,6 @@ class TripController extends AppController
 
         return true;
     }
-
     private function parsePOI(): array {
 
         if(!isset($_COOKIE['POIs'])){
@@ -78,19 +99,11 @@ class TripController extends AppController
             $places[$i] = substr( $place, 7, -1 );
         }
 
-
-
-
-        $cookie = $_COOKIE['desc'];
-        $descriptions = explode(',', $cookie ); // [STRING] [STRING] [STRING]
-
-
         unset( $_COOKIE['POI'] );
         setcookie( 'POI', null, -1, '/' );
 
         return $places;
     }
-
     private function getPOIAsJSON() {
         $POI = $this->parsePOI();
 
@@ -103,7 +116,8 @@ class TripController extends AppController
 
         foreach ( $POI as $iterator => $place ) {
             //TODO check if name[iterator] != null
-            $JSONArray[$name[$iterator]] = [
+            $JSONArray[] = [
+                "name" => $name[$iterator],
                 "location" => $POI[$iterator],
                 "description" => $description[$iterator]
             ];

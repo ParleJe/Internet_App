@@ -88,31 +88,24 @@
             <div class="flow"> <!--First column etc.-->
                 <h2>TITLE OF TRIPS #1</h2>
                 <div class="trip-container">
-                <?PHP
-                if( isset($trips) ) {
-                    foreach($trips as $trip) {
-                        $id = $trip->getTripId();
-                        $title = $trip->getTripName();
-                        $destination = $trip->getDestination();
-                        $color = $trip->getColor();
-                        $photoDir = $trip->getPhotoDirectory();
-                        //...
-                        echo <<<EOL
-                        <div class="trip" id="$id">
-                            <h4 style="color: $color;">$destination</h4>
-                            <h3>$title</h3>
-                            <img src="$photoDir" id="$id-img" alt="trip" />
+                <?PHP  foreach($trips as $trip): ?>
+                        <div class="trip">
+                            <h4 style="color: <?php echo $trip->getColor() ?> ;"> <?php echo $trip->getDestination() ?> </h4>
+                            <h3> <?php echo $trip->getTripName() ?> </h3>
+                            <form method="get" action="view">
+                            <div><input type="image"  alt="trip image" src=" <?php echo $trip->getPhotoDirectory() ?> " ></div>
+                            <input type="hidden" name="tripId" value=" <?php echo $trip->getTripId() ?> ">
+                            </form>
                             <div class="trip-icons">
                                 <i class="fas fa-paperclip"></i>
                                 <i class="fas fa-comment-alt"></i>
                             </div>
-                            <i class="fas fa-sort-down" style="color: $color"></i>
+                            <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
                         </div>
-EOL;
-                    }
-                }
 
-                ?>
+                <?php endforeach; ?>
+
+
                 </div>
             </div>
 

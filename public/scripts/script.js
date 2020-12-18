@@ -1,11 +1,9 @@
 
 //nav
-$('.new-button').on('mouseover', function() {
 
-})
 //trips.php
 $(".trip>i").on( 'click', function() {
-    $(this).siblings('img').slideToggle('slow')
+    $(this).siblings('form').slideToggle('slow')
     $(this).toggleClass('rotate')
 })
 //create.php

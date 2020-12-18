@@ -55,7 +55,7 @@ body {
     align-items: center;
 }
 
-form.login {
+.login-container>form.login {
     display: flex;
     flex-direction: column;
     justify-content: center;
