@@ -2,7 +2,7 @@
     width: 90%;
     height: 85%;
     margin: 0;
-    background: white;
+    background: var(--element-background-color);
 
     border-radius: var(--radius);
 
@@ -13,13 +13,12 @@
     margin: 0;
     padding: 5em 6em;
     height:60%;
-    /*background-image: url(public/resources/trip-placeholder.jpg);*/
     background-size: 100% 150%;
     border-radius: var(--radius);
     display: flex;
     justify-content: space-between;
 
-    box-shadow: 0 6px 6px #00000050;
+    box-shadow: 0 6px 6px var(--shadow);
 }
 
 .photo-background>i {
@@ -66,9 +65,9 @@
     z-index: 3;
     width: 35%;
     height: 60vh;
-    background: white;
+    background: var(--element-background-color);
 
-    box-shadow: 6px 4px 6px #00000050;
+    box-shadow: 6px 4px 6px var(--shadow);
 
     border-radius: var(--radius);
 }
@@ -99,7 +98,7 @@
 }
 
 .hover {
-    color: red;
+    color: var(--main-color);
 }
 
 .POI-list>ol>li>p,i {
@@ -110,9 +109,9 @@
     z-index: 1;
     width: 40%;
     height: 70%;
-    background: white;
+    background: var(--element-background-color);
 
-    box-shadow: 6px 4px 6px #00000050;
+    box-shadow: 6px 4px 6px var(--shadow);
 
     border-radius: 0 var(--radius) var(--radius) 0;
 
@@ -133,10 +132,10 @@
 .trip>div:last-child {
     width: 20%;
     height: 60%;
-    background: white;
+    background: var(--element-background-color);
     border-radius: var(--radius);
 
-    box-shadow: 0 4px 6px #00000050;
+    box-shadow: 0 4px 6px var(--shadow);
 
     display: flex;
     flex-direction: column;

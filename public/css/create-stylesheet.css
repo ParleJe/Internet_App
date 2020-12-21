@@ -6,7 +6,7 @@
 
 .content {
     padding: 2em 5em;
-    background: #FFFFFF;
+    background: var(--element-background-color);
     margin: auto;
     border-radius: var(--radius);
     display: flex;
@@ -17,7 +17,7 @@
 #map-container {
     width: 100vw;
     height: 100vh;
-    background: white;
+    background: var(--element-background-color);
     position: absolute;
     left: 0;
 }
@@ -63,12 +63,11 @@ h2 {
 
 input {
     border-radius: 0;
-    width: 80%;
-    border-bottom: 1px solid #C968C9;
+    width: 100%;
+    border-bottom: 1px solid var(--main-color);
 }
 
 form>div {
-    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -78,10 +77,10 @@ textarea {
     font-size: 1.5em;
     background: transparent;
     border-radius: calc(var(--radius)/4);
-    border: 1px solid #e5b2e5;
+    border: 1px solid var(--main-color);
     padding: 1vh;
     margin: 1em;
-    width: 80%;
+    width: 100%;
 
     resize: none;
 }
@@ -99,7 +98,7 @@ textarea {
 .button {
     font-size: 2em;
     width: fit-content;
-    border: 1px solid #C968C9;
+    border: 1px solid var(--main-color);
     border-radius: var(--radius);
 }
 
@@ -109,7 +108,7 @@ textarea {
     padding: 0.2em 1em;
     margin: 1em;
 
-    background: #6BA2EB;
+    background: var(--highlight-color);
     border: 0;
 }
 

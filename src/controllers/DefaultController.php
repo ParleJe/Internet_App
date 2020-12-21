@@ -15,29 +15,19 @@
             $this->render('registration');
         }
 
-        public function trips() {
-            include('src/SessionHandling.php');
-            $repository = new TripRepository();
-            $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
-            $this->render('trips', ['trips'=> $trips]);
-        }
-
         public function create() {
             $this->render('create');
         }
 
-        public function friends() {
-            include('src/SessionHandling.php');
-            $repository = new UserRepository();
-            $friends = $repository->getFriendsOfUser($this->getCurrentLoggedID());
-            $this->render('friends', ['friends'=> $friends]);
-        }
-
         public function settings() {
-            $this->render('profile');
+            $id = $this->getCurrentLoggedID();
+            $repo = new UserRepository();
+            $profile = $repo->getUserById($id);
+            $repo = new TripRepository();
+            $trips = $repo->getTripsByUserId($id);
+            $this->render('profile', ['profile' => $profile, 'trips' => $trips] );
         }
 
-        public function trip_overview() {
-            $this->render('trip_overview');
+        public function test () {
         }
     }

@@ -76,55 +76,13 @@ include('src/SessionHandling.php');
         <button class="search-btn">Search</button>
     </div>
     <div class="content">
-
-        <div class="search" id="search-1">
+        <!--<div class="search" id="search-1">
             <img src="public/resources/placeholder.jpg" alt="trip"/>
             <div>
                 <h2>LOREM IPSUM</h2>
                 <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
             </div>
-        </div>
-
-        <div class="search" id="search-2">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
+        </div>-->
     </div>
 </div>
 </body>

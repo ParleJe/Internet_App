@@ -97,8 +97,8 @@ if( ! isset($trip)) {
                     <p class="trip-desc"> <?PHP echo $trip->getDescription() ?></p>
                 </div>
             </div>
-            <div>
-                <h1>participants</h1>
+            <div class="option-menu">
+                <!--<h1>participants</h1>
                 <div class="grid-friends">
                     <div>
                         <img src="public/resources/placeholder.jpg" alt="friend photo">
@@ -120,7 +120,14 @@ if( ! isset($trip)) {
                     </div>
 
                 </div>
-                <i class="fas fa-plus-circle"></i>
+                <i class="fas fa-plus-circle"></i>-->
+                <h1 class="menu" id="participants">Participants</h1>
+                <h1 class="menu" id="chat">Chat</h1>
+                <h1 class="menu" id="map">Check Map</h1>
+                <?PHP if($type === 'template')
+                    echo '<h1 class="menu" id="create">Create Trip From This Template</h1>'
+                ?>
+                <h1 class="menu" id="delete">Delete <?PHP echo $type ?></h1>
             </div>
         </div>
     </section>

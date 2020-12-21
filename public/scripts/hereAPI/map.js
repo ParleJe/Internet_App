@@ -34,5 +34,8 @@ map.addEventListener('longpress', evt => {
 
 new Search('Berlin, DEU');
 $('#map-container').css('display', 'none')
+$('#map-container>i, #POI').on( 'click', function() {
+    $('#map-container').fadeToggle('slow')
+})
 
 export { router, geocoder, map }

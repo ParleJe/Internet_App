@@ -2,6 +2,13 @@
 
 :root {
     --radius: 4em;
+    --background-color: #EDEDED;
+    --element-background-color: #FFFFFF;
+    --shadow: #00000040;
+    --main-color: #6BA2EB;
+    --highlight-color: #6BA2EB45;
+    --font-color : #000000;
+    --second-font-color : #0D0D0D90
 }
 
 * {
@@ -11,7 +18,7 @@
 }
 
 body {
-    background-color: #EDEDED;
+    background-color: var(--background-color);
     margin: 0;
     height: 100vh;
     width: 100vw;
@@ -30,14 +37,14 @@ body {
     width: 100vw;
     height: 85vh;
     border-radius: var(--radius) var(--radius) 0 0;
-    background-color: #ffffff;
+    background-color: var(--element-background-color);
     position: fixed;
     bottom: 0;
     left: 0;
 }
 
 .middle-line {
-    background: linear-gradient(#ffffff, #000) no-repeat center/2px 100%;
+    background: linear-gradient(var(--element-background-color), black) no-repeat center/2px 100%;
     width: inherit;
     height: inherit;
     border-radius: inherit;
@@ -65,7 +72,7 @@ body {
     padding-left: 5vw;
     background: #FDFDFD;
     border-radius: var(--radius);
-    box-shadow: 5px 12px 6px #DDA0DD33;
+    box-shadow: 5px 12px 6px var(--shadow);
 }
 
 input {
@@ -80,13 +87,13 @@ input {
 }
 
 input:hover {
-    background: #dda0dd20;
+    background: var(--highlight-color);
 }
 
 .login-button {
     border: 0;
     background: transparent;
-    color: #dda0dd;
+    color: var(--highlight-color);
     cursor: pointer;
     margin: 10px;
     padding: 0;
@@ -118,7 +125,7 @@ input:hover {
 }
 
 .login-button:hover {
-    color: #C968C9;
+    color: var(--main-color);
 
 }
 
@@ -174,7 +181,7 @@ nav {
     width: 18%;
     min-width: 200px;
     height: 93vh;
-    background: #FFFFFF;
+    background: var(--element-background-color);
     border-radius: var(--radius);
     margin: 2vw 2vw 2vw 2vw;
     display: flex;
@@ -226,7 +233,7 @@ nav>ol>li:last-child {
     height: 30%;
     margin-bottom: 1em;
     border-radius: var(--radius);
-    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
+    background: transparent radial-gradient(closest-side at 50% 50%, var(--element-background-color) 0%, var(--main-color) 120%) 0 0 no-repeat padding-box;
 }
 
 .nav-button {

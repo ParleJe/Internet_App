@@ -51,14 +51,6 @@ class User
         return $user;
 
     }
-    public function getVariablesToArray(): array {
-        $array = [];
-        foreach($this as $value) {
-            $array[] = $value;
-        }
-        return $array;
-    }
-
 
 
 
@@ -102,13 +94,6 @@ class User
     {
         return $this->role_id;
     }
-
-
-    public function setRoleName($role_name): void
-    {
-        $this->role_name = $role_name;
-    }
-
 
     public function getName()
     {

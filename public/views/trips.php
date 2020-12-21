@@ -2,6 +2,8 @@
     include('src/SessionHandling.php');
     if( ! isset($trips) ){
         die("problem!");
+    } elseif ( ! isset($planned) ) {
+        die('another problem!');
     }
 ?>
 
@@ -89,7 +91,7 @@
         <section class="content"> <!-- grid layout 3 columns-->
 
             <div class="flow"> <!--First column etc.-->
-                <h2>TITLE OF TRIPS #1</h2>
+                <h2>Your Creations:</h2>
                 <div class="trip-container">
                 <?PHP  foreach($trips as $trip): ?>
                         <div class="trip">
@@ -99,10 +101,6 @@
                             <div><input type="image"  alt="trip image" src=" <?php echo $trip->getPhotoDirectory() ?> " ></div>
                             <input type="hidden" name="tripId" value=" <?php echo $trip->getTripId() ?> ">
                             </form>
-                            <div class="trip-icons">
-                                <i class="fas fa-paperclip"></i>
-                                <i class="fas fa-comment-alt"></i>
-                            </div>
                             <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
                         </div>
 
@@ -113,15 +111,31 @@
             </div>
 
             <div class="flow">
-                <h2>TITLE OF TRIPS #2</h2>
+                <h2>Planned:</h2>
                 <div class="trip-container">
+
+                    <?PHP  foreach($planned as $trip): ?>
+                        <div class="trip">
+                            <h4 style="color: <?php echo $trip->getColor() ?> ;"> <?php echo $trip->getDestination() ?> </h4>
+                            <h3> <?php echo $trip->getTripName() ?> </h3>
+                            <form method="get" action="view">
+                                <div><input type="image"  alt="trip image" src=" <?php echo $trip->getPhotoDirectory() ?> " ></div>
+                                <input type="hidden" name="tripId" value=" <?php echo $trip->getTripId() ?> ">
+                            </form>
+                            <div class="trip-icons">
+                                <i class="fas fa-comment-alt"></i>
+                            </div>
+                            <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
+                        </div>
+
+                    <?php endforeach; ?>
 
                 </div>
             </div>
 
             <div class="flow">
                 <!--TODO empty columns-->
-                <h2>TITLE OF TRIPS #3</h2>
+                <h2>Taking Part:</h2>
                 <div class="trip-container">
 
                 </div>

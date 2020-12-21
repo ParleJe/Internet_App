@@ -17,7 +17,6 @@ include('src/SessionHandling.php');
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     <!--Scripts-->
     <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
-    <script src="public/scripts/script.js" DEFER></script>
     <script type="module" src="public/scripts/hereAPI/map.js" DEFER></script>
     <!--icons-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
@@ -88,6 +87,10 @@ include('src/SessionHandling.php');
                     <input type="color" name="color" style="width: 10%;" value="#e66465">
                     <input class="button" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
                     <input class="button" id="POI" name="points_of_interest" type="button" value="Add POI"> <!--Point Of Interest-->
+                </div>
+                <div>
+                    <input name="start" placeholder="Start?" type="date" required="required" value="<?PHP echo date('Y-m-d'); ?>" min="<?PHP echo date('Y-m-d'); ?>">
+                    <input name="end" placeholder="End?" type="date" required="required" value="<?PHP echo date('Y-m-d', strtotime('+1 week')); ?>" min="<?PHP echo date('Y-m-d'); ?>">
                 </div>
                 <button class="button" id="submit" type="submit">Submit</button> <!--Submit All Form-->
             </form>

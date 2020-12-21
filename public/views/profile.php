@@ -1,5 +1,8 @@
 <?PHP
 include('src/SessionHandling.php');
+if (! isset( $trips ) || ! isset( $profile )) {
+    die();
+}
 ?>
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
@@ -74,43 +77,21 @@ include('src/SessionHandling.php');
             <div>
                 <img src="public/resources/placeholder.jpg"  alt="profile photo">
                 <!--icon for add to friends or delete account-->
-                <h2>NAME SURNAME</h2>
-                <h3>LOGIN</h3>
+                <h2><?PHP echo $profile->getName().' '.$profile->getSurname() ?></h2>
+                <h3> <?PHP echo $profile->getNickname() ?> </h3>
             </div>
 
 
 
             <section class="trips-created">
                 <!--here all created trips by user-->
-                <div class="trip" id="trip-1">
+                <?PHP foreach ($trips as $trip): ?>
+                <div class="trip" id="<?PHP echo $trip->getTripId() ?>" style="background-image: url( ' <?PHP echo $trip->getPhotoDirectory() ?> ' );">
                     <!--photo of the trip as background-->
-                    <h2>NAME</h2>
+                    <h2><?PHP echo $trip->getTripName() ?></h2>
                 </div>
+                <?PHP endforeach; ?>
 
-                <div class="trip" id="trip-2">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-3">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-4">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-5">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-6">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
             </section>
 
         </div>

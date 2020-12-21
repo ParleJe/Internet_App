@@ -3,10 +3,10 @@
     border-radius: var(--radius);
     width: 50%;
     padding: 0;
-    background: #FFFFFF;
+    background: var(--element-background-color);
     display: flex;
 }
-
+/*TODO unify search buttons*/
 .top-bar>input {
     border-radius: var(--radius) 0 0 var(--radius);
     margin: 0;
@@ -15,17 +15,18 @@
 
 .top-bar>button {
     font-weight: 700;
-    color: #282e3f;
+    color: var(--font-color);
+    letter-spacing: 0.1em;
     margin: 0;
     font-size: 1.5em;
-    background: #6BA2EB;
+    background: var(--main-color);
     border: 0;
     width: 20%;
     border-radius: 0 2em 2em 0;
 }
 
 .top-bar>button:hover {
-    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
+    background: transparent radial-gradient(closest-side at 50% 50%, var(--element-background-color) 0%, var(--main-color) 120%) 0 0 no-repeat padding-box;
 }
 
 .content {
@@ -109,16 +110,11 @@ p {
         height: 20vh;
         width: 80%;
     }
-    #search-2 {
-        grid-column: unset;
-    }
-    #search-2>img {
-        height: 20vh;
-    }
+
     .search>div {
         border-radius: 1.2em;
         visibility: visible;
-        background: white;
+        background: var(--element-background-color);
         width: 60%;
         justify-self: unset;
         margin-top: 0;

@@ -1,7 +1,7 @@
+
 $('.search-btn').on( 'click', function() {
-    const input = document.getElementById('search-input').value;
-    alert(input);
-    ajaxRequest(input)
+    const input = document.querySelector('#search-input').value;
+    ajaxRequest(input);
 })
 
 function ajaxRequest ( input ) {
@@ -29,13 +29,3 @@ function ajaxRequest ( input ) {
     })
 })
 }
-
-/*<div class="search" id="search-1">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
- */

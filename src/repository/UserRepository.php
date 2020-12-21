@@ -3,6 +3,15 @@
 
 class UserRepository extends Repository
 {
+    public function getUserById(int $id): ?User {
+        $statement = $this->database->getInstance()->prepare('
+           SELECT * FROM user_full_detail WHERE mortal_id = ?;
+        ');
+        $statement->execute( [$id] );
+
+        return $statement->fetchObject("User"); // always one
+
+    }
 
     public function getUser(string $mail): array
     {
@@ -11,7 +20,7 @@ class UserRepository extends Repository
         ');
         $statement->execute( [$mail] );
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, "User"); // always one
+        return $statement->fetchAll(PDO::FETCH_CLASS, "User");
 
     }
 
@@ -65,5 +74,17 @@ class UserRepository extends Repository
         return $statement->fetchAll(PDO::FETCH_CLASS, "User");
     }
 
+    public function getUsersByName (string $name): array {
+        $statement = $this->database->getInstance()->prepare('
+        SELECT * FROM user_full_detail where nickname LIKE ?;
+        ');
+
+        try {
+            $statement->execute( ['%'.$name.'%'] );
+        } catch ( Exception $e) {
+            return [];
+        }
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
+    }
 
 }

@@ -5,6 +5,8 @@ include('src/SessionHandling.php');
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/friends-stylesheet.css">
 
+    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <script src="public/scripts/friends.js" DEFER></script>
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <title>Friends</title>
 </head>
@@ -62,9 +64,9 @@ include('src/SessionHandling.php');
 </nav>
 
 <section class="content-container">
-    <div class="top-bar"><!--TODO WAIT FOR AJAXJS-->
-        <input name="search" type="text" placeholder="Search">
-        <button>Search</button>
+    <div class="top-bar">
+        <input id="search-input" type="text" placeholder="Search">
+        <button id="search-btn">Search</button>
     </div>
 
     <div class="content">
@@ -95,7 +97,6 @@ EOL;
     </div>
 </section>
 
-<script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
-<script src="public/scripts/script.js"></script>
+
 
 </body>

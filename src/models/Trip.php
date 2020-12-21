@@ -11,28 +11,64 @@ class Trip //implements JsonSerializable
     public $photo_directory;
     public $mortal_id;
     public $color;
-
+    public $date_start;
+    public $date_end;
     //TODO change to array with data
-    public static function initWithVariables(?int $trip_id, string $trip_name, string $destination, string $description,
-                                             string $points_of_interest, string $photo_directory,string $color, int $mortal_id): Trip{
+    public static function initWithVariables(array $data): Trip{
         $newTrip = new Trip();
 
-        $newTrip->trip_id = $trip_id;
-        $newTrip->trip_name = $trip_name;
-        $newTrip->destination = $destination;
-        $newTrip->description = $description;
-        $newTrip->points_of_interest = $points_of_interest;
-        $newTrip->photo_directory = $photo_directory;
-        $newTrip->color = $color;
-        $newTrip->mortal_id = $mortal_id;
+        $newTrip->trip_id = $data['trip_id'];
+        $newTrip->trip_name = $data['trip_name'];
+        $newTrip->destination = $data['destination'];
+        $newTrip->description = $data['description'];
+        $newTrip->points_of_interest = $data['points_of_interest'];
+        $newTrip->photo_directory = $data['photo_directory'];
+        $newTrip->color = $data['color'];
+        $newTrip->mortal_id = $data['mortal_id'];
+        $newTrip->setDateStart($data['date_start']);
+        $newTrip->setDateEnd($data['date_end']);
 
         return $newTrip;
     }
 
-
-    public function asJson() {
-
+    /**
+     * @return mixed
+     */
+    public function getDateStart()
+    {
+        return $this->date_start;
     }
+
+    /**
+     * @param mixed $date_start
+     * @return Trip
+     */
+    public function setDateStart($date_start)
+    {
+        $this->date_start = $date_start;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateEnd()
+    {
+        return $this->date_end;
+    }
+
+    /**
+     * @param mixed $date_end
+     * @return Trip
+     */
+    public function setDateEnd($date_end)
+    {
+        $this->date_end = $date_end;
+        return $this;
+    }
+
+
+
     /**
      * @return mixed
      */

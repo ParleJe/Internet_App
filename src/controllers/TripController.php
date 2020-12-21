@@ -9,12 +9,8 @@ class TripController extends AppController
 
     public function create()
     {
-        if ( session_status() !== PHP_SESSION_ACTIVE ) {
-            session_start();
-        }
-
         $tripRepo = new TripRepository();
-        $userID = $_SESSION['user_id'];
+        $userID = $this->getCurrentLoggedID();
         if( $this->isPost() && is_uploaded_file( $_FILES['photo']['tmp_name'] ) && $this->validate( $_FILES['photo'] ) ){ // check photo
             $photoDIR = dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name'];
             move_uploaded_file(
@@ -23,7 +19,7 @@ class TripController extends AppController
             );
 
             $title = $_POST['trip_name'];
-            if( $tripRepo->getTripByName( $title ) != null ) {
+            if( empty($tripRepo->getTripByName( $title )) ) {
                 return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
             }
 
@@ -31,8 +27,7 @@ class TripController extends AppController
             $destination = $_POST['destination'];
 
             //get POIs
-            $points_of_interest = $this->parsePOI();
-            $points_of_interest = $this->getPOIAsJSON( $points_of_interest );
+            $points_of_interest = $this->getPOIAsJSON();
 
             //get description
             $description = $_POST['description'];
@@ -40,28 +35,57 @@ class TripController extends AppController
             //get color
             $color = $_POST['color'];
 
-            $trip = Trip::initWithVariables( null, $title, $destination, $description,
-                $points_of_interest, self::UPLOAD_DIRECTORY.$_FILES['photo']['name'], $color, $userID );
+            //get date
+            $start = $_POST['start'];
+            $end = $_POST['end'];
 
-            if( ! $tripRepo->setTrip( $trip ) ) {
+            $trip = Trip::initWithVariables( [
+                'trip_name' => $title,
+                'destination' => $destination,
+                'description' => $description,
+                'color' => $color,
+                'date_start' => $start,
+                'date_end' => $end,
+                'points_of_interest' => $points_of_interest,
+                'photo_directory' => $photoDIR,
+                'role_id' => USER::USER,
+                'mortal_id' => $userID
+            ] );
+
+
+            if( ! $tripRepo->setTripByTransaction( $trip ) ) {
                 return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
             }
 
             return Routing::run('trips');
         }
        
-
+        die('ajaj');
         return $this->render('create', ['messages' => $this->messages]);
     }
     public function view() {
+        //TODO CHECK OWNERSHIP!!!
         $tripId = $_GET["tripId"];
         $repo = new TripRepository();
         $trip = $repo->getTripById($tripId);
         if( is_null($trip) ) {
             return Routing::run('trips');
+
         }
-        return $this->render('trip_overview', ['trip' => $trip]);
+        $planned = $repo->fetchPlannedTripsByTripId($trip->getTripId());
+        if ( ! is_null($planned)) {
+            return $this->render('trip_overview', ['trip' => $planned, 'type' =>'planned trip']);
+        }
+        return $this->render('trip_overview', ['trip' => $trip, 'type' => 'template']);
     }
+    public function trips() {
+        include('src/SessionHandling.php');
+        $repository = new TripRepository();
+        $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
+        $planned = $repository->fetchPlannedTripsByUserId($this->getCurrentLoggedID());
+        $this->render('trips', ['trips'=> $trips, 'planned'=> $planned]);
+    }
+
     public function ajaxTripDescription() {
 
         $tripID = $_GET["tripID"];
@@ -84,6 +108,7 @@ class TripController extends AppController
 
         echo json_encode($trips);
     }
+
     private function validate( array $file ): bool {
         if( $file['size'] > self::MAX_FILE_SIZE ) {
             $this->messages[] = 'File is too large';
@@ -132,6 +157,11 @@ class TripController extends AppController
             ];
         }
         return json_encode($JSONArray);
+
+    }
+    private function isPlannedTrip(int $tripID) {
+        $repo = new TripRepository();
+        $planned = $repo->fetchPlannedTripsByTripId($tripID);
 
     }
 

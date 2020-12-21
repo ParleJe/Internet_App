@@ -1,11 +1,10 @@
-/*TODO EXTRACT ALL HARDCODED VALUES INTO VARS(COLORS, RADIUSES ETC.)*/
 .top-bar {
     border-radius: var(--radius);
     width: 100%;
     height: 12%;
 
     padding: 0.5em 1em;
-    background: #FFFFFF;
+    background: var(--element-background-color);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -33,7 +32,6 @@
 .top-bar>div>.trip-icons{
     justify-content: flex-end;
     margin-inline-end: 0;
-    color: dimgray;
 }
 .top-bar>div>.trip-icons>i:last-child{
     margin-right: 0;
@@ -46,7 +44,7 @@
 
     font-size: 2em;
     font-weight: 800;
-    color: dimgray;
+    color: var(--second-font-color);
 }
 
 .top-bar>div>a {
@@ -55,8 +53,8 @@
     width: fit-content;
     padding: 0.5em 1.5em;
     border-radius: calc(var(--radius)/4);
-    background: #e5b2e5;
-    color: #961c9690;
+    background: var(--highlight-color);
+    color: var(--font-color);
 }
 
 
@@ -93,7 +91,7 @@
     height: fit-content;
     padding: 1vh;
     border-radius: calc(var(--radius));
-    background: white;
+    background: var(--element-background-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -193,5 +191,3 @@ form>div {
         overflow: unset;
     }
 }
-
-/*TODO fix height of flow div in order to correspond with navigation height*/
