@@ -24,20 +24,19 @@ include('src/SessionHandling.php');
 </head>
 
 <body>
-<nav id="navigation-bar">
+<nav>
 
-        <div class="nav-logo-container">
-            <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
-        </div>
-
+    <div class="nav-logo-container">
+        <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
+    </div>
+    <div class="new-trip-container">
+        <a class="new-trip-button" href="create">
+            <pre>Get to the Boat</pre>
+            <img src="public/resources/drakkar.svg" alt="click here to start new trip">
+        </a>
+    </div>
+    <div class="list">
         <ol>
-            <li class="button-container">
-                <a class="new-button" href="create">
-                    Get to the Boat
-                    <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-                </a>
-            </li>
-
             <li>
                 <a class="nav-button" href="trips">
                     <i class="fas fa-spinner"></i>
@@ -57,23 +56,23 @@ include('src/SessionHandling.php');
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="settings">
+                <a class="nav-button" href="profile">
                     <i class="fas fa-cog"></i>
                     <pre>Settings</pre>
                 </a>
             </li>
-
             <li>
                 <a class="nav-button" href="search">
                     <i class="fas fa-map-marker-alt"></i>
                     <pre>Search</pre>
                 </a>
             </li>
-            <li>
-                <div></div>
-            </li>
         </ol>
-    </nav>
+    </div>
+    <div class="placeholder">
+        <div></div>
+    </div>
+</nav>
 
 <section class="content-container">
 
@@ -82,7 +81,7 @@ include('src/SessionHandling.php');
                 <h2>My New Trip</h2>
                 <input name="trip_name" placeholder="Trip name" required="required"> <!--Title-->
                 <input name="destination" placeholder="Where?" required="required"> <!--Destination-->
-                <textarea name="description" rows="6" cols="30" placeholder="What is about?"></textarea> <!--Description-->
+                <textarea name="description" rows="6" cols="30" maxlength="255" placeholder="What is about?"></textarea> <!--Description-->
                 <div>
                     <input type="color" name="color" style="width: 10%;" value="#e66465">
                     <input class="button" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
@@ -94,11 +93,10 @@ include('src/SessionHandling.php');
                 </div>
                 <button class="button" id="submit" type="submit">Submit</button> <!--Submit All Form-->
             </form>
-
         </div>
 
         <div id="map-container">
-            <i class="fas fa-times""></i>
+            <i class="fas fa-times"">
             <div class="inner-city-field-container">
                         <div contenteditable="true" class="city-field"></div>
                         <div class="city-field-suggestion"></div>

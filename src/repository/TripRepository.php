@@ -95,21 +95,53 @@ class TripRepository extends Repository {
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Trip');
     }
 
-    public function fetchPlannedTripsByTripId(int $tripID): ?Trip {
+    public function fetchPlannedTripsByTripId(int $tripID, int $userID): ?Trip {
         $connection = $this->database->getInstance();
 
         $stmt = $connection->prepare('
         SELECT * FROM planned_trip natural join trip 
-        WHERE trip_id = ?;
+        WHERE trip_id = ? AND mortal_id = ?;
         ');
 
         $stmt->execute([
-            $tripID
+            $tripID,
+            $userID
         ]);
 
         $trip = $stmt->fetchObject('Trip');
         $trip = $trip?: null;
         return $trip;
+
+    }
+
+    public function fetchFeatureTrip(int $userID): ?Trip {
+        $con = $this->database->getInstance();
+
+        $con->prepare('
+        SELECT * FROM planned_trip_details WHERE date_start > now() ORDER BY date_start;
+        ');
+    }
+
+    public function setPlannedTrip(array $data): bool {
+    $con = $this->database->getInstance();
+
+    $test = $this->fetchPlannedTripsByTripId($data['trip_id']);
+    if( ! is_null( $test ) ){
+        //TODO render message 'cant plan more than one!'
+        return false;
+    }
+
+    $stmt = $con->prepare('
+        INSERT INTO planned_trip (trip_id, date_start, date_end, mortal_id) 
+        VALUES                   (?, ?, ?, ?); 
+        ');
+
+    return $stmt->execute([
+       $data['trip_id'],
+       $data['start'],
+       $data['end'],
+       $data['mortal_id']
+    ]);
 
     }
 }

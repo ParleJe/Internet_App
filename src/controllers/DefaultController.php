@@ -19,7 +19,7 @@
             $this->render('create');
         }
 
-        public function settings() {
+        public function profile() {
             $id = $this->getCurrentLoggedID();
             $repo = new UserRepository();
             $profile = $repo->getUserById($id);
@@ -29,5 +29,6 @@
         }
 
         public function test () {
+            $this->render('test');
         }
     }

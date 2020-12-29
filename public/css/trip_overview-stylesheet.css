@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
 .content {
     width: 90%;
     height: 85%;
@@ -169,6 +170,36 @@
     width: 75%;
     height: 80%;
     border-radius: var(--radius);
+}
+.plan-trip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: var(--radius);
+}
+
+.plan-trip>input {
+    width: fit-content;
+    border-bottom: 1px solid var(--main-color);
+    border-radius: 0;
+}
+
+.plan-trip>button {
+    font-size: 2em;
+    border: 0;
+    background: var(--main-color);
+    border-radius: var(--radius);
+    padding: 0.5em 1em;
+}
+
+.plan-trip>h1 {
+    font-size: 4em;
+    font-family: 'Nothing You Could Do', cursive;
+    text-decoration: underline;
+    margin-bottom: 0;
 }
 
 .trip>div:last-child>i {

@@ -1,4 +1,7 @@
 let details;
+//TODO GET URL DYNAMICALLY
+let apiUrl = "http://localhost:8080";
+let tripID = getTripID();
 window.onload = init();
 
 $('li').on( 'mouseout mouseover', function() {
@@ -9,7 +12,9 @@ $('li').on( 'mouseout mouseover', function() {
 
 function getTripID() {
     let url = document.URL;
-    return url.split("&").pop().split("=").pop();
+    url = url.split("&");
+    url.pop();
+    return url.pop().split("=").pop();
 }
 
 function setMenuActions() {
@@ -19,7 +24,7 @@ function setMenuActions() {
      .siblings('#chat').on('click', () => {chat(view)})
      .siblings('#map').on('click', () => {displayMap()})
      .siblings('#delete').on('click', () => {deleteTrip()})
-     .siblings('#create').on('click', () => {plan()})
+     .siblings('#create').on('click', () => {plan(view)})
 }
 //TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM (MAX 6)
 function participants(view) {
@@ -55,34 +60,17 @@ function participants(view) {
 //TODO ALL CHAT FEATURE
 function chat(view){
     console.log('chat')
+    $.ajax({
+        url : apiUrl + '/ajaxGetComments',
+        dataType : "json",
+        data : {
+            tripID : getTripID()
+        }
+    }).done( (res) => {
+        console.log(res);
+    } )
     view.empty();
-    view.append(`
-    <h1>participants</h1>
-    <div class="grid-friends">
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-
-</div>
-<i class="fas fa-plus-circle"></i>
-    `)
-    view.empty();
-    view.append(` `)
+    view.append()
 }
 //TODO MAP
 function displayMap(){
@@ -91,19 +79,27 @@ function displayMap(){
 }
 //TODO AJAX POST DELETE
 function deleteTrip(){
-
-    console.log('del')
+    if( confirm("Are you sure you want to delete it?") ){
+        console.log('deleted')
+    }else{
+        console.log('ok')
+    }
 }
 //TODO PLAN TRIP FEATURE
-function plan(){
-
+function plan(view){
+    view.empty().append(`
+    <form class="plan-trip" method="post" action="planTrip">
+        <h1>Plan It!</h1>
+        <input name="start" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">
+        <input name="end" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">
+        <input name="trip_id" value="${getTripID()}" type="hidden">
+        <button name="submit" type="submit">Submit</button>
+    </form>
+    `)
     console.log('plan')
 }
 
 function getDetails() {
-    //TODO GET URL DYNAMICALLY
-    let apiUrl = "http://localhost:8080";
-    let tripId = getTripID();
     $.ajax({
         url : apiUrl + '/ajaxTripDescription',
         dataType : 'json',

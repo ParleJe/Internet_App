@@ -55,7 +55,7 @@
     align-items: center;
 }
 
-.search>img {
+.search-img {
     border-radius: calc(var(--radius)/2);
     object-fit: cover;
     width: 100%;
@@ -106,7 +106,7 @@ p {
         height: unset;
         justify-content: unset;
     }
-    .search>img {
+    .search-img {
         height: 20vh;
         width: 80%;
     }

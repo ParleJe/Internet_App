@@ -60,23 +60,22 @@ class TripController extends AppController
             return Routing::run('trips');
         }
        
-        die('ajaj');
         return $this->render('create', ['messages' => $this->messages]);
     }
     public function view() {
-        //TODO CHECK OWNERSHIP!!!
-        $tripId = $_GET["tripId"];
+        //TODO try get tripID else get PlannedTripID !!!
+        $tripID = $_GET["tripId"];
         $repo = new TripRepository();
-        $trip = $repo->getTripById($tripId);
+        if( $_GET["type"] === 'template' ) {
+            $trip = $repo->getTripById($tripID);
+        } else {
+            $trip = $repo->fetchPlannedTripsByTripId($tripID, $this->getCurrentLoggedID());
+        }
         if( is_null($trip) ) {
             return Routing::run('trips');
+        }
+        return $this->render('trip_overview', ['trip' => $trip, 'type' => $_GET["type"]]);
 
-        }
-        $planned = $repo->fetchPlannedTripsByTripId($trip->getTripId());
-        if ( ! is_null($planned)) {
-            return $this->render('trip_overview', ['trip' => $planned, 'type' =>'planned trip']);
-        }
-        return $this->render('trip_overview', ['trip' => $trip, 'type' => 'template']);
     }
     public function trips() {
         include('src/SessionHandling.php');
@@ -84,6 +83,19 @@ class TripController extends AppController
         $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
         $planned = $repository->fetchPlannedTripsByUserId($this->getCurrentLoggedID());
         $this->render('trips', ['trips'=> $trips, 'planned'=> $planned]);
+    }
+    public function PlanTrip() {
+        $data = [];
+        $data['mortal_id'] = $this->getCurrentLoggedID();
+        $data['start'] = $_POST['start'];
+        $data['end'] = $_POST['end'];
+        $data['trip_id'] = $_POST['trip_id'];
+
+        $repo = new TripRepository();
+        if( $repo->setPlannedTrip($data) ) {
+            return Routing::run('trips');
+        }
+        return Routing::run('trips', ['messages' => 'Cannot plan more than one trip from one template']);
     }
 
     public function ajaxTripDescription() {
@@ -157,11 +169,6 @@ class TripController extends AppController
             ];
         }
         return json_encode($JSONArray);
-
-    }
-    private function isPlannedTrip(int $tripID) {
-        $repo = new TripRepository();
-        $planned = $repo->fetchPlannedTripsByTripId($tripID);
 
     }
 
