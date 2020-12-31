@@ -33,22 +33,22 @@ function participants(view) {
     view.append(`
     <h1>participants</h1>
     <div class="grid-friends">
-    <div>
+    <div class="flex">
         <img src="public/resources/placeholder.jpg" alt="friend photo">
     </div>
-    <div>
+    <div class="flex">
         <img src="public/resources/placeholder.jpg" alt="friend photo">
     </div>
-    <div>
+    <div class="flex">
         <img src="public/resources/placeholder.jpg" alt="friend photo">
     </div>
-    <div>
+    <div class="flex">
         <img src="public/resources/placeholder.jpg" alt="friend photo">
     </div>
-    <div>
+    <div class="flex">
         <img src="public/resources/placeholder.jpg" alt="friend photo">
     </div>
-    <div>
+    <div class="flex">
         <img src="public/resources/placeholder.jpg" alt="friend photo">
     </div>
 
@@ -59,7 +59,6 @@ function participants(view) {
 }
 //TODO ALL CHAT FEATURE
 function chat(view){
-    console.log('chat')
     $.ajax({
         url : apiUrl + '/ajaxGetComments',
         dataType : "json",
@@ -67,11 +66,33 @@ function chat(view){
             tripID : getTripID()
         }
     }).done( (res) => {
-        console.log(res);
+        view.empty();
+        view.append(`
+            <div class="comment-container flex column">
+            </div>
+            <div class="comment-add flex">
+                <input type="text">
+                <button>ADD</button>
+            </div>
+        `)
+        view = $(".comment-container")
+        view.empty();
+        res.forEach(comment => {
+            //TODO DISPLAY FETCHED COMMENTS
+            console.log(comment);
+            view.append(`
+            <div class="comment flow">
+                <a href="blablabla">
+                    <h1>${comment.mortal_id}</h1>
+                </a>
+                <p>${comment.content}</p>
+            </div>
+            `);
+        })
     } )
-    view.empty();
-    view.append()
+
 }
+
 //TODO MAP
 function displayMap(){
 
@@ -88,7 +109,7 @@ function deleteTrip(){
 //TODO PLAN TRIP FEATURE
 function plan(view){
     view.empty().append(`
-    <form class="plan-trip" method="post" action="planTrip">
+    <form class="plan-trip flex column" method="post" action="planTrip">
         <h1>Plan It!</h1>
         <input name="start" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">
         <input name="end" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">

@@ -24,47 +24,47 @@ include('src/SessionHandling.php');
 </head>
 
 <body>
-<nav>
+<nav class="flex column">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button" href="create">
+        <a class="new-trip-button flex" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
     </div>
-    <div class="list">
+    <div class="list flex">
         <ol>
             <li>
-                <a class="nav-button" href="trips">
+                <a class="nav-button flex" href="trips">
                     <i class="fas fa-spinner"></i>
                     <pre>Your Trips</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="Calendar">
-                    <i class="far fa-calendar-alt"></i>
-                    <pre>Calendar</pre>
-                </a>
-            </li>
-            <li>
-                <a class="nav-button" href="friends">
+                <a class="nav-button flex" href="friends">
                     <i class="fas fa-user-friends"></i>
                     <pre>Friends</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="profile">
+                <a class="nav-button flex" href="profile">
                     <i class="fas fa-cog"></i>
                     <pre>Settings</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="search">
+                <a class="nav-button flex" href="search">
                     <i class="fas fa-map-marker-alt"></i>
                     <pre>Search</pre>
+                </a>
+            </li>
+            <li>
+                <a class="nav-button flex" href="logout">
+                    <i class="far fa-calendar-alt"></i>
+                    <pre>Logout</pre>
                 </a>
             </li>
         </ol>
@@ -74,20 +74,20 @@ include('src/SessionHandling.php');
     </div>
 </nav>
 
-<section class="content-container">
+<section class="content-container flex column">
 
         <div class="content">
-            <form action="create" method="POST" enctype="multipart/form-data">
+            <form class="flex column" action="create" method="POST" enctype="multipart/form-data">
                 <h2>My New Trip</h2>
                 <input name="trip_name" placeholder="Trip name" required="required"> <!--Title-->
                 <input name="destination" placeholder="Where?" required="required"> <!--Destination-->
                 <textarea name="description" rows="6" cols="30" maxlength="255" placeholder="What is about?"></textarea> <!--Description-->
-                <div>
+                <div class="flex">
                     <input type="color" name="color" style="width: 10%;" value="#e66465">
                     <input class="button" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
                     <input class="button" id="POI" name="points_of_interest" type="button" value="Add POI"> <!--Point Of Interest-->
                 </div>
-                <div>
+                <div class="flex">
                     <input name="start" placeholder="Start?" type="date" required="required" value="<?PHP echo date('Y-m-d'); ?>" min="<?PHP echo date('Y-m-d'); ?>">
                     <input name="end" placeholder="End?" type="date" required="required" value="<?PHP echo date('Y-m-d', strtotime('+1 week')); ?>" min="<?PHP echo date('Y-m-d'); ?>">
                 </div>

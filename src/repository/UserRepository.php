@@ -87,4 +87,13 @@ class UserRepository extends Repository
         return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
     }
 
+    public function setUserStatus(int $userID): bool {
+        $stmt = $this->database->getInstance()->prepare('
+        UPDATE mortal SET is_log = NOT is_log WHERE mortal_id=?;
+        ');
+
+        return $stmt->execute([ $userID ]);
+
+
+    }
 }

@@ -45,23 +45,12 @@
     overflow: auto;
 }
 
-.cell {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
 .profile {
     background: white;
     border-radius: var(--radius);
     padding: 1em;
     margin: 2em 3em;
     width: 60%;
-
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
 
     transition: 0.1s;
 

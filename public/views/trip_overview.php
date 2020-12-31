@@ -18,47 +18,47 @@ if( ! isset($trip)) {
 
 <body>
 
-<nav>
+<nav class="flex column">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button" href="create">
+        <a class="new-trip-button flex" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
     </div>
-    <div class="list">
+    <div class="list flex">
         <ol>
             <li>
-                <a class="nav-button" href="trips">
+                <a class="nav-button flex" href="trips">
                     <i class="fas fa-spinner"></i>
                     <pre>Your Trips</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="Calendar">
-                    <i class="far fa-calendar-alt"></i>
-                    <pre>Calendar</pre>
-                </a>
-            </li>
-            <li>
-                <a class="nav-button" href="friends">
+                <a class="nav-button flex" href="friends">
                     <i class="fas fa-user-friends"></i>
                     <pre>Friends</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="view?tripId=18">
+                <a class="nav-button flex" href="view?tripId=18">
                     <i class="fas fa-cog"></i>
                     <pre>Settings</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="search">
+                <a class="nav-button flex" href="search">
                     <i class="fas fa-map-marker-alt"></i>
                     <pre>Search</pre>
+                </a>
+            </li>
+            <li>
+                <a class="nav-button flex" href="logout">
+                    <i class="far fa-calendar-alt"></i>
+                    <pre>Logout</pre>
                 </a>
             </li>
         </ol>
@@ -68,7 +68,7 @@ if( ! isset($trip)) {
     </div>
 </nav>
 
-<div class="content-container">
+<div class="content-container flex column">
     <section class="content"> <!-- grid layout 3 columns-->
         <div class="photo-background" style="background-image: url(' <?PHP echo $trip->getPhotoDirectory() ?> ')">
         <i class="fas fa-arrow-alt-circle-left" style="color: <?PHP echo $trip->getColor().'90' ?>" onclick="window.history.back()"></i>
@@ -77,7 +77,7 @@ if( ! isset($trip)) {
             </div>
         </div>
         <div class="trip">
-            <div class="desc">
+            <div class="desc flex">
                 <div class="POI-list">
                     <ol>
                         <?php
@@ -96,7 +96,7 @@ if( ! isset($trip)) {
                     <p class="trip-desc"> <?PHP echo $trip->getDescription() ?></p>
                 </div>
             </div>
-            <div class="option-menu">
+            <div class="option-menu flow column">
                 <!--<h1>participants</h1>
                 <div class="grid-friends">
                     <div>

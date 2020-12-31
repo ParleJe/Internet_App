@@ -19,7 +19,7 @@ function ajaxRequest ( input ) {
         view.empty();
         res.forEach( element => {
             view.append(`
-            <div class="search" id="search-${element.trip_id}">
+            <div class="search flex column" id="search-${element.trip_id}">
                 <a href="view?tripId=${element.trip_id}"><img src="${element.photo_directory}" alt="trip" class="search-img"/></a>
                 <div>
                     <h2>${element.trip_name}</h2>

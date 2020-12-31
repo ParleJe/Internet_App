@@ -14,6 +14,7 @@ class User
     public $name;
     public $surname;
     public $nickname;
+    public $is_log;
 
        /* /**
          * User constructor.
@@ -50,6 +51,42 @@ class User
         
         return $user;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoleId()
+    {
+        return $this->role_id;
+    }
+
+    /**
+     * @param mixed $role_id
+     * @return User
+     */
+    public function setRoleId($role_id)
+    {
+        $this->role_id = $role_id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isLog()
+    {
+        return $this->is_log;
+    }
+
+    /**
+     * @param mixed $is_log
+     * @return User
+     */
+    public function setIsLog($is_log)
+    {
+        $this->is_log = $is_log;
+        return $this;
     }
 
 

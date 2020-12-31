@@ -12,6 +12,7 @@ Routing::get( 'friends', 'UserController' );
 Routing::get( 'profile', 'DefaultController' );
 Routing::get( 'trips', 'TripController' );
 Routing::get( 'view', 'TripController' );
+Routing::get( 'logout', 'LoginController' );
 
 Routing::get('test', 'DefaultController');
 

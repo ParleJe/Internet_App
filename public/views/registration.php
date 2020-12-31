@@ -15,8 +15,8 @@
             <div class="logo-container">
                 <img src="public/resources/logo-registration.svg" class="login-logo" alt="logo of the project">
             </div>
-            <div class="login-container">
-                <form class="login" action="registration" method="post" >
+            <div class="login-container flex column">
+                <form class="login flex column" action="registration" method="post" >
                     <input name="email" type="email" placeholder="enter your mail">
                     <input name="login" type="text" placeholder="choose your login">
                     <input name="password" type="password" placeholder="enter your password">

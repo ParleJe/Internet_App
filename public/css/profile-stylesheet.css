@@ -1,17 +1,8 @@
-
 .content {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
-
 .profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background: var(--element-background-color);
     padding: 2em;
     width: 80%;
@@ -19,10 +10,6 @@
     border-radius: var(--radius);
 }
 .profile>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 60%;
 }
@@ -33,20 +20,17 @@
     width: 30%;
     height: 80%;
 }
-
 .profile>div>h2 {
     margin: 0;
     font-size: 3em;
     font-weight: 500;
     text-decoration: underline;
 }
-
 .profile>h3 {
     margin: 0;
     font-weight: 400;
     font-size: 1.8em;
 }
-
 .profile>section {
     border-radius: var(--radius);
     background: var(--element-background-color);
@@ -61,7 +45,6 @@
     grid-auto-columns: 25%;
     overflow: auto;
 }
-
 .trip{
     margin: auto;
     height: 80%;
@@ -71,7 +54,6 @@
 
     text-align: center;
 }
-
 .trip>h2 {
     font-size: 2em;
     font-weight: 500;

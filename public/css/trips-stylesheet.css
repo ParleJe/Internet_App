@@ -92,35 +92,30 @@
     padding: 1vh;
     border-radius: calc(var(--radius));
     background: var(--element-background-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-self: center;
 }
 
 .trip>h4 {
-    font-weight: 600;
-    font-size: 1.2em;
+    font-weight: 300;
+    margin-top: 0.5em;
 }
 
-.trip>h4, .trip>h3 {
-    font-weight: 500;
-    margin: 0.2em 0.2em 0.2em 1em;
+h2, .trip>h4, .trip>h3 {
+    font-size: 2em;
+    margin-bottom: 0;
 }
 
 h2, .trip>h3 {
-    font-weight: 600;
-    font-size: 2em;
+    font-weight: 700;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .trip-icons {
     display: flex;
-    margin: 1em 1em 0 2em;
 }
 
 .trip-icons>i {
     font-size: 2em;
-    margin-right: 1.5em;
 }
 
 input {
@@ -152,7 +147,7 @@ form>div {
 
 .rotate {
     -webkit-transform: rotateX(180deg);
-    transform: rotateX(180deg);
+    transform: rotateX(180deg) translateY(-50%);
 }
 
 @media screen and (max-width:801px), screen and (max-device-width:801px) {

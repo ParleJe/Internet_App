@@ -4,12 +4,9 @@
     height: 85%;
     margin: 0;
     background: var(--element-background-color);
-
     border-radius: var(--radius);
-
     position: relative;
 }
-
 .photo-background {
     margin: 0;
     padding: 5em 6em;
@@ -21,26 +18,22 @@
 
     box-shadow: 0 6px 6px var(--shadow);
 }
-
 .photo-background>i {
     font-size: 8em;
     height: fit-content;
 }
-
 .photo-background>div {
     border-radius: var(--radius);
     width: fit-content;
     height: fit-content;
 
 }
-
 .photo-background>div>h1 {
     margin: 0;
     padding: 0.6em 1.8em;
     font-size: 2.5em;
     font-weight: 700;
 }
-
 .trip {
     position: absolute;
     left: 5em;
@@ -53,33 +46,26 @@
     align-items: center;
     justify-content: space-between;
 }
-
 .desc {
     width: 70%;
     height: 100%;
-
-    display: flex;
-    align-items: center;
 }
-
 .POI-list {
     z-index: 3;
     width: 35%;
-    height: 60vh;
+    height: 90%;
     background: var(--element-background-color);
 
     box-shadow: 6px 4px 6px var(--shadow);
 
     border-radius: var(--radius);
 }
-
 .POI-list>ol {
     margin: 1em;
     font-size: 3em;
 
     overflow: auto;
 }
-
 .POI-list>ol>li {
     padding-block-start: 0.25em;
     padding-block-end: 0.25em;
@@ -89,23 +75,18 @@
     grid-template-columns: 20% 60%;
     align-items: center;
 }
-
 .POI-list>ol>li:first-child {
     padding-block-start: 0;
 }
-
 .POI-list>ol>li:last-child {
     padding-block-end: 0;
 }
-
 .hover {
     color: var(--main-color);
 }
-
 .POI-list>ol>li>p,i {
     font-size: 0.9em;
 }
-
 .description {
     z-index: 1;
     width: 40%;
@@ -118,37 +99,29 @@
 
     padding: 2em;
 }
-
 .description>p {
     font-size: 2em;
 }
-
 .description>h1 {
     font-size: 2.7em;
     font-weight: 400;
     text-decoration: underline;
     margin: 0;
 }
-
-.trip>div:last-child {
+.option-menu {
     width: 20%;
     height: 60%;
     background: var(--element-background-color);
     border-radius: var(--radius);
 
     box-shadow: 0 4px 6px var(--shadow);
-
-    display: flex;
-    flex-direction: column;
 }
-
-.trip>div:last-child>h1 {
+.option-menu>h1 {
     text-align: center;
     font-size: 1.5em;
     font-weight: 400;
     text-decoration: underline;
 }
-
 .grid-friends {
     width: 100%;
     height: 70%;
@@ -157,36 +130,25 @@
     grid-template: repeat(2, 1fr) / repeat(3,1fr);
     grid-gap: 0;
 }
-
 .grid-friends>div {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center ;
 }
-
 .grid-friends>div>img {
     width: 75%;
     height: 80%;
     border-radius: var(--radius);
 }
 .plan-trip {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100%;
     border: 1px solid black;
     border-radius: var(--radius);
 }
-
 .plan-trip>input {
     width: fit-content;
     border-bottom: 1px solid var(--main-color);
     border-radius: 0;
 }
-
 .plan-trip>button {
     font-size: 2em;
     border: 0;
@@ -194,19 +156,64 @@
     border-radius: var(--radius);
     padding: 0.5em 1em;
 }
-
 .plan-trip>h1 {
     font-size: 4em;
     font-family: 'Nothing You Could Do', cursive;
     text-decoration: underline;
     margin-bottom: 0;
 }
-
 .trip>div:last-child>i {
     font-size: 3em;
     text-align: center;
 }
 
+.comment{
+/*flow*/
+    width: 95%;
+    box-shadow: 0 4px 6px #00000090;
+    border-radius: calc(var(--radius)/2);
+    margin: 0.5em 0;
+    padding: 0.5em;
+    font-size: 1.5em;
+
+}
+.comment a {
+    width: 100%;
+    font-size: inherit;
+}
+.comment a>h1 {
+    font-size: inherit;
+    font-weight: 500;
+}
+.comment p {
+    width: 100%;
+    font-size: inherit;
+}
+.comment-container{
+    height: 80%;
+    width: 100%;
+    justify-content: flex-start;
+    overflow: auto;
+    border-radius: var(--radius);
+}
+.comment-add {
+    height: 20%;
+    width: 100%;
+
+    border-radius: var(--radius);
+    border-top: 0;
+}
+.comment-add button {
+    width: 20%;
+    background-color: var(--main-color);
+    border: 0;
+    border-radius: var(--radius);
+}
+.comment-add input {
+    width: 80%;
+    border-bottom: 1px solid var(--main-color);
+    border-radius: 0;
+}
 @media screen and (max-width:801px), screen and (max-device-width:801px) {
     .content {
         height: 60%;

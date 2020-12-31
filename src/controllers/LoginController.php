@@ -23,19 +23,32 @@ class LoginController extends AppController {
             return $this->render('login', ['messages' => ['Wrong mail!']]);
         }
 
-
         if( ! password_verify( $passwd, $user->getPassword() ) )
         {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-        if(session_start()) {
+        if( $user->isLog() ) {
+            return $this->render('login', ['messages' => ['User already logged in']]);
+        }
+
+        if(session_start() && $userDB->setUserStatus($user->getMortalId(), 1)) {
             $_SESSION['user_id'] = $user->getMortalId();
             $_SESSION['isLoggedIn'] = true;
-            return Routing::run('trips/');
+            return Routing::run('trips');
         }
 
         return $this->render('login', ['messages' => ['Something went wrong']]);
+    }
+
+    public function logout () {
+        $repo = new UserRepository();
+        if( $repo->setUserStatus( $this->getCurrentLoggedID(), 0) ){
+            session_unset();
+            session_destroy();
+            return Routing::run('');
+        }
+        // TODO WHAT IF IT WONT WORK ???
     }
 
     public function registration() {

@@ -12,47 +12,47 @@ include('src/SessionHandling.php');
 </head>
 
 <body>
-<nav>
+<nav class="flex column">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button" href="create">
+        <a class="new-trip-button flex" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
     </div>
-    <div class="list">
+    <div class="list flex">
         <ol>
             <li>
-                <a class="nav-button" href="trips">
+                <a class="nav-button flex" href="trips">
                     <i class="fas fa-spinner"></i>
                     <pre>Your Trips</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="Calendar">
-                    <i class="far fa-calendar-alt"></i>
-                    <pre>Calendar</pre>
-                </a>
-            </li>
-            <li>
-                <a class="nav-button" href="friends">
+                <a class="nav-button flex" href="friends">
                     <i class="fas fa-user-friends"></i>
                     <pre>Friends</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="profile">
+                <a class="nav-button flex" href="profile">
                     <i class="fas fa-cog"></i>
                     <pre>Settings</pre>
                 </a>
             </li>
             <li>
-                <a class="nav-button" href="search">
+                <a class="nav-button flex" href="search">
                     <i class="fas fa-map-marker-alt"></i>
                     <pre>Search</pre>
+                </a>
+            </li>
+            <li>
+                <a class="nav-button flex" href="logout">
+                    <i class="far fa-calendar-alt"></i>
+                    <pre>Logout</pre>
                 </a>
             </li>
         </ol>
@@ -62,7 +62,7 @@ include('src/SessionHandling.php');
     </div>
 </nav>
 
-<section class="content-container">
+<section class="content-container flex column">
     <div class="top-bar">
         <input id="search-input" type="text" placeholder="Search">
         <button id="search-btn">Search</button>
@@ -78,8 +78,8 @@ include('src/SessionHandling.php');
                 $surname = $friend->getSurName();
                 $nickname = $friend->getNickname();
                 echo <<<EOL
-                <div class="cell">
-                    <div class="profile" id="$id">
+                <div class="flex">
+                    <div class="profile flex column" id="$id">
                         <img src="public/resources/placeholder.jpg" alt="profile photo">
                         <div>
                             <h2>$name $surname</h2>
