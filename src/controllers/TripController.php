@@ -82,7 +82,8 @@ class TripController extends AppController
         $repository = new TripRepository();
         $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
         $planned = $repository->fetchPlannedTripsByUserId($this->getCurrentLoggedID());
-        $this->render('trips', ['trips'=> $trips, 'planned'=> $planned]);
+        $featured = $repository->fetchFeatureTrip($this->getCurrentLoggedID());
+        $this->render('trips', ['trips'=> $trips, 'planned'=> $planned, 'featured'=> $featured]);
     }
     public function PlanTrip() {
         $data = [];

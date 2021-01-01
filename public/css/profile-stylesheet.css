@@ -7,7 +7,6 @@
     padding: 2em;
     width: 80%;
     height: 100%;
-    border-radius: var(--radius);
 }
 .profile>div {
     width: 100%;
@@ -32,7 +31,6 @@
     font-size: 1.8em;
 }
 .profile>section {
-    border-radius: var(--radius);
     background: var(--element-background-color);
     box-shadow: 0 -8px 10px var(--shadow);
     width: 100%;
@@ -49,7 +47,6 @@
     margin: auto;
     height: 80%;
     width: 100%;
-    border-radius: var(--radius);
     background-size: 100% 100%;
 
     text-align: center;

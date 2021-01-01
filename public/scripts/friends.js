@@ -10,7 +10,7 @@ function addSearchHandler() {
 })
 }
 function ajaxRequest (input) {
-    const apiUrl = 'http://localhost:8080'
+    const apiUrl = 'http://localhost:8080';
     const view = $('.content');
     $.ajax( {
         url : apiUrl + '/ajaxGetUsers',
@@ -20,14 +20,12 @@ function ajaxRequest (input) {
         },
         dataType : "json"
     } ).done( (res =>{
-        console.log("data acquired")
-        console.log(res);
         view.empty();
         res.forEach( el => {
             view.append(`
-                <div class="cell">
-                    <div class="profile" id="${el.mortal_id}">
-                        <img src="public/resources/placeholder.jpg" alt="profile photo">
+                <div class="round">
+                    <div class="profile round" id="${el.mortal_id}">
+                        <img class="round" src="public/resources/placeholder.jpg" alt="profile photo">
                         <div>
                             <h2>${el.name} ${el.surname}</h2>
                             <h3>${el.nickname}</h3>

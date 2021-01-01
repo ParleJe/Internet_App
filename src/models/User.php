@@ -1,63 +1,52 @@
 <?php
 
 
-class User
+class User implements JsonSerializable
 {
     const ADMIN = 1;
     const USER = 2;
 
-    //keep order as in the database
-    public $mortal_id;
-    public $mail;
-    public $password;
-    public $role_id;
-    public $name;
-    public $surname;
-    public $nickname;
-    public $is_log;
 
-       /* /**
-         * User constructor.
-         * @param $mortal_id
-         * @param $mail
-         * @param $password
-         * @param $role_name
-         * @param $name
-         * @param $surname
-         * @param $nickname
-         */
-    /*public function __construct($mortal_id, $mail, $password, $role_name, $name, $surname, $nickname)
+    private int $mortal_id;
+    private string $mail;
+    private string $password;
+    private int $role_id;
+    private string $name;
+    private string $surname;
+    private string $nickname;
+    private bool $is_log;
+
+    public function __construct (array $data = null) {
+        if( ! is_null($data)){
+        $this->setMortalId($data['mortal_id']);
+        $this->setMail($data['mail']);
+        $this->setPassword($data['password']);
+        $this->setRoleId($data['role_id']);
+        $this->setName($data['name']);
+        $this->setSurname($data['surname']);
+        $this->setNickname($data['nickname']);
+        $this->setIsLog($data['is_log']);
+        }
+    }
+
+    public function jsonSerialize()
     {
-        $this->mortal_id = $mortal_id;
-        $this->mail = $mail;
-        $this->password = $password;
-        $this->role_name = $role_name;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->nickname = $nickname;
-    }*/
-
-
-    public static function initiateUserWithValues ($mortal_id, $mail, $password, $role_id, $name, $surname, $nickname): User {
-        $user = new User();
-
-        $user->mortal_id = $mortal_id;
-        $user->mail = $mail;
-        $user->password = $password;
-        $user->role_id = $role_id;
-        $user->name = $name;
-        $user->surname = $surname;
-        $user->nickname = $nickname;
-        
-        return $user;
-
+        return [
+            'mortal_id' => $this->getMortalId(),
+            'mail' => $this->getMail(),
+            'password' => $this->getPassword(),
+            //'role_id' => $this->getRoleId(),
+            'name' => $this->getName(),
+            'surname' => $this->getSurname(),
+            'nickname' => $this->getNickname(),
+            'is_log' => $this->isLog()
+        ];
     }
 
     /**
      * @return mixed
      */
-    public function getRoleId()
-    {
+    public function getRoleId() {
         return $this->role_id;
     }
 
@@ -65,8 +54,7 @@ class User
      * @param mixed $role_id
      * @return User
      */
-    public function setRoleId($role_id)
-    {
+    public function setRoleId(int $role_id): User {
         $this->role_id = $role_id;
         return $this;
     }

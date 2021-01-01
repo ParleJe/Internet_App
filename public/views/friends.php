@@ -12,13 +12,13 @@ include('src/SessionHandling.php');
 </head>
 
 <body>
-<nav class="flex column">
+<nav class="flex column round">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button flex" href="create">
+        <a class="new-trip-button flex round" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
@@ -58,14 +58,14 @@ include('src/SessionHandling.php');
         </ol>
     </div>
     <div class="placeholder">
-        <div></div>
+        <div class="round"></div>
     </div>
 </nav>
 
 <section class="content-container flex column">
-    <div class="top-bar">
+    <div class="top-bar round">
         <input id="search-input" type="text" placeholder="Search">
-        <button id="search-btn">Search</button>
+        <button class="round" id="search-btn">Search</button>
     </div>
 
     <div class="content">
@@ -78,9 +78,9 @@ include('src/SessionHandling.php');
                 $surname = $friend->getSurName();
                 $nickname = $friend->getNickname();
                 echo <<<EOL
-                <div class="flex">
-                    <div class="profile flex column" id="$id">
-                        <img src="public/resources/placeholder.jpg" alt="profile photo">
+                <div class="flex round">
+                    <div class="profile flex column round" id="$id">
+                        <img class="round" src="public/resources/placeholder.jpg" alt="profile photo">
                         <div>
                             <h2>$name $surname</h2>
                             <h3>$nickname</h3>

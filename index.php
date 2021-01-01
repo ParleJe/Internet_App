@@ -1,6 +1,6 @@
 <?php
 
-require_once 'AutoLoader.php';
+require_once 'src/AutoLoader.php';
 AutoLoader::register();
 
 $path = trim( $_SERVER['REQUEST_URI'], '/' );

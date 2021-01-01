@@ -2,4 +2,4 @@
 .DS_Store
 /public/scripts/hereAPI/config.js
 /public/uploads
-config.php
+src/repository/config.php

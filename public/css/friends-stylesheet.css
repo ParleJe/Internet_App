@@ -1,5 +1,4 @@
 .top-bar {
-    border-radius: var(--radius);
     width: 50%;
     padding: 0;
     background: var(--element-background-color);
@@ -24,7 +23,6 @@
     background: var(--main-color);
     border: 0;
     width: 20%;
-    border-radius: var(--radius);
 }
 
 .top-bar>button:hover {
@@ -47,7 +45,6 @@
 
 .profile {
     background: white;
-    border-radius: var(--radius);
     padding: 1em;
     margin: 2em 3em;
     width: 60%;
@@ -65,23 +62,22 @@
 .profile>img {
     object-fit: cover;
     width: 100%;
-    border-radius: var(--radius);
 }
 
 .profile>div {
     text-align: center;
 }
 .profile>div>h2 {
-    font-size: 2.5em;
-    text-underline: auto;
-    border-bottom: 1px solid black;
-
+    font-size: 2em;
+    font-weight: 500;
+    color: var(--font-color);
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
 }
 
 .profile>div>h3 {
-    color: var(--second-font-color);
+    color: var(--font-color);
+    font-size: 2em;
     margin-top: 0.2em;
 }
 

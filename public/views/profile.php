@@ -14,13 +14,13 @@ if (! isset( $trips ) || ! isset( $profile )) {
 
 <body>
 
-<nav class="flex column">
+<nav class="flex column round">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button flex" href="create">
+        <a class="new-trip-button flex round" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
@@ -60,7 +60,7 @@ if (! isset( $trips ) || ! isset( $profile )) {
         </ol>
     </div>
     <div class="placeholder">
-        <div></div>
+        <div class="round"></div>
     </div>
 </nav>
 
@@ -68,7 +68,7 @@ if (! isset( $trips ) || ! isset( $profile )) {
 
     <div class="content flex column">
 
-        <div class="profile flex column">
+        <div class="profile flex column round">
             <div class="flex column">
                 <img src="public/resources/placeholder.jpg"  alt="profile photo">
                 <!--icon for add to friends or delete account-->
@@ -78,10 +78,10 @@ if (! isset( $trips ) || ! isset( $profile )) {
 
 
 
-            <section class="trips-created">
+            <section class="round">
                 <!--here all created trips by user-->
                 <?PHP foreach ($trips as $trip): ?>
-                <div class="trip" id="<?PHP echo $trip->getTripId() ?>" style="background-image: url( ' <?PHP echo $trip->getPhotoDirectory() ?> ' );">
+                <div class="trip round" id="<?PHP echo $trip->getTripId() ?>" style="background-image: url( ' <?PHP echo $trip->getPhotoDirectory() ?> ' );">
                     <!--photo of the trip as background-->
                     <h2><?PHP echo $trip->getTripName() ?></h2>
                 </div>

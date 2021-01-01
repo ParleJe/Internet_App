@@ -16,7 +16,6 @@
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
     text-decoration: none;
-    color: var(--font-color);
 }
 
 body {
@@ -39,9 +38,11 @@ body {
     flex-direction: column;
 }
 
+.round {
+    border-radius: var(--radius);
+}
 
 .message {
-    border-radius: var(--radius);
     background: transparent;
     padding: 1em 4em;
 }
@@ -76,7 +77,6 @@ body {
     padding-right: 5vw;
     padding-left: 5vw;
     background: var(--element-background-color);
-    border-radius: var(--radius);
     box-shadow: 5px 12px 6px var(--shadow);
 }
 
@@ -84,7 +84,6 @@ input {
     font-weight: 300;
     font-size: 1.5em;
     background: transparent;
-    border-radius: var(--radius);
     border: none;
     padding: 1vh;
     margin: 1em;
@@ -186,8 +185,8 @@ img.login-logo {
 .content-container {
     width: 100%;
     height: 93%;
-    padding: 2vw;
-    background: transparent;
+    padding: 2vw 2vw 2vw 0;
+    justify-content: flex-start;
 
 }
 
@@ -196,8 +195,7 @@ nav {
     width: 18%;
     min-width: 200px;
     height: 93vh;
-    background: white;
-    border-radius: var(--radius);
+    background: var(--element-background-color);
     margin: 2vw;
 }
 nav div {
@@ -222,7 +220,6 @@ nav div {
     width: 80%;
     background: var(--main-color);
     padding: 0.5em;
-    border-radius: calc(var(--radius) - 1em);
 }
 .new-trip-button>img {
     width: 30%;
@@ -240,7 +237,6 @@ nav div {
 .placeholder div {
     height: 90%;
     width: 80%;
-    border-radius: var(--radius);
     background: var(--main-color);
 }
 
@@ -261,12 +257,13 @@ nav div {
 }
 .nav-button {
     font-size: 2.0em;
-    transition: 0.2s;
+    color: var(--font-color);
 }
 .nav-button i {
     width: 20%;
     font-size: 1.5em;
     color: inherit;
+    text-align: center;
 }
 .nav-button pre {
     width: 80%;

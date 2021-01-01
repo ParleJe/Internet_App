@@ -9,7 +9,7 @@ class CommentController extends AppController
         $loggedIn = $this->getCurrentLoggedID();
         $plannedTrip = $repo->fetchPlannedTripsByTripId((int)$tripID, $loggedIn);
         $repo = new CommentRepository();
-        $plannedTripId = (int)$plannedTrip->planned_trip_id;
+        $plannedTripId = (int)$plannedTrip->getPlannedTripId();
         $comments = $repo->getCommentsByPlannedTripID($plannedTripId);
         echo json_encode($comments);
     }

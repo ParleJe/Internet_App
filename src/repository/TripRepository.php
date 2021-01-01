@@ -84,8 +84,10 @@ class TripRepository extends Repository {
         $connection = $this->database->getInstance();
 
         $stmt = $connection->prepare('
-        SELECT * FROM planned_trip natural join trip 
-        WHERE mortal_id = ?;
+        SELECT pt.planned_trip_id, pt.trip_id, t.trip_name, t.destination, t.photo_directory, t.color, pt.date_start, pt.date_end 
+        FROM planned_trip pt left join trip t on t.trip_id = pt.trip_id 
+        WHERE pt.mortal_id = ?
+        ORDER BY date_start;
         ');
 
         $stmt->execute([
@@ -117,9 +119,11 @@ class TripRepository extends Repository {
     public function fetchFeatureTrip(int $userID): ?Trip {
         $con = $this->database->getInstance();
 
-        $con->prepare('
-        SELECT * FROM planned_trip_details WHERE date_start > now() ORDER BY date_start;
+        $stmt = $con->prepare('
+        SELECT * FROM planned_trip_details WHERE date_start > now() ORDER BY date_start LIMIT 1;
         ');
+        $stmt->execute();
+        return $stmt->fetchObject('Trip');
     }
 
     public function setPlannedTrip(array $data): bool {

@@ -18,13 +18,13 @@ if( ! isset($trip)) {
 
 <body>
 
-<nav class="flex column">
+<nav class="flex column round">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button flex" href="create">
+        <a class="new-trip-button flex round" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
@@ -64,21 +64,21 @@ if( ! isset($trip)) {
         </ol>
     </div>
     <div class="placeholder">
-        <div></div>
+        <div class="round"></div>
     </div>
 </nav>
 
 <div class="content-container flex column">
-    <section class="content"> <!-- grid layout 3 columns-->
-        <div class="photo-background" style="background-image: url(' <?PHP echo $trip->getPhotoDirectory() ?> ')">
+    <section class="content round"> <!-- grid layout 3 columns-->
+        <div class="photo-background round" style="background-image: url(' <?PHP echo $trip->getPhotoDirectory() ?> ')">
         <i class="fas fa-arrow-alt-circle-left" style="color: <?PHP echo $trip->getColor().'90' ?>" onclick="window.history.back()"></i>
-            <div style="background-color: <?PHP echo $trip->getColor().'50'?>">
+            <div class="round" style="background-color: <?PHP echo $trip->getColor().'50'?>">
                 <h1><?PHP echo $trip->getTripName() ?></h1>
             </div>
         </div>
         <div class="trip">
             <div class="desc flex">
-                <div class="POI-list">
+                <div class="POI-list round">
                     <ol>
                         <?php
                         $decoded = json_decode( $trip->getPointsOfInterest(), true );
@@ -96,7 +96,7 @@ if( ! isset($trip)) {
                     <p class="trip-desc"> <?PHP echo $trip->getDescription() ?></p>
                 </div>
             </div>
-            <div class="option-menu flow column">
+            <div class="option-menu flow column round">
                 <!--<h1>participants</h1>
                 <div class="grid-friends">
                     <div>

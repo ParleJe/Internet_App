@@ -9,7 +9,6 @@
     padding: 2em 5em;
     background: var(--element-background-color);
     margin: auto;
-    border-radius: var(--radius);
     display: flex;
 
 
@@ -84,7 +83,6 @@ textarea {
     font-size: 2em;
     width: fit-content;
     border: 1px solid var(--main-color);
-    border-radius: var(--radius);
 }
 
 #submit {

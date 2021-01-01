@@ -1,35 +1,66 @@
 <?php
 
 
-class Trip //implements JsonSerializable
+class Trip implements JsonSerializable
 {
-    public $trip_id;
-    public $trip_name;
-    public $destination;
-    public $description;
-    public $points_of_interest;
-    public $photo_directory;
-    public $mortal_id;
-    public $color;
-    public $date_start;
-    public $date_end;
-    //TODO change to array with data
-    public static function initWithVariables(array $data): Trip{
-        $newTrip = new Trip();
+    private $trip_id;
+    private $trip_name;
+    private $destination;
+    private $description;
+    private $points_of_interest;
+    private $photo_directory;
+    private $mortal_id;
+    private $color;
+    private $planned_trip_id;
+    private $date_start;
+    private $date_end;
 
-        $newTrip->trip_id = $data['trip_id'];
-        $newTrip->trip_name = $data['trip_name'];
-        $newTrip->destination = $data['destination'];
-        $newTrip->description = $data['description'];
-        $newTrip->points_of_interest = $data['points_of_interest'];
-        $newTrip->photo_directory = $data['photo_directory'];
-        $newTrip->color = $data['color'];
-        $newTrip->mortal_id = $data['mortal_id'];
-        $newTrip->setDateStart($data['date_start']);
-        $newTrip->setDateEnd($data['date_end']);
-
-        return $newTrip;
+    public function __construct(array $data = null){
+        if( ! is_null($data)) {
+            $this->setTripId($data['trip_id']);
+            $this->setTripName($data['trip_name']);
+            $this->setDestination($data['destination']);
+            $this->setDescription($data['description']);
+            $this->setPointsOfInterest($data['points_of_interest']);
+            $this->setPhotoDirectory($data['photo_directory']);
+            $this->setMortalId($data['mortal_id']);
+            $this->setColor($data['color']);
+            $this->setPlannedTripId($data['planned_trip_id']);
+            $this->setDateStart($data['date_start']);
+            $this->setDateEnd($data['date_end']);
+        }
     }
+
+    public function jsonSerialize()
+    {
+        return [
+            'trip_id' => $this->getTripId(),
+            'trip_name' => $this->getTripName(),
+            'destination' => $this->getDestination(),
+            'points_of_interest' => $this->getPointsOfInterest(),
+            'photo_directory' => $this->getPhotoDirectory(),
+            'mortal_id' => $this->getMortalId(),
+            'color' => $this->getColor(),
+            'planned_trip_id' => $this->getPlannedTripId(),
+            'date_start' => $this->getDateStart(),
+            'date_end' => $this->getDateEnd()
+        ];
+    }/**
+ * @return mixed
+ */
+public function getPlannedTripId()
+{
+    return $this->planned_trip_id;
+}/**
+ * @param mixed $planned_trip_id
+ * @return Trip
+ */
+public function setPlannedTripId($planned_trip_id)
+{
+    $this->planned_trip_id = $planned_trip_id;
+    return $this;
+}
+
 
     /**
      * @return mixed

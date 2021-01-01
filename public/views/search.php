@@ -16,13 +16,13 @@ include('src/SessionHandling.php');
 <body>
 
 
-<nav class="flex column">
+<nav class="flex column round">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button flex" href="create">
+        <a class="new-trip-button flex round" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
@@ -62,14 +62,14 @@ include('src/SessionHandling.php');
         </ol>
     </div>
     <div class="placeholder">
-        <div></div>
+        <div class="round"></div>
     </div>
 </nav>
 
 <div class="content-container flex column">
-    <div class="top-bar">
+    <div class="top-bar round">
         <input id="search-input" name="search" type="text" placeholder="Search">
-        <button class="search-btn">Search</button>
+        <button class="search-btn round">Search</button>
     </div>
     <div class="content">
 

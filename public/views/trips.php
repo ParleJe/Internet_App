@@ -1,9 +1,9 @@
 <?PHP
     include('src/SessionHandling.php');
-    if( ! isset($trips) ){
+    if( !  (isset($trips) && isset($planned)) ){
         die("problem!");
-    } elseif ( ! isset($planned) ) {
-        die('another problem!');
+    } elseif ( ! isset($featured) ) {
+        $featured = new Trip();
     }
 ?>
 
@@ -22,13 +22,13 @@
 
 <body>
 
-<nav class="flex column">
+<nav class="flex column round">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button flex" href="create">
+        <a class="new-trip-button flex round" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
@@ -68,25 +68,24 @@
         </ol>
     </div>
     <div class="placeholder">
-        <div></div>
+        <div class="round"></div>
     </div>
 </nav>
 
     <div class="content-container flex column">
 
-        <section class="top-bar">
+        <section class="top-bar round">
             <div>
-            <h2>City of The Forgotten Kings</h2>
-                <a>
-                    invite people
+            <h2><?PHP echo $featured->getTripName() ?></h2>
+                <a class="round" style="background: <?php echo $featured->getColor() ?> ">
+                    <?php echo $featured->getDestination() ?>
                 </a>
             </div>
             <div>
-                <pre>Date</pre>
-                <pre>XX.XX.XXXX</pre>
+                <pre>Date:</pre>
+                <pre><?php echo $featured->getDateStart() ?></pre>
                 <div class="trip-icons"><!--Icons-->
                     <i class="fas fa-comment-alt"></i>
-                    <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
         </section>
@@ -95,10 +94,10 @@
 
             <div class="flow"> <!--First column etc.-->
                 <h2>Your Creations:</h2>
-                <div class="trip-container">
+                <div class="trip-container round">
 
                 <?PHP  foreach($trips as $trip): ?>
-                        <div class="trip flex column">
+                        <div class="trip flex column round">
                             <h4 style="color: <?php echo $trip->getColor() ?> ;"> <?php echo $trip->getDestination() ?> </h4>
                             <h3><?php echo $trip->getTripName() ?></h3>
                             <form method="get" action="view">
@@ -120,17 +119,15 @@
 
                     <?PHP  foreach($planned as $trip): ?>
 
-                        <div class="trip flex column">
+                        <div class="trip flex column round">
                             <h4 style="color: <?php echo $trip->getColor() ?> ;"><?php echo $trip->getDestination() ?></h4>
-                            <h3><?php echo $trip->getTripId() ?></h3>
+                            <h3><?php echo $trip->getTripName() ?></h3>
                             <form method="get" action="view">
                                 <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
                                 <input type="hidden" name="tripId" value="<?php echo $trip->getTripId() ?>">
                                 <input type="hidden" name="type" value="planned">
                             </form>
-                            <div class="trip-icons">
-                                <i class="fas fa-comment-alt"></i>
-                            </div>
+                            <h4><?PHP echo $trip->getDateStart().' - '.$trip->getDateEnd() ?></h4>
                             <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
                         </div>
 

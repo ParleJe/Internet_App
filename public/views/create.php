@@ -24,13 +24,13 @@ include('src/SessionHandling.php');
 </head>
 
 <body>
-<nav class="flex column">
+<nav class="flex column round">
 
     <div class="nav-logo-container">
         <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
     </div>
     <div class="new-trip-container">
-        <a class="new-trip-button flex" href="create">
+        <a class="new-trip-button flex round" href="create">
             <pre>Get to the Boat</pre>
             <img src="public/resources/drakkar.svg" alt="click here to start new trip">
         </a>
@@ -70,28 +70,28 @@ include('src/SessionHandling.php');
         </ol>
     </div>
     <div class="placeholder">
-        <div></div>
+        <div class="round"></div>
     </div>
 </nav>
 
 <section class="content-container flex column">
 
-        <div class="content">
+        <div class="content round">
             <form class="flex column" action="create" method="POST" enctype="multipart/form-data">
                 <h2>My New Trip</h2>
                 <input name="trip_name" placeholder="Trip name" required="required"> <!--Title-->
                 <input name="destination" placeholder="Where?" required="required"> <!--Destination-->
                 <textarea name="description" rows="6" cols="30" maxlength="255" placeholder="What is about?"></textarea> <!--Description-->
                 <div class="flex">
-                    <input type="color" name="color" style="width: 10%;" value="#e66465">
-                    <input class="button" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
-                    <input class="button" id="POI" name="points_of_interest" type="button" value="Add POI"> <!--Point Of Interest-->
+                    <input class="round" type="color" name="color" style="width: 10%;" value="#e66465">
+                    <input class="button round" id="file-form" name="photo" type="file" value="Photo" required="required"> <!--Photo-->
+                    <input class="button round" id="POI" name="points_of_interest" type="button" value="Add POI"> <!--Point Of Interest-->
                 </div>
                 <div class="flex">
                     <input name="start" placeholder="Start?" type="date" required="required" value="<?PHP echo date('Y-m-d'); ?>" min="<?PHP echo date('Y-m-d'); ?>">
                     <input name="end" placeholder="End?" type="date" required="required" value="<?PHP echo date('Y-m-d', strtotime('+1 week')); ?>" min="<?PHP echo date('Y-m-d'); ?>">
                 </div>
-                <button class="button" id="submit" type="submit">Submit</button> <!--Submit All Form-->
+                <button class="button round" id="submit" type="submit">Submit</button> <!--Submit All Form-->
             </form>
         </div>
 

@@ -34,7 +34,7 @@ function participants(view) {
     <h1>participants</h1>
     <div class="grid-friends">
     <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
+        <img class="round" src="public/resources/placeholder.jpg" alt="friend photo">
     </div>
     <div class="flex">
         <img src="public/resources/placeholder.jpg" alt="friend photo">
@@ -66,13 +66,14 @@ function chat(view){
             tripID : getTripID()
         }
     }).done( (res) => {
+        console.log(res)
         view.empty();
         view.append(`
-            <div class="comment-container flex column">
+            <div class="comment-container flex column round">
             </div>
-            <div class="comment-add flex">
+            <div class="comment-add flex round">
                 <input type="text">
-                <button>ADD</button>
+                <button class="round">ADD</button>
             </div>
         `)
         view = $(".comment-container")
@@ -109,12 +110,12 @@ function deleteTrip(){
 //TODO PLAN TRIP FEATURE
 function plan(view){
     view.empty().append(`
-    <form class="plan-trip flex column" method="post" action="planTrip">
+    <form class="plan-trip flex column round" method="post" action="planTrip">
         <h1>Plan It!</h1>
         <input name="start" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">
         <input name="end" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">
         <input name="trip_id" value="${getTripID()}" type="hidden">
-        <button name="submit" type="submit">Submit</button>
+        <button class="round" name="submit" type="submit">Submit</button>
     </form>
     `)
     console.log('plan')
