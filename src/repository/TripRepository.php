@@ -1,6 +1,13 @@
 <?php
 
 class TripRepository extends Repository {
+    private PDO $connection;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->connection = $this->database->getInstance();
+    }
 
     public function getTripByName(string $name): array {
         $statement = $this->database->getInstance()->prepare('
@@ -25,16 +32,16 @@ class TripRepository extends Repository {
         return $trip;
     }
 
-    public function setTripByTransaction(Trip $trip) {
+    public function setTripByTransaction(Trip $trip): bool{
         $con = $this->database->getInstance();
 
         if($con->beginTransaction()) {
-            $stmnt = $con->prepare('
+            $stmt = $con->prepare('
             INSERT INTO trip (trip_name, destination, description, points_of_interest, photo_directory, color, mortal_id) 
             VALUES           (?, ?, ?, ?, ?, ?, ?);
             ');
 
-            if( ! $stmnt->execute( [
+            if( ! $stmt->execute( [
                 $trip->getTripName(),
                 $trip->getDestination(),
                 $trip->getDescription(),
@@ -47,16 +54,17 @@ class TripRepository extends Repository {
                 return false;
             }
 
-            $stmnt = $con->prepare('
-            INSERT INTO planned_trip (trip_id, date_start, date_end, mortal_id) 
+            $stmt = $con->prepare('
+            INSERT INTO planned_trip (trip_id, date_start, date_end, mortal_id, vulp_code) 
             VALUES                   (?, ?, ?, ?); 
             ');
 
-            if( ! $stmnt->execute( [
+            if( ! $stmt->execute( [
                 $con->lastInsertId(),
                 $trip->getDateStart(),
                 $trip->getDateEnd(),
-                $trip->getMortalId()
+                $trip->getMortalId(),
+                $trip->getVulpCode()
             ] )) {
                 $con->rollBack();
                 return false;
@@ -136,16 +144,38 @@ class TripRepository extends Repository {
     }
 
     $stmt = $con->prepare('
-        INSERT INTO planned_trip (trip_id, date_start, date_end, mortal_id) 
-        VALUES                   (?, ?, ?, ?); 
+        INSERT INTO planned_trip (trip_id, date_start, date_end, mortal_id, vulp_code) 
+        VALUES                   (?, ?, ?, ?, ?); 
         ');
 
-    return $stmt->execute([
-       $data['trip_id'],
-       $data['start'],
-       $data['end'],
-       $data['mortal_id']
-    ]);
+    return $stmt->execute($data);
 
     }
+
+    public function checkVulpCode(string $vulp_code): bool {
+        $stmt = $this->connection->prepare('
+        SELECT * FROM planned_trip where vulp_code = ?;
+        ');
+        $stmt->execute([ $vulp_code ]);
+
+        return !is_null($stmt->fetchObject('Trip'));
+    }
+
+    public function bindUserWithPlannedTrip(string $code, int $userID) {
+        $stmt = $this->connection->prepare('
+        SELECT * from planned_trip_details where vulp_code = ?;
+        '); //get trip according to code
+        $stmt->execute([$code]);
+        $trip = $stmt->fetchObject('Trip');
+
+        $stmt = $this->connection->prepare('
+        INSERT INTO planned_trip_mortal VALUES (?,?);
+        '); // bind user with trip
+        if( ! $stmt->execute([$trip->getPlannedTripId(), $userID]) ) {
+            return null;
+        }
+        return $trip;
+
+    }
+
 }

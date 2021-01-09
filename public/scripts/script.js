@@ -1,6 +1,13 @@
+import {fetchData} from "./fetchAPI";
+
+const codeInput = document.querySelector('#take-part>input');
+document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
+    alert(codeInput.value);
+    const response = await fetchData({search:codeInput.value}, String('/participate'))
+})
 
 //trips.php
-$(".trip>i").on( 'click', function() {
+$(".fa-sort-down").on( 'click', function() {
     $(this).siblings('form').slideToggle('slow')
     $(this).toggleClass('rotate')
 })

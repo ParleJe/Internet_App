@@ -97,7 +97,7 @@ input:hover {
 .login-button {
     border: 0;
     background: transparent;
-    color: var(--highlight-color);
+    color: var(--main-color);
     cursor: pointer;
     margin: 10px;
     padding: 0;
@@ -178,8 +178,36 @@ img.login-logo {
     }
 }
 
+/* ________________________________________________ */
 
-/*________________________________________*/
+.top-bar {
+    width: 50%;
+    padding: 0;
+    background: var(--element-background-color);
+    display: flex;
+}
+
+.top-bar>input {
+    border-radius: var(--radius) 0 0 var(--radius);
+    margin: 0;
+    width: 80%;
+}
+
+.top-bar>button {
+    font-weight: 700;
+    color: #282e3f;
+    margin: 0.4em;
+    font-size: 1.5em;
+    background: var(--main-color);
+    border: 0;
+    width: 20%;
+}
+
+.top-bar>button:hover {
+    background: transparent radial-gradient(closest-side at 50% 50%, var(--element-background-color) 0%, var(--main-color) 120%) 0 0 no-repeat padding-box;
+}
+
+/* ________________________________________________ */
 
 
 .content-container {
@@ -276,8 +304,6 @@ nav div {
     color: var(--main-color);
     transition: 0.2s;
 }
-
-
 
 @media screen and (max-width:801px), screen and (max-device-width:801px) {
     .middle-line {

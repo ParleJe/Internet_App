@@ -11,9 +11,11 @@ class Trip implements JsonSerializable
     private $photo_directory;
     private $mortal_id;
     private $color;
-    private $planned_trip_id;
+    //______PLANNED_TRIP______
+    private ?int $planned_trip_id;
     private $date_start;
     private $date_end;
+    private ?string $vulp_code;
 
     public function __construct(array $data = null){
         if( ! is_null($data)) {
@@ -28,38 +30,44 @@ class Trip implements JsonSerializable
             $this->setPlannedTripId($data['planned_trip_id']);
             $this->setDateStart($data['date_start']);
             $this->setDateEnd($data['date_end']);
+            $this->setVulpCode($data['vulp_code']);
         }
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'trip_id' => $this->getTripId(),
             'trip_name' => $this->getTripName(),
             'destination' => $this->getDestination(),
+            'description' => $this->getDescription(),
             'points_of_interest' => $this->getPointsOfInterest(),
             'photo_directory' => $this->getPhotoDirectory(),
             'mortal_id' => $this->getMortalId(),
             'color' => $this->getColor(),
             'planned_trip_id' => $this->getPlannedTripId(),
             'date_start' => $this->getDateStart(),
-            'date_end' => $this->getDateEnd()
+            'date_end' => $this->getDateEnd(),
+            'vulp_code' => $this->getVulpCode()
         ];
-    }/**
- * @return mixed
- */
-public function getPlannedTripId()
-{
+    }
+
+    public function getPlannedTripId(): ?int {
     return $this->planned_trip_id;
-}/**
- * @param mixed $planned_trip_id
- * @return Trip
- */
-public function setPlannedTripId($planned_trip_id)
-{
-    $this->planned_trip_id = $planned_trip_id;
-    return $this;
 }
+
+    public function setPlannedTripId( int $planned_trip_id) {
+    $this->planned_trip_id = $planned_trip_id;
+}
+
+    public function getVulpCode(): ?string {
+        return $this->vulp_code;
+    }
+
+
+    public function setVulpCode(string $vulp_code) {
+        $this->vulp_code = $vulp_code;
+    }
 
 
     /**

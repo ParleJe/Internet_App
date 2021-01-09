@@ -115,7 +115,6 @@ h2, .trip>h3 {
 
 input {
     object-fit: cover;
-    height: 7.5vmax;
     width: 70%;
     align-self: center;
     cursor: pointer;
@@ -138,6 +137,10 @@ form>div {
     font-size: 2em;
     text-align: center;
     cursor: pointer;
+}
+
+.fa-plus-circle {
+    margin-top: 0.5em;
 }
 
 .rotate {

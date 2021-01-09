@@ -19,15 +19,6 @@
             $this->render('create');
         }
 
-        public function profile() {
-            $id = $this->getCurrentLoggedID();
-            $repo = new UserRepository();
-            $profile = $repo->getUserById($id);
-            $repo = new TripRepository();
-            $trips = $repo->getTripsByUserId($id);
-            $this->render('profile', ['profile' => $profile, 'trips' => $trips] );
-        }
-
         public function test () {
             $this->render('test');
         }

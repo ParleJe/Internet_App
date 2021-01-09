@@ -6,6 +6,13 @@ class TripController extends AppController
     const SUPPORTED_EXTENSIONS = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
     private $messages;
+    private Repository $repo;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->repo = new TripRepository();
+    }
 
     public function create()
     {
@@ -39,6 +46,11 @@ class TripController extends AppController
             $start = $_POST['start'];
             $end = $_POST['end'];
 
+            //create VulpCode
+            do{
+                $vulp_code = bin2hex(random_bytes(3));
+            } while ($this->repo->checkVulpCode($vulp_code));
+
             $trip = Trip::initWithVariables( [
                 'trip_name' => $title,
                 'destination' => $destination,
@@ -49,7 +61,8 @@ class TripController extends AppController
                 'points_of_interest' => $points_of_interest,
                 'photo_directory' => $photoDIR,
                 'role_id' => USER::USER,
-                'mortal_id' => $userID
+                'mortal_id' => $userID,
+                'vulp_code' => $vulp_code
             ] );
 
 
@@ -63,13 +76,11 @@ class TripController extends AppController
         return $this->render('create', ['messages' => $this->messages]);
     }
     public function view() {
-        //TODO try get tripID else get PlannedTripID !!!
         $tripID = $_GET["tripId"];
-        $repo = new TripRepository();
         if( $_GET["type"] === 'template' ) {
-            $trip = $repo->getTripById($tripID);
+            $trip = $this->repo->getTripById($tripID);
         } else {
-            $trip = $repo->fetchPlannedTripsByTripId($tripID, $this->getCurrentLoggedID());
+            $trip = $this->repo->fetchPlannedTripsByTripId($tripID, $this->getCurrentLoggedID());
         }
         if( is_null($trip) ) {
             return Routing::run('trips');
@@ -79,10 +90,9 @@ class TripController extends AppController
     }
     public function trips() {
         include('src/SessionHandling.php');
-        $repository = new TripRepository();
-        $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
-        $planned = $repository->fetchPlannedTripsByUserId($this->getCurrentLoggedID());
-        $featured = $repository->fetchFeatureTrip($this->getCurrentLoggedID());
+        $trips = $this->repo->getTripsByUserId($this->getCurrentLoggedID());
+        $planned = $this->repo->fetchPlannedTripsByUserId($this->getCurrentLoggedID());
+        $featured = $this->repo->fetchFeatureTrip($this->getCurrentLoggedID());
         $this->render('trips', ['trips'=> $trips, 'planned'=> $planned, 'featured'=> $featured]);
     }
     public function PlanTrip() {
@@ -91,35 +101,41 @@ class TripController extends AppController
         $data['start'] = $_POST['start'];
         $data['end'] = $_POST['end'];
         $data['trip_id'] = $_POST['trip_id'];
+        do{
+            $data['vulp_code'] = bin2hex(random_bytes(3));
+        }while ($this->repo->checkVulpCode($data['vulp_code']));
 
-        $repo = new TripRepository();
-        if( $repo->setPlannedTrip($data) ) {
+        if( $this->repo->setPlannedTrip($data) ) {
             return Routing::run('trips');
         }
         return Routing::run('trips', ['messages' => 'Cannot plan more than one trip from one template']);
     }
+//TODO if '' get all friends;
+    public function fetchTrips() {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
 
-    public function ajaxTripDescription() {
+            header('Content-type: application/json');
+            http_response_code(200);
 
-        $tripID = $_GET["tripID"];
-        $repo = new TripRepository();
-        $trip = $repo->getTripById($tripID);
-
-        header('Content-type: application/json');
-        http_response_code(200);
-        echo $trip->getPointsOfInterest();
-
-    }
-    public function ajaxGetTrips() {
-        $string = $_GET['search'];
-        $repo = new TripRepository();
-        $trips = $repo->getTripByName($string);
-        $json = null;
-        foreach ($trips as $trip){
-            $json[] = json_encode($trip);
+            echo json_encode($this->repo->getTripByName($decoded['search']));
         }
-
-        echo json_encode($trips);
+    }
+    public function participate() {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+            $planned_trip = $this->repo->bindUserWithPlannedTrip($decoded['search'], $this->getCurrentLoggedID());
+            if( is_null($planned_trip)) {
+                http_response_code(400);
+            }
+            header('Content-type: application/json');
+            http_response_code(200);
+            echo json_encode($planned_trip);
+        }
     }
 
     private function validate( array $file ): bool {

@@ -1,7 +1,9 @@
+import {fetchData} from "./fetchAPI.js";
+
 let details;
 //TODO GET URL DYNAMICALLY
-let apiUrl = "http://localhost:8080";
-let tripID = getTripID();
+const apiUrl = "http://localhost:8080";
+const tripID = getTripID();
 window.onload = init();
 
 $('li').on( 'mouseout mouseover', function() {
@@ -21,7 +23,7 @@ function setMenuActions() {
     let optionMenu = $('.option-menu');
     let view = $('.description');
  $('#participants').on('click', () => {participants(optionMenu)})
-     .siblings('#chat').on('click', () => {chat(view)})
+     .siblings('#chat').on('click', () => {chat()})
      .siblings('#map').on('click', () => {displayMap()})
      .siblings('#delete').on('click', () => {deleteTrip()})
      .siblings('#create').on('click', () => {plan(view)})
@@ -58,7 +60,7 @@ function participants(view) {
 
 }
 //TODO ALL CHAT FEATURE
-function chat(view){
+function chatty(view){
     $.ajax({
         url : apiUrl + '/ajaxGetComments',
         dataType : "json",
@@ -79,7 +81,6 @@ function chat(view){
         view = $(".comment-container")
         view.empty();
         res.forEach(comment => {
-            //TODO DISPLAY FETCHED COMMENTS
             console.log(comment);
             view.append(`
             <div class="comment flow">
@@ -93,6 +94,38 @@ function chat(view){
     } )
 
 }
+
+const chat = async () => {
+    const json = await fetchData({search:tripID}, String('/fetchComments'))
+    display(await json);
+}
+
+const display = (res) => {
+    let view = $('.description');
+    view.empty();
+    view.append(`
+            <div class="comment-container flex column round">
+            </div>
+            <div class="comment-add flex round">
+                <input type="text">
+                <button class="round">ADD</button>
+            </div>
+        `)
+    view = $(".comment-container")
+    view.empty();
+    res.forEach(comment => {
+        console.log(comment);
+        view.append(`
+            <div class="comment flow">
+                <a href="blablabla">
+                    <h1>${comment.mortal_id}</h1>
+                </a>
+                <p>${comment.content}</p>
+            </div>
+            `);
+    })
+}
+
 
 //TODO MAP
 function displayMap(){

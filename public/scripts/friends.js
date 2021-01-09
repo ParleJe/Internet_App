@@ -1,28 +1,17 @@
-function addEffect(){
+import {fetchData} from "./fetchAPI.js";
+
+const view = $('.content');
+const input = document.querySelector('.search-input');
+const addEffect = () => {
     $('.profile').on('mouseover mouseout', function() {
         $(this).toggleClass('hover')
     })
 }
-function addSearchHandler() {
-    $('#search-btn').on( 'click', function() {
-    const input = document.querySelector('#search-input').value;
-    ajaxRequest(input);
-})
-}
-function ajaxRequest (input) {
-    const apiUrl = 'http://localhost:8080';
-    const view = $('.content');
-    $.ajax( {
-        url : apiUrl + '/ajaxGetUsers',
-        method : 'get',
-        data : {
-            name : input
-        },
-        dataType : "json"
-    } ).done( (res =>{
-        view.empty();
-        res.forEach( el => {
-            view.append(`
+
+const display = (response) => {
+    view.empty();
+    response.forEach( el => {
+        view.append(`
                 <div class="round">
                     <div class="profile round" id="${el.mortal_id}">
                         <img class="round" src="public/resources/placeholder.jpg" alt="profile photo">
@@ -33,13 +22,13 @@ function ajaxRequest (input) {
                     </div>
                 </div>
                 `);
-        })
-        addEffect();
-    }));
-}
-function init() {
+    })
     addEffect();
-    addSearchHandler();
 }
 
-document.onload = init();
+document.querySelector('.search-btn').addEventListener('click', async () => {
+    const search = input.value;
+    const jsonResponse = await fetchData({search: search}, String('/fetchUsers'));
+    display(await jsonResponse);
+})
+addEffect();

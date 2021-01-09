@@ -1,24 +1,19 @@
+import {fetchData} from "./fetchAPI.js";
 
-$('.search-btn').on( 'click', function() {
-    const input = document.querySelector('#search-input').value;
-    ajaxRequest(input);
+const search = document.querySelector('.search-input');
+const view = $('.content');
+
+$('.search-btn').on( 'click', async function() {
+    const input = search.value;
+    const json = await fetchData({search: input}, String('/fetchTrips'));
+    display(json);
 })
 
-function ajaxRequest ( input ) {
-    const apiUrl = "http://localhost:8080"
-    const view = $('.content');
-    $.ajax( {
-        url: apiUrl + "/ajaxGetTrips",
-        dataType: 'json',
-        method: "get",
-        data: {
-            search : input
-        }
-    }). done ( (res) => {
+const display = (json) => {
 
-        view.empty();
-        res.forEach( element => {
-            view.append(`
+    view.empty();
+    json.forEach( element => {
+        view.append(`
             <div class="search flex column" id="search-${element.trip_id}">
                 <a href="view?tripId=${element.trip_id}"><img src="${element.photo_directory}" alt="trip" class="search-img round"/></a>
                 <div>
@@ -28,5 +23,5 @@ function ajaxRequest ( input ) {
             </div>
             `);
     })
-})
 }
+//TODO TEMPLATES
