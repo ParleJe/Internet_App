@@ -13,29 +13,24 @@ const map = new H.Map(document.getElementById('map'), defaultLayers.vector.norma
 });
 window.addEventListener('resize', () => map.getViewPort().resize());
 new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-const provider = map.getBaseLayer().getProvider();
 
 
 //Initialize router and geocoder
-const router = platform.getRoutingService();
 const geocoder = platform.getGeocodingService();
 
 window.addEventListener('resize', () => map.getViewPort().resize());
 
 
-map.addEventListener('longpress', evt => {
+/*map.addEventListener('longpress', evt => {
     const pointer = evt.currentPointer;
     if((evt.target instanceof H.map.Marker)){
         removeMarker(evt.target, map)
     } else {
         addMarker(map.screenToGeo(pointer.viewportX, pointer.viewportY), map)
     }
-}, false);
+}, false);*/
 
 new Search('Berlin, DEU');
-$('#map-container').css('display', 'none')
-$('#map-container>i, #POI').on( 'click', function() {
-    $('#map-container').fadeToggle('slow')
-})
 
-export { router, geocoder, map }
+
+export { geocoder, map }

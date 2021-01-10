@@ -125,12 +125,10 @@ class TripRepository extends Repository {
     }
 
     public function fetchFeatureTrip(int $userID): ?Trip {
-        $con = $this->database->getInstance();
-
-        $stmt = $con->prepare('
-        SELECT * FROM planned_trip_details WHERE date_start > now() ORDER BY date_start LIMIT 1;
+        $stmt = $this->connection->prepare('
+        SELECT * FROM planned_trip_details WHERE date_start > now() AND mortal_id = ? ORDER BY date_start LIMIT 1;
         ');
-        $stmt->execute();
+        $stmt->execute([$userID]);
         return $stmt->fetchObject('Trip');
     }
 
@@ -176,6 +174,14 @@ class TripRepository extends Repository {
         }
         return $trip;
 
+    }
+
+    public function getMemberTripsByUserId(int $userID) {
+        $stmt = $this->connection->prepare('
+        SELECT * FROM member_planned_trip_details WHERE mortal_id = ?;
+        ');
+        $stmt->execute([$userID]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, 'Trip');
     }
 
 }

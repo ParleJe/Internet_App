@@ -19,12 +19,6 @@ class TripController extends AppController
         $tripRepo = new TripRepository();
         $userID = $this->getCurrentLoggedID();
         if( $this->isPost() && is_uploaded_file( $_FILES['photo']['tmp_name'] ) && $this->validate( $_FILES['photo'] ) ){ // check photo
-            $photoDIR = dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name'];
-            move_uploaded_file(
-                $_FILES['photo']['tmp_name'],
-                $photoDIR
-            );
-
             $title = $_POST['trip_name'];
             if( empty($tripRepo->getTripByName( $title )) ) {
                 return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
@@ -51,7 +45,14 @@ class TripController extends AppController
                 $vulp_code = bin2hex(random_bytes(3));
             } while ($this->repo->checkVulpCode($vulp_code));
 
-            $trip = Trip::initWithVariables( [
+            //change photo location
+            $photoDIR = dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['photo']['name'];
+            move_uploaded_file(
+                $_FILES['photo']['tmp_name'],
+                $photoDIR
+            );
+
+            $trip = new Trip( [
                 'trip_name' => $title,
                 'destination' => $destination,
                 'description' => $description,
@@ -69,6 +70,7 @@ class TripController extends AppController
             if( ! $tripRepo->setTripByTransaction( $trip ) ) {
                 return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
             }
+
 
             return Routing::run('trips');
         }
@@ -90,10 +92,12 @@ class TripController extends AppController
     }
     public function trips() {
         include('src/SessionHandling.php');
-        $trips = $this->repo->getTripsByUserId($this->getCurrentLoggedID());
-        $planned = $this->repo->fetchPlannedTripsByUserId($this->getCurrentLoggedID());
+        $id = $this->getCurrentLoggedID();
+        $trips = $this->repo->getTripsByUserId($id);
+        $planned = $this->repo->fetchPlannedTripsByUserId($id);
+        $members = $this->repo->getMemberTripsByUserId($id);
         $featured = $this->repo->fetchFeatureTrip($this->getCurrentLoggedID());
-        $this->render('trips', ['trips'=> $trips, 'planned'=> $planned, 'featured'=> $featured]);
+        $this->render('trips', ['trips'=> $trips, 'planned'=> $planned, 'featured'=> $featured, 'members' => $members]);
     }
     public function PlanTrip() {
         $data = [];
@@ -119,8 +123,8 @@ class TripController extends AppController
 
             header('Content-type: application/json');
             http_response_code(200);
-
-            echo json_encode($this->repo->getTripByName($decoded['search']));
+            $trips = $this->repo->getTripByName($decoded['search']);
+            echo json_encode($trips);
         }
     }
     public function participate() {
@@ -131,13 +135,41 @@ class TripController extends AppController
             $planned_trip = $this->repo->bindUserWithPlannedTrip($decoded['search'], $this->getCurrentLoggedID());
             if( is_null($planned_trip)) {
                 http_response_code(400);
+                echo '';
             }
             header('Content-type: application/json');
             http_response_code(200);
             echo json_encode($planned_trip);
         }
     }
+    public function ajaxTripDescription() {
 
+        $tripID = $_GET["tripID"];
+        $repo = new TripRepository();
+        $trip = $repo->getTripById($tripID);
+
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo $trip->getPointsOfInterest();
+
+    }
+    public function fetchPOI() {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            $trip = $this->repo->getTripById($decoded['search']);
+            if( is_null($trip)) {
+                http_response_code(400);
+                return;
+            }
+
+            header('Content-type: application/json');
+            http_response_code(200);
+            echo $trip->getPointsOfInterest();
+        }
+    }
     private function validate( array $file ): bool {
         if( $file['size'] > self::MAX_FILE_SIZE ) {
             $this->messages[] = 'File is too large';

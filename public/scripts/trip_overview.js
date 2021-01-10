@@ -1,4 +1,5 @@
 import {fetchData} from "./fetchAPI.js";
+import {map} from "./hereAPI/map.js"
 
 let details;
 //TODO GET URL DYNAMICALLY
@@ -6,9 +7,9 @@ const apiUrl = "http://localhost:8080";
 const tripID = getTripID();
 window.onload = init();
 
-$('li').on( 'mouseout mouseover', function() {
+$('li').on('mouseout mouseover', function () {
     $(this).toggleClass('hover');
-}).on( 'click', function() {
+}).on('click', function () {
     updateDescription($(this).attr('id'));
 })
 
@@ -22,13 +23,21 @@ function getTripID() {
 function setMenuActions() {
     let optionMenu = $('.option-menu');
     let view = $('.description');
- $('#participants').on('click', () => {participants(optionMenu)})
-     .siblings('#chat').on('click', () => {chat()})
-     .siblings('#map').on('click', () => {displayMap()})
-     .siblings('#delete').on('click', () => {deleteTrip()})
-     .siblings('#create').on('click', () => {plan(view)})
+    $('#participants').on('click', () => {
+        participants(optionMenu)
+    })
+        .siblings('#chat').on('click', () => {
+        chat()
+    })
+        .siblings('#delete').on('click', () => {
+        deleteTrip()
+    })
+        .siblings('#create').on('click', () => {
+        plan(view)
+    })
 }
-//TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM (MAX 6)
+
+//TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
 function participants(view) {
 
     view.empty();
@@ -59,48 +68,13 @@ function participants(view) {
     `)
 
 }
-//TODO ALL CHAT FEATURE
-function chatty(view){
-    $.ajax({
-        url : apiUrl + '/ajaxGetComments',
-        dataType : "json",
-        data : {
-            tripID : getTripID()
-        }
-    }).done( (res) => {
-        console.log(res)
-        view.empty();
-        view.append(`
-            <div class="comment-container flex column round">
-            </div>
-            <div class="comment-add flex round">
-                <input type="text">
-                <button class="round">ADD</button>
-            </div>
-        `)
-        view = $(".comment-container")
-        view.empty();
-        res.forEach(comment => {
-            console.log(comment);
-            view.append(`
-            <div class="comment flow">
-                <a href="blablabla">
-                    <h1>${comment.mortal_id}</h1>
-                </a>
-                <p>${comment.content}</p>
-            </div>
-            `);
-        })
-    } )
 
-}
-
+//TODO POST COMMENT
 const chat = async () => {
-    const json = await fetchData({search:tripID}, String('/fetchComments'))
-    display(await json);
+    const json = await fetchData({search: tripID}, String('/fetchComments'))
+    displayComments(json);
 }
-
-const display = (res) => {
+const displayComments = (res) => {
     let view = $('.description');
     view.empty();
     view.append(`
@@ -126,49 +100,65 @@ const display = (res) => {
     })
 }
 
+function initMap(data) {
+    data.forEach(mark => {
+        let location = mark.location;
+        location = location.split(' ');
+        const localization = {lat: parseFloat(location[1]), lng: parseFloat(location[0])};
+        let newMarker = new H.map.Marker(localization, {volatility: true});
 
-//TODO MAP
-function displayMap(){
+        map.addObject(newMarker);
+        map.setCenter(localization);
+    })
+    $('#map-container').css('display', 'none')
+    $('#map-container>i, #map-toggle').on('click', function () {
+        $('#map-container').fadeToggle('slow')
+    })
 
-    console.log('map')
+
 }
+
 //TODO AJAX POST DELETE
-function deleteTrip(){
-    if( confirm("Are you sure you want to delete it?") ){
+function deleteTrip() {
+    if (confirm("Are you sure you want to delete it?")) {
         console.log('deleted')
-    }else{
+    } else {
         console.log('ok')
     }
 }
+
 //TODO PLAN TRIP FEATURE
-function plan(view){
+function plan(view) {
     view.empty().append(`
     <form class="plan-trip flex column round" method="post" action="planTrip">
         <h1>Plan It!</h1>
-        <input name="start" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">
-        <input name="end" type="date" min="${ new Date().toISOString().slice(0, 10)}" value="${ new Date().toISOString().slice(0, 10)}">
+        <input name="start" type="date" min="${new Date().toISOString().slice(0, 10)}" value="${new Date().toISOString().slice(0, 10)}">
+        <input name="end" type="date" min="${new Date().toISOString().slice(0, 10)}" value="${new Date().toISOString().slice(0, 10)}">
         <input name="trip_id" value="${getTripID()}" type="hidden">
         <button class="round" name="submit" type="submit">Submit</button>
     </form>
     `)
-    console.log('plan')
 }
 
-function getDetails() {
-    $.ajax({
-        url : apiUrl + '/ajaxTripDescription',
-        dataType : 'json',
-        data : {
-            tripID : getTripID()
+async function getDetails() {
+    /*$.ajax({
+        url: apiUrl + '/ajaxTripDescription',
+        dataType: 'json',
+        data: {
+            tripID: getTripID()
         }
-    }).done( (res) => {
+    }).done((res) => {
         details = res;
-    } )
-}
-function init() {
+        initMap(res);
+    })*/
+    details = await fetchData({search: tripID}, String('/fetchPOI'))
+    initMap(details);
+} //TODO CHANGE TO FETCHJS
+async function init() {
     getDetails();
     setMenuActions();
 }
+
 function updateDescription(id) {
 
     $('.description').empty().append(`
@@ -176,6 +166,7 @@ function updateDescription(id) {
     <p class="trip-desc"> ${details[id].description}</p>
     `);
 }
+
 
 /*
 <h1>participants</h1>

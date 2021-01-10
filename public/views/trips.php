@@ -16,7 +16,7 @@
     <!--JS-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
-    <script src="public/scripts/script.js" DEFER></script>
+    <script type="module" src="public/scripts/script.js" DEFER></script>
     <title>Your Trips</title>
 </head>
 
@@ -91,9 +91,24 @@
             <div class="flow">
                 <!--TODO empty columns-->
                 <h2>Taking Part:</h2>
-                <div class="trip-container">
+                <?PHP if( isset($members) ) foreach ($members as $trip): ?>
+                    <div class="trip flex column round">
+                        <h4 style="color: <?php echo $trip->getColor() ?> ;"><?php echo $trip->getDestination() ?></h4>
+                        <h3><?php echo $trip->getTripName() ?></h3>
+                        <form method="get" action="view">
+                            <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
+                            <input type="hidden" name="tripId" value="<?php echo $trip->getTripId() ?>">
+                            <input type="hidden" name="type" value="planned">
+                        </form>
+                        <!--<h4><?PHP /*echo $trip->getDateStart().' - '.$trip->getDateEnd() */?></h4>-->
+                        <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
+                    </div>
+                <?PHP endforeach; ?>
+
+
+                <div class="trip-container" id="members">
                     <div class="trip flex column round" id="take-part">
-                        <input placeholder="type unique vulp-code" type="text">
+                        <input placeholder="type unique vulp-code to join trip" type="text">
                         <i class="fas fa-plus-circle"></i>
                     </div>
                 </div>
@@ -103,3 +118,17 @@
     </div>
 
 </body>
+
+<template id="trip-template">
+    <div class="trip flex column round" >
+        <h4></h4>
+        <h3></h3>
+        <form method="get" action="view">
+            <div><input type="image"  alt="trip image" src="" ></div>
+            <input id="id" type="hidden" name="tripId" value="">
+            <input id="type" type="hidden" name="type" value="planned-member">
+        </form>
+        <h4></h4>
+        <i class="fas fa-sort-down"></i>
+    </div>
+</template>

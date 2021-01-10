@@ -1,10 +1,10 @@
 import {fetchData} from "./fetchAPI.js";
 
-const search = document.querySelector('.search-input');
+const searchInput = document.querySelector('.search-input');
 const view = $('.content');
 
 $('.search-btn').on( 'click', async function() {
-    const input = search.value;
+    const input = searchInput.value;
     const json = await fetchData({search: input}, String('/fetchTrips'));
     display(json);
 })

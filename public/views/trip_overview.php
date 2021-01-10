@@ -10,6 +10,13 @@ if( ! isset($trip)) {
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/trip_overview-stylesheet.css">
+
+    <!-- HERE API -->
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <!-- SCRIPTS -->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
     <script type="module" src="public/scripts/trip_overview.js" DEFER></script>
@@ -49,32 +56,9 @@ if( ! isset($trip)) {
                 </div>
             </div>
             <div class="option-menu flow column round">
-                <!--<h1>participants</h1>
-                <div class="grid-friends">
-                    <div>
-                        <img src="public/resources/placeholder.jpg" alt="friend photo">
-                    </div>
-                    <div>
-                        <img src="public/resources/placeholder.jpg" alt="friend photo">
-                    </div>
-                    <div>
-                        <img src="public/resources/placeholder.jpg" alt="friend photo">
-                    </div>
-                    <div>
-                        <img src="public/resources/placeholder.jpg" alt="friend photo">
-                    </div>
-                    <div>
-                        <img src="public/resources/placeholder.jpg" alt="friend photo">
-                    </div>
-                    <div>
-                        <img src="public/resources/placeholder.jpg" alt="friend photo">
-                    </div>
-
-                </div>
-                <i class="fas fa-plus-circle"></i>-->
                 <h1 class="menu" id="participants">Participants</h1>
                 <h1 class="menu" id="chat">Chat</h1>
-                <h1 class="menu" id="map">Check Map</h1>
+                <h1 class="menu" id="map-toggle">Check Map</h1>
                 <?PHP if($type === 'template')
                     echo '<h1 class="menu" id="create">Create Trip From This Template</h1>'
                 ?>
@@ -82,5 +66,13 @@ if( ! isset($trip)) {
             </div>
         </div>
     </section>
+</div>
+<div id="map-container">
+    <i class="fas fa-times"> </i>
+    <div class="inner-city-field-container">
+        <div contenteditable="true" class="city-field"></div>
+        <div class="city-field-suggestion"></div>
+    </div>
+    <div id="map"></div>
 </div>
 </body>

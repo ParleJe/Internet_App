@@ -22,7 +22,9 @@ Routing::post( 'registration', 'LoginController' );
 Routing::post( 'planTrip', 'TripController' );
 Routing::post('participate', 'TripController');
 
-Routing::ajax( 'ajaxTripDescription', 'TripController' );
+
+Routing::post('fetchData', 'AppController');
+Routing::ajax( 'fetchPOI', 'TripController' );
 Routing::ajax( 'fetchTrips', 'TripController' );
 Routing::ajax( 'fetchUsers', 'UserController' );
 Routing::ajax( 'fetchComments', 'CommentController');

@@ -12,13 +12,13 @@ class Trip implements JsonSerializable
     private $mortal_id;
     private $color;
     //______PLANNED_TRIP______
-    private ?int $planned_trip_id;
+    private $planned_trip_id;
     private $date_start;
     private $date_end;
-    private ?string $vulp_code;
+    private $vulp_code;
 
     public function __construct(array $data = null){
-        if( ! is_null($data)) {
+        if(! is_null($data)) {
             $this->setTripId($data['trip_id']);
             $this->setTripName($data['trip_name']);
             $this->setDestination($data['destination']);
@@ -52,7 +52,7 @@ class Trip implements JsonSerializable
         ];
     }
 
-    public function getPlannedTripId(): ?int {
+    public function getPlannedTripId() {
     return $this->planned_trip_id;
 }
 
@@ -60,7 +60,7 @@ class Trip implements JsonSerializable
     $this->planned_trip_id = $planned_trip_id;
 }
 
-    public function getVulpCode(): ?string {
+    public function getVulpCode() {
         return $this->vulp_code;
     }
 

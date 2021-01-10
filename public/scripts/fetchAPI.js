@@ -1,5 +1,4 @@
 const url = 'http://localhost:8080';
-
 const fetchData = async (data, urlAppend) => {
     const fetchUrl = url+urlAppend
     const response = await fetch(fetchUrl, {
@@ -19,4 +18,4 @@ const fetchData = async (data, urlAppend) => {
 
 const postData = async (data, urlAppend) => {}
 
-export {fetchData, postData}
+export {fetchData}
