@@ -56,16 +56,18 @@ class Trip implements JsonSerializable
     return $this->planned_trip_id;
 }
 
-    public function setPlannedTripId( int $planned_trip_id) {
+    public function setPlannedTripId( $planned_trip_id) {
     $this->planned_trip_id = $planned_trip_id;
 }
-
+    /**
+     * @return mixed
+     */
     public function getVulpCode() {
         return $this->vulp_code;
     }
 
 
-    public function setVulpCode(string $vulp_code) {
+    public function setVulpCode( $vulp_code) {
         $this->vulp_code = $vulp_code;
     }
 

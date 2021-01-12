@@ -91,22 +91,21 @@
             <div class="flow">
                 <!--TODO empty columns-->
                 <h2>Taking Part:</h2>
-                <?PHP if( isset($members) ) foreach ($members as $trip): ?>
-                    <div class="trip flex column round">
-                        <h4 style="color: <?php echo $trip->getColor() ?> ;"><?php echo $trip->getDestination() ?></h4>
-                        <h3><?php echo $trip->getTripName() ?></h3>
-                        <form method="get" action="view">
-                            <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
-                            <input type="hidden" name="tripId" value="<?php echo $trip->getTripId() ?>">
-                            <input type="hidden" name="type" value="planned">
-                        </form>
-                        <!--<h4><?PHP /*echo $trip->getDateStart().' - '.$trip->getDateEnd() */?></h4>-->
-                        <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
-                    </div>
-                <?PHP endforeach; ?>
-
 
                 <div class="trip-container" id="members">
+                    <?PHP if( isset($members) ) foreach ($members as $trip): ?>
+                        <div class="trip flex column round">
+                            <h4 style="color: <?php echo $trip->getColor() ?> ;"><?php echo $trip->getDestination() ?></h4>
+                            <h3><?php echo $trip->getTripName() ?></h3>
+                            <form method="get" action="view">
+                                <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
+                                <input type="hidden" name="tripId" value="<?php echo $trip->getTripId() ?>">
+                                <input type="hidden" name="type" value="planned">
+                            </form>
+                            <!--<h4><?PHP /*echo $trip->getDateStart().' - '.$trip->getDateEnd() */?></h4>-->
+                            <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
+                        </div>
+                    <?PHP endforeach; ?>
                     <div class="trip flex column round" id="take-part">
                         <input placeholder="type unique vulp-code to join trip" type="text">
                         <i class="fas fa-plus-circle"></i>

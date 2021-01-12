@@ -1,6 +1,5 @@
-const url = 'http://localhost:8080';
-const fetchData = async (data, urlAppend) => {
-    const fetchUrl = url+urlAppend
+const fetchUrl = 'http://localhost:8080/fetchData';
+const fetchData = async (data) => {
     const response = await fetch(fetchUrl, {
         method: "POST",
         headers: {
@@ -15,7 +14,5 @@ const fetchData = async (data, urlAppend) => {
     }
     return await response.json();
 }
-
-const postData = async (data, urlAppend) => {}
 
 export {fetchData}

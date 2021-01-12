@@ -33,10 +33,9 @@ class TripRepository extends Repository {
     }
 
     public function setTripByTransaction(Trip $trip): bool{
-        $con = $this->database->getInstance();
 
-        if($con->beginTransaction()) {
-            $stmt = $con->prepare('
+        if($this->connection->beginTransaction()) {
+            $stmt = $this->connection->prepare('
             INSERT INTO trip (trip_name, destination, description, points_of_interest, photo_directory, color, mortal_id) 
             VALUES           (?, ?, ?, ?, ?, ?, ?);
             ');
@@ -50,26 +49,26 @@ class TripRepository extends Repository {
                 $trip->getColor(),
                 $trip->getMortalId()
             ] )) {
-                $con->rollBack();
+                $this->connection->rollBack();
                 return false;
             }
 
-            $stmt = $con->prepare('
+            $stmt = $this->connection->prepare('
             INSERT INTO planned_trip (trip_id, date_start, date_end, mortal_id, vulp_code) 
-            VALUES                   (?, ?, ?, ?); 
+            VALUES                   (?, ?, ?, ?, ?); 
             ');
 
             if( ! $stmt->execute( [
-                $con->lastInsertId(),
+                $this->connection->lastInsertId(),
                 $trip->getDateStart(),
                 $trip->getDateEnd(),
                 $trip->getMortalId(),
                 $trip->getVulpCode()
             ] )) {
-                $con->rollBack();
+                $this->connection->rollBack();
                 return false;
             }
-            $con->commit();
+            $this->connection->commit();
             return true;
         }
         return false;
@@ -155,8 +154,8 @@ class TripRepository extends Repository {
         SELECT * FROM planned_trip where vulp_code = ?;
         ');
         $stmt->execute([ $vulp_code ]);
-
-        return !is_null($stmt->fetchObject('Trip'));
+        $trip = $stmt->fetchObject('Trip');
+        return $trip;
     }
 
     public function bindUserWithPlannedTrip(string $code, int $userID) {

@@ -7,7 +7,7 @@ const trips = document.querySelectorAll('.trip');
 document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
     alert(codeInput.value);
 
-        const response = await fetchData({search: codeInput.value}, String('/participate'));
+        const response = await fetchData({requestType:'membership',data: codeInput.value});
         display(response);
         addListener();
 })

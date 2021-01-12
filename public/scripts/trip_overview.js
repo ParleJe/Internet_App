@@ -151,7 +151,7 @@ async function getDetails() {
         details = res;
         initMap(res);
     })*/
-    details = await fetchData({search: tripID}, String('/fetchPOI'))
+    details = await fetchData({requestType:"poi" ,data: tripID})
     initMap(details);
 } //TODO CHANGE TO FETCHJS
 async function init() {
