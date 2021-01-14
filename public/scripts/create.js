@@ -1,6 +1,8 @@
-import {geocoder, map} from './hereAPI/map.js';
+import {map} from './hereAPI/map.js';
 import {addMarker, removeMarker} from "./hereAPI/helpers.js";
 
+const mapContainer = document.querySelector('#map-container');
+const PoiButton = document.querySelector('#POI');
 
 map.addEventListener('longpress', evt => {
     const pointer = evt.currentPointer;
@@ -11,7 +13,12 @@ map.addEventListener('longpress', evt => {
     }
 }, false);
 
-$('#map-container').css('display', 'none')
+/*$('#map-container').css('display', 'none')
 $('#map-container>i, #POI').on( 'click', function() {
     $('#map-container').fadeToggle('slow')
+})*/
+
+mapContainer.style.display = 'none';
+createPoiButton.addEventListener('click', () => {
+    $('#map-container').fadeToggle('slow'); //JQuery for animations;
 })

@@ -1,12 +1,19 @@
 import {fetchData} from "./fetchAPI.js";
+import {friendsProfiles} from "./GUIelements.js";
 
 const view = $('.content');
 const input = document.querySelector('.search-input');
 //TODO change to pure js
-const addEffect = () => {
+const addEffect_old = () => {
     $('.profile').on('mouseover mouseout', function() {
         $(this).toggleClass('hover')
     })
+}
+const addEffect = () => {
+    const profileTabs = document.querySelectorAll('.profile')
+    friendsProfiles.map(item => item.addEventListener('click', () => {
+        this.toggleClass('hover');
+    }))
 }
 
 const display = (response) => {
