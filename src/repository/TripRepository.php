@@ -17,7 +17,7 @@ class TripRepository extends Repository {
             ');
         $statement->execute( [ '%'.$name.'%' ] );
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, 'Trip');
+        return $statement->fetchAll(parent::FETCH_FLAGS, 'Trip');
     }
 
     public function getTripById(int $id): ?Trip {
@@ -28,8 +28,8 @@ class TripRepository extends Repository {
 
         $statement->execute( [ $id ] );
 
-        $trip = $statement->fetchObject('Trip');
-        $trip = $trip?: null;
+        $trip = $statement->fetchAll(parent::FETCH_FLAGS, 'Trip');
+        $trip = $trip[0]?: null;
 
         return $trip;
     }
@@ -85,7 +85,7 @@ class TripRepository extends Repository {
 
         $statement->execute( [ $id ] );
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, 'Trip');
+        return $statement->fetchAll(parent::FETCH_FLAGS, 'Trip');
 
     }
 
@@ -95,6 +95,11 @@ class TripRepository extends Repository {
         ');
 
         return $stmt->execute([$tripID]);
+    }
+
+    //TODO
+    public function getAllTrips(): array{
+
     }
 
     //______________________for planned_trip table____________________
@@ -112,7 +117,7 @@ class TripRepository extends Repository {
             $userID
         ]);
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS, 'Trip');
+        return $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip');
     }
 
     public function fetchPlannedTripsByTripId(int $tripID, int $userID): ?Trip {
@@ -128,7 +133,7 @@ class TripRepository extends Repository {
             $userID
         ]);
 
-        $trip = $stmt->fetchObject('Trip');
+        $trip = $stmt->fetchObject('Trip', PDO::FETCH_PROPS_LATE);
         $trip = $trip?: null;
         return $trip;
 
@@ -139,8 +144,9 @@ class TripRepository extends Repository {
         SELECT * FROM planned_trip_details WHERE date_start > now() AND mortal_id = ? ORDER BY date_start LIMIT 1;
         ');
         $stmt->execute([$userID]);
-        $obj = $stmt->fetchObject('Trip');
-        return $obj === false? null: $obj;
+        $obj = $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip');
+
+        return $obj[0] === false? null: $obj[0];
     }
 
     public function setPlannedTrip(array $data): bool {
@@ -176,24 +182,29 @@ class TripRepository extends Repository {
         return $stmt->execute([$plannedTripID]);
     }
 
+    //TODO
+    public function getAllPlannedTrips(): ?array {
+
+    }
+
     //___________________help functions______________________________
     public function checkVulpCode(string $vulp_code): bool {
         $stmt = $this->connection->prepare('
         SELECT * FROM planned_trip where vulp_code = ?;
         ');
         $stmt->execute([ $vulp_code ]);
-        $trip = $stmt->fetchObject('Trip');
-        return $trip;
+        $trip = $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip');
+
+        return $trip[0];
     }
 
-
     //membership functions
-    public function bindUserWithPlannedTrip(string $code, int $userID) {
+    public function bindUserWithPlannedTrip(string $code, int $userID): ?Trip {
         $stmt = $this->connection->prepare('
         SELECT * from planned_trip_details where vulp_code = ?;
         '); //get trip according to code
         $stmt->execute([$code]);
-        $trip = $stmt->fetchObject('Trip');
+        $trip = $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip')[0];
 
         $stmt = $this->connection->prepare('
         INSERT INTO planned_trip_mortal VALUES (?,?);
@@ -211,7 +222,7 @@ class TripRepository extends Repository {
         SELECT * FROM member_planned_trip_details WHERE mortal_id = ?;
         ');
         $stmt->execute([$userID]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, 'Trip');
+        return $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip');
     }
 
     public function deleteMembership(int $plannedTripID, int $userID): bool

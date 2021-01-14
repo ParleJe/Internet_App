@@ -1,6 +1,5 @@
 <?php
 
-
 class CommentRepository extends Repository
 {
     public function getCommentsByPlannedTripID(int $tripID): ?array {
@@ -13,10 +12,15 @@ class CommentRepository extends Repository
         if ( ! $stmt->execute([ $tripID ]) ) {
             return null;
         }
-        return $stmt->fetchAll(PDO::FETCH_CLASS, 'Comment');
+        return $stmt->fetchAll(parent::FETCH_FLAGS, 'Comment');
 }
 
-    public function addComment(int $userID, string $content, int $tripID): bool
+    //TODO
+    public function getAllComments():?array{
+
+    }
+
+    public function addComment(int $userID, string $content, int $tripID): ?Comment
     {
         $conn = $this->database->getInstance();
         $stmt = $conn->prepare('
@@ -24,7 +28,11 @@ class CommentRepository extends Repository
         VALUES (?,now(),?,?);
         ');
 
-        return $stmt->execute([$content, $userID, $tripID]);
+        $stmt->execute([$content, $userID, $tripID]);
+        if(is_null($conn->lastInsertId())){
+        return null;
+        }
+        return new Comment(['comment_id' => $conn->lastInsertId(), 'content' => $content, 'mortal_id' => $userID]);
     }
 
     public function deleteComment(int $commentID): bool {

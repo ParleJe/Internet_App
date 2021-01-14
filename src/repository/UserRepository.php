@@ -6,11 +6,11 @@ class UserRepository extends Repository
     public function getUserById(int $id): ?User
     {
         $statement = $this->database->getInstance()->prepare('
-           SELECT * FROM user_full_detail WHERE mortal_id = ?;
+           SELECT * FROM user_full_detail WHERE mortal_id = ? LIMIT 1;
         ');
         $statement->execute([$id]);
 
-        return $statement->fetchObject("User"); // always one
+        return $statement->fetchAll(parent::FETCH_FLAGS,"User")[0];
 
     }
 
@@ -21,7 +21,7 @@ class UserRepository extends Repository
         ');
         $statement->execute([$mail]);
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, "User");
+        return $statement->fetchAll(parent::FETCH_FLAGS, "User");
 
     }
 
@@ -73,7 +73,7 @@ class UserRepository extends Repository
 
         $statement->execute([$user]);
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, "User");
+        return $statement->fetchAll(parent::FETCH_FLAGS, "User");
     }
 
     public function getUsersByName(string $name): array
@@ -87,7 +87,7 @@ class UserRepository extends Repository
         } catch (Exception $e) {
             return [];
         }
-        return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
+        return $statement->fetchAll(parent::FETCH_FLAGS, 'User');
     }
 
     public function setUserStatus(int $userID): bool
@@ -110,9 +110,11 @@ class UserRepository extends Repository
         return $stmt->execute([$userID]);
     }
 
-    /*
-     * @throws Exception if case is not found
-     */
+    //TODO
+    public function getAllUsers(): ?array {
+
+    }
+
     public function owns(int $userId, int $tripId, string $type): bool
     {
         $trip = $tripId;
@@ -137,7 +139,7 @@ class UserRepository extends Repository
             $stmt->execute([$userId, $trip]);
             return $stmt->fetchColumn() === 1;
         }
-        throw new Exception('not supported');
+        return false;
     }
 
     public function isMember(int $userID, int $tripID): bool

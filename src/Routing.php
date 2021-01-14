@@ -11,9 +11,6 @@
             self::$routes[$url] = $controller;
         }
 
-        public static function ajax( $url, $controller ) {
-            self::$routes[$url] = $controller;
-        }
 
         public static function run( $url ) {
 

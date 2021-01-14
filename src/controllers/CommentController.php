@@ -1,27 +1,24 @@
 <?php
 
 
+use JetBrains\PhpStorm\Pure;
+
 class CommentController extends AppController
 {
-    private $repo;
+    private CommentRepository $repo;
 
-    /**
-     * CommentController constructor.
-     */
     public function __construct()
     {
         parent::__construct();
         $this->repo = new CommentRepository();
     }
 
-
-    public function putComment(int $tripID, string $content):void
+    public function putComment(?int $tripID, ?string $content): ?Comment
     {
-        if($this->repo->addComment($tripID, $content, $this->getCurrentLoggedID())){
-            header('Content-type: application/json');
-            http_response_code(200);
+        if(empty($content) || is_null($tripID)){
+            return null; // wrong arguments
         }
-        http_response_code(400);
+        return $this->repo->addComment($tripID, $content, $this->getCurrentLoggedID());
     }
 
     public function deleteComment(int $commentID): void
