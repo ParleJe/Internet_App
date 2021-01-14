@@ -23,9 +23,5 @@ Routing::post( 'planTrip', 'TripController' );
 Routing::post('participate', 'TripController');
 
 
-Routing::post('fetchData', 'AppController');
-Routing::ajax( 'fetchPOI', 'TripController' );
-Routing::ajax( 'fetchTrips', 'TripController' );
-Routing::ajax( 'fetchUsers', 'UserController' );
-Routing::ajax( 'fetchComments', 'CommentController');
+Routing::post('fetchData', 'FetchController');
 Routing::run( $path );

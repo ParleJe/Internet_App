@@ -5,7 +5,6 @@ let details;
 //TODO GET URL DYNAMICALLY
 const apiUrl = "http://localhost:8080";
 const tripID = getTripID();
-window.onload = init();
 
 $('li').on('mouseout mouseover', function () {
     $(this).toggleClass('hover');
@@ -19,7 +18,6 @@ function getTripID() {
     url.pop();
     return url.pop().split("=").pop();
 }
-
 function setMenuActions() {
     let optionMenu = $('.option-menu');
     let view = $('.description');
@@ -37,7 +35,6 @@ function setMenuActions() {
     })
 
 }
-
 //TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
 function participants(view) {
 
@@ -99,7 +96,6 @@ const displayComments = (res) => {
             `);
     })
 }
-
 function initMap(data) {
     data.forEach(mark => {
         let location = mark.location;
@@ -110,14 +106,7 @@ function initMap(data) {
         map.addObject(newMarker);
         map.setCenter(localization);
     })
-    $('#map-container').css('display', 'none')
-    $('#map-container>i, #map-toggle').on('click', function () {
-        $('#map-container').fadeToggle('slow')
-    })
-
-
 }
-
 //TODO AJAX POST DELETE
 function deleteTrip() {
     if (confirm("Are you sure you want to delete it?")) {
@@ -126,8 +115,6 @@ function deleteTrip() {
         console.log('ok')
     }
 }
-
-//TODO PLAN TRIP FEATURE
 function plan(view) {
     view.empty().append(`
     <form class="plan-trip flex column round" method="post" action="planTrip">
@@ -139,26 +126,11 @@ function plan(view) {
     </form>
     `)
 }
-
 async function getDetails() {
-    /*$.ajax({
-        url: apiUrl + '/ajaxTripDescription',
-        dataType: 'json',
-        data: {
-            tripID: getTripID()
-        }
-    }).done((res) => {
-        details = res;
-        initMap(res);
-    })*/
     details = await fetchData({requestType:"poi" ,data: tripID})
     initMap(details);
-} //TODO CHANGE TO FETCHJS
-async function init() {
-    getDetails();
-    setMenuActions();
-}
 
+}
 function updateDescription(id) {
 
     $('.description').empty().append(`
@@ -166,6 +138,13 @@ function updateDescription(id) {
     <p class="trip-desc"> ${details[id].description}</p>
     `);
 }
+
+$('#map-container').css('display', 'none')
+$('#map-container>i, #map-toggle').on('click', function () {
+    $('#map-container').fadeToggle('slow')
+})
+getDetails();
+setMenuActions();
 
 
 /*

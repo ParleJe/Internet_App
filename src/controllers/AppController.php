@@ -32,33 +32,5 @@
             }
             return null;
         }
-//TODO to fetchController
-        public function fetchData():void {
 
-            $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-            if ($contentType === "application/json") {
-                $content = trim(file_get_contents("php://input"));
-                $decoded = json_decode($content, true);
-
-                switch (strtolower($decoded['requestType'])) {
-                    case 'trip':
-                        $controller = new TripController();
-                        $controller->fetchTrips($decoded['data']); break;
-                    case 'membership':
-                        $controller = new TripController();
-                        $controller->participate($decoded['data']); break;
-                    case 'poi': $controller = new TripController();
-                        $controller->fetchPOI($decoded['data']); break;
-                    case 'user': $controller = new UserController();
-                        $controller->fetchUsers($decoded['data']); break;
-                    case 'comment': $controller = new CommentController();
-                        $controller->fetchComments($decoded['data']); break;
-                    default: header('Content-type: application/json');
-                        http_response_code(404);
-                        echo 'Request not supported';
-                }
-                return;
-            }
-
-        }
     }

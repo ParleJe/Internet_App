@@ -131,44 +131,6 @@ class TripController extends AppController
         return Routing::run('trips', ['messages' => 'Cannot plan more than one trip from one template']);
     }
 
-    public function fetchTrips($data)
-    {
-        $trips = $this->repo->getTripByName($data);
-        if (empty($trips)) {
-            http_response_code(404);
-            return;
-        }
-        header('Content-type: application/json');
-        http_response_code(200);
-        echo json_encode($trips);
-
-    }
-
-    public function participate(string $code)
-    {
-            $planned_trip = $this->repo->bindUserWithPlannedTrip($code, $this->getCurrentLoggedID());
-            if (is_null($planned_trip)) {
-                http_response_code(404);
-                return;
-            }
-            header('Content-type: application/json');
-            http_response_code(201);
-            echo json_encode($planned_trip);
-    }
-
-    public function fetchPOI(string $data)
-    {
-        $trip = $this->repo->getTripById($data);
-        if (is_null($trip)) {
-            http_response_code(400);
-            return;
-        }
-
-        header('Content-type: application/json');
-        http_response_code(200);
-        echo $trip->getPointsOfInterest();
-    }
-
     private function validate(array $file): bool
     {
         if ($file['size'] > self::MAX_FILE_SIZE) {
