@@ -101,9 +101,12 @@ class UserRepository extends Repository
 
     }
 
-    //TODO
     public function deleteUser(int $userID):bool {
+        $stmt = $this->database->getInstance()->prepare('
+        DELETE FROM mortal WHERE mortal_id = ?;
+        ');
 
+        return $stmt->execute([$userID]);
     }
 
     //TODO change location to tripRepository

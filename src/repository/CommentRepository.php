@@ -26,4 +26,12 @@ class CommentRepository extends Repository
 
         return $stmt->execute([$content, $userID, $tripID]);
     }
+
+    public function deleteComment(int $commentID): bool {
+        $stmt = $this->database->getInstance()->prepare('
+        DELETE FROM comment WHERE comment_id = ?;
+        ');
+
+        return $stmt->execute([$commentID]);
+    }
 }

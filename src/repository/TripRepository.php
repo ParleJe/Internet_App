@@ -89,6 +89,14 @@ class TripRepository extends Repository {
 
     }
 
+    public function deleteTrip($tripID): bool {
+        $stmt = $this->connection->prepare('
+        DELETE FROM trip WHERE trip_id = ?;
+        ');
+
+        return $stmt->execute([$tripID]);
+    }
+
     //______________________for planned_trip table____________________
     public function fetchPlannedTripsByUserId(int $userID): array {
         $connection = $this->database->getInstance();
@@ -159,10 +167,13 @@ class TripRepository extends Repository {
 
     }
 
-    //TODO
-    public function deletePlannedTrip($tripID):bool
+    public function deletePlannedTrip($plannedTripID):bool
     {
-        return true;
+        $stmt = $this->connection->prepare('
+        DELETE FROM planned_trip WHERE planned_trip_id = ?;
+        ');
+
+        return $stmt->execute([$plannedTripID]);
     }
 
     //___________________help functions______________________________
@@ -203,10 +214,13 @@ class TripRepository extends Repository {
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Trip');
     }
 
-    //TODO
-    public function deleteMembership(int $tripID, int $userID): bool
+    public function deleteMembership(int $plannedTripID, int $userID): bool
     {
-        return true;
+        $stmt = $this->connection->prepare('
+        DELETE FROM planned_trip_mortal WHERE planned_trip_id = ? AND mortal_id = ?;
+        ');
+
+        return $stmt->execute([$plannedTripID, $userID]);
     }
 
 }
