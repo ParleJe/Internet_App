@@ -15,4 +15,15 @@ class CommentRepository extends Repository
         }
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Comment');
 }
+
+    public function addComment(int $userID, string $content, int $tripID): bool
+    {
+        $conn = $this->database->getInstance();
+        $stmt = $conn->prepare('
+        INSERT INTO comment (content, add_date, mortal_id, planned_trip_id) 
+        VALUES (?,now(),?,?);
+        ');
+
+        return $stmt->execute([$content, $userID, $tripID]);
+    }
 }

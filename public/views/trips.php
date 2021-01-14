@@ -1,7 +1,6 @@
 <?PHP
-    include('src/SessionHandling.php');
     if( !  (isset($trips) && isset($planned)) ){
-        die("problem!");
+        die("problem! Refresh");
     } elseif ( ! isset($featured) ) {
         $featured = new Trip();
     }
@@ -54,7 +53,7 @@
                             <h3><?php echo $trip->getTripName() ?></h3>
                             <form method="get" action="view">
                             <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
-                            <input type="hidden" name="tripId" value="<?php echo $trip->getTripId() ?>">
+                            <input type="hidden" name="id" value="<?php echo $trip->getTripId() ?>">
                             <input type="hidden" name="type" value="template">
                             </form>
                             <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
@@ -76,7 +75,7 @@
                             <h3><?php echo $trip->getTripName() ?></h3>
                             <form method="get" action="view">
                                 <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
-                                <input type="hidden" name="tripId" value="<?php echo $trip->getTripId() ?>">
+                                <input type="hidden" name="id" value="<?php echo $trip->getTripId() ?>">
                                 <input type="hidden" name="type" value="planned">
                             </form>
                             <h4><?PHP echo $trip->getDateStart().' - '.$trip->getDateEnd() ?></h4>
@@ -99,8 +98,8 @@
                             <h3><?php echo $trip->getTripName() ?></h3>
                             <form method="get" action="view">
                                 <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
-                                <input type="hidden" name="tripId" value="<?php echo $trip->getTripId() ?>">
-                                <input type="hidden" name="type" value="planned">
+                                <input type="hidden" name="id" value="<?php echo $trip->getTripId() ?>">
+                                <input type="hidden" name="type" value="member">
                             </form>
                             <!--<h4><?PHP /*echo $trip->getDateStart().' - '.$trip->getDateEnd() */?></h4>-->
                             <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
@@ -124,8 +123,8 @@
         <h3></h3>
         <form method="get" action="view">
             <div><input type="image"  alt="trip image" src="" ></div>
-            <input id="id" type="hidden" name="tripId" value="">
-            <input id="type" type="hidden" name="type" value="planned-member">
+            <input id="id" type="hidden" name="id" value="">
+            <input id="type" type="hidden" name="type" value="member">
         </form>
         <h4></h4>
         <i class="fas fa-sort-down"></i>

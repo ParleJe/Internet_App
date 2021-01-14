@@ -37,17 +37,25 @@ class UserController extends AppController
         echo json_encode( $repo->getUsersByName($searched) );
     }
 
-    public function fetchUsers() {
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
-
+    public function fetchUsers(?string $data) {
             header('Content-type: application/json');
             http_response_code(200);
 
-            echo json_encode($this->repo->getUsersByName($decoded['search']));
+            echo json_encode($this->repo->getUsersByName($data));
+    }
+
+    public function getUserPermission($tripId, $type): ?string
+    {
+        $userID = $this->getCurrentLoggedID();
+        if( ! $this->repo->owns($userID, $tripId, $type) )
+        {
+            if( $this->repo->isMember($userID, $tripId) )
+            {
+                return 'member';
+            }
+            return null;
         }
+        return 'owner';
     }
 
 }

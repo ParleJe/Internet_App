@@ -26,7 +26,7 @@ include('src/SessionHandling.php');
                         <img class="round" src="public/resources/placeholder.jpg" alt="profile photo">
                         <div>
                             <h2><?PHP echo $friend->getName().$friend->getSurname() ?></h2>
-                            <h3><?PHP echo $friend->getMNickname() ?></h3>
+                            <h3><?PHP echo $friend->getNickname() ?></h3>
                         </div>
                     </div>
                 </div>

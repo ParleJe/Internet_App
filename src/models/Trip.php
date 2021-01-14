@@ -3,6 +3,7 @@
 
 class Trip implements JsonSerializable
 {
+
     private $trip_id;
     private $trip_name;
     private $destination;

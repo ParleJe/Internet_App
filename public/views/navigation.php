@@ -1,3 +1,4 @@
+<!--TODO locate in views/reusablecomponents-->
 <nav class="flex column round">
 
     <div class="nav-logo-container">

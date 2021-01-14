@@ -2,6 +2,7 @@ import {fetchData} from "./fetchAPI.js";
 
 const view = $('.content');
 const input = document.querySelector('.search-input');
+//TODO change to pure js
 const addEffect = () => {
     $('.profile').on('mouseover mouseout', function() {
         $(this).toggleClass('hover')
@@ -28,7 +29,7 @@ const display = (response) => {
 
 document.querySelector('.search-btn').addEventListener('click', async () => {
     const search = input.value;
-    const jsonResponse = await fetchData({search: search}, String('/fetchUsers'));
+    const jsonResponse = await fetchData({requestType: "user",data: search});
     display(await jsonResponse);
 })
 addEffect();

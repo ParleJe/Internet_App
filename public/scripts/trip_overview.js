@@ -26,15 +26,16 @@ function setMenuActions() {
     $('#participants').on('click', () => {
         participants(optionMenu)
     })
+        .siblings('#create').on('click', () => {
+        plan(view)
+    })
         .siblings('#chat').on('click', () => {
         chat()
     })
         .siblings('#delete').on('click', () => {
         deleteTrip()
     })
-        .siblings('#create').on('click', () => {
-        plan(view)
-    })
+
 }
 
 //TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
@@ -71,7 +72,7 @@ function participants(view) {
 
 //TODO POST COMMENT
 const chat = async () => {
-    const json = await fetchData({search: tripID}, String('/fetchComments'))
+    const json = await fetchData({requestType: 'comment',data: tripID}, String('/fetchComments'))
     displayComments(json);
 }
 const displayComments = (res) => {
@@ -88,7 +89,6 @@ const displayComments = (res) => {
     view = $(".comment-container")
     view.empty();
     res.forEach(comment => {
-        console.log(comment);
         view.append(`
             <div class="comment flow">
                 <a href="blablabla">

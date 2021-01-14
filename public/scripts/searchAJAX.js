@@ -3,16 +3,19 @@ import {fetchData} from "./fetchAPI.js";
 const searchInput = document.querySelector('.search-input');
 const view = $('.content');
 
-$('.search-btn').on( 'click', async function() {
+document.querySelector('.search-btn').addEventListener('click', async() => {
     const input = searchInput.value;
-    const json = await fetchData({search: input}, String('/fetchTrips'));
-    display(json);
-})
-
+    try {
+        const json = await fetchData({requestType: 'trip', data: input});
+        display(json);
+    } catch (e) {
+        alarm(e.message);
+    }})
+//TODO change to template
 const display = (json) => {
 
     view.empty();
-    json.forEach( element => {
+    json.forEach(element => {
         view.append(`
             <div class="search flex column" id="search-${element.trip_id}">
                 <a href="view?tripId=${element.trip_id}"><img src="${element.photo_directory}" alt="trip" class="search-img round"/></a>

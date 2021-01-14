@@ -32,8 +32,8 @@
             }
             return null;
         }
-
-        public function fetchData() {
+//TODO to fetchController
+        public function fetchData():void {
 
             $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
             if ($contentType === "application/json") {

@@ -1,8 +1,16 @@
+<!--TODO get User permissions to this trip-->
 <?PHP
 include('src/SessionHandling.php');
 
-if( ! isset($trip)) {
+if( ! (isset($trip) && isset($type))) {
     die('something went wrong');
+}
+$controller = new UserController();
+$permission = $controller->getUserPermission($trip->getTripId(), $type);
+$permission = strtolower($permission);
+if( is_null($permission) && $type !== 'template') //everyone can access to the template
+{
+    die('You do not have permission to see this page');
 }
 ?>
 <!DOCTYPE html>
@@ -62,7 +70,12 @@ if( ! isset($trip)) {
                 <?PHP if($type === 'template')
                     echo '<h1 class="menu" id="create">Create Trip From This Template</h1>'
                 ?>
-                <h1 class="menu" id="delete">Delete <?PHP echo $type ?></h1>
+                <?PHP if($permission === 'owner')
+                echo '<h1 class="menu" id="delete">Delete</h1>'
+                ?>
+                <?PHP if($permission ==='owner' && $type !== 'template')
+                echo '<h1 class="vulpcode">Copy vulpcode</h1>'
+                ?>
             </div>
         </div>
     </section>

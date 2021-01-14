@@ -9,6 +9,8 @@ class TripRepository extends Repository {
         $this->connection = $this->database->getInstance();
     }
 
+
+    //______________________for trip table____________________
     public function getTripByName(string $name): array {
         $statement = $this->database->getInstance()->prepare('
             SELECT * FROM trip where trip_name LIKE ?;
@@ -87,6 +89,7 @@ class TripRepository extends Repository {
 
     }
 
+    //______________________for planned_trip table____________________
     public function fetchPlannedTripsByUserId(int $userID): array {
         $connection = $this->database->getInstance();
 
@@ -108,7 +111,7 @@ class TripRepository extends Repository {
         $connection = $this->database->getInstance();
 
         $stmt = $connection->prepare('
-        SELECT * FROM planned_trip natural join trip 
+        SELECT * FROM planned_trip_details 
         WHERE trip_id = ? AND mortal_id = ?;
         ');
 
@@ -128,27 +131,41 @@ class TripRepository extends Repository {
         SELECT * FROM planned_trip_details WHERE date_start > now() AND mortal_id = ? ORDER BY date_start LIMIT 1;
         ');
         $stmt->execute([$userID]);
-        return $stmt->fetchObject('Trip');
+        $obj = $stmt->fetchObject('Trip');
+        return $obj === false? null: $obj;
     }
 
     public function setPlannedTrip(array $data): bool {
-    $con = $this->database->getInstance();
+        $con = $this->database->getInstance();
 
-    $test = $this->fetchPlannedTripsByTripId($data['trip_id']);
-    if( ! is_null( $test ) ){
-        //TODO render message 'cant plan more than one!'
-        return false;
-    }
+        $test = $this->fetchPlannedTripsByTripId($data['trip_id'], $data['mortal_id']);
+        if( ! is_null( $test ) ){
+            //TODO render message 'cant plan more than one!'
+            return false;
+        }
 
-    $stmt = $con->prepare('
+        $stmt = $con->prepare('
         INSERT INTO planned_trip (trip_id, date_start, date_end, mortal_id, vulp_code) 
         VALUES                   (?, ?, ?, ?, ?); 
         ');
 
-    return $stmt->execute($data);
+        return $stmt->execute([
+            $data["trip_id"],
+            $data["start"],
+            $data["end"],
+            $data["mortal_id"],
+            $data["vulp_code"]
+        ]);
 
     }
 
+    //TODO
+    public function deletePlannedTrip($tripID):bool
+    {
+        return true;
+    }
+
+    //___________________help functions______________________________
     public function checkVulpCode(string $vulp_code): bool {
         $stmt = $this->connection->prepare('
         SELECT * FROM planned_trip where vulp_code = ?;
@@ -158,6 +175,8 @@ class TripRepository extends Repository {
         return $trip;
     }
 
+
+    //membership functions
     public function bindUserWithPlannedTrip(string $code, int $userID) {
         $stmt = $this->connection->prepare('
         SELECT * from planned_trip_details where vulp_code = ?;
@@ -175,12 +194,19 @@ class TripRepository extends Repository {
 
     }
 
-    public function getMemberTripsByUserId(int $userID) {
+    public function getMemberTripsByUserId(int $userID): array
+    {
         $stmt = $this->connection->prepare('
         SELECT * FROM member_planned_trip_details WHERE mortal_id = ?;
         ');
         $stmt->execute([$userID]);
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Trip');
+    }
+
+    //TODO
+    public function deleteMembership(int $tripID, int $userID): bool
+    {
+        return true;
     }
 
 }

@@ -81,11 +81,20 @@ class TripController extends AppController
 
     public function view()
     {
-        $tripID = $_GET["tripId"];
-        if ($_GET["type"] === 'template') {
-            $trip = $this->repo->getTripById($tripID);
-        } else {
-            $trip = $this->repo->fetchPlannedTripsByTripId($tripID, $this->getCurrentLoggedID());
+        $tripID = $_GET["id"];
+        switch ($_GET["type"]) {
+            case 'template':$trip = $this->repo->getTripById($tripID); break;
+            case 'planned': $trip = $this->repo->fetchPlannedTripsByTripId($tripID, $this->getCurrentLoggedID()); break;
+            case 'member':
+                $trips = $this->repo->getMemberTripsByUserId($this->getCurrentLoggedID());
+                foreach ($trips as $item) {
+
+                    if ($item->getTripId() === (int)$tripID) {
+                        $trip = $item;
+                        break;
+                    }
+            }
+            break;
         }
         if (is_null($trip)) {
             return Routing::run('trips');
