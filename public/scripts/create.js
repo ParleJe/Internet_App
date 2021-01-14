@@ -3,7 +3,7 @@ import {addMarker, removeMarker} from "./hereAPI/helpers.js";
 
 const mapContainer = document.querySelector('#map-container');
 const PoiButton = document.querySelector('#POI');
-
+const mapExitBtn = document.querySelector('#map-container>i');
 map.addEventListener('longpress', evt => {
     const pointer = evt.currentPointer;
     if((evt.target instanceof H.map.Marker)){
@@ -19,6 +19,9 @@ $('#map-container>i, #POI').on( 'click', function() {
 })*/
 
 mapContainer.style.display = 'none';
-createPoiButton.addEventListener('click', () => {
+PoiButton.addEventListener('click', () => {
+    $('#map-container').fadeToggle('slow'); //JQuery for animations;
+});
+mapExitBtn.addEventListener('click', () => {
     $('#map-container').fadeToggle('slow'); //JQuery for animations;
 })

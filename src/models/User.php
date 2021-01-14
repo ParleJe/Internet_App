@@ -7,25 +7,26 @@ class User implements JsonSerializable
     const USER = 2;
 
 
-    private int $mortal_id;
-    private string $mail;
-    private string $password;
-    private int $role_id;
-    private string $name;
-    private string $surname;
-    private string $nickname;
-    private bool $is_log;
+    private ?int $mortal_id;
+    private ?string $mail;
+    private ?string $password;
+    private ?int $role_id;
+    private ?string $name;
+    private ?string $surname;
+    private ?string $nickname;
+    private ?bool $is_log;
 
-    public function __construct (array $data = null) {
-        if( ! is_null($data)){
-        $this->setMortalId($data['mortal_id']);
-        $this->setMail($data['mail']);
-        $this->setPassword($data['password']);
-        $this->setRoleId($data['role_id']);
-        $this->setName($data['name']);
-        $this->setSurname($data['surname']);
-        $this->setNickname($data['nickname']);
-        $this->setIsLog($data['is_log']);
+    public function __construct(array $data = null)
+    {
+        if (!is_null($data)) {
+            $this->setMortalId($data['mortal_id']);
+            $this->setMail($data['mail']);
+            $this->setPassword($data['password']);
+            $this->setRoleId($data['role_id']);
+            $this->setName($data['name']);
+            $this->setSurname($data['surname']);
+            $this->setNickname($data['nickname']);
+            $this->setIsLog($data['is_log']);
         }
     }
 
@@ -35,7 +36,7 @@ class User implements JsonSerializable
             'mortal_id' => $this->getMortalId(),
             'mail' => $this->getMail(),
             'password' => $this->getPassword(),
-            //'role_id' => $this->getRoleId(),
+            'role_id' => $this->getRoleId(),
             'name' => $this->getName(),
             'surname' => $this->getSurname(),
             'nickname' => $this->getNickname(),
@@ -43,44 +44,33 @@ class User implements JsonSerializable
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRoleId() {
+
+    public function getRoleId(): ?int
+    {
         return $this->role_id;
     }
 
-    /**
-     * @param mixed $role_id
-     * @return User
-     */
-    public function setRoleId(int $role_id): User {
+
+    public function setRoleId($role_id): void
+    {
         $this->role_id = $role_id;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function isLog()
+
+    public function isLog(): bool
     {
         return $this->is_log;
     }
 
-    /**
-     * @param mixed $is_log
-     * @return User
-     */
-    public function setIsLog($is_log)
+
+    public function setIsLog($is_log): void
     {
         $this->is_log = $is_log;
-        return $this;
     }
 
 
-
-
-    public function getMortalId() : int{
+    public function getMortalId(): int
+    {
         return $this->mortal_id;
     }
 
@@ -91,7 +81,7 @@ class User implements JsonSerializable
     }
 
 
-    public function getMail()
+    public function getMail(): ?string
     {
         return $this->mail;
     }
@@ -103,7 +93,7 @@ class User implements JsonSerializable
     }
 
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -115,12 +105,12 @@ class User implements JsonSerializable
     }
 
 
-    public function getRoleName()
+    public function getRoleName(): ?int
     {
         return $this->role_id;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -132,7 +122,7 @@ class User implements JsonSerializable
     }
 
 
-    public function getSurname()
+    public function getSurname(): ?string
     {
         return $this->surname;
     }
@@ -144,7 +134,7 @@ class User implements JsonSerializable
     }
 
 
-    public function getNickname()
+    public function getNickname(): ?string
     {
         return $this->nickname;
     }
@@ -154,7 +144,6 @@ class User implements JsonSerializable
     {
         $this->nickname = $nickname;
     }
-
 
 
 }

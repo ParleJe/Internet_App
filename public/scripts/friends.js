@@ -1,21 +1,19 @@
 import {fetchData} from "./fetchAPI.js";
-import {friendsProfiles} from "./GUIelements.js";
 
 const view = $('.content');
 const input = document.querySelector('.search-input');
-//TODO change to pure js
-const addEffect_old = () => {
-    $('.profile').on('mouseover mouseout', function() {
-        $(this).toggleClass('hover')
-    })
-}
+const searchBtn = document.querySelector('.search-btn');
+
 const addEffect = () => {
     const profileTabs = document.querySelectorAll('.profile')
-    friendsProfiles.map(item => item.addEventListener('click', () => {
-        this.toggleClass('hover');
-    }))
+    profileTabs.forEach(item =>addMultipleEvents(item, "mouseout mouseover",() => item.classList.toggle('hover') ))
 }
-
+const addMultipleEvents = (element, eventNames, func) => {
+    let events = eventNames.split(' ');
+    events.map(event => {
+        element.addEventListener(event, func, false);
+    })
+}
 const display = (response) => {
     view.empty();
     response.forEach( el => {
@@ -34,9 +32,10 @@ const display = (response) => {
     addEffect();
 }
 
-document.querySelector('.search-btn').addEventListener('click', async () => {
+searchBtn.addEventListener('click', async () => {
     const search = input.value;
     const jsonResponse = await fetchData({requestType: "user",data: search});
     display(await jsonResponse);
 })
+
 addEffect();
