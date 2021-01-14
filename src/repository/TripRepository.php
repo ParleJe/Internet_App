@@ -125,7 +125,7 @@ class TripRepository extends Repository {
 
         $stmt = $connection->prepare('
         SELECT * FROM planned_trip_details 
-        WHERE trip_id = ? AND mortal_id = ?;
+        WHERE trip_id = ? AND mortal_id = ? LIMIT 1;
         ');
 
         $stmt->execute([
@@ -133,7 +133,7 @@ class TripRepository extends Repository {
             $userID
         ]);
 
-        $trip = $stmt->fetchObject('Trip', PDO::FETCH_PROPS_LATE);
+        $trip = $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip')[0];
         $trip = $trip?: null;
         return $trip;
 
@@ -182,7 +182,7 @@ class TripRepository extends Repository {
         return $stmt->execute([$plannedTripID]);
     }
 
-    //TODO
+    //TODO admin
     public function getAllPlannedTrips(): ?array {
 
     }

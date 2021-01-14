@@ -17,14 +17,7 @@ class User implements JsonSerializable
     private ?string $nickname;
     private ?bool $is_log;
 
-    #[ArrayShape(['mortal_id' => 'int',
-        'mail' => "null|string",
-        'password' => "null|string",
-        'role_id' => "int|null",
-        'name' => "null|string",
-        'surname' => "null|string",
-        'nickname' => "null|string",
-        'is_log' => "bool"])]
+
     public function __construct(array $data = null)
     {
         $this->setMortalId($data['mortal_id']);
@@ -38,14 +31,6 @@ class User implements JsonSerializable
     }
 
 
-    #[ArrayShape(['mortal_id' => 'int',
-        'mail' => "null|string",
-        'password' => "null|string",
-        'role_id' => "int|null",
-        'name' => "null|string",
-        'surname' => "null|string",
-        'nickname' => "null|string",
-        'is_log' => "bool"])]
     public function jsonSerialize(): array
     {
         return [

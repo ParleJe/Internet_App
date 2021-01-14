@@ -29,10 +29,11 @@ class UserController extends AppController
 
     public function getUserPermission($tripId, $type): ?string
     {
+        $this->repository = new UserRepository();
         $userID = $this->getCurrentLoggedID();
         try {
-            if (!$this->repo->owns($userID, $tripId, $type)) {
-                if ($this->repo->isMember($userID, $tripId)) {
+            if (!$this->repository->owns($userID, $tripId, $type)) {
+                if ($this->repository->isMember($userID, $tripId)) {
                     return 'member';
                 }
                 return null;
