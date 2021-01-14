@@ -101,7 +101,8 @@ class UserRepository extends Repository
 
     }
 
-    public function deleteUser(int $userID):bool {
+    public function deleteUser(int $userID): bool
+    {
         $stmt = $this->database->getInstance()->prepare('
         DELETE FROM mortal WHERE mortal_id = ?;
         ');
@@ -109,11 +110,13 @@ class UserRepository extends Repository
         return $stmt->execute([$userID]);
     }
 
-    //TODO change location to tripRepository
+    /*
+     * @throws Exception if case is not found
+     */
     public function owns(int $userId, int $tripId, string $type): bool
     {
         $trip = $tripId;
-        switch($type){
+        switch ($type) {
             case 'template':
                 $stmt = $this->database->getInstance()->prepare('
                 SELECT COUNT(1) FROM trip WHERE mortal_id = ? AND trip_id = ? ;
@@ -126,12 +129,15 @@ class UserRepository extends Repository
                 SELECT COUNT(1) FROM planned_trip WHERE mortal_id = ? AND planned_trip_id = ? ;
             ');
                 break;
-            case 'member': return false;
+            case 'member':
+                return false;
         }
 
-
-        $stmt->execute([$userId, $trip]);
-        return $stmt->fetchColumn() === 1;
+        if (isset($stmt)) {
+            $stmt->execute([$userId, $trip]);
+            return $stmt->fetchColumn() === 1;
+        }
+        throw new Exception('not supported');
     }
 
     public function isMember(int $userID, int $tripID): bool
@@ -139,7 +145,7 @@ class UserRepository extends Repository
         $repository = new TripRepository();
         $trips = $repository->getMemberTripsByUserId($userID);
         foreach ($trips as $trip) {
-            if($trip->gettripId() === $tripID) return true;
+            if ($trip->gettripId() === $tripID) return true;
         }
         return false;
     }
