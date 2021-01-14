@@ -15,27 +15,11 @@
             $this->render('registration');
         }
 
-        public function trips() {
-            $repository = new TripRepository();
-            $trips = $repository->getTripsByUserId($this->getCurrentLoggedID());
-            $this->render('trips', ['trips'=> $trips]);
-        }
-
         public function create() {
             $this->render('create');
         }
 
-        public function friends() {
-            $repository = new UserRepository();
-            $friends = $repository->getFriendsOfUser($this->getCurrentLoggedID());
-            $this->render('friends', ['friends'=> $friends]);
-        }
-
-        public function settings() {
-            $this->render('profile');
-        }
-
-        public function trip_overview() {
-            $this->render('trip_overview');
+        public function test () {
+            $this->render('test');
         }
     }

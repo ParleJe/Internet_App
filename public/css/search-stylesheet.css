@@ -1,41 +1,12 @@
 
-.top-bar {
-    border-radius: var(--radius);
-    width: 50%;
-    padding: 0;
-    background: #FFFFFF;
-    display: flex;
-}
-
-.top-bar>input {
-    border-radius: var(--radius) 0 0 var(--radius);
-    margin: 0;
-    width: 80%;
-}
-
-.top-bar>button {
-    font-weight: 700;
-    color: #282e3f;
-    margin: 0;
-    font-size: 1.5em;
-    background: #6BA2EB;
-    border: 0;
-    width: 20%;
-    border-radius: 0 2em 2em 0;
-}
-
-.top-bar>button:hover {
-    background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 0%, #6BA2EB 120%) 0 0 no-repeat padding-box;
-}
-
 .content {
     width: 100%;
-    height: 88%;
+    height: 100%;
     background: transparent;
     margin-top: 2vw;
     display: grid;
     grid-template-rows: 1fr;
-    grid-gap: 2em;
+    grid-gap: 4em;
     grid-auto-flow: column;
     grid-auto-columns: 50%;
 
@@ -43,46 +14,32 @@
     align-items: center;
     overflow: auto;
 }
-
 .search {
     margin: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
-
-.search>img {
-    border-radius: calc(var(--radius)/2);
+.search-img {
     object-fit: cover;
     width: 100%;
     height: 40vh;
 }
-
 .search>div {
     background: white;
-    padding-top: 2em;
-    padding-left: 1em;
+    padding: 3em;
     border-radius: 2em;
     justify-self: flex-end;
-    margin-top: 10vh;
+    margin-top: 5vh;
     width: 90%;
     text-align: left;
 }
-
-h2 {
-    padding-left: 1em;
+.search h2 {
+    font-weight: 500;
     font-size: 2em;
 }
-
-p {
-    font-size: 1.2em;
-    padding-bottom: 1em;
+.search p {
+    font-size: 2em;
 }
-
-
 @media screen and (max-width:801px), screen and (max-device-width:801px) {
     .top-bar {
         width: 80%;
@@ -105,20 +62,15 @@ p {
         height: unset;
         justify-content: unset;
     }
-    .search>img {
+    .search-img {
         height: 20vh;
         width: 80%;
     }
-    #search-2 {
-        grid-column: unset;
-    }
-    #search-2>img {
-        height: 20vh;
-    }
+
     .search>div {
         border-radius: 1.2em;
         visibility: visible;
-        background: white;
+        background: var(--element-background-color);
         width: 60%;
         justify-self: unset;
         margin-top: 0;

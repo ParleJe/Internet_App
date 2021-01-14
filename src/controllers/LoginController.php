@@ -23,19 +23,32 @@ class LoginController extends AppController {
             return $this->render('login', ['messages' => ['Wrong mail!']]);
         }
 
-
         if( ! password_verify( $passwd, $user->getPassword() ) )
         {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-        if(session_start()) {
+        if( $user->isLog() ) {
+            return $this->render('login', ['messages' => ['User already logged in']]);
+        }
+
+        if(session_start() && $userDB->setUserStatus($user->getMortalId())) {
             $_SESSION['user_id'] = $user->getMortalId();
             $_SESSION['isLoggedIn'] = true;
-            return Routing::run('trips/');
+            return Routing::run('trips');
         }
 
         return $this->render('login', ['messages' => ['Something went wrong']]);
+    }
+
+    public function logout () {
+        $repo = new UserRepository();
+        if( $repo->setUserStatus( $this->getCurrentLoggedID(), 0) ){
+            session_unset();
+            session_destroy();
+            return Routing::run('');
+        }
+        // TODO WHAT IF IT WONT WORK ???
     }
 
     public function registration() {
@@ -49,8 +62,13 @@ class LoginController extends AppController {
         $mail = $_POST["email"];
         $login = $_POST["login"];
         $passwd = password_hash( $_POST["password"], PASSWORD_ARGON2ID, $this->options );
-        $newUser = User::initiateUserWithValues(null, $mail, $passwd, User::USER,
-                                                null, null, $login);
+        $newUser = new User([
+            'user_id' => null,
+            'mail' => $mail,
+            'password' => $passwd,
+            'role_id' => User::USER,
+            'nickname' => $login
+        ]);
 
         $userDB = new UserRepository();
         if( ! $userDB->setUserByTransaction( $newUser ) ) {

@@ -7,122 +7,30 @@ include('src/SessionHandling.php');
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/search-stylesheet.css">
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <script type="module" src="public/scripts/searchAJAX.js" DEFER></script>
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <title>Search</title>
 </head>
 
 <body>
 
-<?PHP
 
-?>
+<?PHP include('public/views/navigation.php') ?>
 
-<nav id="navigation-bar">
-
-    <div class="nav-logo-container">
-        <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
-    </div>
-
-    <ol>
-        <li class="button-container">
-            <a class="new-button" href="create">
-                Get to the Boat
-                <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-button" href="trips">
-                <i class="fas fa-spinner"></i>
-                <pre>Your Trips</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="Calendar">
-                <i class="far fa-calendar-alt"></i>
-                <pre>Calendar</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="friends">
-                <i class="fas fa-user-friends"></i>
-                <pre>Friends</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="settings">
-                <i class="fas fa-cog"></i>
-                <pre>Settings</pre>
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-button" href="search">
-                <i class="fas fa-map-marker-alt"></i>
-                <pre>Search</pre>
-            </a>
-        </li>
-        <li>
-            <div></div>
-        </li>
-    </ol>
-</nav>
-
-<div class="content-container">
-    <div class="top-bar">
-        <input name="search" type="text" placeholder="Search">
-        <button>Search</button>
-    </div>
-    <div class="content">
-
-        <div class="search" id="search-1">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-2">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-        <div class="search" id="search-3">
-            <img src="public/resources/placeholder.jpg" alt="trip"/>
-            <div>
-                <h2>LOREM IPSUM</h2>
-                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-            </div>
-        </div>
-
-    </div>
+<div class="content-container flex column">
+    <!--<div class="top-bar round">
+        <input class="search-input" name="search" type="text" placeholder="Search">
+        <button class="search-btn round">Search</button>
+    </div>-->
+    <?PHP include('public/views/searchBar.php') ?>
+    <div class="content"></div>
 </div>
 </body>
+        <!--<div class="search" id="search-1">
+            <a><img src="public/resources/placeholder.jpg" alt="trip" class="search-img"/></a>
+            <div>
+                <h2>LOREM IPSUM</h2>
+                <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+            </div>
+        </div>-->

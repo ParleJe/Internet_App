@@ -1,69 +1,76 @@
 <?php
 
 
-class User
+class User implements JsonSerializable
 {
     const ADMIN = 1;
     const USER = 2;
 
-    //keep order as in the database
-    public $mortal_id;
-    public $mail;
-    public $password;
-    public $role_id;
-    public $name;
-    public $surname;
-    public $nickname;
 
-       /* /**
-         * User constructor.
-         * @param $mortal_id
-         * @param $mail
-         * @param $password
-         * @param $role_name
-         * @param $name
-         * @param $surname
-         * @param $nickname
-         */
-    /*public function __construct($mortal_id, $mail, $password, $role_name, $name, $surname, $nickname)
+    private ?int $mortal_id;
+    private ?string $mail;
+    private ?string $password;
+    private ?int $role_id;
+    private ?string $name;
+    private ?string $surname;
+    private ?string $nickname;
+    private ?bool $is_log;
+
+    public function __construct(array $data = null)
     {
-        $this->mortal_id = $mortal_id;
-        $this->mail = $mail;
-        $this->password = $password;
-        $this->role_name = $role_name;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->nickname = $nickname;
-    }*/
-
-
-    public static function initiateUserWithValues ($mortal_id, $mail, $password, $role_id, $name, $surname, $nickname): User {
-        $user = new User();
-
-        $user->mortal_id = $mortal_id;
-        $user->mail = $mail;
-        $user->password = $password;
-        $user->role_id = $role_id;
-        $user->name = $name;
-        $user->surname = $surname;
-        $user->nickname = $nickname;
-        
-        return $user;
-
-    }
-    public function getVariablesToArray(): array {
-        $array = [];
-        foreach($this as $value) {
-            $array[] = $value;
+        if (!is_null($data)) {
+            $this->setMortalId($data['mortal_id']);
+            $this->setMail($data['mail']);
+            $this->setPassword($data['password']);
+            $this->setRoleId($data['role_id']);
+            $this->setName($data['name']);
+            $this->setSurname($data['surname']);
+            $this->setNickname($data['nickname']);
+            $this->setIsLog($data['is_log']);
         }
-        return $array;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'mortal_id' => $this->getMortalId(),
+            'mail' => $this->getMail(),
+            'password' => $this->getPassword(),
+            'role_id' => $this->getRoleId(),
+            'name' => $this->getName(),
+            'surname' => $this->getSurname(),
+            'nickname' => $this->getNickname(),
+            'is_log' => $this->isLog()
+        ];
     }
 
 
+    public function getRoleId(): ?int
+    {
+        return $this->role_id;
+    }
 
 
+    public function setRoleId($role_id): void
+    {
+        $this->role_id = $role_id;
+    }
 
-    public function getMortalId() : int{
+
+    public function isLog(): bool
+    {
+        return $this->is_log;
+    }
+
+
+    public function setIsLog($is_log): void
+    {
+        $this->is_log = $is_log;
+    }
+
+
+    public function getMortalId(): int
+    {
         return $this->mortal_id;
     }
 
@@ -74,7 +81,7 @@ class User
     }
 
 
-    public function getMail()
+    public function getMail(): ?string
     {
         return $this->mail;
     }
@@ -86,7 +93,7 @@ class User
     }
 
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -98,19 +105,12 @@ class User
     }
 
 
-    public function getRoleName()
+    public function getRoleName(): ?int
     {
         return $this->role_id;
     }
 
-
-    public function setRoleName($role_name): void
-    {
-        $this->role_name = $role_name;
-    }
-
-
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -122,7 +122,7 @@ class User
     }
 
 
-    public function getSurname()
+    public function getSurname(): ?string
     {
         return $this->surname;
     }
@@ -134,7 +134,7 @@ class User
     }
 
 
-    public function getNickname()
+    public function getNickname(): ?string
     {
         return $this->nickname;
     }
@@ -144,7 +144,6 @@ class User
     {
         $this->nickname = $nickname;
     }
-
 
 
 }

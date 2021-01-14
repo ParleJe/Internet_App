@@ -13,11 +13,11 @@
             <div class="logo-container">
                 <img src="public/resources/logo.svg" class="login-logo" alt="logo of the project">
             </div>
-            <div class="login-container">
+            <div class="login-container flex column">
 
-                <form class="login" action="login" method="post" >
-                    <input name="email" type="email" placeholder="email@email.com">
-                    <input name="password" type="password" placeholder="password">
+                <form class="login flex column round" action="login" method="post" >
+                    <input class="round" name="email" type="email" placeholder="email@email.com">
+                    <input class="round" name="password" type="password" placeholder="password">
                     <p> don't have an account? Click <a href="registration">HERE</a></p>
                     <div class="message">
                     <?php

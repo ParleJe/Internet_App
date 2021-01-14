@@ -1,5 +1,8 @@
 <?PHP
 include('src/SessionHandling.php');
+if (! isset( $trips ) || ! isset( $profile )) {
+    die();
+}
 ?>
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
@@ -11,106 +14,31 @@ include('src/SessionHandling.php');
 
 <body>
 
-<?PHP
+<?PHP include('public/views/navigation.php') ?>
 
-?>
+<section class="content-container flex column">
 
-<nav id="navigation-bar">
+    <div class="content flex column">
 
-    <div class="nav-logo-container">
-        <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
-    </div>
-
-    <ol>
-        <li class="button-container">
-            <a class="new-button" href="create">
-                Get to the Boat
-                <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-button" href="trips">
-                <i class="fas fa-spinner"></i>
-                <pre>Your Trips</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="Calendar">
-                <i class="far fa-calendar-alt"></i>
-                <pre>Calendar</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="friends">
-                <i class="fas fa-user-friends"></i>
-                <pre>Friends</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="settings">
-                <i class="fas fa-cog"></i>
-                <pre>Settings</pre>
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-button" href="search">
-                <i class="fas fa-map-marker-alt"></i>
-                <pre>Search</pre>
-            </a>
-        </li>
-        <li>
-            <div></div>
-        </li>
-    </ol>
-</nav>
-
-<section class="content-container">
-
-    <div class="content">
-
-        <div class="profile">
-            <div>
+        <div class="profile flex column round">
+            <div class="flex column">
                 <img src="public/resources/placeholder.jpg"  alt="profile photo">
                 <!--icon for add to friends or delete account-->
-                <h2>NAME SURNAME</h2>
-                <h3>LOGIN</h3>
+                <h2><?PHP echo $profile->getName().' '.$profile->getSurname() ?></h2>
+                <h3> <?PHP echo $profile->getNickname() ?> </h3>
             </div>
 
 
 
-            <section class="trips-created">
+            <section class="round">
                 <!--here all created trips by user-->
-                <div class="trip" id="trip-1">
+                <?PHP foreach ($trips as $trip): ?>
+                <div class="trip round" id="<?PHP echo $trip->getTripId() ?>" style="background-image: url( ' <?PHP echo $trip->getPhotoDirectory() ?> ' );">
                     <!--photo of the trip as background-->
-                    <h2>NAME</h2>
+                    <h2><?PHP echo $trip->getTripName() ?></h2>
                 </div>
+                <?PHP endforeach; ?>
 
-                <div class="trip" id="trip-2">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-3">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-4">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-5">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-6">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
             </section>
 
         </div>
