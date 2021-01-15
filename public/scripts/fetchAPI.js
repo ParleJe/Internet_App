@@ -1,7 +1,13 @@
-const fetchUrl = 'http://localhost:8080/fetchData';
-const fetchData = async (data) => {
+const fetchUrl = document.location.origin+'/endPoint';
+//supported methods
+const post = "POST"; //to retrieve data from server
+const del = "DELETE"; //to delete record
+const put = "PUT"; //to put record in db
+
+
+const fetchData = async (data, requestMethod) => {
     const response = await fetch(fetchUrl, {
-        method: "POST",
+        method: requestMethod,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -12,7 +18,10 @@ const fetchData = async (data) => {
         const message = `An error has occured: ${response.status}`;
         throw new Error(message);
     }
-    return await response.json();
+    if(response.status === 204) { //no-content
+        return [];
+    }
+    return response.json();
 }
 
-export {fetchData}
+export {fetchData, post, del, put}

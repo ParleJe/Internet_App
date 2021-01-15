@@ -11,17 +11,16 @@ class Comment implements JsonSerializable
     private ?int $mortal_id;
     private ?int $planned_trip_id;
 
-    #[ArrayShape(['comment_id' => "int|null", 'content' => "null|string", 'add_date' => "null|string", 'mortal_id' => "int|null", 'planned_trip_id' => "int|null"])]
     public function __construct(array $data = null)
     {
             $this->comment_id = $data['comment_id'];
             $this->content = $data['content'];
             $this->add_date = $data['add_date'];
             $this->mortal_id = $data['mortal_id'];
+            $this->setPlannedTripId($data['planned_trip_id']);
     }
 
 
-    #[ArrayShape(['comment_id' => "int|null", 'content' => "null|string", 'add_date' => "null|string", 'mortal_id' => "int|null", 'planned_trip_id' => "int|null"])]
     public function jsonSerialize(): array
     {
         return [

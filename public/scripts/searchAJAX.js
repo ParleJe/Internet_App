@@ -1,4 +1,4 @@
-import {fetchData} from "./fetchAPI.js";
+import {fetchData, post} from "./fetchAPI.js";
 
 const searchInput = document.querySelector('.search-input');
 const view = $('.content');
@@ -6,10 +6,10 @@ const view = $('.content');
 document.querySelector('.search-btn').addEventListener('click', async() => {
     const input = searchInput.value;
     try {
-        const json = await fetchData({requestType: 'trip', data: input});
+        const json = await fetchData({dataType: 'trip', data: input}, post);
         display(json);
     } catch (e) {
-        alarm(e.message);
+        console.log(e.message);
     }})
 //TODO change to template
 const display = (json) => {

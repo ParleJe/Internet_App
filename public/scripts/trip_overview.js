@@ -1,16 +1,9 @@
-import {fetchData} from "./fetchAPI.js";
+import {fetchData, post, put} from "./fetchAPI.js";
 import {map} from "./hereAPI/map.js"
 
 let details;
 //TODO GET URL DYNAMICALLY
-const apiUrl = "http://localhost:8080";
 const tripID = getTripID();
-
-$('li').on('mouseout mouseover', function () {
-    $(this).toggleClass('hover');
-}).on('click', function () {
-    updateDescription($(this).attr('id'));
-})
 
 function getTripID() {
     let url = document.URL;
@@ -24,11 +17,11 @@ function setMenuActions() {
     $('#participants').on('click', () => {
         participants(optionMenu)
     })
-        .siblings('#create').on('click', () => {
-        plan(view)
-    })
         .siblings('#chat').on('click', () => {
         chat()
+    })
+        .siblings('#create').on('click', () => {
+        plan(view)
     })
         .siblings('#delete').on('click', () => {
         deleteTrip()
@@ -69,7 +62,7 @@ function participants(view) {
 
 //TODO POST COMMENT
 const chat = async () => {
-    const json = await fetchData({requestType: 'comment',data: tripID}, String('/fetchComments'))
+    const json = await fetchData({dataType:"comment",data: tripID}, post);
     displayComments(json);
 }
 const displayComments = (res) => {
@@ -79,14 +72,19 @@ const displayComments = (res) => {
             <div class="comment-container flex column round">
             </div>
             <div class="comment-add flex round">
-                <input type="text">
-                <button class="round">ADD</button>
+                <input type="text" id="comment-content">
+                <button class="round" id="add-comment">ADD</button>
             </div>
         `)
+    document.querySelector('#add-comment').addEventListener('click', postComment );
     view = $(".comment-container")
     view.empty();
-    res.forEach(comment => {
-        view.append(`
+    alert(typeof res);
+    res.forEach(comment => addComment(comment));
+}
+const addComment = (comment) => {
+    const view = $(".comment-container");
+    view.append(`
             <div class="comment flow">
                 <a href="blablabla">
                     <h1>${comment.mortal_id}</h1>
@@ -94,7 +92,21 @@ const displayComments = (res) => {
                 <p>${comment.content}</p>
             </div>
             `);
-    })
+}
+const postComment = async () => {
+    const input = document.querySelector('#comment-content');
+    const content = input.value;
+    if(content === ''){
+        alert("You cannot post empty comment")
+        return;
+    }
+    try {
+    const addedComment = await fetchData({dataType:'comment', data: {content: content, tripID: tripID}}, put);
+    addComment(addedComment);
+    } catch (e) {
+        console.error(e.message);
+    }
+    input.value = '';
 }
 function initMap(data) {
     data.forEach(mark => {
@@ -107,7 +119,6 @@ function initMap(data) {
         map.setCenter(localization);
     })
 }
-//TODO AJAX POST DELETE
 function deleteTrip() {
     if (confirm("Are you sure you want to delete it?")) {
         console.log('deleted')
@@ -127,7 +138,7 @@ function plan(view) {
     `)
 }
 async function getDetails() {
-    details = await fetchData({requestType:"poi" ,data: tripID})
+    details = await fetchData({dataType:"poi" ,data: tripID}, post);
     initMap(details);
 
 }
@@ -142,6 +153,11 @@ function updateDescription(id) {
 $('#map-container').css('display', 'none')
 $('#map-container>i, #map-toggle').on('click', function () {
     $('#map-container').fadeToggle('slow')
+})
+$('li').on('mouseout mouseover', function () {
+    $(this).toggleClass('hover');
+}).on('click', function () {
+    updateDescription($(this).attr('id'));
 })
 getDetails();
 setMenuActions();

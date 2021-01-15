@@ -1,4 +1,4 @@
-import {fetchData} from "./fetchAPI.js";
+import {fetchData, put} from "./fetchAPI.js";
 
 const codeDiv = document.querySelector('#take-part');
 const membersContainer = document.querySelector('#members');
@@ -7,7 +7,7 @@ const trips = document.querySelectorAll('.trip');
 document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
     alert(codeInput.value);
 
-        const response = await fetchData({requestType:'membership',data: codeInput.value});
+        const response = await fetchData({dataType:'membership',data: codeInput.value}, put);
         display(response);
         addListener();
 })
