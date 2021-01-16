@@ -60,7 +60,10 @@
                         </div>
 
                 <?php endforeach; ?>
-
+                        <div class="trip flex column round" id="create-new-mobile">
+                            <h3>Create New Trip !!!</h3>
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
                 </div>
             </div>
 
@@ -76,7 +79,7 @@
                             <form method="get" action="view">
                                 <div><input type="image"  alt="trip image" src="<?php echo $trip->getPhotoDirectory() ?>" ></div>
                                 <input type="hidden" name="id" value="<?php echo $trip->getTripId() ?>">
-                                <input type="hidden" name="type" value="planned">
+                                <input type="hidden" name="type" value="planned">1
                             </form>
                             <h4><?PHP echo $trip->getDateStart().' - '.$trip->getDateEnd() ?></h4>
                             <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>

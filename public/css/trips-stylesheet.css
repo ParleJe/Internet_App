@@ -149,6 +149,9 @@ form>div {
     transition: 500ms;
 }
 
+#create-new-mobile {
+    display: none;
+}
 @media screen and (max-width:801px), screen and (max-device-width:801px) {
     .content {
         grid-gap: 1em;
@@ -183,5 +186,9 @@ form>div {
     .trip-container{
         height: unset;
         overflow: unset;
+    }
+
+    #create-new-mobile {
+        display: flex;
     }
 }
