@@ -35,6 +35,16 @@ include('src/SessionHandling.php');
     </div>
 </section>
 
-
-
 </body>
+
+<template id="profile-template">
+    <div class="round">
+        <div class="profile round" id="">
+            <img class="round" src="" alt="profile photo">
+            <div>
+                <h2></h2>
+                <h3></h3>
+            </div>
+        </div>
+    </div>
+</template>
