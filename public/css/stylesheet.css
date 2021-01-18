@@ -15,6 +15,7 @@
     font-size: 0.8vmin;
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
+    color:var(--font-color);
     text-decoration: none;
 }
 
@@ -28,6 +29,9 @@ body {
     overflow: hidden;
 }
 
+a, i {
+    cursor: pointer;
+}
 .flex {
     display: flex;
     justify-content: center;
@@ -55,6 +59,30 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
+}
+
+.error-message {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--shadow);
+}
+
+.error-message div {
+    background-color: var(--element-background-color);
+    border: 1px solid var(--main-color);
+
+}
+
+.error-message div h1 {
+    padding: 2em 1em 0.4em;
+    margin: 0;
+    font-size: 3em;
+}
+
+.error-message div i {
+    margin: 0 0 1em;
+    font-size: 3em;
 }
 
 .middle-line {

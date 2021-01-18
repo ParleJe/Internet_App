@@ -32,6 +32,7 @@ class Trip implements JsonSerializable
             $this->setDateStart($data['date_start']);
             $this->setDateEnd($data['date_end']);
             $this->setVulpCode($data['vulp_code']);
+
     }
 
     public function jsonSerialize(): array

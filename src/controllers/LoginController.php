@@ -43,7 +43,7 @@ class LoginController extends AppController {
 
     public function logout () {
         $repo = new UserRepository();
-        if( $repo->setUserStatus( $this->getCurrentLoggedID(), 0) ){
+        if( $repo->setUserStatus( $this->getCurrentLoggedID()) ){
             session_unset();
             session_destroy();
             return Routing::run('');

@@ -4,6 +4,8 @@
     } elseif ( ! isset($featured) ) {
         $featured = new Trip();
     }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +22,11 @@
 </head>
 
 <body>
-
+<?PHP
+if( isset($messages)) {
+    include "error_message.php";
+}
+?>
 <?PHP include('public/views/navigation.php') ?>
 
     <div class="content-container flex column">

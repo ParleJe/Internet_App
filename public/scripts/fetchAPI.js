@@ -15,11 +15,11 @@ const fetchData = async (data, requestMethod) => {
     });
 
     if (! response.ok) {
-        const message = `An error has occured: ${response.status}`;
+        const message = `An error has occurred: ${response.status}`;
         throw new Error(message);
     }
     if(response.status === 204) { //no-content
-        return [];
+        return [];  //eempty json file;
     }
     return response.json();
 }

@@ -43,7 +43,7 @@ class TripController extends AppController
             //create VulpCode
             do {
                 $vulp_code = bin2hex(random_bytes(3));
-            } while ($this->repo->checkVulpCode($vulp_code));
+            } while ( ! $this->repo->checkVulpCode($vulp_code));
 
             // photo location
             $photoDIR = dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['photo']['name'];
@@ -73,10 +73,10 @@ class TripController extends AppController
             );
 
 
-            return Routing::run('trips');
+            return $this->trips();
         }
 
-        return $this->render('create', ['messages' => $this->messages]);
+        return $this->render('create');
     }
 
     public function view()
@@ -103,7 +103,7 @@ class TripController extends AppController
 
     }
 
-    public function trips()
+    public function trips($msg = null)
     {
         include('src/SessionHandling.php');
         $id = $this->getCurrentLoggedID();
@@ -111,7 +111,10 @@ class TripController extends AppController
         $planned = $this->repo->fetchPlannedTripsByUserId($id);
         $members = $this->repo->getMemberTripsByUserId($id);
         $featured = $this->repo->fetchFeatureTrip($this->getCurrentLoggedID());
-        $this->render('trips', ['trips' => $trips, 'planned' => $planned, 'featured' => $featured, 'members' => $members]);
+        if( is_null($msg)){
+        return $this->render('trips', ['trips' => $trips, 'planned' => $planned, 'featured' => $featured, 'members' => $members]);
+        }
+        return $this->render('trips', ['trips' => $trips, 'planned' => $planned, 'featured' => $featured, 'members' => $members, 'messages' => $msg]);
     }
 
     public function PlanTrip()
@@ -123,12 +126,12 @@ class TripController extends AppController
         $data['trip_id'] = $_POST['trip_id'];
         do {
             $data['vulp_code'] = bin2hex(random_bytes(3));
-        } while ($this->repo->checkVulpCode($data['vulp_code']));
+        } while ( ! $this->repo->checkVulpCode($data['vulp_code']));
 
         if ($this->repo->setPlannedTrip($data)) {
-            return Routing::run('trips');
+            return $this->render('trips');
         }
-        return Routing::run('trips', ['messages' => 'Cannot plan more than one trip from one template']);
+        return $this->trips(['messages' => 'Cannot plan more than one trip from one template']);
     }
 
     private function validate(array $file): bool

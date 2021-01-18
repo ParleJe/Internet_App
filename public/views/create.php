@@ -24,7 +24,13 @@ include('src/SessionHandling.php');
 </head>
 
 <body>
-<?PHP include('public/views/navigation.php') ?>
+<?PHP
+include('public/views/navigation.php');
+
+if(isset($messages)) {
+    include "error_message.php";
+}
+?>
 
 <section class="content-container flex column">
 

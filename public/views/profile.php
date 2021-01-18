@@ -22,7 +22,11 @@ if (! isset( $trips ) || ! isset( $profile )) {
 
         <div class="profile flex column round">
             <div class="flex column">
-                <img src="public/resources/placeholder.jpg"  alt="profile photo">
+                <div class="flex photo-container">
+                    <i class="fas fa-plus-circle"></i>
+                    <img class='profile-pic' src="public/resources/placeholder.jpg"  alt="profile photo">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
                 <!--icon for add to friends or delete account-->
                 <h2><?PHP echo $profile->getName().' '.$profile->getSurname() ?></h2>
                 <h3> <?PHP echo $profile->getNickname() ?> </h3>
@@ -31,12 +35,12 @@ if (! isset( $trips ) || ! isset( $profile )) {
 
 
             <section class="round">
-                <!--here all created trips by user-->
                 <?PHP foreach ($trips as $trip): ?>
-                <div class="trip round" id="<?PHP echo $trip->getTripId() ?>" style="background-image: url( ' <?PHP echo $trip->getPhotoDirectory() ?> ' );">
-                    <!--photo of the trip as background-->
-                    <h2><?PHP echo $trip->getTripName() ?></h2>
-                </div>
+                <a href="<?PHP echo '/view?id='.$trip->getTripId().'&type=template' ?>">
+                    <div class="trip round" id="<?PHP echo $trip->getTripId() ?>" style="background-image: url( ' <?PHP echo $trip->getPhotoDirectory() ?> ' );">
+                        <h2><?PHP echo $trip->getTripName() ?></h2>]
+                    </div>
+                </a>
                 <?PHP endforeach; ?>
 
             </section>

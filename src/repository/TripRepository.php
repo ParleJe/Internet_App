@@ -195,7 +195,7 @@ class TripRepository extends Repository {
         $stmt->execute([ $vulp_code ]);
         $trip = $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip');
 
-        return $trip[0];
+        return is_null($trip[0]);
     }
 
     //membership functions
