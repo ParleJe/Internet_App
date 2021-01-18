@@ -106,7 +106,7 @@ class FetchController extends AppController
         echo $trip->getPointsOfInterest();
     }
 
-    private function postUsers(?string $data): void
+    private function postUser(?string $data): void
     {
         $this->repository = new UserRepository();
         $users = $this->repository->getUsersByName($data);
