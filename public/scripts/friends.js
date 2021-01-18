@@ -23,8 +23,11 @@ const appendObject = (object) => {
     const clone = template.content.cloneNode(true);
 
     clone.querySelector('div').id = object.mortal_id;
-    clone.querySelector('img').src = '/public/resources/placeholder.jpg'
-        //object.photo_directory;
+    if(object.photo_directory === undefined) {
+        clone.querySelector('img').src = '/public/resources/placeholder.jpg'
+    } else {
+        clone.querySelector('img').src = object.photo_directory;
+    }
     clone.querySelector('h2').innerHTML = object.name + ' ' + object.surname;
     clone.querySelector('h3').innerHTML = object.nickname;
 
