@@ -19,7 +19,7 @@ const appendNode = (object) => {
     const clone = template.content.cloneNode(true);
 
     clone.id = 'search-' + object.trip_id;
-    clone.querySelector('a').href = `view?tripId=${object.trip_id}&type=template`;
+    clone.querySelector('a').href = `view?id=${object.trip_id}&type=template`;
     clone.querySelector('img').src = object.photo_directory;
     clone.querySelector('h2').innerHTML = object.trip_name;
     clone.querySelector('p').innerHTML = object.description;
