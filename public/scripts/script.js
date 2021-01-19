@@ -31,7 +31,7 @@ const listenerFunction = (node) => {
 document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
     const response = await fetchData({dataType:'membership',data: codeInput.value}, put);
     display(response);
-    //addListener();
+
 })
 
 /**

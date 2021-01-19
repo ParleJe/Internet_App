@@ -16,7 +16,10 @@ class UserController extends AppController
 
     public function profile()
     {
-        $id = $this->getCurrentLoggedID();
+        $id = $_GET['id'];
+        if($id === null) {
+            $id = $this->getCurrentLoggedID();
+        }
         $repo = new UserRepository();
         $profile = $repo->getUserById($id);
         $repo = new TripRepository();

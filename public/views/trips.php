@@ -68,7 +68,7 @@ if( isset($messages)) {
                 <?php endforeach; ?>
                         <div class="trip flex column round" id="create-new-mobile">
                             <h3>Create New Trip !!!</h3>
-                            <i class="fas fa-plus-circle"></i>
+                            <i class="fas fa-times-circle"></i>
                         </div>
                 </div>
             </div>

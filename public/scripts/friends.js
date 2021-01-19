@@ -19,6 +19,7 @@ const appendObject = (object) => {
     const template = document.querySelector('#profile-template')
     const clone = template.content.cloneNode(true);
 
+    clone.querySelector('a').href = `/profile?id=${object.mortal_id}`;
     clone.querySelector('div').id = object.mortal_id;
     if(object.photo_directory === null) {
         clone.querySelector('img').src = '/public/resources/placeholder.jpg'

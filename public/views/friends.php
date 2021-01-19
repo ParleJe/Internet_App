@@ -15,11 +15,12 @@
 <section class="content-container flex column">
 
     <?PHP include('public/views/searchBar.php') ?>
-    
+
     <div class="content">
 
         <?php
         if (isset($friends)) foreach ($friends as $friend):?>
+            <a href="/profile?id=<?PHP echo $friend->getMortalId() ?>">
                 <div class="flex round">
                     <div class="profile flex column round" id="<?PHP echo $friend->getMortalId() ?>">
                         <?PHP if( ! is_null($friend->getPhotoDirectory())) {
@@ -35,6 +36,7 @@
                         </div>
                     </div>
                 </div>
+            </a>
         <?PHP endforeach; ?>
 
     </div>
@@ -43,13 +45,15 @@
 </body>
 
 <template id="profile-template">
-    <div class="round flex">
-        <div class="profile round" id="">
-            <img class="round" src="" alt="profile photo">
-            <div>
-                <h2></h2>
-                <h3></h3>
+    <a href="">
+        <div class="round flex">
+            <div class="profile round" id="">
+                <img class="round" src="" alt="profile photo">
+                <div>
+                    <h2></h2>
+                    <h3></h3>
+                </div>
             </div>
         </div>
-    </div>
+    </a>
 </template>
