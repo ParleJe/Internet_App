@@ -3,7 +3,7 @@
 
 class UserSessionHandler
 {
-    private array $availableWithoutLog = ['search', '', 'login', 'test', 'logout'];
+    private array $availableWithoutLog = ['registration', '', 'login', 'test', 'logout'];
 
     public function __construct()
     {
@@ -14,7 +14,7 @@ class UserSessionHandler
         return isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true;
     }
 
-    public function getPageAvaibility(string $name): bool
+    public function getPageAvailability(string $name): bool
     {
         if( in_array($name, $this->availableWithoutLog) || $this->checkLogStatus()) {
             return true;

@@ -22,7 +22,7 @@
             }
 
             $sessionHandler = new UserSessionHandler();
-            if($sessionHandler->getPageAvaibility($action)) {
+            if($sessionHandler->getPageAvailability($action)) {
                 $controller = self::$routes[ $action ];
                 $controllerInstance = new $controller;
                 $action = $action ?: 'index';
