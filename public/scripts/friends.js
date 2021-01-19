@@ -2,15 +2,18 @@ import {fetchData,addMultipleEvents, post} from "./helpers.js";
 
 const input = document.querySelector('.search-input');
 const searchBtn = document.querySelector('.search-btn');
+const displayView = document.querySelector('.content');
 
+//adds hover effect for profile tabs
 const addEffect = () => {
     const profileTabs = document.querySelectorAll('.profile')
     profileTabs.forEach(item => addMultipleEvents(item, "mouseout mouseover",() => item.classList.toggle('hover') ))
 }
 const display = (response) => {
-    const view = document.querySelector('.content');
+
     view.innerHTML='';
     response.map( object => appendObject(object))
+    addEffect();
 }
 const appendObject = (object) => {
     const template = document.querySelector('#profile-template')
@@ -25,8 +28,7 @@ const appendObject = (object) => {
     clone.querySelector('h2').innerHTML = object.name + ' ' + object.surname;
     clone.querySelector('h3').innerHTML = object.nickname;
 
-    const view = document.querySelector('.content');
-    view.append(clone);
+    displayView.append(clone);
 }
 
 /*________________________________________________________________________*/
@@ -35,6 +37,8 @@ searchBtn.addEventListener('click', async () => {
     const jsonResponse = await fetchData({dataType: 'user',data: search}, post);
     display(jsonResponse);
 })
+
+// add effects for server pre-loaded profiles
 addEffect();
 
 
