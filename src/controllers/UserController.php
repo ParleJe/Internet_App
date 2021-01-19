@@ -9,7 +9,6 @@ class UserController extends AppController
 
     public function friends()
     {
-        include('src/SessionHandling.php');
         $this->repository = new UserRepository();
         $friends = $this->repository->getFriendsOfUser($this->getCurrentLoggedID());
         $this->render('friends', ['friends' => $friends]);

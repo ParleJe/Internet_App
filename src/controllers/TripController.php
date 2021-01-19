@@ -5,12 +5,13 @@ class TripController extends AppController
     const MAX_FILE_SIZE = 1024 * 1024;
     const SUPPORTED_EXTENSIONS = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
-    private array $messages;
+    private ?array $messages;
     private Repository $repo;
 
     public function __construct()
     {
         parent::__construct();
+        $this->messages = null;
         $this->repo = new TripRepository();
     }
 
@@ -139,9 +140,8 @@ class TripController extends AppController
         return $places;
     }
 
-    public function trips($msg = null)
+    public function trips(?array $msg = null)
     {
-        include('src/SessionHandling.php');
         $id = $this->getCurrentLoggedID();
         $trips = $this->repo->getTripsByUserId($id);
         $planned = $this->repo->fetchPlannedTripsByUserId($id);
