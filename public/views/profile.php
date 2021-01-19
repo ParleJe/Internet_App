@@ -1,5 +1,4 @@
 <?PHP
-include('src/SessionHandling.php');
 if (! isset( $trips ) || ! isset( $profile )) {
     die();
 }
