@@ -7,7 +7,9 @@
 
 <body>
 <?PHP
-
+if(isset($messages)) {
+    include "error_message.php";
+}
 ?>
     <div class="container">
 
@@ -16,22 +18,11 @@
                 <img src="public/resources/logo-registration.svg" class="login-logo" alt="logo of the project">
             </div>
             <div class="login-container flex column">
-                <form class="login flex column round" action="registration" method="post" >
+                <form class="login flex column round" action="registration" method="post">
                     <input class="round" name="email" type="email" placeholder="enter your mail">
                     <input class="round" name="login" type="text" placeholder="choose your login">
                     <input class="round" name="password" type="password" placeholder="enter your password">
                     <input class="round" name="reentered-password" type="password" placeholder="confirm your password">
-                    <div class="message">
-                        <?php
-                        if(isset($messages))
-                        {
-                            foreach ($messages as $message)
-                            {
-                                echo $message;
-                            }
-                        }
-                        ?>
-                    </div>
                     <button class="login-button" type="submit">
                         <i class="fas fa-spinner"></i>
                     </button>
