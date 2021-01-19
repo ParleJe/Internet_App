@@ -1,4 +1,4 @@
-import {fetchData, put} from "./fetchAPI.js";
+import {fetchData, put} from "./helpers.js";
 
 const codeDiv = document.querySelector('#take-part');
 const membersContainer = document.querySelector('#members');
