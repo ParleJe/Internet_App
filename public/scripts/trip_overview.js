@@ -5,21 +5,10 @@ const tripID = getTripID();
 let details;
 const descView = document.querySelector('.description');
 const mapContainer = document.querySelector('#map-container');
-
-
-mapContainer.style.display = 'none';
-document.querySelectorAll('#map-container>i, #map-toggle').forEach(element => {
-    element.addEventListener('click',() => $('#map-container').fadeToggle('slow'))
-})
-document.querySelectorAll('.POI-list li').forEach(element => {
-    addMultipleEvents(element, 'mouseout mouseover', () => element.classList.toggle('hover'))
-    element.addEventListener('click', () => updateDescription(element.id))
-})
-document.querySelector('#participants').addEventListener('click', () => participants())
-document.querySelector('#chat').addEventListener('click', () => chat())
-document.querySelector('#create').addEventListener('click', () => plan())
-document.querySelector('#delete').addEventListener('click', () => deleteTrip())
-getPoi();
+const participants = document.querySelector('#participants');
+const chat = document.querySelector('#chat')
+const create = document.querySelector('#create')
+const deleteBtn = document.querySelector('#delete')
 
 //__________________functions____________________
 function getTripID() {
@@ -28,9 +17,10 @@ function getTripID() {
     url.pop();
     return url.pop().split("=").pop();
 }
+
 //TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
-function participants() {
-    descView.innerHTML =`
+function showParticipants() {
+    descView.innerHTML = `
     <h1>participants</h1>
     <div class="grid-friends">
     <div class="flex">
@@ -56,11 +46,13 @@ function participants() {
 <i class="fas fa-plus-circle"></i>
     `
 }
-async function chat ()  {
-    const json = await fetchData({dataType:"comment",data: tripID}, post);
+
+async function showChat() {
+    const json = await fetchData({dataType: "comment", data: tripID}, post);
     displayComments(json);
 }
-function displayComments (res) {
+
+function displayComments(res) {
     let view = $('.description');
     view.empty();
     view.append(`
@@ -71,12 +63,13 @@ function displayComments (res) {
                 <button class="round" id="add-comment">ADD</button>
             </div>
         `)
-    document.querySelector('#add-comment').addEventListener('click', postComment );
+    document.querySelector('#add-comment').addEventListener('click', postComment);
     view = $(".comment-container")
     view.empty();
     alert(typeof res);
     res.forEach(comment => addComment(comment));
 }
+
 function addComment(comment) {
     const view = $(".comment-container");
     view.append(`
@@ -88,21 +81,23 @@ function addComment(comment) {
             </div>
             `);
 }
+
 async function postComment() {
     const input = document.querySelector('#comment-content');
     const content = input.value;
-    if(content === ''){
+    if (content === '') {
         alert("You cannot post empty comment")
         return;
     }
     try {
-    const addedComment = await fetchData({dataType:'comment', data: {content: content, tripID: tripID}}, put);
-    addComment(addedComment);
+        const addedComment = await fetchData({dataType: 'comment', data: {content: content, tripID: tripID}}, put);
+        addComment(addedComment);
     } catch (e) {
         console.error(e.message);
     }
     input.value = '';
 }
+
 function initMap(data) {
     data.forEach(mark => {
         let location = mark.location;
@@ -114,6 +109,7 @@ function initMap(data) {
         map.setCenter(localization);
     })
 }
+
 function deleteTrip() {
     if (confirm("Are you sure you want to delete it?")) {
         console.log('deleted')
@@ -121,6 +117,7 @@ function deleteTrip() {
         console.log('ok')
     }
 }
+
 function plan() {
     descView.innerHTML = `
     <form class="plan-trip flex column round" method="post" action="planTrip">
@@ -132,10 +129,12 @@ function plan() {
     </form>
     `
 }
-async function getPoi () {
+
+async function getPoi() {
     details = await fetchData({dataType: "poi", data: tripID}, post);
     initMap(await details)
 }
+
 function updateDescription(id) {
 
     $('.description').empty().append(`
@@ -145,31 +144,24 @@ function updateDescription(id) {
 }
 
 
-
-
-
-/*
-<h1>participants</h1>
-<div class="grid-friends">
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-
-</div>
-<i class="fas fa-plus-circle"></i>
-*/
+mapContainer.style.display = 'none';
+document.querySelectorAll('#map-container>i, #map-toggle').forEach(element => {
+    element.addEventListener('click', () => $('#map-container').fadeToggle('slow'))
+})
+document.querySelectorAll('.POI-list li').forEach(element => {
+    addMultipleEvents(element, 'mouseout mouseover', () => element.classList.toggle('hover'))
+    element.addEventListener('click', () => updateDescription(element.id))
+})
+if (participants !== null) {
+    participants.addEventListener('click', () => showParticipants())
+}
+if (chat !== null) {
+    chat.addEventListener('click', () => showChat())
+}
+if (create !== null) {
+    create.addEventListener('click', () => plan())
+}
+if (deleteBtn !== null) {
+    deleteBtn.addEventListener('click', () => deleteTrip())
+}
+getPoi();
