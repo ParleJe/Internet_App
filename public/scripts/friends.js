@@ -1,4 +1,4 @@
-import {fetchData, post} from "./fetchAPI.js";
+import {fetchData,addMultipleEvents, post} from "./helpers.js";
 
 const input = document.querySelector('.search-input');
 const searchBtn = document.querySelector('.search-btn');
@@ -6,12 +6,6 @@ const searchBtn = document.querySelector('.search-btn');
 const addEffect = () => {
     const profileTabs = document.querySelectorAll('.profile')
     profileTabs.forEach(item => addMultipleEvents(item, "mouseout mouseover",() => item.classList.toggle('hover') ))
-}
-const addMultipleEvents = (element, eventNames, func) => {
-    let events = eventNames.split(' ');
-    events.map(event => {
-        element.addEventListener(event, func, false);
-    })
 }
 const display = (response) => {
     const view = document.querySelector('.content');
@@ -34,7 +28,6 @@ const appendObject = (object) => {
     const view = document.querySelector('.content');
     view.append(clone);
 }
-
 
 /*________________________________________________________________________*/
 searchBtn.addEventListener('click', async () => {
