@@ -1,6 +1,8 @@
 <?php
+include 'config.php';
+
 class DatabaseConnection {
-    private static PDO $instance;
+    private static $instance;
     private string $username;
     private string $password;
     private string $host;
