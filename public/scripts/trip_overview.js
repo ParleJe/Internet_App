@@ -1,38 +1,36 @@
-import {fetchData, post, put} from "./fetchAPI.js";
+import {addMultipleEvents, fetchData, post, put} from "./helpers.js";
 import {map} from "./hereAPI/map.js"
 
-let details;
-//TODO GET URL DYNAMICALLY
 const tripID = getTripID();
+let details;
+const descView = document.querySelector('.description');
+const mapContainer = document.querySelector('#map-container');
 
+
+mapContainer.style.display = 'none';
+document.querySelectorAll('#map-container>i, #map-toggle').forEach(element => {
+    element.addEventListener('click',() => $('#map-container').fadeToggle('slow'))
+})
+document.querySelectorAll('.POI-list li').forEach(element => {
+    addMultipleEvents(element, 'mouseout mouseover', () => element.classList.toggle('hover'))
+    element.addEventListener('click', () => updateDescription(element.id))
+})
+document.querySelector('#participants').addEventListener('click', () => participants())
+document.querySelector('#chat').addEventListener('click', () => chat())
+document.querySelector('#create').addEventListener('click', () => plan())
+document.querySelector('#delete').addEventListener('click', () => deleteTrip())
+getPoi();
+
+//__________________functions____________________
 function getTripID() {
     let url = document.URL;
     url = url.split("&");
     url.pop();
     return url.pop().split("=").pop();
 }
-function setMenuActions() {
-    let optionMenu = $('.option-menu');
-    let view = $('.description');
-    $('#participants').on('click', () => {
-        participants(optionMenu)
-    })
-        .siblings('#chat').on('click', () => {
-        chat()
-    })
-        .siblings('#create').on('click', () => {
-        plan(view)
-    })
-        .siblings('#delete').on('click', () => {
-        deleteTrip()
-    })
-
-}
 //TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
-function participants(view) {
-
-    view.empty();
-    view.append(`
+function participants() {
+    descView.innerHTML =`
     <h1>participants</h1>
     <div class="grid-friends">
     <div class="flex">
@@ -56,16 +54,13 @@ function participants(view) {
 
 </div>
 <i class="fas fa-plus-circle"></i>
-    `)
-
+    `
 }
-
-//TODO POST COMMENT
-const chat = async () => {
+async function chat ()  {
     const json = await fetchData({dataType:"comment",data: tripID}, post);
     displayComments(json);
 }
-const displayComments = (res) => {
+function displayComments (res) {
     let view = $('.description');
     view.empty();
     view.append(`
@@ -82,7 +77,7 @@ const displayComments = (res) => {
     alert(typeof res);
     res.forEach(comment => addComment(comment));
 }
-const addComment = (comment) => {
+function addComment(comment) {
     const view = $(".comment-container");
     view.append(`
             <div class="comment flow">
@@ -93,7 +88,7 @@ const addComment = (comment) => {
             </div>
             `);
 }
-const postComment = async () => {
+async function postComment() {
     const input = document.querySelector('#comment-content');
     const content = input.value;
     if(content === ''){
@@ -126,8 +121,8 @@ function deleteTrip() {
         console.log('ok')
     }
 }
-function plan(view) {
-    view.empty().append(`
+function plan() {
+    descView.innerHTML = `
     <form class="plan-trip flex column round" method="post" action="planTrip">
         <h1>Plan It!</h1>
         <input name="start" type="date" min="${new Date().toISOString().slice(0, 10)}" value="${new Date().toISOString().slice(0, 10)}">
@@ -135,12 +130,11 @@ function plan(view) {
         <input name="trip_id" value="${getTripID()}" type="hidden">
         <button class="round" name="submit" type="submit">Submit</button>
     </form>
-    `)
+    `
 }
-async function getDetails() {
-    details = await fetchData({dataType:"poi" ,data: tripID}, post);
-    initMap(details);
-
+async function getPoi () {
+    details = await fetchData({dataType: "poi", data: tripID}, post);
+    initMap(await details)
 }
 function updateDescription(id) {
 
@@ -150,17 +144,8 @@ function updateDescription(id) {
     `);
 }
 
-$('#map-container').css('display', 'none')
-$('#map-container>i, #map-toggle').on('click', function () {
-    $('#map-container').fadeToggle('slow')
-})
-$('li').on('mouseout mouseover', function () {
-    $(this).toggleClass('hover');
-}).on('click', function () {
-    updateDescription($(this).attr('id'));
-})
-getDetails();
-setMenuActions();
+
+
 
 
 /*

@@ -1,19 +1,12 @@
-import {fetchData, post} from "./fetchAPI.js";
+import {fetchData, post} from "./helpers.js";
 
 const searchInput = document.querySelector('.search-input');
 const view = document.querySelector('.content');
 
-document.querySelector('.search-btn').addEventListener('click', async() => {
-    const input = searchInput.value;
-        const json = await fetchData({dataType: 'trip', data: input}, post);
-        display(json);
-
-})
-
+/*________________Functions________________*/
 const display = (response) => {
     response.map(object => appendNode(object));
 }
-
 const appendNode = (object) => {
     const template = document.querySelector('#search-template');
     const clone = template.content.cloneNode(true);
@@ -26,3 +19,10 @@ const appendNode = (object) => {
 
     view.append(clone);
 }
+/*________________________________________*/
+document.querySelector('.search-btn').addEventListener('click', async() => {
+    const input = searchInput.value;
+    const json = await fetchData({dataType: 'trip', data: input}, post);
+    display(json);
+
+})
