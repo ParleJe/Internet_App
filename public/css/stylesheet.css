@@ -45,11 +45,6 @@ a, i {
     border-radius: var(--radius);
 }
 
-.message {
-    background: transparent;
-    padding: 1em 4em;
-}
-
 .container {
     width: 100vw;
     height: 85vh;
@@ -117,6 +112,9 @@ input {
     width: 100%;
 }
 
+.highlight {
+    border-bottom: 2px solid var(--highlight-color);
+}
 input:hover {
     background: var(--highlight-color);
 }

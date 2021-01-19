@@ -19,10 +19,12 @@ if(isset($messages)) {
             </div>
             <div class="login-container flex column">
                 <form class="login flex column round" action="registration" method="post">
-                    <input class="round" name="email" type="email" placeholder="enter your mail">
-                    <input class="round" name="login" type="text" placeholder="choose your login">
-                    <input class="round" name="password" type="password" placeholder="enter your password">
-                    <input class="round" name="reentered-password" type="password" placeholder="confirm your password">
+                    <input class="highlight" name="email" type="email" placeholder="enter your mail" required="required">
+                    <input class="highlight" name="login" type="text" placeholder="choose your nickname" required="required">
+                    <input class="highlight" name="quote" type="text" placeholder="choose your quote">
+                    <input class="highlight" id="file-form" name="photo" type="file" value="Photo" placeholder="choose your profile picture">
+                    <input class="highlight" name="password" type="password" placeholder="enter your password" required="required">
+                    <input class="highlight" name="reentered-password" type="password" placeholder="confirm your password" required="required">
                     <button class="login-button" type="submit">
                         <i class="fas fa-spinner"></i>
                     </button>
