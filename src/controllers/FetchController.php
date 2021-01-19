@@ -121,6 +121,24 @@ class FetchController extends AppController
         echo json_encode($users);
     }
 
+    /*
+     * creates friend relationship between logged and selected user
+     */
+    private function putUser(int $data):void{
+        $this->repository = new UserRepository();
+
+        if($this->getCurrentLoggedID() == $data) {
+            http_response_code(self::I_TEAPOT);
+            return;
+        }
+
+        if ($this->repository->setFriend($this->getCurrentLoggedID(), $data)) {
+            http_response_code(self::CREATED);
+            return;
+        }
+        http_response_code(self::I_TEAPOT);
+    }
+
     private function postComment(int $data): void
     {
         $this->repository = new TripRepository();

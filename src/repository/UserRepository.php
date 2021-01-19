@@ -101,6 +101,17 @@ class UserRepository extends Repository
 
     }
 
+    public function setFriend(int $userID, int $friendID): bool {
+        $stmt = $this->database->getInstance()->prepare('
+        INSERT INTO user_user (user_id, friend_id) 
+        VALUES (?,?);
+        ');
+
+        return $stmt->execute([
+            $userID,
+            $friendID
+        ]);
+    }
     public function deleteUser(int $userID): bool
     {
         $stmt = $this->database->getInstance()->prepare('
