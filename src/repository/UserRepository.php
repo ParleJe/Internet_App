@@ -14,14 +14,14 @@ class UserRepository extends Repository
 
     }
 
-    public function getUser(string $mail): array
+    public function getUser(string $mail): ?User
     {
         $statement = $this->database->getInstance()->prepare('
            SELECT * FROM user_full_detail WHERE mail = ?;
         ');
         $statement->execute([$mail]);
 
-        return $statement->fetchAll(parent::FETCH_FLAGS, "User");
+        return $statement->fetchAll(parent::FETCH_FLAGS, "User")[0];
 
     }
 
@@ -30,13 +30,13 @@ class UserRepository extends Repository
         $connection = $this->database->getInstance();
         if ($connection->beginTransaction()) {
             $statement = $connection->prepare('
-           INSERT INTO mortal_details (name, surname, nickname ) 
+           INSERT INTO mortal_details (nickname, quote, photo_directory ) 
            VALUES                     (?, ?, ?);
            ');
             if (!$statement->execute([
-                $user->getName(),
-                $user->getSurname(),
-                $user->getNickname()
+                $user->getNickname(),
+                $user->getQuote(),
+                $user->getPhotoDirectory()
             ])) {
                 $connection->rollBack();
                 return false;

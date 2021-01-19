@@ -12,10 +12,32 @@ class User implements JsonSerializable
     private ?string $mail;
     private ?string $password;
     private ?int $role_id;
-    private ?string $name;
-    private ?string $surname;
     private ?string $nickname;
     private ?bool $is_log;
+    private ?string $photo_directory;
+    private ?string $quote;
+
+
+    public function getPhotoDirectory(): ?string
+    {
+        return $this->photo_directory;
+    }
+
+
+    public function setPhotoDirectory(?string $photo_directory)
+    {
+        $this->photo_directory = $photo_directory;
+    }
+
+    public function getQuote(): ?string
+    {
+        return $this->quote;
+    }
+
+    public function setQuote(?string $quote)
+    {
+        $this->quote = $quote;
+    }
 
 
     public function __construct(array $data = null)
@@ -24,10 +46,10 @@ class User implements JsonSerializable
         $this->setMail($data['mail']);
         $this->setPassword($data['password']);
         $this->setRoleId($data['role_id']);
-        $this->setName($data['name']);
-        $this->setSurname($data['surname']);
         $this->setNickname($data['nickname']);
         $this->setIsLog($data['is_log']);
+        $this->setPhotoDirectory($data['photo_directory']);
+        $this->setQuote($data['quote']);
     }
 
 
