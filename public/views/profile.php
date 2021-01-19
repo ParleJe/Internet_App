@@ -22,13 +22,18 @@ if (! isset( $trips ) || ! isset( $profile )) {
         <div class="profile flex column round">
             <div class="flex column">
                 <div class="flex photo-container">
-                    <i class="fas fa-plus-circle"></i>
-                    <img class='profile-pic' src="public/resources/placeholder.jpg"  alt="profile photo">
-                    <i class="fas fa-plus-circle"></i>
+                    <i class="fas fa-heart"></i>
+                    <?PHP if( ! is_null($profile->getPhotoDirectory()) ) {
+                        $photoDir = $profile->getPhotoDirectory();
+                    } else {
+                        $photoDir = 'public/resources/placeholder.jpg';
+                    }
+                    ?>
+                    <img class='profile-pic' src="<?PHP echo $photoDir ?>"  alt="profile photo">
+                    <i class="fas fa-times-circle"></i>
                 </div>
-                <!--icon for add to friends or delete account-->
-                <h2><?PHP echo $profile->getName().' '.$profile->getSurname() ?></h2>
-                <h3> <?PHP echo $profile->getNickname() ?> </h3>
+                <h2><?PHP echo $profile->getNickname() ?></h2>
+                <h3> <?PHP echo $profile->getQuote() ?> </h3>
             </div>
 
 

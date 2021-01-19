@@ -17,13 +17,19 @@
     <div class="content">
 
         <?php
-        if (isset($friends)) foreach ($friends as $friend): ?>
+        if (isset($friends)) foreach ($friends as $friend):?>
                 <div class="flex round">
                     <div class="profile flex column round" id="<?PHP echo $friend->getMortalId() ?>">
-                        <img class="round" src="public/resources/placeholder.jpg" alt="profile photo">
+                        <?PHP if( ! is_null($friend->getPhotoDirectory())) {
+                            $photoDir = $friend->getPhotoDirectory();
+                        } else {
+                            $photoDir = 'public/resources/placeholder.jpg';
+                        }
+                        ?>
+                        <img class="round" src="<?php echo $photoDir ?>" alt="profile photo">
                         <div>
-                            <h2><?PHP echo $friend->getName().$friend->getSurname() ?></h2>
-                            <h3><?PHP echo $friend->getNickname() ?></h3>
+                            <h2><?PHP echo $friend->getNickname() ?></h2>
+                            <h3><?PHP echo $friend->getQuote() ?></h3>
                         </div>
                     </div>
                 </div>
@@ -35,7 +41,7 @@
 </body>
 
 <template id="profile-template">
-    <div class="round">
+    <div class="round flex">
         <div class="profile round" id="">
             <img class="round" src="" alt="profile photo">
             <div>
