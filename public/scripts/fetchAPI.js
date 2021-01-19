@@ -19,7 +19,7 @@ const fetchData = async (data, requestMethod) => {
         throw new Error(message);
     }
     if(response.status === 204) { //no-content
-        return [];  //eempty json file;
+        return [];  //empty json file;
     }
     return response.json();
 }
