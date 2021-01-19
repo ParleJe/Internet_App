@@ -4,14 +4,6 @@ const codeDiv = document.querySelector('#take-part');
 const membersContainer = document.querySelector('#members');
 const codeInput = document.querySelector('#take-part>input');
 
-document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
-    alert(codeInput.value);
-
-        const response = await fetchData({dataType:'membership',data: codeInput.value}, put);
-        display(response);
-        addListener();
-})
-
 const display = (json) => {
     const template = document.querySelector("#trip-template");
     const clone = template.content.cloneNode(true);
@@ -21,20 +13,34 @@ const display = (json) => {
     clone.querySelector('form>div>input').src = json.photo_directory;
     clone.querySelector('form>#id').value = json.trip_id;
 
+    clone.querySelector('.fa-sort-down').addEventListener('click', () => listenerFunction(clone))
     membersContainer.insertBefore(clone, codeDiv);
 
 
 }
+const listenerFunction = (node) => {
+    $(node).children('form').slideToggle('slow');
+    node.querySelector('.fa-sort-down').classList.toggle('rotate');
 
-
-//trips.php
-
-const addListener = () => {
-    $(".fa-sort-down").prop("onclick", null).off("click").on('click', function () {
-
-        $(this).siblings('form').slideToggle('slow')
-        $(this).toggleClass('rotate')
-    })
 }
+//______________________________________________________
 
-addListener();
+/**
+ * add onclick to joining trip functionality
+ */
+document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
+    const response = await fetchData({dataType:'membership',data: codeInput.value}, put);
+    display(response);
+    //addListener();
+})
+
+/**
+ * allows to display trip photo
+ */
+document.querySelectorAll('.trip').forEach(node => {
+    console.log(node)
+    const arrow = node.querySelector('.fa-sort-down')
+    if( arrow !== null) {
+        arrow.addEventListener('click', () => listenerFunction(node))
+    }
+})
