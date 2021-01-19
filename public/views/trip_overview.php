@@ -1,13 +1,10 @@
 <!--TODO get User permissions to this trip-->
 <?PHP
-include('src/SessionHandling.php');
 
-if( ! (isset($trip) && isset($type))) {
+if( ! (isset($trip) && isset($type) && isset($permission))) {
     die('something went wrong');
 }
-$controller = new UserController();
-$permission = $controller->getUserPermission($trip->getTripId(), $type);
-$permission = strtolower($permission);
+
 if( is_null($permission) && $type !== 'template') //everyone can access to the template
 {
     die('You do not have permission to see this page');
@@ -65,7 +62,9 @@ if( is_null($permission) && $type !== 'template') //everyone can access to the t
             </div>
             <div class="option-menu flow column round">
                 <h1 class="menu" id="participants">Participants</h1>
-                <h1 class="menu" id="chat">Chat</h1>
+                <?PHP if($type !== 'template')
+                    echo '<h1 class="menu" id="chat">Chat</h1>'
+                ?>
                 <h1 class="menu" id="map-toggle">Check Map</h1>
                 <?PHP if($type === 'template')
                     echo '<h1 class="menu" id="create">Create Trip From This Template</h1>'

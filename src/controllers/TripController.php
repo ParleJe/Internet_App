@@ -153,6 +153,7 @@ class TripController extends AppController
 
     public function view()
     {
+        $trip = null;
         $tripID = $_GET["id"];
         switch ($_GET["type"]) {
             case 'template':
@@ -176,7 +177,11 @@ class TripController extends AppController
             $this->trips();
             return;
         }
-        $this->render('trip_overview', ['trip' => $trip, 'type' => $_GET["type"]]);
+
+        $controller = new UserController();
+        $permission = $controller->getUserPermission($trip->getTripId(), $_GET["type"]);
+        $permission = strtolower($permission);
+        $this->render('trip_overview', ['trip' => $trip, 'type' => $_GET["type"], 'permission' => $permission]);
 
     }
 
