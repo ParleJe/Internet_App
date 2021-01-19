@@ -15,7 +15,7 @@
 
 .photo-container {
     justify-content: space-between;
-    width: 100%;
+    width: 80%;
 }
 
 .photo-container i  {
@@ -26,20 +26,20 @@
 .profile-pic {
     justify-self: flex-start;
     border-radius: calc(var(--radius)*2);
-    margin: auto;
+    width: 50%;
 }
 
-.profile>div>h2 {
-    margin: 1em 0 0;
+.profile h2 {
+    margin: 1em 0;
     font-size: 3em;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: underline;
 }
 
-.profile>h3 {
+.profile h3 {
     margin: 0;
-    font-weight: 400;
-    font-size: 1.8em;
+    font-weight: 300;
+    font-size: 3em;
 }
 .profile>section {
     background: var(--element-background-color);

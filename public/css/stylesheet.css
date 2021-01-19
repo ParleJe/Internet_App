@@ -286,12 +286,11 @@ nav div {
 
 .placeholder {
     height: 30%;
-
 }
 .placeholder div {
     height: 90%;
     width: 80%;
-    background: var(--main-color);
+    background: radial-gradient(closest-side at 50% 50%, var(--background-color) 20%, var(--main-color) 200%);
 }
 
 .list {
