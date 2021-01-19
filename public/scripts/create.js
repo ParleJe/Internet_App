@@ -6,6 +6,7 @@ const PoiButton = document.querySelector('#POI');
 const mapExitBtn = document.querySelector('#map-container>i');
 const textArea = document.querySelector('textarea');
 const maxLengthOfTextArea = textArea.attributes.maxlength;
+
 /**
  * Adds possibility of placing markers on map
  */
@@ -20,7 +21,7 @@ map.addEventListener('longpress', evt => {
 
 mapContainer.style.display = 'none';
 /**
- * Listeners for open and close map div
+ * Listeners for open and close #map-container div
  */
 PoiButton.addEventListener('click', () => {
     $('#map-container').fadeToggle('slow'); //JQuery for animations;
