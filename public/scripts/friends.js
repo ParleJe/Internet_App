@@ -11,7 +11,7 @@ const addEffect = () => {
 }
 const display = (response) => {
 
-    view.innerHTML='';
+    displayView.innerHTML='';
     response.map( object => appendObject(object))
     addEffect();
 }
