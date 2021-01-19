@@ -5,7 +5,7 @@ class TripController extends AppController
     const MAX_FILE_SIZE = 1024 * 1024;
     const SUPPORTED_EXTENSIONS = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
-    private $messages;
+    private array $messages;
     private Repository $repo;
 
     public function __construct()
@@ -20,8 +20,9 @@ class TripController extends AppController
         $userID = $this->getCurrentLoggedID();
         if ($this->isPost() && is_uploaded_file($_FILES['photo']['tmp_name']) && $this->validate($_FILES['photo'])) { // check photo
             $title = $_POST['trip_name'];
-            if ( ! empty($tripRepo->getTripByName($title))) {
-                return $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
+            if (!empty($tripRepo->getTripByName($title))) {
+                $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
+                return;
             }
 
             //get destination
@@ -43,7 +44,7 @@ class TripController extends AppController
             //create VulpCode
             do {
                 $vulp_code = bin2hex(random_bytes(3));
-            } while ( ! $this->repo->checkVulpCode($vulp_code));
+            } while (!$this->repo->checkVulpCode($vulp_code));
 
             // photo location
             $photoDIR = dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['photo']['name'];
@@ -64,8 +65,8 @@ class TripController extends AppController
 
             if (!$tripRepo->setTripByTransaction($trip)) {
                 var_dump($trip);
-                die();
-                return $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
+                $this->render("create", ['messages' => ["Sorry, we have problem with connection"]]);
+                return;
             }
             move_uploaded_file(
                 $_FILES['photo']['tmp_name'],
@@ -73,65 +74,11 @@ class TripController extends AppController
             );
 
 
-            return $this->trips();
+            $this->trips();
+            return;
         }
 
-        return $this->render('create');
-    }
-
-    public function view()
-    {
-        $tripID = $_GET["id"];
-        switch ($_GET["type"]) {
-            case 'template':$trip = $this->repo->getTripById($tripID); break;
-            case 'planned': $trip = $this->repo->fetchPlannedTripsByTripId($tripID, $this->getCurrentLoggedID()); break;
-            case 'member':
-                $trips = $this->repo->getMemberTripsByUserId($this->getCurrentLoggedID());
-                foreach ($trips as $item) {
-
-                    if ($item->getTripId() === (int)$tripID) {
-                        $trip = $item;
-                        break;
-                    }
-            }
-            break;
-        }
-        if (is_null($trip)) {
-            return Routing::run('trips');
-        }
-        return $this->render('trip_overview', ['trip' => $trip, 'type' => $_GET["type"]]);
-
-    }
-
-    public function trips($msg = null)
-    {
-        include('src/SessionHandling.php');
-        $id = $this->getCurrentLoggedID();
-        $trips = $this->repo->getTripsByUserId($id);
-        $planned = $this->repo->fetchPlannedTripsByUserId($id);
-        $members = $this->repo->getMemberTripsByUserId($id);
-        $featured = $this->repo->fetchFeatureTrip($this->getCurrentLoggedID());
-        if( is_null($msg)){
-        return $this->render('trips', ['trips' => $trips, 'planned' => $planned, 'featured' => $featured, 'members' => $members]);
-        }
-        return $this->render('trips', ['trips' => $trips, 'planned' => $planned, 'featured' => $featured, 'members' => $members, 'messages' => $msg]);
-    }
-
-    public function PlanTrip()
-    {
-        $data = [];
-        $data['mortal_id'] = $this->getCurrentLoggedID();
-        $data['start'] = $_POST['start'];
-        $data['end'] = $_POST['end'];
-        $data['trip_id'] = $_POST['trip_id'];
-        do {
-            $data['vulp_code'] = bin2hex(random_bytes(3));
-        } while ( ! $this->repo->checkVulpCode($data['vulp_code']));
-
-        if ($this->repo->setPlannedTrip($data)) {
-            return $this->render('trips');
-        }
-        return $this->trips(['messages' => 'Cannot plan more than one trip from one template']);
+        $this->render('create', ['messages' => $this->messages]);
     }
 
     private function validate(array $file): bool
@@ -147,6 +94,31 @@ class TripController extends AppController
         }
 
         return true;
+    }
+
+    private function getPOIAsJSON(): ?string
+    {
+        $POI = $this->parsePOI();
+
+        $cookie = $_COOKIE['name'];
+        $name = explode(',', $cookie); // [STRING] [STRING] [STRING]
+
+        $cookie = $_COOKIE['desc'];
+        $description = explode(',', $cookie); // [STRING] [STRING] [STRING]
+        $JSONArray = [];
+
+        foreach ($POI as $iterator => $place) {
+            //TODO check if name[iterator] != null
+            $JSONArray[] = [
+                "name" => $name[$iterator],
+                "location" => $POI[$iterator],
+                "description" => $description[$iterator]
+            ];
+        }
+        $jsonObj = json_encode($JSONArray);
+        $jsonObj = $jsonObj===false?null:$jsonObj;
+        return $jsonObj;
+
     }
 
     private function parsePOI(): array
@@ -167,27 +139,63 @@ class TripController extends AppController
         return $places;
     }
 
-    private function getPOIAsJSON()
+    public function trips($msg = null)
     {
-        $POI = $this->parsePOI();
+        include('src/SessionHandling.php');
+        $id = $this->getCurrentLoggedID();
+        $trips = $this->repo->getTripsByUserId($id);
+        $planned = $this->repo->fetchPlannedTripsByUserId($id);
+        $members = $this->repo->getMemberTripsByUserId($id);
+        $featured = $this->repo->fetchFeatureTrip($this->getCurrentLoggedID());
 
-        $cookie = $_COOKIE['name'];
-        $name = explode(',', $cookie); // [STRING] [STRING] [STRING]
+        $this->render('trips', ['trips' => $trips, 'planned' => $planned, 'featured' => $featured, 'members' => $members, 'messages' => $msg]);
+    }
 
-        $cookie = $_COOKIE['desc'];
-        $description = explode(',', $cookie); // [STRING] [STRING] [STRING]
-        $JSONArray = [];
+    public function view()
+    {
+        $tripID = $_GET["id"];
+        switch ($_GET["type"]) {
+            case 'template':
+                $trip = $this->repo->getTripById($tripID);
+                break;
+            case 'planned':
+                $trip = $this->repo->fetchPlannedTripsByTripId($tripID, $this->getCurrentLoggedID());
+                break;
+            case 'member':
+                $trips = $this->repo->getMemberTripsByUserId($this->getCurrentLoggedID());
+                foreach ($trips as $item) {
 
-        foreach ($POI as $iterator => $place) {
-            //TODO check if name[iterator] != null
-            $JSONArray[] = [
-                "name" => $name[$iterator],
-                "location" => $POI[$iterator],
-                "description" => $description[$iterator]
-            ];
+                    if ($item->getTripId() === (int)$tripID) {
+                        $trip = $item;
+                        break;
+                    }
+                }
+                break;
         }
-        return json_encode($JSONArray);
+        if (is_null($trip)) {
+            $this->trips();
+            return;
+        }
+        $this->render('trip_overview', ['trip' => $trip, 'type' => $_GET["type"]]);
 
+    }
+
+    public function PlanTrip()
+    {
+        $data = [];
+        $data['mortal_id'] = $this->getCurrentLoggedID();
+        $data['start'] = $_POST['start'];
+        $data['end'] = $_POST['end'];
+        $data['trip_id'] = $_POST['trip_id'];
+        do {
+            $data['vulp_code'] = bin2hex(random_bytes(3));
+        } while (!$this->repo->checkVulpCode($data['vulp_code']));
+
+        if ($this->repo->setPlannedTrip($data)) {
+            $this->trips();
+            return;
+        }
+        $this->trips(['messages' => 'Cannot plan more than one trip from one template']);
     }
 
 }
