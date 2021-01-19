@@ -1,6 +1,6 @@
 <?PHP
 if (! isset( $trips ) || ! isset( $profile )) {
-    die();
+    die('problem has occurred! ');
 }
 ?>
 <head>
@@ -8,6 +8,7 @@ if (! isset( $trips ) || ! isset( $profile )) {
     <link rel="stylesheet" type="text/css" href="public/css/profile-stylesheet.css">
 
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
+    <script src="public/scripts/profile.js" type="module"></script>
     <title>Create</title>
 </head>
 
@@ -22,7 +23,7 @@ if (! isset( $trips ) || ! isset( $profile )) {
         <div class="profile flex column round">
             <div class="flex column">
                 <div class="flex photo-container">
-                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart" id="<?PHP echo $profile->getMortalId() ?>"></i>
                     <?PHP if( ! is_null($profile->getPhotoDirectory()) ) {
                         $photoDir = $profile->getPhotoDirectory();
                     } else {
@@ -33,7 +34,7 @@ if (! isset( $trips ) || ! isset( $profile )) {
                     <i class="fas fa-times-circle"></i>
                 </div>
                 <h2><?PHP echo $profile->getNickname() ?></h2>
-                <h3> <?PHP echo $profile->getQuote() ?> </h3>
+                <h3><?PHP echo $profile->getQuote() ?></h3>
             </div>
 
 
