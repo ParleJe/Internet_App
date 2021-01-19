@@ -9,11 +9,13 @@
 </head>
 
 <body>
+
 <?PHP include('public/views/navigation.php') ?>
 
 <section class="content-container flex column">
-    <?PHP include('public/views/searchBar.php') ?>
 
+    <?PHP include('public/views/searchBar.php') ?>
+    
     <div class="content">
 
         <?php

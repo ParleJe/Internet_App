@@ -3,7 +3,7 @@
 
 class UserController extends AppController
 {
-    private $repository;
+    private Repository $repository;
 
 
 
