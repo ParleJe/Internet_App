@@ -60,8 +60,8 @@ class User implements JsonSerializable
             'mail' => $this->getMail(),
             'password' => $this->getPassword(),
             'role_id' => $this->getRoleId(),
-            'name' => $this->getName(),
-            'surname' => $this->getSurname(),
+            'quote' => $this->getQuote(),
+            'photo_directory' => $this->getPhotoDirectory(),
             'nickname' => $this->getNickname(),
             'is_log' => $this->isLog()
         ];
