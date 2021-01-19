@@ -24,4 +24,11 @@ const fetchData = async (data, requestMethod) => {
     return response.json();
 }
 
-export {fetchData, post, del, put}
+function addMultipleEvents(element, eventNames, func) {
+    let events = eventNames.split(' ');
+    events.map(event => {
+        element.addEventListener(event, func, false);
+    })
+}
+
+export {fetchData, addMultipleEvents, post, del, put}
