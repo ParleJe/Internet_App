@@ -16,15 +16,26 @@ class UserController extends AppController
 
     public function profile()
     {
+        $repo = new UserRepository();
+        $type = 'other';
         $id = $_GET['id'];
         if($id === null) {
             $id = $this->getCurrentLoggedID();
+            $type = 'own';
+        } else {
+            $friends = $repo->getFriendsOfUser($this->getCurrentLoggedID());
+            foreach ($friends as $user) {
+                if($user->getMortalId() == $id){
+                    $type = 'friend';
+                    break;
+                }
+            }
         }
-        $repo = new UserRepository();
+
         $profile = $repo->getUserById($id);
         $repo = new TripRepository();
         $trips = $repo->getTripsByUserId($id);
-        $this->render('profile', ['profile' => $profile, 'trips' => $trips]);
+        $this->render('profile', ['profile' => $profile, 'trips' => $trips, 'type' => $type]);
     }
 
 
