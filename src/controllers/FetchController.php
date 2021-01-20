@@ -49,6 +49,10 @@ class FetchController extends AppController
                         $method = $sendMethod . 'Comment';
                         $this->$method($decoded['data']);
                         break;
+                    case 'friend':
+                        $method = $sendMethod . 'Friend';
+                        $this->$method($decoded['data']);
+                        break;
                     default:
                         header('Content-type: application/json');
                         http_response_code(self::REQUEST_NOT_SUPPORTED);
@@ -77,6 +81,18 @@ class FetchController extends AppController
         http_response_code(self::REQUEST_OK);
         echo json_encode($trips);
 
+    }
+
+    private function  deleteTrips(int $data): void {
+        $this->repository = new TripRepository();
+
+        if( $this->repository->deleteTrip($data)) {
+            http_response_code(self::REQUEST_OK);
+            echo json_encode('succesfully deleted');
+            return;
+        }
+        http_response_code(self::I_TEAPOT);
+        echo json_encode('cannot delete');
     }
 
     private function putMembership(string $code): void
@@ -124,7 +140,7 @@ class FetchController extends AppController
     /*
      * creates friend relationship between logged and selected user
      */
-    private function putUser(int $data):void{
+    private function putFriend(int $data):void{
         $this->repository = new UserRepository();
 
         if($this->getCurrentLoggedID() == $data) {
@@ -139,7 +155,8 @@ class FetchController extends AppController
         http_response_code(self::I_TEAPOT);
     }
 
-    private function deleteUser(int $data):void {
+    private function deleteFriend(int $data):void {
+
         $this->repository = new UserRepository();
 
         if( $this->repository->deleteFriendship($this->getCurrentLoggedID(), $data)) {
@@ -148,7 +165,19 @@ class FetchController extends AppController
             return;
         }
         http_response_code(self::I_TEAPOT);
-        echo 'cannot delete';
+        echo json_encode('cannot delete');
+    }
+
+    private function deleteUser(int $data):void {
+        $this->repository = new UserRepository();
+
+        if( $this->repository->deleteUser($data)) {
+            http_response_code(self::REQUEST_OK);
+            echo json_encode('succesfully deleted');
+            return;
+        }
+        http_response_code(self::I_TEAPOT);
+        echo json_encode('cannot delete');
     }
 
     private function postComment(int $data): void
@@ -212,5 +241,17 @@ class FetchController extends AppController
         header('Content-type: application/json');
         http_response_code(self::CREATED);
         echo json_encode($added);
+    }
+
+    private function deleteComment(int $data): void {
+        $this->repository = new CommentRepository();
+
+        if( $this->repository->deleteComment($data)) {
+            http_response_code(self::REQUEST_OK);
+            echo json_encode('succesfully deleted');
+            return;
+        }
+        http_response_code(self::I_TEAPOT);
+        echo json_encode('cannot delete');
     }
 }
