@@ -14,7 +14,8 @@ if (! isset( $trips ) || ! isset( $profile )) {
 
 <body>
 
-<?PHP include('public/views/navigation.php') ?>
+<?PHP echo $type;
+include('public/views/navigation.php') ?>
 
 <section class="content-container flex column">
 
@@ -23,18 +24,23 @@ if (! isset( $trips ) || ! isset( $profile )) {
         <div class="profile flex column round">
             <div class="flex column">
                 <div class="flex photo-container">
-                    <i class="fas fa-heart" id="<?PHP echo $profile->getMortalId() ?>"></i>
-                    <?PHP if( ! is_null($profile->getPhotoDirectory()) ) {
+                    <?PHP if ($type === 'other'): ?>
+                    <i class="fas fa-heart"  id="<?= $profile->getMortalId() ?>"></i>
+                    <?PHP else: ?>
+                    <i class="fas fa-heart" style="color: var(--main-color)" id="<?= $profile->getMortalId() ?>"></i>
+                    <?PHP endif; ?>
+
+                    <?php
+                    if( ! is_null($profile->getPhotoDirectory()) ) {
                         $photoDir = $profile->getPhotoDirectory();
                     } else {
                         $photoDir = 'public/resources/placeholder.jpg';
                     }
                     ?>
-                    <img class='profile-pic' src="<?PHP echo $photoDir ?>"  alt="profile photo">
-                    <i class="fas fa-times-circle"></i>
+                    <img class='profile-pic' src="<?= $photoDir ?>"  alt="profile photo">
                 </div>
-                <h2><?PHP echo $profile->getNickname() ?></h2>
-                <h3><?PHP echo $profile->getQuote() ?></h3>
+                <h2><?= $profile->getNickname() ?></h2>
+                <h3><?= $profile->getQuote() ?></h3>
             </div>
 
 
