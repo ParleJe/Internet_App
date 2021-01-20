@@ -47,7 +47,7 @@
 <template id="profile-template">
     <a href="">
         <div class="round flex">
-            <div class="profile round" id="">
+            <div class="profile flex column round" id="">
                 <img class="round" src="" alt="profile photo">
                 <div>
                     <h2></h2>

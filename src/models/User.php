@@ -1,8 +1,5 @@
 <?php
 
-
-use JetBrains\PhpStorm\ArrayShape;
-
 class User implements JsonSerializable
 {
     const ADMIN = 1;
@@ -122,7 +119,7 @@ class User implements JsonSerializable
         $this->is_log = $is_log;
     }
 
-    public function isLog(): bool
+    public function isLog(): ?bool
     {
         return $this->is_log;
     }
