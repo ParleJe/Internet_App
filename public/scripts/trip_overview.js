@@ -1,4 +1,4 @@
-import {addMultipleEvents, del, fetchData, post, put} from "./helpers.js";
+import {addMultipleEvents, fetchData, post, put} from "./helpers.js";
 import {map} from "./hereAPI/map.js"
 
 const tripID = getTripID();
@@ -8,6 +8,7 @@ const mapContainer = document.querySelector('#map-container');
 const participants = document.querySelector('#participants');
 const chat = document.querySelector('#chat')
 const create = document.querySelector('#create')
+const code = document.querySelector('.vulpcode');
 
 //__________________functions____________________
 function getTripID() {
@@ -121,6 +122,10 @@ function updateDescription(id) {
     `;
 }
 
+const copyCode = () => {
+    navigator.clipboard.writeText(code.id).then(() => alert('Vulpcode copied!'));
+}
+
 
 mapContainer.style.display = 'none';
 document.querySelectorAll('#map-container>i, #map-toggle').forEach(element => {
@@ -130,8 +135,14 @@ document.querySelectorAll('.POI-list li').forEach(element => {
     addMultipleEvents(element, 'mouseout mouseover', () => element.classList.toggle('hover'))
     element.addEventListener('click', () => updateDescription(element.id))
 })
+
+
 if (participants !== null) {
     participants.addEventListener('click', () => showParticipants())
+}
+
+if (code !== null) {
+    code.addEventListener('click', () => copyCode())
 }
 if (chat !== null) {
     chat.addEventListener('click', () => showChat())
