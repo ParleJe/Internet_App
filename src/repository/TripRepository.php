@@ -108,14 +108,14 @@ class TripRepository extends Repository {
         return [];
     }
 
-    //______________________for planned_trip table____________________
+    //______________________for planned_trip____________________
     public function fetchPlannedTripsByUserId(int $userID): array {
         $connection = $this->database->getInstance();
 
         $stmt = $connection->prepare('
         SELECT pt.planned_trip_id, pt.trip_id, t.trip_name, t.destination, t.photo_directory, t.color, pt.date_start, pt.date_end 
         FROM planned_trip pt left join trip t on t.trip_id = pt.trip_id 
-        WHERE pt.mortal_id = ?
+        WHERE pt.mortal_id = ? AND date_start > now()
         ORDER BY date_start;
         ');
 
@@ -236,6 +236,27 @@ class TripRepository extends Repository {
         $stmt->execute([$userID]);
         return $stmt->fetchAll(parent::FETCH_FLAGS, 'Trip');
     }
+
+    public function getPlannedTripId(int $userID, int $templateID): ?int {
+        $stmt = $this->connection->prepare('
+        SELECT planned_trip_id from planned_trip WHERE mortal_id = ? AND trip_id = ?;
+        ');
+        $stmt->execute([$userID, $templateID]);
+        $id = $stmt->fetch(PDO::FETCH_COLUMN);
+        if( $id != 0){
+            return $id;
+        }
+        $stmt = $this->connection->prepare('
+        SELECT pt.planned_trip_id from planned_trip_mortal ptm LEFT JOIN planned_trip pt on pt.planned_trip_id = ptm.planned_trip_id
+        WHERE ptm.mortal_id = ? AND trip_id = ?;
+        ');
+        $stmt->execute([$userID, $templateID]);
+        $id = $stmt->fetch(PDO::FETCH_COLUMN);
+        if( $id != 0) return $id;
+        return null;
+
+    }
+
 
     public function deleteMembership(int $plannedTripID, int $userID): bool
     {

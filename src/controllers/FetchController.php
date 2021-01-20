@@ -108,6 +108,23 @@ class FetchController extends AppController
         echo json_encode($planned_trip);
     }
 
+    private function postMembership(int $data): void {
+        $this->repository = new TripRepository();
+        $id = $this->repository->getPlannedTripId($this->getCurrentLoggedID(), $data);
+
+        $this->repository = new UserRepository();
+        $members = $this->repository->getAllMembers($id);
+
+        if(empty($members)) {
+            http_response_code(self::NO_CONTENT);
+            return;
+        }
+
+        http_response_code(self::REQUEST_OK);
+        echo json_encode($members);
+
+    }
+
     private function postPOI(string $data): void
     {
         $this->repository = new TripRepository();

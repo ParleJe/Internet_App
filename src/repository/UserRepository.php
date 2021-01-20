@@ -142,6 +142,16 @@ class UserRepository extends Repository
         return [];
     }
 
+    public function getAllMembers($plannedTripID): array {
+        $stmt = $this->database->getInstance()->prepare('
+        SELECT m.mortal_id, md.photo_directory, md.nickname FROM planned_trip_mortal ptm left join mortal m on ptm.mortal_id = m.mortal_id left join mortal_details md on m.mortal_details_id = md.mortal_details_id
+        WHERE planned_trip_id = ?;
+        ');
+        $stmt->execute([$plannedTripID]);
+        return $stmt->fetchAll(self::FETCH_FLAGS, 'User');
+
+    }
+
     public function owns(int $userId, int $tripId, string $type): bool
     {
         $trip = $tripId;
