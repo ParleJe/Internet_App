@@ -216,7 +216,7 @@ img {
     }
 
     .photo-background {
-        height: 25%;
+        height: 50%;
         justify-content: space-around;
     }
     .photo-background>div>h1 {
@@ -256,5 +256,8 @@ img {
 
     .trip>div:last-child>i {
         margin-block-end: 0.5em;
+    }
+    #comment-content, #add-comment {
+        font-size: 2em;
     }
 }
