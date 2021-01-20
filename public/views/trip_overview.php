@@ -5,7 +5,7 @@ if( ! (isset($trip) && isset($type) && isset($permission))) {
     die('something went wrong');
 }
 
-if( is_null($permission) && $type !== 'template') //everyone can access to the template
+if( is_null($permission) && $type !== 'template')
 {
     die('You do not have permission to see this page');
 }
@@ -88,3 +88,9 @@ if( is_null($permission) && $type !== 'template') //everyone can access to the t
     <div id="map"></div>
 </div>
 </body>
+
+<template id="participant">
+    <div class="flex">
+        <img class="round" src="" alt="friend photo">
+    </div>
+</template>

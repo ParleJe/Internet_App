@@ -1,4 +1,4 @@
-import {addMultipleEvents, fetchData, post, put} from "./helpers.js";
+import {addMultipleEvents, del, fetchData, post, put} from "./helpers.js";
 import {map} from "./hereAPI/map.js"
 
 const tripID = getTripID();
@@ -8,7 +8,6 @@ const mapContainer = document.querySelector('#map-container');
 const participants = document.querySelector('#participants');
 const chat = document.querySelector('#chat')
 const create = document.querySelector('#create')
-const deleteBtn = document.querySelector('#delete')
 
 //__________________functions____________________
 function getTripID() {
@@ -19,32 +18,21 @@ function getTripID() {
 }
 
 //TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
-function showParticipants() {
+async function showParticipants() {
+
+    const participants = await fetchData({dataType: 'membership', data: tripID}, post)
     descView.innerHTML = `
     <h1>participants</h1>
     <div class="grid-friends">
-    <div class="flex">
-        <img class="round" src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
+    </div>`;
+    const participantsView = descView.querySelector('.grid-friends');
+    const template = document.querySelector('#participant')
+    participants.forEach(user => {
+        const clone = template.content.cloneNode(true);
+        clone.querySelector('img').src = user.photo_directory;
+        participantsView.append(clone);
+    })
 
-</div>
-<i class="fas fa-plus-circle"></i>
-    `
 }
 
 async function showChat() {
@@ -66,7 +54,6 @@ function displayComments(res) {
     document.querySelector('#add-comment').addEventListener('click', postComment);
     view = $(".comment-container")
     view.empty();
-    alert(typeof res);
     res.forEach(comment => addComment(comment));
 }
 
@@ -110,14 +97,6 @@ function initMap(data) {
     })
 }
 
-function deleteTrip() {
-    if (confirm("Are you sure you want to delete it?")) {
-        console.log('deleted')
-    } else {
-        console.log('ok')
-    }
-}
-
 function plan() {
     descView.innerHTML = `
     <form class="plan-trip flex column round" method="post" action="planTrip">
@@ -136,11 +115,10 @@ async function getPoi() {
 }
 
 function updateDescription(id) {
-
-    $('.description').empty().append(`
+    descView.innerHTML = `
     <h1 class="trip-name">${details[id].name}</h1>
     <p class="trip-desc"> ${details[id].description}</p>
-    `);
+    `;
 }
 
 
@@ -160,8 +138,5 @@ if (chat !== null) {
 }
 if (create !== null) {
     create.addEventListener('click', () => plan())
-}
-if (deleteBtn !== null) {
-    deleteBtn.addEventListener('click', () => deleteTrip())
 }
 getPoi();
