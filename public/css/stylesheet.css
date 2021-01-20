@@ -105,7 +105,7 @@ a, i {
 
 input {
     font-weight: 300;
-    font-size: 1.5em;
+    font-size: 2em;
     background: transparent;
     border: none;
     padding: 1vh;
@@ -382,10 +382,9 @@ nav div {
     font-weight: 600;
     font-size: 3em;
     position: absolute;
-    top: 0.2em;
-    left: 1em;
 }
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
     .middle-line {
         background: none;
         flex-direction: column;
@@ -401,13 +400,16 @@ nav div {
     }
     input {
         margin-top: 0;
-        margin-bottom: 0;
     }
     .logo-container {
         margin-top: 4em;
         margin-bottom: 10em;
         width: 100%;
         height: 20%;
+    }
+
+    .login-container p {
+        font-size: 2em;
     }
     .login-button>i {
         font-size: 2em;
@@ -461,5 +463,42 @@ nav div {
     }
     .nav-button i {
         width: unset;
+    }
+
+    /*_____ map*/
+    #map-container {
+        width: 100vw;
+        height: 70vh;
+        border-top: 6px solid var(--font-color);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    #map-container>i {
+        font-size: 3em;
+    }
+
+    .inner-city-field-container {
+        font-size: 2em;
+        top: 4em;
+        left: 30vw;
+        width: 40vw;
+        z-index: 10;
+    }
+
+    .city-field {
+        cursor: pointer;
+        border-bottom: 2px solid black;
+        transition: .3s all ease-in-out;
+
+        z-index: 10;
+    }
+    .city-field, .city-field-suggestion {
+        width: 100%;
+        font-weight: 600;
+        font-size: 2em;
+        position: absolute;
+        top: 0.2em;
+        left: 1em;
     }
 }

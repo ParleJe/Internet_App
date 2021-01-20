@@ -79,9 +79,13 @@ textarea {
 
 
 
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
     .content>div {
         display: none;
+    }
+
+    .content input {
+        font-size: 2em;
     }
 
     .content>form {
@@ -103,46 +107,9 @@ textarea {
         justify-content: space-around;
     }
 
-    textarea {
-        font-size: 0.8em;
-    }
-
-    input {
-        font-size: 0.8em;
-    }
     .button {
         font-size: 1em;
         width: fit-content;
     }
-    #map-container {
-        width: 100vw;
-        height: 100vw;
-        border-radius: calc(var(--radius)/2);
-    }
-    #map-container>i {
-        font-size: 6em;
-    }
 
-    .inner-city-field-container {
-        top: 4em;
-        left: 30vw;
-        width: 40vw;
-        z-index: 10;
-    }
-
-    .city-field {
-        cursor: pointer;
-        border-bottom: 2px solid black;
-        transition: .3s all ease-in-out;
-
-        z-index: 10;
-    }
-    .city-field, .city-field-suggestion {
-        width: 100%;
-        font-weight: 600;
-        font-size: 2em;
-        position: absolute;
-        top: 0.2em;
-        left: 1em;
-    }
 }

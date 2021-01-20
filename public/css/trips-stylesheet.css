@@ -115,7 +115,7 @@ h2, .trip>h3 {
 
 input {
     object-fit: cover;
-    width: 70%;
+    width: 90%;
     align-self: center;
     cursor: pointer;
     border-radius: 0;
@@ -152,11 +152,10 @@ form>div {
 #create-new-mobile {
     display: none;
 }
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
     .content {
         grid-gap: 1em;
         width: 100%;
-
         overflow: auto;
     }
 
@@ -175,11 +174,9 @@ form>div {
     .top-bar {
         display: none;
     }
-    h2 {
-        font-size: 1em;
-    }
 
     .flow {
+        min-width: 65vw;
         overflow: unset;
     }
 

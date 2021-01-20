@@ -61,20 +61,39 @@ if( is_null($permission) && $type !== 'template')
                 </div>
             </div>
             <div class="option-menu flow column round">
-                <h1 class="menu" id="participants">Participants</h1>
-                <?PHP if($type !== 'template')
-                    echo '<h1 class="menu" id="chat">Chat</h1>'
-                ?>
-                <h1 class="menu" id="map-toggle">Check Map</h1>
-                <?PHP if($type === 'template')
-                    echo '<h1 class="menu" id="create">Create Trip From This Template</h1>'
-                ?>
-                <?PHP if($permission === 'owner')
-                echo '<h1 class="menu" id="delete">Delete</h1>'
-                ?>
-                <?PHP if($permission ==='owner' && $type !== 'template')
-                echo '<h1 class="vulpcode">Copy vulpcode</h1>'
-                ?>
+                <ol>
+                <?PHP if($type !== 'template'): ?>
+                <li>
+                    <div class="flex">
+                        <h1 class="menu" id="participants">Participants</h1>
+                    </div>
+                </li>
+                    <li>
+                        <div class="flex">
+                            <h1 class="menu" id="chat">Chat</h1>
+                        </div>
+                    </li>
+                <?PHP endif; ?>
+                    <li>
+                        <div class="flex">
+                            <h1 class="menu" id="map-toggle">Check Map</h1>
+                        </div>
+                    </li>
+                <?PHP if($type === 'template'): ?>
+                    <li>
+                        <div class="flex">
+                            <h1 class="menu" id="create">Create Trip From This Template</h1>
+                        </div>
+                    </li>
+                <?PHP endif; ?>
+                <?PHP if($permission ==='owner' && $type !== 'template'): ?>
+                    <li>
+                        <div class="flex">
+                            <h1 class="vulpcode" id="<?= $trip->getVulpCode() ?>">Copy vulpcode</h1>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                </ol>
             </div>
         </div>
     </section>

@@ -23,7 +23,7 @@
 
 <template id="search-template">
         <div class="search flex column" id="">
-            <a href=""><img src="" alt="trip" class="search-img round"/></a>
+            <a class="flex column" href=""><img src="" alt="trip" class="search-img round"/></a>
             <div>
                 <h2></h2>
                 <p></p>

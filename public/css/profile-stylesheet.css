@@ -27,7 +27,6 @@
 }
 .profile-pic {
     justify-self: flex-start;
-    border-radius: calc(var(--radius)*2);
     width: 50%;
 }
 
@@ -69,7 +68,7 @@
     font-weight: 500;
 }
 
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
 
     .profile {
         height: 80%;
@@ -80,6 +79,9 @@
         width: 60%;
     }
 
+    .profile-pic {
+        width: 80%;
+    }
     .profile>section {
         grid-gap: 2em;
         grid-auto-columns: 50%;

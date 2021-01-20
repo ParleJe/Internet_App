@@ -1,5 +1,5 @@
 <?PHP
-if (! isset( $trips ) || ! isset( $profile )) {
+if (! (isset( $trips ) && isset( $profile ) && isset( $type ))) {
     die('problem has occurred! ');
 }
 ?>
@@ -14,8 +14,7 @@ if (! isset( $trips ) || ! isset( $profile )) {
 
 <body>
 
-<?PHP echo $type;
-include('public/views/navigation.php') ?>
+<?PHP include('public/views/navigation.php') ?>
 
 <section class="content-container flex column">
 
@@ -37,7 +36,7 @@ include('public/views/navigation.php') ?>
                         $photoDir = 'public/resources/placeholder.jpg';
                     }
                     ?>
-                    <img class='profile-pic' src="<?= $photoDir ?>"  alt="profile photo">
+                    <img class='profile-pic round' src="<?= $photoDir ?>"  alt="profile photo">
                 </div>
                 <h2><?= $profile->getNickname() ?></h2>
                 <h3><?= $profile->getQuote() ?></h3>
