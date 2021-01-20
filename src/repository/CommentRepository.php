@@ -21,8 +21,8 @@ class CommentRepository extends Repository
         SELECT * FROM comment;
         ');
 
-        if( !$stmt->execute()){
-            return $stmt->fetchAll(self::FETCH_FLAGS, 'Trip');
+        if( $stmt->execute()){
+            return $stmt->fetchAll(self::FETCH_FLAGS, 'Comment');
         }
         return [];
     }

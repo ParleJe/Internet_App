@@ -102,7 +102,7 @@ class TripRepository extends Repository {
         SELECT * FROM trip;
         ');
 
-        if( !$stmt->execute()){
+        if( $stmt->execute()){
             return $stmt->fetchAll(self::FETCH_FLAGS, 'Trip');
         }
         return [];

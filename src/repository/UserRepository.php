@@ -136,8 +136,8 @@ class UserRepository extends Repository
         SELECT * FROM mortal;
         ');
 
-        if( !$stmt->execute()){
-            return $stmt->fetchAll(self::FETCH_FLAGS, 'Trip');
+        if( $stmt->execute() ){
+            return $stmt->fetchAll(self::FETCH_FLAGS, 'User');
         }
         return [];
     }
