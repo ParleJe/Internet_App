@@ -112,6 +112,7 @@ class UserRepository extends Repository
             $friendID
         ]);
     }
+
     public function deleteUser(int $userID): bool
     {
         $stmt = $this->database->getInstance()->prepare('
@@ -119,6 +120,15 @@ class UserRepository extends Repository
         ');
 
         return $stmt->execute([$userID]);
+    }
+
+    public function deleteFriendship(int $userID, int $friendID): bool
+    {
+        $stmt = $this->database->getInstance()->prepare('
+        DELETE FROM user_user WHERE user_id = ? AND friend_id = ?;
+        ');
+
+        return $stmt->execute([$userID, $friendID]);
     }
 
     public function getAllUsers(): ?array {

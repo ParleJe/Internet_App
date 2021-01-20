@@ -139,6 +139,18 @@ class FetchController extends AppController
         http_response_code(self::I_TEAPOT);
     }
 
+    private function deleteUser(int $data):void {
+        $this->repository = new UserRepository();
+
+        if( $this->repository->deleteFriendship($this->getCurrentLoggedID(), $data)) {
+            http_response_code(self::REQUEST_OK);
+            echo 'succesfully deleted';
+            return;
+        }
+        http_response_code(self::I_TEAPOT);
+        echo 'cannot delete';
+    }
+
     private function postComment(int $data): void
     {
         $this->repository = new TripRepository();

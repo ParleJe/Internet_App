@@ -1,10 +1,11 @@
 import {fetchData, put, del} from "./helpers.js";
 
 const followBtn = document.querySelector('.fa-heart');
-const BtnStatus = followBtn.style.color;
+
 
 
     followBtn.addEventListener('click', () => {
+        const BtnStatus = followBtn.style.color;
         try {
             if(BtnStatus === '') {
                 followBtn.style.color = 'var(--main-color)';
