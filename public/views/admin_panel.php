@@ -12,6 +12,7 @@ if( !(isset($trips) && isset($users) && isset($comments)) ) {
     <link rel="stylesheet" type="text/css" href="public/css/trips-stylesheet.css">
     <!--JS-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
+    <script type="module" src="public/scripts/admin_panel.js" DEFER></script>
     <title>Admin Panel</title>
 </head>
 
@@ -26,9 +27,9 @@ if( !(isset($trips) && isset($users) && isset($comments)) ) {
             <div class="trip-container">
 
                 <?PHP foreach ($trips as $trip): ?>
-                    <div>
-                        <h2><?PHP echo $trip->getTripName(); ?></h2>
-                        <i class="trip-btn fas fa-minus-circle" id="<?PHP echo $trip->getTripId() ?>"></i>
+                    <div class="template trip round flex column">
+                        <h2><?= $trip->getTripName(); ?></h2>
+                        <i class="trip-btn fas fa-minus-circle" id="<?= $trip->getTripId() ?>"></i>
                     </div>
                 <?PHP endforeach; ?>
 
@@ -39,12 +40,12 @@ if( !(isset($trips) && isset($users) && isset($comments)) ) {
             <h2>Users:</h2>
             <div class="trip-container">
 
-                <?PHP foreach ($users as $user): ?>
-                    <div>
-                        <h2><?PHP echo $user->getNickName(); ?></h2>
-                        <i class="user-btn fas fa-minus-circle" id="<?PHP echo $user->getUserId() ?>"></i>
+                <?PHP foreach ($users as $u): ?>
+                    <div class="user trip round flex column">
+                        <h2><?PHP echo $u->getMail() ?></h2>
+                        <i class="user-btn fas fa-minus-circle" id="<?PHP echo $u->getMortalId() ?>"></i>
                     </div>
-                <?PHP endforeach; ?>
+                <?PHP endforeach ?>
 
             </div>
         </div>
@@ -54,16 +55,18 @@ if( !(isset($trips) && isset($users) && isset($comments)) ) {
             <div class="trip-container" id="members">
 
                 <?PHP foreach ($comments as $comment): ?>
-                    <div>
+                    <div class="comment trip round flex column">
                         <h2><?PHP echo $comment->getContent(); ?></h2>
-                        <i class="comment-btn fas fa-minus-circle" id="<?PHP echo $comment->geCommentId() ?>"></i>
+                        <i class="comment-btn fas fa-minus-circle" id="<?PHP echo $comment->getCommentId(); ?>"></i>
                     </div>
                 <?PHP endforeach; ?>
 
             </div>
         </div>
 
+
     </section>
+    <a href="logout"><button class="button round">  Log Out  </button></a>
 </div>
 
 </body>
