@@ -1,15 +1,19 @@
-import {fetchData, put} from "./helpers.js";
+import {fetchData, put, del} from "./helpers.js";
 
 const followBtn = document.querySelector('.fa-heart');
 const BtnStatus = followBtn.style.color;
 
-if(BtnStatus === ''){
+
     followBtn.addEventListener('click', () => {
         try {
-            fetchData({dataType: 'user', data: followBtn.id}, put);
-            followBtn.style.color = 'var(--main-color)';
+            if(BtnStatus === '') {
+                followBtn.style.color = 'var(--main-color)';
+                fetchData({dataType: 'user', data: followBtn.id}, put);
+            } else {
+                followBtn.style.color = '';
+                fetchData({dataType: 'user', data: followBtn.id}, del);
+            }
         } catch (e) {
             console.error(e.message);
         }
     })
-}
