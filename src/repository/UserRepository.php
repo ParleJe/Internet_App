@@ -121,9 +121,15 @@ class UserRepository extends Repository
         return $stmt->execute([$userID]);
     }
 
-    //TODO
     public function getAllUsers(): ?array {
+        $stmt = $this->database->getInstance()->prepare('
+        SELECT * FROM mortal;
+        ');
 
+        if( !$stmt->execute()){
+            return $stmt->fetchAll(self::FETCH_FLAGS, 'Trip');
+        }
+        return [];
     }
 
     public function owns(int $userId, int $tripId, string $type): bool

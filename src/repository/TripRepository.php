@@ -97,9 +97,15 @@ class TripRepository extends Repository {
         return $stmt->execute([$tripID]);
     }
 
-    //TODO
     public function getAllTrips(): array{
+        $stmt = $this->connection->prepare('
+        SELECT * FROM trip;
+        ');
 
+        if( !$stmt->execute()){
+            return $stmt->fetchAll(self::FETCH_FLAGS, 'Trip');
+        }
+        return [];
     }
 
     //______________________for planned_trip table____________________
@@ -182,9 +188,15 @@ class TripRepository extends Repository {
         return $stmt->execute([$plannedTripID]);
     }
 
-    //TODO admin
     public function getAllPlannedTrips(): ?array {
+        $stmt = $this->connection->prepare('
+        SELECT * FROM planned_trip;
+        ');
 
+        if( !$stmt->execute()){
+            return $stmt->fetchAll(self::FETCH_FLAGS, 'Trip');
+        }
+        return [];
     }
 
     //___________________help functions______________________________

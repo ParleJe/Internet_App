@@ -17,7 +17,14 @@ class CommentRepository extends Repository
 
     //TODO
     public function getAllComments():?array{
+        $stmt = $this->database->getInstance()->prepare('
+        SELECT * FROM comment;
+        ');
 
+        if( !$stmt->execute()){
+            return $stmt->fetchAll(self::FETCH_FLAGS, 'Trip');
+        }
+        return [];
     }
 
     public function addComment(int $userID, string $content, int $tripID): ?Comment

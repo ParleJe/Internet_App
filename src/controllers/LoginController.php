@@ -7,6 +7,7 @@ class LoginController extends AppController {
     ];
 
     public function login() {
+
         if(!$this->isPost()) {
             $this->render('login');
             return;
@@ -38,6 +39,10 @@ class LoginController extends AppController {
         if(session_start() && $userDB->setUserStatus($user->getMortalId())) {
             $_SESSION['user_id'] = $user->getMortalId();
             $_SESSION['isLoggedIn'] = true;
+            if($user->role_name === 'ADMIN') { // check if user is admin or not
+                $this->admin();
+                return;
+            }
             Routing::run('trips');
             return;
         }
@@ -101,6 +106,19 @@ class LoginController extends AppController {
         );
 
         $this->render('login'); // You made it! Back to login page
+    }
+
+    public function admin () {
+        $repo = new UserRepository();
+        $users = $repo->getAllUsers();
+        $repo = new TripRepository();
+        $trips = $repo->getAllTrips();
+        $repo = new CommentRepository();
+        $comments = $repo->getAllComments();
+
+        $this->render('admin_panel', ['users' => $users, 'trips' => $trips, 'comments' => $comments]);
+
+
     }
 
     /**
