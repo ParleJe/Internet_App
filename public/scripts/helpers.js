@@ -6,6 +6,7 @@ const put = "PUT"; //to put record in db
 
 
 const fetchData = async (data, requestMethod) => {
+
     const response = await fetch(fetchUrl, {
         method: requestMethod,
         headers: {
@@ -15,10 +16,10 @@ const fetchData = async (data, requestMethod) => {
     });
 
     if (! response.ok) {
-        const message = `An error has occurred: ${response.status}`;
-        throw new Error(message);
+        console.error(`An error has occurred: ${response.status}`);
+        return [];
     }
-    if(response.status === 204) { //no-content
+    if(response.status === 204 || response.status === 418) { //no-content
         return [];  //empty json file;
     }
     return response.json();

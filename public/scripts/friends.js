@@ -21,11 +21,9 @@ const appendObject = (object) => {
 
     clone.querySelector('a').href = `/profile?id=${object.mortal_id}`;
     clone.querySelector('div').id = object.mortal_id;
-    if(object.photo_directory === null) {
-        clone.querySelector('img').src = '/public/resources/placeholder.jpg'
-    } else {
-        clone.querySelector('img').src = object.photo_directory;
-    }
+
+    clone.querySelector('img').src = object.photo_directory;
+
     clone.querySelector('h2').innerHTML = object.nickname;
     clone.querySelector('h3').innerHTML = object.quote;
 
