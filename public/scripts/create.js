@@ -35,7 +35,7 @@ textArea.addEventListener('keyup', () => {
     if(textArea.value.length <= maxLengthOfTextArea) {
         return true;
     } else {
-        textArea.value = this.value.substr(0, limit);
+        textArea.value = this.value.substr(0, maxLengthOfTextArea);
         return false;
     }
 })
