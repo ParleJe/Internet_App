@@ -1,9 +1,14 @@
 <!DOCTYPE HTML>
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
-    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <script src="public/scripts/registerValidation.js" DEFER></script>
     <title>CREATE YOUR ACCOUNT</title>
+    <!--Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
+
+    <!--Scripts-->
+    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
+
+    <!--Icons-->
+    <script src="public/scripts/registerValidation.js" DEFER></script>
 </head>
 
 <body>

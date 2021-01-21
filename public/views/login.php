@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
-    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
     <title>LOGIN PAGE</title>
+
+    <!--stylesheets-->
+    <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
+
+    <!--Icons-->
+    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

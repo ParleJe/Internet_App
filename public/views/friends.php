@@ -1,11 +1,14 @@
 <head>
+    <title>Friends</title>
+
+    <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/friends-stylesheet.css">
 
-    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <!--Scripts-->
     <script type="module" src="public/scripts/friends.js" DEFER></script>
+    <!--Icons-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <title>Friends</title>
 </head>
 
 <body>

@@ -13,6 +13,9 @@ if( is_null($permission) && $type !== 'template')
 <!DOCTYPE html>
 
 <head>
+    <title><?= $trip->getTripName() ?></title>
+
+    <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/trip_overview-stylesheet.css">
 
@@ -21,11 +24,13 @@ if( is_null($permission) && $type !== 'template')
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-    <!-- SCRIPTS -->
-    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
     <script type="module" src="public/scripts/trip_overview.js" DEFER></script>
-    <title>Your Trips</title>
+
+    <!--Icons-->
+    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -48,16 +53,16 @@ if( is_null($permission) && $type !== 'template')
                         $decoded = json_decode( $trip->getPointsOfInterest(), true );
                         foreach ( $decoded as $position => $point ):
                         ?>
-                            <li id="<?PHP echo $position ?>">
+                            <li id="<?= $position ?>">
                                 <i class="fas fa-map-pin"></i>
-                                <p><?PHP echo $point['name'] ?></p>
+                                <p><?= $point['name'] ?></p>
                             </li>
                         <?PHP endforeach; ?>
                     </ol>
                 </div>
                 <div class="description">
-                    <h1 class="trip-name"><?PHP echo $trip->getTripName() ?></h1>
-                    <p class="trip-desc"> <?PHP echo $trip->getDescription() ?></p>
+                    <h1 class="trip-name"><?= $trip->getTripName() ?></h1>
+                    <p class="trip-desc"> <?= $trip->getDescription() ?></p>
                 </div>
             </div>
             <div class="option-menu flow column round">

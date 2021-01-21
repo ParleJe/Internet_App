@@ -14,7 +14,7 @@
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     <!--Scripts-->
     <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
-    <script type="module" src="public/scripts/create.js" ></script>
+    <script type="module" src="public/scripts/create.js" DEFER></script>
     <!--icons-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
 
@@ -51,7 +51,7 @@ if(isset($messages)) {
         </div>
 
         <div id="map-container">
-            <i class="fas fa-times""> </i>
+            <i class="fas fa-times""></i>
             <div class="inner-city-field-container">
                         <div contenteditable="true" class="city-field"></div>
                         <div class="city-field-suggestion"></div>

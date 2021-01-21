@@ -4,12 +4,15 @@ if (! (isset( $trips ) && isset( $profile ) && isset( $type ))) {
 }
 ?>
 <head>
+    <title>Profile</title>
+
+    <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/profile-stylesheet.css">
-
-    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
+    <!--Scripts-->
     <script src="public/scripts/profile.js" type="module"></script>
-    <title>Create</title>
+    <!--Icons-->
+    <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -29,14 +32,7 @@ if (! (isset( $trips ) && isset( $profile ) && isset( $type ))) {
                     <i class="fas fa-heart" style="color: var(--main-color)" id="<?= $profile->getMortalId() ?>"></i>
                     <?PHP endif; ?>
 
-                    <?php
-                    if( ! is_null($profile->getPhotoDirectory()) ) {
-                        $photoDir = $profile->getPhotoDirectory();
-                    } else {
-                        $photoDir = 'public/resources/placeholder.jpg';
-                    }
-                    ?>
-                    <img class='profile-pic round' src="<?= $photoDir ?>"  alt="profile photo">
+                    <img class='profile-pic round' src="<?= $profile->getPhotoDirectory() ?>"  alt="profile photo">
                 </div>
                 <h2><?= $profile->getNickname() ?></h2>
                 <h3><?= $profile->getQuote() ?></h3>
@@ -47,8 +43,8 @@ if (! (isset( $trips ) && isset( $profile ) && isset( $type ))) {
             <section class="round">
                 <?PHP foreach ($trips as $trip): ?>
                 <a href="<?PHP echo '/view?id='.$trip->getTripId().'&type=template' ?>">
-                    <div class="trip round" id="<?PHP echo $trip->getTripId() ?>" style="background-image: url( ' <?PHP echo $trip->getPhotoDirectory() ?> ' );">
-                        <h2><?PHP echo $trip->getTripName() ?></h2>]
+                    <div class="trip round" id="<?= $trip->getTripId() ?>" style="background-image: url( ' <?= $trip->getPhotoDirectory() ?> ' );">
+                        <h2><?= $trip->getTripName() ?></h2>]
                     </div>
                 </a>
                 <?PHP endforeach; ?>
