@@ -61,7 +61,7 @@ if( is_null($permission) && $type !== 'template')
                 </div>
             </div>
             <div class="option-menu flow column round">
-                <ol>
+                <ol class="flex column">
                 <?PHP if($type !== 'template'): ?>
                 <li>
                     <div class="flex">

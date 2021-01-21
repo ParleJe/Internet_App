@@ -1,8 +1,6 @@
 <?PHP
     if( !  (isset($trips) && isset($planned)) ){
         die("problem! Refresh");
-    } elseif ( ! isset($featured) ) {
-        $featured = new Trip();
     }
 
 
@@ -29,23 +27,22 @@ if( isset($messages)) {
 ?>
 <?PHP include('public/views/navigation.php') ?>
 
-    <div class="content-container flex column">
-
-        <section class="top-bar round">
-            <div>
-            <h2><?PHP echo $featured->getTripName() ?></h2>
-                <a class="round" style="background: <?php echo $featured->getColor() ?> ">
-                    <?php echo $featured->getDestination() ?>
-                </a>
-            </div>
-            <div>
-                <pre>Date:</pre>
-                <pre><?php echo $featured->getDateStart() ?></pre>
-                <div class="trip-icons"><!--Icons-->
-                    <i class="fas fa-comment-alt"></i>
+<div class="content-container flex column">
+            <section class="top-bar round">
+                <?PHP if(isset($featured)): ?>
+                <div>
+                <h2><?= $featured->getTripName() ?></h2>
+                    <a href="/view?id=<?=$featured->getTripId()?>&type=planned" class="round" style="background: <?php echo $featured->getColor() ?> ">
+                        <?= $featured->getDestination() ?>
+                    </a>
                 </div>
-            </div>
-        </section>
+                <div>
+                    <pre>Date:</pre>
+                    <pre><?= $featured->getDateStart() ?></pre>
+                </div>
+                <?PHP endif; ?>
+            </section>
+
 
         <section class="content"> <!-- grid layout 3 columns-->
 
@@ -132,7 +129,7 @@ if( isset($messages)) {
     <div class="trip flex column round" >
         <h4></h4>
         <h3></h3>
-        <form method="get" action="view">
+        <form id="to-display" method="get" action="view">
             <div><input type="image"  alt="trip image" src="" ></div>
             <input id="id" type="hidden" name="id" value="">
             <input id="type" type="hidden" name="type" value="member">
