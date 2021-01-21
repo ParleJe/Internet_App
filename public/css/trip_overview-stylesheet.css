@@ -126,11 +126,11 @@ img {
     grid-template: repeat(2, 1fr) / repeat(3,1fr);
     grid-gap: 0;
 }
-.grid-friends>div {
+.grid-friends a,.grid-friends div  {
     width: 100%;
     height: 100%;
 }
-.grid-friends>div>img {
+.grid-friends img {
     width: 75%;
     height: 80%;
 }
