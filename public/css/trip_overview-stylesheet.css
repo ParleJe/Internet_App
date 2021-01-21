@@ -56,14 +56,13 @@ img {
     width: 35%;
     height: 90%;
     background: var(--element-background-color);
+    overflow: auto;
 
     box-shadow: 6px 4px 6px var(--shadow);
 }
 .POI-list>ol {
-    margin: 1em;
     font-size: 3em;
 
-    overflow: auto;
 }
 .POI-list>ol>li {
     padding-block-start: 0.25em;
@@ -92,11 +91,9 @@ img {
     width: 40%;
     height: 70%;
     background: var(--element-background-color);
-
     box-shadow: 6px 4px 6px var(--shadow);
-
     border-radius: 0 var(--radius) var(--radius) 0;
-
+    overflow: auto;
     padding: 2em;
 }
 .description>p {
