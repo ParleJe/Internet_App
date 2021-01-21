@@ -1,6 +1,6 @@
 import { $, requestGeocode, autocompleteGeocodeUrl } from './helpers.js';
 import { center } from './config.js';
-import { map} from "./map.js";
+import { map } from "./map.js";
 
 class Search {
 

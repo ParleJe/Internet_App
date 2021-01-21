@@ -1,181 +1,177 @@
 <?php
 
 
-class Trip
+class Trip implements JsonSerializable
 {
-    private $trip_id;
-    private $trip_name;
-    private $destination;
-    private $description;
-    private $points_of_interest;
-    private $photo_directory;
-    private $mortal_id;
-    private $color;
 
-    public static function initWithVariables(?int $trip_id, string $trip_name, string $destination, string $description,
-                                             string $points_of_interest, string $photo_directory,string $color, int $mortal_id): Trip{
-        $newTrip = new Trip();
+    private ?int $trip_id;
+    private ?string $trip_name;
+    private ?string $destination;
+    private ?string $description;
+    private ?string $points_of_interest;
+    private ?string $photo_directory;
+    private ?int $mortal_id;
+    private ?string $color;
+    //______PLANNED_TRIP______
+    private ?int $planned_trip_id;
+    private ?string $date_start;
+    private ?string $date_end;
+    private ?string $vulp_code;
 
-        $newTrip->trip_id = $trip_id;
-        $newTrip->trip_name = $trip_name;
-        $newTrip->destination = $destination;
-        $newTrip->description = $description;
-        $newTrip->points_of_interest = $points_of_interest;
-        $newTrip->photo_directory = $photo_directory;
-        $newTrip->color = $color;
-        $newTrip->mortal_id = $mortal_id;
+    public function __construct(array $data = null)
+    {
+        $this->setTripId($data['trip_id']);
+        $this->setTripName($data['trip_name']);
+        $this->setDestination($data['destination']);
+        $this->setDescription($data['description']);
+        $this->setPointsOfInterest($data['points_of_interest']);
+        $this->setPhotoDirectory($data['photo_directory']);
+        $this->setMortalId($data['mortal_id']);
+        $this->setColor($data['color']);
+        $this->setPlannedTripId($data['planned_trip_id']);
+        $this->setDateStart($data['date_start']);
+        $this->setDateEnd($data['date_end']);
+        $this->setVulpCode($data['vulp_code']);
 
-        return $newTrip;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTripId()
+    public function jsonSerialize(): array
+    {
+        return [
+            'trip_id' => $this->getTripId(),
+            'trip_name' => $this->getTripName(),
+            'destination' => $this->getDestination(),
+            'description' => $this->getDescription(),
+            'points_of_interest' => $this->getPointsOfInterest(),
+            'photo_directory' => $this->getPhotoDirectory(),
+            'mortal_id' => $this->getMortalId(),
+            'color' => $this->getColor(),
+            'planned_trip_id' => $this->getPlannedTripId(),
+            'date_start' => $this->getDateStart(),
+            'date_end' => $this->getDateEnd(),
+            'vulp_code' => $this->getVulpCode()
+        ];
+    }
+
+    public function getTripId(): ?int
     {
         return $this->trip_id;
     }
 
-    /**
-     * @param mixed $trip_id
-     * @return Trip
-     */
-    public function setTripId($trip_id)
+    public function setTripId(?int $trip_id): void
     {
         $this->trip_id = $trip_id;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTripName()
+    public function getTripName(): ?string
     {
         return $this->trip_name;
     }
 
-    /**
-     * @param mixed $trip_name
-     * @return Trip
-     */
-    public function setTripName($trip_name)
+    public function setTripName(?string $trip_name): void
     {
         $this->trip_name = $trip_name;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDestination()
+    public function getDestination(): ?string
     {
         return $this->destination;
     }
 
-    /**
-     * @param mixed $destination
-     * @return Trip
-     */
-    public function setDestination($destination)
+    public function setDestination(?string $destination): void
     {
         $this->destination = $destination;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param mixed $description
-     * @return Trip
-     */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPointsOfInterest()
+    public function getPointsOfInterest(): ?string
     {
         return $this->points_of_interest;
     }
 
-    /**
-     * @param mixed $points_of_interest
-     * @return Trip
-     */
-    public function setPointsOfInterest($points_of_interest)
+    public function setPointsOfInterest(?string $points_of_interest): void
     {
         $this->points_of_interest = $points_of_interest;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPhotoDirectory()
+    public function getPhotoDirectory(): ?string
     {
         return $this->photo_directory;
     }
 
-    /**
-     * @param mixed $photo_directory
-     * @return Trip
-     */
-    public function setPhotoDirectory($photo_directory)
+    public function setPhotoDirectory(?string $photo_directory): void
     {
         $this->photo_directory = $photo_directory;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMortalId()
+    public function getMortalId(): ?int
     {
         return $this->mortal_id;
     }
 
-    /**
-     * @param mixed $mortal_id
-     * @return Trip
-     */
-    public function setMortalId($mortal_id)
+    public function setMortalId(?int $mortal_id): void
     {
         $this->mortal_id = $mortal_id;
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getColor()
+    public function getColor(): ?string
     {
         return $this->color;
     }
 
-    /**
-     * @param mixed $color
-     * @return Trip
-     */
-    public function setColor($color)
+    public function setColor(?string $color): void
     {
         $this->color = $color;
-        return $this;
     }
 
+    public function getPlannedTripId(): ?int
+    {
+        return $this->planned_trip_id;
+    }
 
+    public function setPlannedTripId(?int $planned_trip_id): void
+    {
+        $this->planned_trip_id = $planned_trip_id;
+    }
 
+    public function getDateStart(): ?string
+    {
+        return $this->date_start;
+    }
 
+    public function setDateStart(?string $date_start): void
+    {
+        $this->date_start = $date_start;
+    }
 
+    public function getDateEnd(): ?string
+    {
+        return $this->date_end;
+    }
+
+    public function setDateEnd(?string $date_end): void
+    {
+        $this->date_end = $date_end;
+    }
+
+    public function getVulpCode(): ?string
+    {
+        return $this->vulp_code;
+    }
+
+    public function setVulpCode(?string $vulp_code): void
+    {
+        $this->vulp_code = $vulp_code;
+    }
 
 
 }

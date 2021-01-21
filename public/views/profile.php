@@ -1,116 +1,54 @@
 <?PHP
-include('src/SessionHandling.php');
+if (! (isset( $trips ) && isset( $profile ) && isset( $type ))) {
+    die('problem has occurred! ');
+}
 ?>
 <head>
+    <title>Profile</title>
+
+    <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/profile-stylesheet.css">
-
+    <!--Scripts-->
+    <script src="public/scripts/profile.js" type="module"></script>
+    <!--Icons-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <title>Create</title>
 </head>
 
 <body>
 
-<?PHP
+<?PHP include('public/views/navigation.php') ?>
 
-?>
+<section class="content-container flex column">
 
-<nav id="navigation-bar">
+    <div class="content flex column">
 
-    <div class="nav-logo-container">
-        <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
-    </div>
+        <div class="profile flex column round">
+            <div class="flex column">
+                <div class="flex photo-container">
+                    <?PHP if ($type === 'other'): ?>
+                    <i class="fas fa-heart"  id="<?= $profile->getMortalId() ?>"></i>
+                    <?PHP else: ?>
+                    <i class="fas fa-heart" style="color: var(--main-color)" id="<?= $profile->getMortalId() ?>"></i>
+                    <?PHP endif; ?>
 
-    <ol>
-        <li class="button-container">
-            <a class="new-button" href="create">
-                Get to the Boat
-                <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-button" href="trips">
-                <i class="fas fa-spinner"></i>
-                <pre>Your Trips</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="Calendar">
-                <i class="far fa-calendar-alt"></i>
-                <pre>Calendar</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="friends">
-                <i class="fas fa-user-friends"></i>
-                <pre>Friends</pre>
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" href="settings">
-                <i class="fas fa-cog"></i>
-                <pre>Settings</pre>
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-button" href="search">
-                <i class="fas fa-map-marker-alt"></i>
-                <pre>Search</pre>
-            </a>
-        </li>
-        <li>
-            <div></div>
-        </li>
-    </ol>
-</nav>
-
-<section class="content-container">
-
-    <div class="content">
-
-        <div class="profile">
-            <div>
-                <img src="public/resources/placeholder.jpg"  alt="profile photo">
-                <!--icon for add to friends or delete account-->
-                <h2>NAME SURNAME</h2>
-                <h3>LOGIN</h3>
+                    <img class='profile-pic round' src="<?= $profile->getPhotoDirectory() ?>"  alt="profile photo">
+                </div>
+                <h2><?= $profile->getNickname() ?></h2>
+                <h3><?= $profile->getQuote() ?></h3>
             </div>
 
 
 
-            <section class="trips-created">
-                <!--here all created trips by user-->
-                <div class="trip" id="trip-1">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
+            <section class="round">
+                <?PHP foreach ($trips as $trip): ?>
+                <a href="<?PHP echo '/view?id='.$trip->getTripId().'&type=template' ?>">
+                    <div class="trip round" id="<?= $trip->getTripId() ?>" style="background-image: url( ' <?= $trip->getPhotoDirectory() ?> ' );">
+                        <h2><?= $trip->getTripName() ?></h2>]
+                    </div>
+                </a>
+                <?PHP endforeach; ?>
 
-                <div class="trip" id="trip-2">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-3">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-4">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-5">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
-
-                <div class="trip" id="trip-6">
-                    <!--photo of the trip as background-->
-                    <h2>NAME</h2>
-                </div>
             </section>
 
         </div>

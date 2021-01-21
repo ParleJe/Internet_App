@@ -1,139 +1,142 @@
 <?PHP
-    include('src/SessionHandling.php');
+    if( !  (isset($trips) && isset($planned)) ){
+        die("problem! Refresh");
+    }
+
+
 ?>
 
 <!DOCTYPE html>
 
 <head>
+    <title>Your Trips</title>
+
+    <!--Styles-->
     <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="public/css/trips-stylesheet.css">
+
+    <!--Scripts-->
+    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <script type="module" src="public/scripts/script.js" DEFER></script>
+
+    <!--Icons-->
     <script src="https://kit.fontawesome.com/a19050df1f.js" crossorigin="anonymous"></script>
-    <title>Your Trips</title>
 </head>
 
 <body>
+<?PHP
+if( isset($messages)) {
+    include "error_message.php";
+}
+?>
+<?PHP include('public/views/navigation.php') ?>
 
-
-
-    <nav id="navigation-bar">
-
-        <div class="nav-logo-container">
-            <img class="nav-logo" src="public/resources/logo.svg" alt="logo of the project" />
-        </div>
-
-        <ol>
-            <li class="button-container">
-                <a class="new-button" href="create">
-                    Get to the Boat
-                    <img class="nav-add" src="public/resources/drakkar.svg" alt="click here to start new trip">
-                </a>
-            </li>
-
-            <li>
-                <a class="nav-button" href="trips">
-                    <i class="fas fa-spinner"></i>
-                    <pre>Your Trips</pre>
-                </a>
-            </li>
-            <li>
-                <a class="nav-button" href="Calendar">
-                    <i class="far fa-calendar-alt"></i>
-                    <pre>Calendar</pre>
-                </a>
-            </li>
-            <li>
-                <a class="nav-button" href="friends">
-                    <i class="fas fa-user-friends"></i>
-                    <pre>Friends</pre>
-                </a>
-            </li>
-            <li>
-                <a class="nav-button" href="settings">
-                    <i class="fas fa-cog"></i>
-                    <pre>Settings</pre>
-                </a>
-            </li>
-
-            <li>
-                    <a class="nav-button" href="search">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <pre>Search</pre>
+<div class="content-container flex column">
+            <section class="top-bar round">
+                <?PHP if(isset($featured)): ?>
+                <div>
+                <h2><?= $featured->getTripName() ?></h2>
+                    <a href="/view?id=<?=$featured->getTripId()?>&type=planned" class="round" style="background: <?php echo $featured->getColor() ?> ">
+                        <?= $featured->getDestination() ?>
                     </a>
-            </li>
-            <li>
-                <div></div>
-            </li>
-        </ol>
-    </nav>
-
-    <div class="content-container">
-        <section class="top-bar">
-            <div>
-            <h2>City of The Forgotten Kings</h2>
-                <a>
-                    invite people
-                </a>
-            </div>
-            <div>
-                <pre>Date</pre>
-                <pre>XX.XX.XXXX</pre>
-                <div class="trip-icons"><!--Icons-->
-                    <i class="fas fa-comment-alt"></i>
-                    <i class="fas fa-ellipsis-v"></i>
                 </div>
-            </div>
-        </section>
-        <section class="content"> <!-- grid layout 3 columns-->
+                <div>
+                    <pre>Date:</pre>
+                    <pre><?= $featured->getDateStart() ?></pre>
+                </div>
+                <?PHP endif; ?>
+            </section>
 
-            <div class="flow"> <!--First column etc.-->
-                <h2>TITLE OF TRIPS #1</h2>
-                <div class="trip-container">
-                <?PHP
-                if( isset($trips) ) {
-                    foreach($trips as $trip) {
-                        $id = $trip->getTripId();
-                        $title = $trip->getTripName();
-                        $destination = $trip->getDestination();
-                        $color = $trip->getColor();
-                        $photoDir = $trip->getPhotoDirectory();
-                        //...
-                        echo <<<EOL
-                        <div class="trip" id="$id">
-                            <h4 style="color: $color;">$destination</h4>
-                            <h3>$title</h3>
-                            <img src="$photoDir" id="$id-img" alt="trip" />
-                            <div class="trip-icons">
-                                <i class="fas fa-paperclip"></i>
-                                <i class="fas fa-comment-alt"></i>
-                            </div>
-                            <i class="fas fa-sort-down" style="color: $color"></i>
+
+        <section class="content">
+
+            <div class="flow">
+                <h2>Your Creations:</h2>
+                <div class="trip-container round">
+
+                <?PHP  foreach($trips as $trip): ?>
+                        <div class="trip flex column round">
+                            <h4 style="color: <?php echo $trip->getColor() ?> ;"> <?= $trip->getDestination() ?> </h4>
+                            <h3><?= $trip->getTripName() ?></h3>
+                            <form method="get" action="view">
+                            <div><input type="image"  alt="trip image" src="<?= $trip->getPhotoDirectory() ?>" ></div>
+                            <input type="hidden" name="id" value="<?= $trip->getTripId() ?>">
+                            <input type="hidden" name="type" value="template">
+                            </form>
+                            <i class="fas fa-sort-down" style="color: <?php echo $trip->getColor() ?> "></i>
                         </div>
-EOL;
-                    }
-                }
 
-                ?>
+                <?php endforeach; ?>
+                        <div class="trip flex column round" id="create-new-mobile">
+                            <h3>Create New Trip !!!</h3>
+                            <a href="create">
+                                <i class="fas fa-times-circle"></i>
+                            </a>
+                        </div>
                 </div>
             </div>
 
             <div class="flow">
-                <h2>TITLE OF TRIPS #2</h2>
+                <h2>Planned:</h2>
                 <div class="trip-container">
+
+                    <?PHP  foreach($planned as $trip): ?>
+
+                        <div class="trip flex column round">
+                            <h4 style="color: <?= $trip->getColor() ?> ;"><?= $trip->getDestination() ?></h4>
+                            <h3><?= $trip->getTripName() ?></h3>
+                            <form method="get" action="view">
+                                <div><input type="image"  alt="trip image" src="<?= $trip->getPhotoDirectory() ?>" ></div>
+                                <input type="hidden" name="id" value="<?= $trip->getTripId() ?>">
+                                <input type="hidden" name="type" value="planned">1
+                            </form>
+                            <h4><?PHP echo $trip->getDateStart().' - '.$trip->getDateEnd() ?></h4>
+                            <i class="fas fa-sort-down" style="color: <?= $trip->getColor() ?> "></i>
+                        </div>
+
+                    <?php endforeach; ?>
 
                 </div>
             </div>
 
             <div class="flow">
-                <!--TODO empty columns-->
-                <h2>TITLE OF TRIPS #3</h2>
-                <div class="trip-container">
+                <h2>Taking Part:</h2>
 
+                <div class="trip-container" id="members">
+                    <?PHP if( isset($members) ) foreach ($members as $trip): ?>
+                        <div class="trip flex column round">
+                            <h4 style="color: <?= $trip->getColor() ?> ;"><?= $trip->getDestination() ?></h4>
+                            <h3><?php echo $trip->getTripName() ?></h3>
+                            <form method="get" action="view">
+                                <div><input type="image"  alt="trip image" src="<?= $trip->getPhotoDirectory() ?>" ></div>
+                                <input type="hidden" name="id" value="<?= $trip->getTripId() ?>">
+                                <input type="hidden" name="type" value="member">
+                            </form>
+                            <i class="fas fa-sort-down" style="color: <?= $trip->getColor() ?> "></i>
+                        </div>
+                    <?PHP endforeach; ?>
+                    <div class="trip flex column round" id="take-part">
+                        <input placeholder="type unique vulp-code to join trip" type="text">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
                 </div>
             </div>
 
         </section>
     </div>
 
-    <script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
-    <script src="public/scripts/script.js"></script>
 </body>
+
+<template id="trip-template">
+    <div class="trip flex column round" >
+        <h4></h4>
+        <h3></h3>
+        <form id="to-display" method="get" action="view">
+            <div><input type="image"  alt="trip image" src="" ></div>
+            <input id="id" type="hidden" name="id" value="">
+            <input id="type" type="hidden" name="type" value="member">
+        </form>
+        <h4></h4>
+        <i class="fas fa-sort-down"></i>
+    </div>
+</template>

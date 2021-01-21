@@ -1,150 +1,129 @@
 <?php
 
-
-class User
+class User implements JsonSerializable
 {
     const ADMIN = 1;
     const USER = 2;
 
-    //keep order as in the database
-    public $mortal_id;
-    public $mail;
-    public $password;
-    public $role_id;
-    public $name;
-    public $surname;
-    public $nickname;
+    private ?int $mortal_id;
+    private ?string $mail;
+    private ?string $password;
+    private ?int $role_id;
+    private ?string $nickname;
+    private ?bool $is_log;
+    private ?string $photo_directory;
+    private ?string $quote;
 
-       /* /**
-         * User constructor.
-         * @param $mortal_id
-         * @param $mail
-         * @param $password
-         * @param $role_name
-         * @param $name
-         * @param $surname
-         * @param $nickname
-         */
-    /*public function __construct($mortal_id, $mail, $password, $role_name, $name, $surname, $nickname)
+    public function __construct(array $data = null)
     {
-        $this->mortal_id = $mortal_id;
-        $this->mail = $mail;
-        $this->password = $password;
-        $this->role_name = $role_name;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->nickname = $nickname;
-    }*/
-
-
-    public static function initiateUserWithValues ($mortal_id, $mail, $password, $role_id, $name, $surname, $nickname): User {
-        $user = new User();
-
-        $user->mortal_id = $mortal_id;
-        $user->mail = $mail;
-        $user->password = $password;
-        $user->role_id = $role_id;
-        $user->name = $name;
-        $user->surname = $surname;
-        $user->nickname = $nickname;
-        
-        return $user;
-
-    }
-    public function getVariablesToArray(): array {
-        $array = [];
-        foreach($this as $value) {
-            $array[] = $value;
-        }
-        return $array;
+        $this->setMortalId($data['mortal_id']);
+        $this->setMail($data['mail']);
+        $this->setPassword($data['password']);
+        $this->setRoleId($data['role_id']);
+        $this->setNickname($data['nickname']);
+        $this->setIsLog($data['is_log']);
+        $this->setPhotoDirectory($data['photo_directory']);
+        $this->setQuote($data['quote']);
     }
 
+    public function setIsLog(?bool $is_log): void
+    {
+        $this->is_log = $is_log;
+    }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'mortal_id' => $this->getMortalId(),
+            'mail' => $this->getMail(),
+            'password' => $this->getPassword(),
+            'role_id' => $this->getRoleId(),
+            'quote' => $this->getQuote(),
+            'photo_directory' => $this->getPhotoDirectory(),
+            'nickname' => $this->getNickname(),
+            'is_log' => $this->isLog()
+        ];
+    }
 
-
-
-    public function getMortalId() : int{
+    public function getMortalId(): ?int
+    {
         return $this->mortal_id;
     }
 
-
-    public function setMortalId($mortal_id): void
+    public function setMortalId(?int $mortal_id): void
     {
         $this->mortal_id = $mortal_id;
     }
 
-
-    public function getMail()
+    public function getMail(): ?string
     {
         return $this->mail;
     }
 
-
-    public function setMail($mail): void
+    public function setMail(?string $mail): void
     {
         $this->mail = $mail;
     }
 
-
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-
-    public function setPassword($password): void
+    public function setPassword(?string $password): void
     {
         $this->password = $password;
     }
 
-
-    public function getRoleName()
+    public function getRoleId(): ?int
     {
         return $this->role_id;
     }
 
-
-    public function setRoleName($role_name): void
+    public function setRoleId(?int $role_id): void
     {
-        $this->role_name = $role_name;
+        $this->role_id = $role_id;
     }
 
-
-    public function getName()
+    public function getQuote(): ?string
     {
-        return $this->name;
+        return $this->quote;
     }
 
-
-    public function setName($name): void
+    public function setQuote(?string $quote)
     {
-        $this->name = $name;
+        $this->quote = $quote;
     }
 
-
-    public function getSurname()
+    public function getPhotoDirectory(): ?string
     {
-        return $this->surname;
+        return $this->photo_directory;
     }
 
-
-    public function setSurname($surname): void
+    public function setPhotoDirectory(?string $photo_directory)
     {
-        $this->surname = $surname;
+        $this->photo_directory = $photo_directory;
     }
 
-
-    public function getNickname()
+    public function getNickname(): ?string
     {
         return $this->nickname;
     }
 
-
-    public function setNickname($nickname): void
+    public function setNickname(?string $nickname): void
     {
         $this->nickname = $nickname;
     }
 
+    public function isLog(): ?bool
+    {
+        return $this->is_log;
+    }
+
+    public function getRoleName(): ?int
+    {
+        return $this->role_id;
+    }
 
 
 }

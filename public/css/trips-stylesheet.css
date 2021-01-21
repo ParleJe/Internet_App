@@ -1,17 +1,14 @@
-/*TODO EXTRACT ALL HARDCODED VALUES INTO VARS(COLORS, RADIUSES ETC.)*/
 .top-bar {
-    border-radius: var(--radius);
     width: 100%;
     height: 12%;
 
-    padding: 0.5em 1em;
-    background: #FFFFFF;
+    background: var(--element-background-color);
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.top-bar>div {
+.top-bar div {
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -22,19 +19,13 @@
     width: 30%;
 }
 
-.top-bar>div>h2 {
+.top-bar h2 {
     font-weight: 600;
     font-size: 4em;
     margin-block-start: 0.1em;
     margin-block-end: 0.2em;
 }
 
-
-.top-bar>div>.trip-icons{
-    justify-content: flex-end;
-    margin-inline-end: 0;
-    color: dimgray;
-}
 .top-bar>div>.trip-icons>i:last-child{
     margin-right: 0;
 }
@@ -46,17 +37,16 @@
 
     font-size: 2em;
     font-weight: 800;
-    color: dimgray;
+    color: var(--second-font-color);
 }
 
-.top-bar>div>a {
+.top-bar a {
     font-size: 1.5em;
     font-weight: 500;
     width: fit-content;
     padding: 0.5em 1.5em;
-    border-radius: calc(var(--radius)/4);
-    background: #e5b2e5;
-    color: #961c9690;
+    background: var(--highlight-color);
+    color: var(--font-color);
 }
 
 
@@ -85,53 +75,53 @@
 
 .trip-container{
     height: 100%;
-    border-radius: var(--radius);
     overflow: auto;
 }
 .trip {
     margin-bottom: 2em;
     height: fit-content;
     padding: 1vh;
-    border-radius: calc(var(--radius));
-    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-self: center;
+    background: var(--element-background-color);
 }
 
 .trip>h4 {
-    font-weight: 600;
-    font-size: 1.2em;
+    font-weight: 300;
+    margin-top: 0.5em;
 }
 
-.trip>h4, .trip>h3 {
-    font-weight: 500;
-    margin: 0.2em 0.2em 0.2em 1em;
+h2, .trip>h4, .trip>h3 {
+    font-size: 2em;
+    margin-bottom: 0;
 }
 
 h2, .trip>h3 {
-    font-weight: 600;
-    font-size: 2em;
+    font-weight: 700;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
-
-.trip-icons {
-    display: flex;
-    margin: 1em 1em 0 2em;
-}
-
 .trip-icons>i {
     font-size: 2em;
-    margin-right: 1.5em;
 }
 
-.trip>img {
-    display: none;
+input {
     object-fit: cover;
-    width: 70%;
-    height: 7.5vmax;
+    width: 90%;
     align-self: center;
+    cursor: pointer;
+    border-radius: 0;
+    margin: auto;
 }
+.trip>form {
+    display: none;
+}
+
+form>div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+}
+
 
 .trip>i {
     font-size: 2em;
@@ -139,16 +129,23 @@ h2, .trip>h3 {
     cursor: pointer;
 }
 
-.rotate {
-    -webkit-transform: rotateX(180deg);
-    transform: rotateX(180deg);
+.fa-plus-circle {
+    margin-top: 0.5em;
 }
 
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+.rotate {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg) translateY(-50%);
+    transition: 500ms;
+}
+
+#create-new-mobile {
+    display: none;
+}
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
     .content {
         grid-gap: 1em;
         width: 100%;
-
         overflow: auto;
     }
 
@@ -167,11 +164,9 @@ h2, .trip>h3 {
     .top-bar {
         display: none;
     }
-    h2 {
-        font-size: 1em;
-    }
 
     .flow {
+        min-width: 65vw;
         overflow: unset;
     }
 
@@ -179,6 +174,8 @@ h2, .trip>h3 {
         height: unset;
         overflow: unset;
     }
-}
 
-/*TODO fix height of flow div in order to correspond with navigation height*/
+    #create-new-mobile {
+        display: flex;
+    }
+}

@@ -3,6 +3,7 @@
 
 class Repository
 {
+    const FETCH_FLAGS = PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE;
     protected DatabaseConnection $database;
 
 
