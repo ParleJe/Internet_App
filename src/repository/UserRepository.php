@@ -10,7 +10,7 @@ class UserRepository extends Repository
         ');
         $statement->execute([$id]);
 
-        return $statement->fetchAll(parent::FETCH_FLAGS,"User")[0];
+        return $statement->fetchAll(parent::FETCH_FLAGS, "User")[0];
 
     }
 
@@ -101,7 +101,8 @@ class UserRepository extends Repository
 
     }
 
-    public function setFriend(int $userID, int $friendID): bool {
+    public function setFriend(int $userID, int $friendID): bool
+    {
         $stmt = $this->database->getInstance()->prepare('
         INSERT INTO user_user (user_id, friend_id) 
         VALUES (?,?);
@@ -131,18 +132,20 @@ class UserRepository extends Repository
         return $stmt->execute([$userID, $friendID]);
     }
 
-    public function getAllUsers(): ?array {
+    public function getAllUsers(): ?array
+    {
         $stmt = $this->database->getInstance()->prepare('
         SELECT * FROM mortal;
         ');
 
-        if( $stmt->execute() ){
+        if ($stmt->execute()) {
             return $stmt->fetchAll(self::FETCH_FLAGS, 'User');
         }
         return [];
     }
 
-    public function getAllMembers($plannedTripID): array {
+    public function getAllMembers($plannedTripID): array
+    {
         $stmt = $this->database->getInstance()->prepare('
         SELECT m.mortal_id, md.photo_directory, md.nickname FROM planned_trip_mortal ptm left join mortal m on ptm.mortal_id = m.mortal_id left join mortal_details md on m.mortal_details_id = md.mortal_details_id
         WHERE planned_trip_id = ?;

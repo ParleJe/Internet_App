@@ -20,18 +20,18 @@ class Trip implements JsonSerializable
 
     public function __construct(array $data = null)
     {
-            $this->setTripId($data['trip_id']);
-            $this->setTripName($data['trip_name']);
-            $this->setDestination($data['destination']);
-            $this->setDescription($data['description']);
-            $this->setPointsOfInterest($data['points_of_interest']);
-            $this->setPhotoDirectory($data['photo_directory']);
-            $this->setMortalId($data['mortal_id']);
-            $this->setColor($data['color']);
-            $this->setPlannedTripId($data['planned_trip_id']);
-            $this->setDateStart($data['date_start']);
-            $this->setDateEnd($data['date_end']);
-            $this->setVulpCode($data['vulp_code']);
+        $this->setTripId($data['trip_id']);
+        $this->setTripName($data['trip_name']);
+        $this->setDestination($data['destination']);
+        $this->setDescription($data['description']);
+        $this->setPointsOfInterest($data['points_of_interest']);
+        $this->setPhotoDirectory($data['photo_directory']);
+        $this->setMortalId($data['mortal_id']);
+        $this->setColor($data['color']);
+        $this->setPlannedTripId($data['planned_trip_id']);
+        $this->setDateStart($data['date_start']);
+        $this->setDateEnd($data['date_end']);
+        $this->setVulpCode($data['vulp_code']);
 
     }
 
@@ -58,7 +58,7 @@ class Trip implements JsonSerializable
         return $this->trip_id;
     }
 
-    public function setTripId(?int $trip_id)
+    public function setTripId(?int $trip_id): void
     {
         $this->trip_id = $trip_id;
     }
@@ -68,7 +68,7 @@ class Trip implements JsonSerializable
         return $this->trip_name;
     }
 
-    public function setTripName(?string $trip_name)
+    public function setTripName(?string $trip_name): void
     {
         $this->trip_name = $trip_name;
     }
@@ -78,7 +78,7 @@ class Trip implements JsonSerializable
         return $this->destination;
     }
 
-    public function setDestination(?string $destination)
+    public function setDestination(?string $destination): void
     {
         $this->destination = $destination;
     }
@@ -88,7 +88,7 @@ class Trip implements JsonSerializable
         return $this->description;
     }
 
-    public function setDescription(?string $description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -98,7 +98,7 @@ class Trip implements JsonSerializable
         return $this->points_of_interest;
     }
 
-    public function setPointsOfInterest(?string $points_of_interest)
+    public function setPointsOfInterest(?string $points_of_interest): void
     {
         $this->points_of_interest = $points_of_interest;
     }
@@ -108,7 +108,7 @@ class Trip implements JsonSerializable
         return $this->photo_directory;
     }
 
-    public function setPhotoDirectory(?string $photo_directory)
+    public function setPhotoDirectory(?string $photo_directory): void
     {
         $this->photo_directory = $photo_directory;
     }
@@ -118,7 +118,7 @@ class Trip implements JsonSerializable
         return $this->mortal_id;
     }
 
-    public function setMortalId(?int $mortal_id)
+    public function setMortalId(?int $mortal_id): void
     {
         $this->mortal_id = $mortal_id;
     }
@@ -128,7 +128,7 @@ class Trip implements JsonSerializable
         return $this->color;
     }
 
-    public function setColor(?string $color)
+    public function setColor(?string $color): void
     {
         $this->color = $color;
     }
@@ -138,7 +138,7 @@ class Trip implements JsonSerializable
         return $this->planned_trip_id;
     }
 
-    public function setPlannedTripId(?int $planned_trip_id)
+    public function setPlannedTripId(?int $planned_trip_id): void
     {
         $this->planned_trip_id = $planned_trip_id;
     }
@@ -148,7 +148,7 @@ class Trip implements JsonSerializable
         return $this->date_start;
     }
 
-    public function setDateStart(?string $date_start)
+    public function setDateStart(?string $date_start): void
     {
         $this->date_start = $date_start;
     }
@@ -158,7 +158,7 @@ class Trip implements JsonSerializable
         return $this->date_end;
     }
 
-    public function setDateEnd(?string $date_end)
+    public function setDateEnd(?string $date_end): void
     {
         $this->date_end = $date_end;
     }
@@ -168,7 +168,7 @@ class Trip implements JsonSerializable
         return $this->vulp_code;
     }
 
-    public function setVulpCode(?string $vulp_code)
+    public function setVulpCode(?string $vulp_code): void
     {
         $this->vulp_code = $vulp_code;
     }

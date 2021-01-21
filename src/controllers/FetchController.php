@@ -265,7 +265,7 @@ class FetchController extends AppController
 
         if( $this->repository->deleteComment($data)) {
             http_response_code(self::REQUEST_OK);
-            echo json_encode('succesfully deleted');
+            echo json_encode('successfully deleted');
             return;
         }
         http_response_code(self::I_TEAPOT);

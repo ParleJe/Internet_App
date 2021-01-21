@@ -14,29 +14,6 @@ class User implements JsonSerializable
     private ?string $photo_directory;
     private ?string $quote;
 
-
-    public function getPhotoDirectory(): ?string
-    {
-        return $this->photo_directory;
-    }
-
-
-    public function setPhotoDirectory(?string $photo_directory)
-    {
-        $this->photo_directory = $photo_directory;
-    }
-
-    public function getQuote(): ?string
-    {
-        return $this->quote;
-    }
-
-    public function setQuote(?string $quote)
-    {
-        $this->quote = $quote;
-    }
-
-
     public function __construct(array $data = null)
     {
         $this->setMortalId($data['mortal_id']);
@@ -49,6 +26,10 @@ class User implements JsonSerializable
         $this->setQuote($data['quote']);
     }
 
+    public function setIsLog(?bool $is_log): void
+    {
+        $this->is_log = $is_log;
+    }
 
     public function jsonSerialize(): array
     {
@@ -104,6 +85,26 @@ class User implements JsonSerializable
         $this->role_id = $role_id;
     }
 
+    public function getQuote(): ?string
+    {
+        return $this->quote;
+    }
+
+    public function setQuote(?string $quote)
+    {
+        $this->quote = $quote;
+    }
+
+    public function getPhotoDirectory(): ?string
+    {
+        return $this->photo_directory;
+    }
+
+    public function setPhotoDirectory(?string $photo_directory)
+    {
+        $this->photo_directory = $photo_directory;
+    }
+
     public function getNickname(): ?string
     {
         return $this->nickname;
@@ -112,11 +113,6 @@ class User implements JsonSerializable
     public function setNickname(?string $nickname): void
     {
         $this->nickname = $nickname;
-    }
-
-    public function setIsLog(?bool $is_log): void
-    {
-        $this->is_log = $is_log;
     }
 
     public function isLog(): ?bool
