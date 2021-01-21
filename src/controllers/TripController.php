@@ -2,9 +2,6 @@
 
 class TripController extends AppController
 {
-    const MAX_FILE_SIZE = 1024 * 1024;
-    const SUPPORTED_EXTENSIONS = ['image/png', 'image/jpeg'];
-    const UPLOAD_DIRECTORY = '/../public/uploads/';
     private ?array $messages;
     private Repository $repo;
 
@@ -19,7 +16,8 @@ class TripController extends AppController
     {
         $tripRepo = new TripRepository();
         $userID = $this->getCurrentLoggedID();
-        if ($this->isPost() && is_uploaded_file($_FILES['photo']['tmp_name']) && $this->validate($_FILES['photo'])) { // check photo
+        $photoController = new PhotoController();
+        if ($this->isPost() && is_uploaded_file($_FILES['photo']['tmp_name']) && $photoController->validatePhoto($_FILES['photo'])) { // check photo
             $title = $_POST['trip_name'];
             if (!empty($tripRepo->getTripByName($title))) {
                 $this->render("create", ['messages' => ["Sorry, such a trip name already exists"]]);
@@ -48,7 +46,7 @@ class TripController extends AppController
             } while (!$this->repo->checkVulpCode($vulp_code));
 
             // photo location
-            $photoDIR = dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['photo']['name'];
+            $photoDIR = $photoController->getUploadDirectory($_FILES['photo']);
 
             $trip = new Trip([
                 'trip_name' => $title,
@@ -71,7 +69,7 @@ class TripController extends AppController
             }
             move_uploaded_file(
                 $_FILES['photo']['tmp_name'],
-                $photoDIR
+                dirname(__DIR__).$photoDIR
             );
 
 
@@ -82,20 +80,6 @@ class TripController extends AppController
         $this->render('create', ['messages' => $this->messages]);
     }
 
-    private function validate(array $file): bool
-    {
-        if ($file['size'] > self::MAX_FILE_SIZE) {
-            $this->messages[] = 'File is too large';
-            return false;
-        }
-
-        if (!isset($file['type']) && !in_array($file['type'], self::SUPPORTED_EXTENSIONS)) {
-            $this->messages[] = 'unsupported file type';
-            return false;
-        }
-
-        return true;
-    }
 
     private function getPOIAsJSON(): ?string
     {

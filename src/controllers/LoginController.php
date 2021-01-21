@@ -52,15 +52,20 @@ class LoginController extends AppController {
 
     public function logout () {
         $repo = new UserRepository();
+        if( !isset($_SESSION['isLoggedIn'])) {
+            $this->render('login');
+            return;
+        }
         if( $repo->setUserStatus( $this->getCurrentLoggedID()) ){
             session_unset();
             session_destroy();
-            Routing::run('');
+            $this->render('login');
             return;
         }
     }
 
     public function registration() {
+        $photoController = new PhotoController();
         if( ! $this->isPost() ) {
             $this->render('registration');
             return;
@@ -70,12 +75,12 @@ class LoginController extends AppController {
             return;
         }
 
-        if( !(is_uploaded_file($_FILES['photo']['tmp_name']) || $this->validatePhoto($_FILES['photo'])) ) {
+        if( !(is_uploaded_file($_FILES['photo']['tmp_name']) || $photoController->validatePhoto($_FILES['photo'])) ) {
             $this->render("registration", ['messages' => ["Invalid Photo!"]]);
             return;
         }
 
-        $photoDIR = $this->getUploadDirectory($_FILES['photo']);
+        $photoDIR = $photoController->getUploadDirectory($_FILES['photo']);
         $quote = $_POST["quote"];
         $login = $_POST["login"]; //can be multiple similar nicknames
         $mail = $_POST["email"];
@@ -102,7 +107,7 @@ class LoginController extends AppController {
         }
         move_uploaded_file(
             $_FILES['photo']['tmp_name'],
-            $photoDIR
+            dirname(__DIR__).$photoDIR
         );
 
         $this->render('login'); // You made it! Back to login page
@@ -111,8 +116,10 @@ class LoginController extends AppController {
     public function admin () {
         $repo = new UserRepository();
         $users = $repo->getAllUsers();
+
         $repo = new TripRepository();
         $trips = $repo->getAllTrips();
+
         $repo = new CommentRepository();
         $comments = $repo->getAllComments();
 
@@ -131,25 +138,6 @@ class LoginController extends AppController {
         return is_null($user);
     }
 
-    //TODO to photoController.php
-    private function validatePhoto(array $file): bool
-    {
-        $MAX_FILE_SIZE =  1024 * 1024;
-        $SUPPORTED_EXTENSIONS  = ['image/png', 'image/jpeg'];
-        if ($file['size'] > $MAX_FILE_SIZE) {
-            $this->messages[] = 'File is too large';
-            return false;
-        }
 
-        if (!isset($file['type']) && !in_array($file['type'], $SUPPORTED_EXTENSIONS)) {
-            $this->messages[] = 'unsupported file type';
-            return false;
-        }
 
-        return true;
-    }
-    private function getUploadDirectory(array $file): ?string {
-        $UPLOAD_DIRECTORY =  '/../public/uploads/';
-        return dirname(__DIR__).$UPLOAD_DIRECTORY.$file['name'];
-    }
 }
