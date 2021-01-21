@@ -14,7 +14,7 @@
         <ol>
             <li>
                 <a class="nav-button flex" href="trips">
-                    <i class="fas fa-spinner"></i>
+                    <i class="fas fa-suitcase"></i>
                     <pre>Your Trips</pre>
                 </a>
             </li>
@@ -26,19 +26,19 @@
             </li>
             <li>
                 <a class="nav-button flex" href="profile">
-                    <i class="fas fa-cog"></i>
-                    <pre>Settings</pre>
+                    <i class="fas fa-user"></i>
+                    <pre>Your Profile</pre>
                 </a>
             </li>
             <li>
                 <a class="nav-button flex" href="search">
-                    <i class="fas fa-map-marker-alt"></i>
+                    <i class="fas fa-search"></i>
                     <pre>Search</pre>
                 </a>
             </li>
             <li>
                 <a class="nav-button flex" href="logout">
-                    <i class="far fa-calendar-alt"></i>
+                    <i class="fas fa-sign-out-alt"></i>
                     <pre>Logout</pre>
                 </a>
             </li>
