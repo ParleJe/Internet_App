@@ -38,7 +38,6 @@ document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
  * allows to display trip photo
  */
 document.querySelectorAll('.trip').forEach(node => {
-    console.log(node)
     const arrow = node.querySelector('.fa-sort-down')
     if( arrow !== null) {
         arrow.addEventListener('click', () => listenerFunction(node))

@@ -9,10 +9,10 @@ const followBtn = document.querySelector('.fa-heart');
         try {
             if(BtnStatus === '') {
                 followBtn.style.color = 'var(--main-color)';
-                fetchData({dataType: 'user', data: followBtn.id}, put);
+                fetchData({dataType: 'friend', data: followBtn.id}, put);
             } else {
                 followBtn.style.color = '';
-                fetchData({dataType: 'user', data: followBtn.id}, del);
+                fetchData({dataType: 'friend', data: followBtn.id}, del);
             }
         } catch (e) {
             console.error(e.message);
