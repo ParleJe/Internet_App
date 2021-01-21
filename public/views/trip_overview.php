@@ -114,7 +114,9 @@ if( is_null($permission) && $type !== 'template')
 </body>
 
 <template id="participant">
-    <div class="flex">
-        <img class="round" src="" alt="friend photo">
-    </div>
+    <a href="">
+        <div class="flex">
+            <img class="round" src="" alt="friend photo">
+        </div>
+    </a>
 </template>

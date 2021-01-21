@@ -18,7 +18,6 @@ function getTripID() {
     return url.pop().split("=").pop();
 }
 
-//TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
 async function showParticipants() {
 
     const participants = await fetchData({dataType: 'membership', data: tripID}, post)
@@ -30,6 +29,7 @@ async function showParticipants() {
     const template = document.querySelector('#participant')
     participants.forEach(user => {
         const clone = template.content.cloneNode(true);
+        clone.querySelector('a').href = `/profile?id=${user.mortal_id}`;
         clone.querySelector('img').src = user.photo_directory;
         participantsView.append(clone);
     })

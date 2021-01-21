@@ -44,7 +44,7 @@ if (! (isset( $trips ) && isset( $profile ) && isset( $type ))) {
                 <?PHP foreach ($trips as $trip): ?>
                 <a href="<?PHP echo '/view?id='.$trip->getTripId().'&type=template' ?>">
                     <div class="trip round" id="<?= $trip->getTripId() ?>" style="background-image: url( ' <?= $trip->getPhotoDirectory() ?> ' );">
-                        <h2><?= $trip->getTripName() ?></h2>]
+                        <h2 class="round"><?= $trip->getTripName() ?></h2>]
                     </div>
                 </a>
                 <?PHP endforeach; ?>
