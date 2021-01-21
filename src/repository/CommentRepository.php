@@ -1,22 +1,34 @@
 <?php
 
-
 class CommentRepository extends Repository
 {
-    public function getCommentsByPlannedTripID(int $tripID): ?array {
+    public function getCommentsByPlannedTripID(int $tripID): ?array
+    {
         $conn = $this->database->getInstance();
 
         $stmt = $conn->prepare('
         SELECT c.comment_id, c.content, c.add_date, c.mortal_id FROM comment c WHERE planned_trip_id = ?;
         ');
 
-        if ( ! $stmt->execute([ $tripID ]) ) {
+        if (!$stmt->execute([$tripID])) {
             return null;
         }
-        return $stmt->fetchAll(PDO::FETCH_CLASS, 'Comment');
-}
+        return $stmt->fetchAll(parent::FETCH_FLAGS, 'Comment');
+    }
 
-    public function addComment(int $userID, string $content, int $tripID): bool
+    public function getAllComments(): ?array
+    {
+        $stmt = $this->database->getInstance()->prepare('
+        SELECT * FROM comment;
+        ');
+
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(self::FETCH_FLAGS, 'Comment');
+        }
+        return [];
+    }
+
+    public function addComment(int $userID, string $content, int $tripID): ?Comment
     {
         $conn = $this->database->getInstance();
         $stmt = $conn->prepare('
@@ -24,10 +36,15 @@ class CommentRepository extends Repository
         VALUES (?,now(),?,?);
         ');
 
-        return $stmt->execute([$content, $userID, $tripID]);
+        $stmt->execute([$content, $userID, $tripID]);
+        if (is_null($conn->lastInsertId())) {
+            return null;
+        }
+        return new Comment(['comment_id' => $conn->lastInsertId(), 'content' => $content, 'mortal_id' => $userID]);
     }
 
-    public function deleteComment(int $commentID): bool {
+    public function deleteComment(int $commentID): bool
+    {
         $stmt = $this->database->getInstance()->prepare('
         DELETE FROM comment WHERE comment_id = ?;
         ');

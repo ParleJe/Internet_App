@@ -2,6 +2,7 @@
 
     class Routing {
         public static array $routes;
+        private static UserSessionHandler $sessionHandler;
 
         public static function get( $url, $controller ) {
             self::$routes[$url] = $controller;
@@ -11,9 +12,6 @@
             self::$routes[$url] = $controller;
         }
 
-        public static function ajax( $url, $controller ) {
-            self::$routes[$url] = $controller;
-        }
 
         public static function run( $url ) {
 
@@ -23,11 +21,16 @@
                 die("Wrong URL!!!");
             }
 
-            $controller = self::$routes[ $action ];
-            $controllerInstance = new $controller;
-            $action = $action ?: 'index';
-
-            $controllerInstance->$action();
+            $sessionHandler = new UserSessionHandler();
+            if($sessionHandler->getPageAvailability($action)) {
+                $controller = self::$routes[ $action ];
+                $controllerInstance = new $controller;
+                $action = $action ?: 'index';
+                $controllerInstance->$action();
+            } else {
+                $controllerInstance = new DefaultController();
+                $controllerInstance->index();
+            }
 
         }
 

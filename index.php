@@ -23,5 +23,5 @@ Routing::post( 'planTrip', 'TripController' );
 Routing::post('participate', 'TripController');
 
 
-Routing::post('fetchData', 'FetchController');
+Routing::post('endPoint', 'FetchController');
 Routing::run( $path );

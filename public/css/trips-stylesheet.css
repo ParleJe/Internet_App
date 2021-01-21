@@ -8,7 +8,7 @@
     justify-content: flex-end;
 }
 
-.top-bar>div {
+.top-bar div {
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -19,18 +19,13 @@
     width: 30%;
 }
 
-.top-bar>div>h2 {
+.top-bar h2 {
     font-weight: 600;
     font-size: 4em;
     margin-block-start: 0.1em;
     margin-block-end: 0.2em;
 }
 
-
-.top-bar>div>.trip-icons{
-    justify-content: flex-end;
-    margin-inline-end: 0;
-}
 .top-bar>div>.trip-icons>i:last-child{
     margin-right: 0;
 }
@@ -45,7 +40,7 @@
     color: var(--second-font-color);
 }
 
-.top-bar>div>a {
+.top-bar a {
     font-size: 1.5em;
     font-weight: 500;
     width: fit-content;
@@ -104,18 +99,13 @@ h2, .trip>h3 {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
-
-.trip-icons {
-    display: flex;
-}
-
 .trip-icons>i {
     font-size: 2em;
 }
 
 input {
     object-fit: cover;
-    width: 70%;
+    width: 90%;
     align-self: center;
     cursor: pointer;
     border-radius: 0;
@@ -149,11 +139,13 @@ form>div {
     transition: 500ms;
 }
 
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+#create-new-mobile {
+    display: none;
+}
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
     .content {
         grid-gap: 1em;
         width: 100%;
-
         overflow: auto;
     }
 
@@ -172,16 +164,18 @@ form>div {
     .top-bar {
         display: none;
     }
-    h2 {
-        font-size: 1em;
-    }
 
     .flow {
+        min-width: 65vw;
         overflow: unset;
     }
 
     .trip-container{
         height: unset;
         overflow: unset;
+    }
+
+    #create-new-mobile {
+        display: flex;
     }
 }

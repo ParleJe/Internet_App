@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+img {
+    object-fit: cover;
+}
+
 .content {
     width: 90%;
     height: 85%;
@@ -52,14 +56,13 @@
     width: 35%;
     height: 90%;
     background: var(--element-background-color);
+    overflow: auto;
 
     box-shadow: 6px 4px 6px var(--shadow);
 }
 .POI-list>ol {
-    margin: 1em;
     font-size: 3em;
 
-    overflow: auto;
 }
 .POI-list>ol>li {
     padding-block-start: 0.25em;
@@ -88,11 +91,9 @@
     width: 40%;
     height: 70%;
     background: var(--element-background-color);
-
     box-shadow: 6px 4px 6px var(--shadow);
-
     border-radius: 0 var(--radius) var(--radius) 0;
-
+    overflow: auto;
     padding: 2em;
 }
 .description>p {
@@ -111,10 +112,10 @@
 
     box-shadow: 0 4px 6px var(--shadow);
 }
-.option-menu>h1 {
+.option-menu h1 {
     text-align: center;
-    font-size: 1.5em;
-    font-weight: 400;
+    font-size: 2.5em;
+    font-weight: 500;
     text-decoration: underline;
 }
 .grid-friends {
@@ -160,7 +161,6 @@
 }
 
 .comment{
-/*flow*/
     width: 95%;
     box-shadow: 0 4px 6px #00000090;
     border-radius: calc(var(--radius)/2);
@@ -203,7 +203,25 @@
     border-bottom: 1px solid var(--main-color);
     border-radius: 0;
 }
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+
+.option-menu ol {
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.option-menu li {
+    cursor: pointer;
+    height: 25%;
+    margin: 0;
+    padding: 0;
+}
+.option-menu div {
+    width: 100%;
+    height: 100%;
+}
+@media only screen and (max-width:801px), screen and (max-device-width:801px) {
     .content {
         height: 60%;
         width: 100%;
@@ -212,7 +230,7 @@
     }
 
     .photo-background {
-        height: 25%;
+        height: 50%;
         justify-content: space-around;
     }
     .photo-background>div>h1 {
@@ -221,6 +239,10 @@
 
     .photo-background>i {
         display: none;
+    }
+
+    .option-menu h1 {
+        font-size: 1.5em;
     }
 
     .trip {
@@ -252,5 +274,8 @@
 
     .trip>div:last-child>i {
         margin-block-end: 0.5em;
+    }
+    #comment-content, #add-comment {
+        font-size: 2em;
     }
 }

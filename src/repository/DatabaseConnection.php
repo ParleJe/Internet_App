@@ -1,8 +1,9 @@
 <?php
-require_once 'config.php';
+include 'config.php';
+
 class DatabaseConnection {
     private static $instance;
-    private string$username;
+    private string $username;
     private string $password;
     private string $host;
     private string $database;
@@ -16,7 +17,8 @@ class DatabaseConnection {
     }
     public function __clone(){}
 
-    public function getInstance(){
+    public function getInstance(): PDO
+    {
 
         if(self::$instance == null) {
             try {

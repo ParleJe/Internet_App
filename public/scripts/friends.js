@@ -1,41 +1,43 @@
-import {fetchData} from "./fetchAPI.js";
+import {fetchData,addMultipleEvents, post} from "./helpers.js";
 
-const view = $('.content');
 const input = document.querySelector('.search-input');
 const searchBtn = document.querySelector('.search-btn');
+const displayView = document.querySelector('.content');
 
+//adds hover effect for profile tabs
 const addEffect = () => {
     const profileTabs = document.querySelectorAll('.profile')
-    profileTabs.forEach(item =>addMultipleEvents(item, "mouseout mouseover",() => item.classList.toggle('hover') ))
-}
-const addMultipleEvents = (element, eventNames, func) => {
-    let events = eventNames.split(' ');
-    events.map(event => {
-        element.addEventListener(event, func, false);
-    })
+    profileTabs.forEach(item => addMultipleEvents(item, "mouseout mouseover",() => item.classList.toggle('hover') ))
 }
 const display = (response) => {
-    view.empty();
-    response.forEach( el => {
-        view.append(`
-                <div class="round">
-                    <div class="profile round" id="${el.mortal_id}">
-                        <img class="round" src="public/resources/placeholder.jpg" alt="profile photo">
-                        <div>
-                            <h2>${el.name} ${el.surname}</h2>
-                            <h3>${el.nickname}</h3>
-                        </div>
-                    </div>
-                </div>
-                `);
-    })
+
+    displayView.innerHTML='';
+    response.map( object => appendObject(object))
     addEffect();
 }
+const appendObject = (object) => {
+    const template = document.querySelector('#profile-template')
+    const clone = template.content.cloneNode(true);
 
+    clone.querySelector('a').href = `/profile?id=${object.mortal_id}`;
+    clone.querySelector('div').id = object.mortal_id;
+
+    clone.querySelector('img').src = object.photo_directory;
+
+    clone.querySelector('h2').innerHTML = object.nickname;
+    clone.querySelector('h3').innerHTML = object.quote;
+
+    displayView.append(clone);
+}
+
+/*________________________________________________________________________*/
 searchBtn.addEventListener('click', async () => {
     const search = input.value;
-    const jsonResponse = await fetchData({requestType: "user",data: search});
-    display(await jsonResponse);
+    const jsonResponse = await fetchData({dataType: 'user',data: search}, post);
+    display(jsonResponse);
 })
 
+// add effects for server pre-loaded profiles
 addEffect();
+
+

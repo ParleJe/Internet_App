@@ -12,23 +12,35 @@
     width: 100%;
     height: 60%;
 }
-.profile>div>img {
-    justify-self: flex-start;
-    border-radius: calc(var(--radius)*2);
-    margin: auto;
-    width: 30%;
-    height: 80%;
+
+.photo-container {
+    width: 80%;
 }
-.profile>div>h2 {
-    margin: 0;
+
+.photo-container i  {
+    font-size: 4em;
+    align-self: flex-start;
+}
+
+.fa-times-circle {
+    visibility: hidden;
+}
+.profile-pic {
+    justify-self: flex-start;
+    width: 50%;
+}
+
+.profile h2 {
+    margin: 1em 0;
     font-size: 3em;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: underline;
 }
-.profile>h3 {
+
+.profile h3 {
     margin: 0;
-    font-weight: 400;
-    font-size: 1.8em;
+    font-weight: 300;
+    font-size: 3em;
 }
 .profile>section {
     background: var(--element-background-color);
@@ -52,13 +64,11 @@
     text-align: center;
 }
 .trip>h2 {
-    font-size: 2em;
+    font-size: 3em;
     font-weight: 500;
 }
 
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
-
-
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
 
     .profile {
         height: 80%;
@@ -69,6 +79,9 @@
         width: 60%;
     }
 
+    .profile-pic {
+        width: 80%;
+    }
     .profile>section {
         grid-gap: 2em;
         grid-auto-columns: 50%;

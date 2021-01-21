@@ -1,92 +1,66 @@
-import {fetchData} from "./fetchAPI.js";
+import {addMultipleEvents, fetchData, post, put} from "./helpers.js";
 import {map} from "./hereAPI/map.js"
 
-let details;
-//TODO GET URL DYNAMICALLY
-const apiUrl = "http://localhost:8080";
 const tripID = getTripID();
+let details;
+const descView = document.querySelector('.description');
+const mapContainer = document.querySelector('#map-container');
+const participants = document.querySelector('#participants');
+const chat = document.querySelector('#chat')
+const create = document.querySelector('#create')
+const code = document.querySelector('.vulpcode');
 
-$('li').on('mouseout mouseover', function () {
-    $(this).toggleClass('hover');
-}).on('click', function () {
-    updateDescription($(this).attr('id'));
-})
-
+//__________________functions____________________
 function getTripID() {
     let url = document.URL;
     url = url.split("&");
     url.pop();
     return url.pop().split("=").pop();
 }
-function setMenuActions() {
-    let optionMenu = $('.option-menu');
-    let view = $('.description');
-    $('#participants').on('click', () => {
-        participants(optionMenu)
-    })
-        .siblings('#create').on('click', () => {
-        plan(view)
-    })
-        .siblings('#chat').on('click', () => {
-        chat()
-    })
-        .siblings('#delete').on('click', () => {
-        deleteTrip()
-    })
 
-}
 //TODO AJAX FETCH PARTICIPANTS AND DISPLAY THEM
-function participants(view) {
+async function showParticipants() {
 
-    view.empty();
-    view.append(`
+    const participants = await fetchData({dataType: 'membership', data: tripID}, post)
+    descView.innerHTML = `
     <h1>participants</h1>
     <div class="grid-friends">
-    <div class="flex">
-        <img class="round" src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div class="flex">
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-
-</div>
-<i class="fas fa-plus-circle"></i>
-    `)
+    </div>`;
+    const participantsView = descView.querySelector('.grid-friends');
+    const template = document.querySelector('#participant')
+    participants.forEach(user => {
+        const clone = template.content.cloneNode(true);
+        clone.querySelector('img').src = user.photo_directory;
+        participantsView.append(clone);
+    })
 
 }
 
-//TODO POST COMMENT
-const chat = async () => {
-    const json = await fetchData({requestType: 'comment',data: tripID}, String('/fetchComments'))
+async function showChat() {
+    const json = await fetchData({dataType: "comment", data: tripID}, post);
     displayComments(json);
 }
-const displayComments = (res) => {
+
+function displayComments(res) {
     let view = $('.description');
     view.empty();
     view.append(`
             <div class="comment-container flex column round">
             </div>
             <div class="comment-add flex round">
-                <input type="text">
-                <button class="round">ADD</button>
+                <input type="text" id="comment-content">
+                <button class="round" id="add-comment">ADD</button>
             </div>
         `)
+    document.querySelector('#add-comment').addEventListener('click', postComment);
     view = $(".comment-container")
     view.empty();
-    res.forEach(comment => {
-        view.append(`
+    res.forEach(comment => addComment(comment));
+}
+
+function addComment(comment) {
+    const view = $(".comment-container");
+    view.append(`
             <div class="comment flow">
                 <a href="blablabla">
                     <h1>${comment.mortal_id}</h1>
@@ -94,8 +68,24 @@ const displayComments = (res) => {
                 <p>${comment.content}</p>
             </div>
             `);
-    })
 }
+
+async function postComment() {
+    const input = document.querySelector('#comment-content');
+    const content = input.value;
+    if (content === '') {
+        alert("You cannot post empty comment")
+        return;
+    }
+    try {
+        const addedComment = await fetchData({dataType: 'comment', data: {content: content, tripID: tripID}}, put);
+        addComment(addedComment);
+    } catch (e) {
+        console.error(e.message);
+    }
+    input.value = '';
+}
+
 function initMap(data) {
     data.forEach(mark => {
         let location = mark.location;
@@ -107,16 +97,9 @@ function initMap(data) {
         map.setCenter(localization);
     })
 }
-//TODO AJAX POST DELETE
-function deleteTrip() {
-    if (confirm("Are you sure you want to delete it?")) {
-        console.log('deleted')
-    } else {
-        console.log('ok')
-    }
-}
-function plan(view) {
-    view.empty().append(`
+
+function plan() {
+    descView.innerHTML = `
     <form class="plan-trip flex column round" method="post" action="planTrip">
         <h1>Plan It!</h1>
         <input name="start" type="date" min="${new Date().toISOString().slice(0, 10)}" value="${new Date().toISOString().slice(0, 10)}">
@@ -124,51 +107,47 @@ function plan(view) {
         <input name="trip_id" value="${getTripID()}" type="hidden">
         <button class="round" name="submit" type="submit">Submit</button>
     </form>
-    `)
+    `
 }
-async function getDetails() {
-    details = await fetchData({requestType:"poi" ,data: tripID})
-    initMap(details);
 
+async function getPoi() {
+    details = await fetchData({dataType: "poi", data: tripID}, post);
+    initMap(await details)
 }
+
 function updateDescription(id) {
-
-    $('.description').empty().append(`
+    descView.innerHTML = `
     <h1 class="trip-name">${details[id].name}</h1>
     <p class="trip-desc"> ${details[id].description}</p>
-    `);
+    `;
 }
 
-$('#map-container').css('display', 'none')
-$('#map-container>i, #map-toggle').on('click', function () {
-    $('#map-container').fadeToggle('slow')
+const copyCode = () => {
+    navigator.clipboard.writeText(code.id).then(() => alert('Vulpcode copied!'));
+}
+
+
+mapContainer.style.display = 'none';
+document.querySelectorAll('#map-container>i, #map-toggle').forEach(element => {
+    element.addEventListener('click', () => $('#map-container').fadeToggle('slow'))
 })
-getDetails();
-setMenuActions();
+document.querySelectorAll('.POI-list li').forEach(element => {
+    addMultipleEvents(element, 'mouseout mouseover', () => element.classList.toggle('hover'))
+    element.addEventListener('click', () => updateDescription(element.id))
+})
 
 
-/*
-<h1>participants</h1>
-<div class="grid-friends">
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
-    <div>
-        <img src="public/resources/placeholder.jpg" alt="friend photo">
-    </div>
+if (participants !== null) {
+    participants.addEventListener('click', () => showParticipants())
+}
 
-</div>
-<i class="fas fa-plus-circle"></i>
-*/
+if (code !== null) {
+    code.addEventListener('click', () => copyCode())
+}
+if (chat !== null) {
+    chat.addEventListener('click', () => showChat())
+}
+if (create !== null) {
+    create.addEventListener('click', () => plan())
+}
+getPoi();

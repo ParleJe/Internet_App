@@ -40,16 +40,9 @@
 .search p {
     font-size: 2em;
 }
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
     .top-bar {
         width: 80%;
-    }
-    .top-bar>input {
-        font-size: 0.4em;
-    }
-
-    .top-bar>button {
-        font-size: 0.4em;
     }
     .content {
         width: 90%;
@@ -64,18 +57,15 @@
     }
     .search-img {
         height: 20vh;
-        width: 80%;
     }
-
     .search>div {
-        border-radius: 1.2em;
         visibility: visible;
         background: var(--element-background-color);
         width: 60%;
         justify-self: unset;
         margin-top: 0;
         position: relative;
-        bottom: 10vh;
+        bottom: 11vh;
         padding-top: 0.2em;
     }
     h2 {

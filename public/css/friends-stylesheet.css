@@ -8,7 +8,6 @@
     grid-template-rows: repeat(2, 1fr);
 
     justify-items: center;
-    align-items: center;
     overflow: auto;
 }
 
@@ -16,14 +15,12 @@
     background: white;
     padding: 1em;
     margin: 2em 3em;
-    width: 60%;
 
     transition: 0.1s;
 
 }
 
 .hover {
-/*background: transparent radial-gradient(closest-side at 50% 50%, #EFEFEF 80%, #6BA2EB 300%) 0 0 no-repeat padding-box;*/
     box-shadow: 0 6px 8px var(--shadow);
     transition: 0.1s;
 }
@@ -50,19 +47,10 @@
     margin-top: 0.2em;
 }
 
-@media screen and (max-width:801px), screen and (max-device-width:801px) {
+@media only screen and (max-width:801px), only screen and (max-device-width:801px) {
 
     .top-bar {
-        width: 95%;
-    }
-    .top-bar>input {
-        font-size: 1em;
-        width: 70%;
-    }
-
-    .top-bar>button {
-        font-size: 1em;
-        width: 30%;
+        width: 90%;
     }
 
     .content {

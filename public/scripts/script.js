@@ -1,58 +1,53 @@
-import {fetchData} from "./fetchAPI.js";
+import {fetchData, put} from "./helpers.js";
 
 const codeDiv = document.querySelector('#take-part');
 const membersContainer = document.querySelector('#members');
 const codeInput = document.querySelector('#take-part>input');
-const trips = document.querySelectorAll('.trip');
-document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
-    alert(codeInput.value);
-
-        const response = await fetchData({requestType:'membership',data: codeInput.value});
-        display(response);
-        addListener();
-})
 
 const display = (json) => {
     const template = document.querySelector("#trip-template");
-
     const clone = template.content.cloneNode(true);
+    console.log(json);
     clone.querySelector('h4').innerHTML = json.destination;
-
+    clone.querySelector('h4').style.color = json.color;
     clone.querySelector('h3').innerHTML = json.trip_name;
-
     clone.querySelector('form>div>input').src = json.photo_directory;
-
     clone.querySelector('form>#id').value = json.trip_id;
+    clone.querySelector('.fa-sort-down').style.color = json.color
 
+
+    clone.querySelector('.fa-sort-down').addEventListener('click', (event) => {
+        listenerFunction(event.target);
+    })
     membersContainer.insertBefore(clone, codeDiv);
 
 
 }
+const listenerFunction = (target) => {
+    target.classList.toggle('rotate');
+    $(target.parentNode).children('form').slideToggle(('slow'));
 
-
-//trips.php
-
-const addListener = () => {
-    $(".fa-sort-down").prop("onclick", null).off("click").on('click', function () {
-
-        $(this).siblings('form').slideToggle('slow')
-        $(this).toggleClass('rotate')
-    })
 }
+//______________________________________________________
 
-addListener();
-//create.php
-$("textarea").on("keyup", function() {
-    var limit = $(this).attr("maxlength");
+/**
+ * add onclick to joining trip functionality
+ */
+document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
+    const response = await fetchData({dataType:'membership',data: codeInput.value}, put);
+    display(response);
 
-    if (!limit) return;
-
-    if (this.value.length <= limit) return true;
-    else {
-        this.value = this.value.substr(0,limit);
-        return false;
-    }
 })
 
-
-
+/**
+ * allows to display trip photo
+ */
+document.querySelectorAll('.trip').forEach(node => {
+    const arrow = node.querySelector('.fa-sort-down')
+    if( arrow !== null) {
+        arrow.addEventListener('click', (event) => {
+            //console.log(event.target)
+            listenerFunction(event.target,)
+        })
+    }
+})
