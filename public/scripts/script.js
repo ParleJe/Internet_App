@@ -7,20 +7,25 @@ const codeInput = document.querySelector('#take-part>input');
 const display = (json) => {
     const template = document.querySelector("#trip-template");
     const clone = template.content.cloneNode(true);
-
+    console.log(json);
     clone.querySelector('h4').innerHTML = json.destination;
+    clone.querySelector('h4').style.color = json.color;
     clone.querySelector('h3').innerHTML = json.trip_name;
     clone.querySelector('form>div>input').src = json.photo_directory;
     clone.querySelector('form>#id').value = json.trip_id;
+    clone.querySelector('.fa-sort-down').style.color = json.color
 
-    clone.querySelector('.fa-sort-down').addEventListener('click', () => listenerFunction(clone))
+
+    clone.querySelector('.fa-sort-down').addEventListener('click', (event) => {
+        listenerFunction(event.target);
+    })
     membersContainer.insertBefore(clone, codeDiv);
 
 
 }
-const listenerFunction = (node) => {
-    $(node).children('form').slideToggle('slow');
-    node.querySelector('.fa-sort-down').classList.toggle('rotate');
+const listenerFunction = (target) => {
+    target.classList.toggle('rotate');
+    $(target.parentNode).children('form').slideToggle(('slow'));
 
 }
 //______________________________________________________
@@ -40,6 +45,9 @@ document.querySelector(".fa-plus-circle").addEventListener('click', async() => {
 document.querySelectorAll('.trip').forEach(node => {
     const arrow = node.querySelector('.fa-sort-down')
     if( arrow !== null) {
-        arrow.addEventListener('click', () => listenerFunction(node))
+        arrow.addEventListener('click', (event) => {
+            //console.log(event.target)
+            listenerFunction(event.target,)
+        })
     }
 })
