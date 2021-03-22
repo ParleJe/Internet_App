@@ -2,7 +2,7 @@
 
 ### Used technologies:
 
-- [PHP 8.0] -> BackEnd, Server-side
+- [PHP 7.4] -> BackEnd, Server-side
 - [JavaScript] -> fetch, Client-side
 - [postgreSQL] -> database support
 - [JQuery] -> animations
